@@ -15,6 +15,16 @@ public class GameManager : MonoBehaviour
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        _currentRoomScene = SceneManager.GetActiveScene().name;
+    }
+
+    // Allows testing from any scene without going through MainMenu
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void AutoCreate()
+    {
+        if (Instance != null) return;
+        var go = new GameObject("GameManager");
+        go.AddComponent<GameManager>();
     }
 
     public void StartGame()

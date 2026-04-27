@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,14 @@ public class GameManager : MonoBehaviour
         if (Instance != null) return;
         var go = new GameObject("GameManager");
         go.AddComponent<GameManager>();
+
+        if (Object.FindObjectOfType<EventSystem>() == null)
+        {
+            var esGO = new GameObject("EventSystem");
+            esGO.AddComponent<EventSystem>();
+            esGO.AddComponent<InputSystemUIInputModule>();
+            Object.DontDestroyOnLoad(esGO);
+        }
     }
 
     public void StartGame()

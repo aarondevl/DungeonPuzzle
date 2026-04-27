@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInventory))]
 public class PlayerInteraction : MonoBehaviour
@@ -13,8 +14,10 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) TryInteract();
-        if (Input.GetKeyDown(KeyCode.F)) TryThrow();
+        var kb = Keyboard.current;
+        if (kb == null) return;
+        if (kb.eKey.wasPressedThisFrame) TryInteract();
+        if (kb.fKey.wasPressedThisFrame) TryThrow();
     }
 
     void TryInteract()
@@ -35,7 +38,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (!_inventory.HasItem<Stone>()) return;
         var stone = _inventory.TakeItem() as Stone;
-        Vector2 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mouseWorld = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         stone.Throw(transform.position, mouseWorld);
     }
 }

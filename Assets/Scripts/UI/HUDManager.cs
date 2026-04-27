@@ -5,8 +5,9 @@ public class HUDManager : MonoBehaviour
 {
     [SerializeField] Image[] heartIcons;
     [SerializeField] Image inventoryIcon;
-    [SerializeField] Sprite heartFull;
-    [SerializeField] Sprite heartEmpty;
+
+    static readonly Color HeartFull  = new Color(1f, 0.15f, 0.15f, 1f);
+    static readonly Color HeartEmpty = new Color(0.25f, 0.25f, 0.25f, 0.4f);
 
     PlayerInventory _inventory;
 
@@ -27,7 +28,7 @@ public class HUDManager : MonoBehaviour
         if (GameManager.Instance == null) return;
         int lives = GameManager.Instance.Lives;
         for (int i = 0; i < heartIcons.Length; i++)
-            heartIcons[i].sprite = i < lives ? heartFull : heartEmpty;
+            heartIcons[i].color = i < lives ? HeartFull : HeartEmpty;
     }
 
     void UpdateInventory()

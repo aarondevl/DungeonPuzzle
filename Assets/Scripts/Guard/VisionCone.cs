@@ -45,10 +45,15 @@ public class VisionCone : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             float currentAngle = -halfAngle + angleStep * i;
-            Vector2 dir = DirFromAngle(currentAngle);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, distance, wallLayer);
-            Vector3 point = hit ? (Vector3)hit.point - transform.position
-                                : (Vector3)(dir * distance);
+            // Local direction (no world rotation baked in)
+            float rad = currentAngle * Mathf.Deg2Rad;
+            Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
+            // Convert to world dir for raycast
+            Vector2 worldDir = transform.TransformDirection(localDir);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, worldDir, distance, wallLayer);
+            // Store vertex in local space so the mesh transform applies correctly
+            Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
+                                : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
         }
 
@@ -82,9 +87,10 @@ public class VisionCone : MonoBehaviour
     public void SetAlerted(bool alerted) =>
         _mr.material = alerted ? alertMaterial : normalMaterial;
 
+    // Returns local-space direction; use transform.TransformDirection to get world-space
     Vector2 DirFromAngle(float angleDeg)
     {
-        float rad = (transform.eulerAngles.z + angleDeg) * Mathf.Deg2Rad;
+        float rad = angleDeg * Mathf.Deg2Rad;
         return new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
     }
 }

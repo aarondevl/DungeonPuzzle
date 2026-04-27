@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -11,8 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        _rb.linearVelocity = new Vector2(h, v).normalized * speed;
+        var kb = Keyboard.current;
+        if (kb == null) return;
+        float h = (kb.dKey.isPressed || kb.rightArrowKey.isPressed ? 1f : 0f)
+                - (kb.aKey.isPressed || kb.leftArrowKey.isPressed ? 1f : 0f);
+        float v = (kb.wKey.isPressed || kb.upArrowKey.isPressed ? 1f : 0f)
+                - (kb.sKey.isPressed || kb.downArrowKey.isPressed ? 1f : 0f);
+        _rb.MovePosition(_rb.position + new Vector2(h, v).normalized * speed * Time.fixedDeltaTime);
     }
 }

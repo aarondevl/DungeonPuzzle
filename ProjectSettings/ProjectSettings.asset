@@ -584,7 +584,26 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: UNITY_MCP_READY
+    EmbeddedLinux: UNITY_MCP_READY
+    GameCoreScarlett: UNITY_MCP_READY
+    GameCoreXboxOne: UNITY_MCP_READY
+    Kepler: UNITY_MCP_READY
+    LinuxHeadlessSimulation: UNITY_MCP_READY
+    Nintendo Switch: UNITY_MCP_READY
+    Nintendo Switch 2: UNITY_MCP_READY
+    PS4: UNITY_MCP_READY
+    PS5: UNITY_MCP_READY
+    QNX: UNITY_MCP_READY
+    Server: UNITY_MCP_READY
+    Standalone: UNITY_MCP_READY
+    VisionOS: UNITY_MCP_READY
+    WebGL: UNITY_MCP_READY
+    Windows Store Apps: UNITY_MCP_READY
+    XboxOne: UNITY_MCP_READY
+    iPhone: UNITY_MCP_READY
+    tvOS: UNITY_MCP_READY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -683,11 +702,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 31be7be9-8d0c-4f2f-aac5-3d4aee214958
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: DungeonPuzzle 2026-04-26_14-05-59
+  organizationId: unity_c3079114c475f4d4db5d
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -28,7 +28,7 @@ public class VisionCone : MonoBehaviour
         _mr.material = normalMaterial;
     }
 
-    void Update()
+    void LateUpdate()
     {
         BuildMesh();
         CheckDetection();

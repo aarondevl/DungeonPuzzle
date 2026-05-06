@@ -22,6 +22,7 @@ public abstract class GuardBase : MonoBehaviour
         Rb.bodyType = RigidbodyType2D.Kinematic;
         Rb.gravityScale = 0f;
         Rb.freezeRotation = false;
+        Rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         VisionCone = GetComponentInChildren<VisionCone>();
     }
 

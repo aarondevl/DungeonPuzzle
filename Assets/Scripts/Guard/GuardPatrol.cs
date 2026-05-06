@@ -4,6 +4,7 @@ public class GuardPatrol : GuardBase
 {
     [SerializeField] Transform[] waypoints;
     [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float turnSpeed = 360f;
 
     int _index;
     Vector2 _alertTarget;
@@ -38,8 +39,10 @@ public class GuardPatrol : GuardBase
     void FaceDirection(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
-        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        Rb.MoveRotation(-angle);
+        float target = -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        float current = Rb.rotation;
+        float next = Mathf.MoveTowardsAngle(current, target, turnSpeed * Time.fixedDeltaTime);
+        Rb.MoveRotation(next);
     }
 
     protected override void OnNoiseAlerted(Vector2 position) => _alertTarget = position;

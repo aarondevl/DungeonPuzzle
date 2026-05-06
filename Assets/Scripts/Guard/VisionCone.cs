@@ -10,8 +10,7 @@ public class VisionCone : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Material normalMaterial;
     [SerializeField] Material alertMaterial;
-    [SerializeField, Range(0f, 1f)] float originAlpha = 0.6f;
-    [SerializeField, Range(0f, 1f)] float edgeAlpha = 0.05f;
+    [SerializeField, Range(0f, 1f)] float coneAlpha = 0.35f;
 
     MeshFilter _mf;
     MeshRenderer _mr;
@@ -44,8 +43,9 @@ public class VisionCone : MonoBehaviour
         int[] triangles = new int[rayCount * 3];
         Color[] colors = new Color[rayCount + 2];
 
+        Color uniform = new Color(1, 1, 1, coneAlpha);
         vertices[0] = Vector3.zero;
-        colors[0]   = new Color(1, 1, 1, originAlpha);
+        colors[0]   = uniform;
 
         for (int i = 0; i <= rayCount; i++)
         {
@@ -57,7 +57,7 @@ public class VisionCone : MonoBehaviour
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
-            colors[i + 1]   = new Color(1, 1, 1, edgeAlpha);
+            colors[i + 1]   = uniform;
         }
 
         for (int i = 0; i < rayCount; i++)

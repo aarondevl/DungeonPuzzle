@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GuardPatrol
   alertDuration: 3
+  spotSustainSeconds: 0.4
   waypoints: []
   moveSpeed: 2
 --- !u!50 &8566813006301193868
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efeb62654fd37ce43803de833c1b8d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisionCone
-  angle: 60
+  angle: 50
   distance: 5
   rayCount: 30
   wallLayer:
@@ -228,6 +229,7 @@ MonoBehaviour:
     m_Bits: 64
   normalMaterial: {fileID: 2100000, guid: b490af18120f7a7459a78e230d2b4600, type: 2}
   alertMaterial: {fileID: 2100000, guid: 87a130a0320836d429e1e5aa6313dea4, type: 2}
+  coneAlpha: 0.35
 --- !u!210 &3621801629037255696
 SortingGroup:
   m_ObjectHideFlags: 0

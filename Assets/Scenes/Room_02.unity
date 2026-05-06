@@ -2055,11 +2055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6640209393723414392, guid: 59a3f5698eeabc647a98377dfacba952, type: 3}
       propertyPath: angle
-      value: 65
+      value:  50
       objectReference: {fileID: 0}
     - target: {fileID: 6640209393723414392, guid: 59a3f5698eeabc647a98377dfacba952, type: 3}
       propertyPath: distance
-      value: 4.5
+      value:  5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

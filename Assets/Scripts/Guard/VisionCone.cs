@@ -10,11 +10,14 @@ public class VisionCone : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Material normalMaterial;
     [SerializeField] Material alertMaterial;
+    [SerializeField, Range(0f, 1f)] float originAlpha = 0.6f;
+    [SerializeField, Range(0f, 1f)] float edgeAlpha = 0.05f;
 
     MeshFilter _mf;
     MeshRenderer _mr;
     Mesh _mesh;
 
+    public bool IsSeeingPlayer { get; private set; }
     public event System.Action OnPlayerDetected;
 
     void Awake()
@@ -39,22 +42,22 @@ public class VisionCone : MonoBehaviour
 
         Vector3[] vertices = new Vector3[rayCount + 2];
         int[] triangles = new int[rayCount * 3];
+        Color[] colors = new Color[rayCount + 2];
 
         vertices[0] = Vector3.zero;
+        colors[0]   = new Color(1, 1, 1, originAlpha);
 
         for (int i = 0; i <= rayCount; i++)
         {
             float currentAngle = -halfAngle + angleStep * i;
-            // Local direction (no world rotation baked in)
             float rad = currentAngle * Mathf.Deg2Rad;
             Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
-            // Convert to world dir for raycast
             Vector2 worldDir = transform.TransformDirection(localDir);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, worldDir, distance, wallLayer);
-            // Store vertex in local space so the mesh transform applies correctly
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
+            colors[i + 1]   = new Color(1, 1, 1, edgeAlpha);
         }
 
         for (int i = 0; i < rayCount; i++)
@@ -67,10 +70,9 @@ public class VisionCone : MonoBehaviour
         _mesh.Clear();
         _mesh.vertices = vertices;
         _mesh.triangles = triangles;
+        _mesh.colors = colors;
         _mesh.RecalculateNormals();
     }
-
-    public bool IsSeeingPlayer { get; private set; }
 
     void CheckDetection()
     {
@@ -92,11 +94,4 @@ public class VisionCone : MonoBehaviour
 
     public void SetAlerted(bool alerted) =>
         _mr.material = alerted ? alertMaterial : normalMaterial;
-
-    // Returns local-space direction; use transform.TransformDirection to get world-space
-    Vector2 DirFromAngle(float angleDeg)
-    {
-        float rad = angleDeg * Mathf.Deg2Rad;
-        return new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
-    }
 }

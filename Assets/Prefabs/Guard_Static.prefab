@@ -181,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c5cdd241f5e1c637b10bbbd9887b4d5, type: 2}
+  - {fileID: 2100000, guid: b490af18120f7a7459a78e230d2b4600, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -226,8 +226,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  normalMaterial: {fileID: 2100000, guid: 1c5cdd241f5e1c637b10bbbd9887b4d5, type: 2}
-  alertMaterial: {fileID: 2100000, guid: af70feccd84a93eaab76937c4311aa61, type: 2}
+  normalMaterial: {fileID: 2100000, guid: b490af18120f7a7459a78e230d2b4600, type: 2}
+  alertMaterial: {fileID: 2100000, guid: 87a130a0320836d429e1e5aa6313dea4, type: 2}
 --- !u!210 &2483014574372126506
 SortingGroup:
   m_ObjectHideFlags: 0

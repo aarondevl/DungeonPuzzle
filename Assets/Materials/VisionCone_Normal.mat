@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: VisionCone_Normal
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 0e57ef916252df84e93dd6aa45839817, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -34,9 +34,14 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
+    - _EdgeFade: 0.32
     - _EnableExternalAlpha: 0
+    - _NoiseStrength: 0.4
+    - _PulseAmount: 0.12
+    - _PulseSpeed: 2.2
+    - _ScrollSpeed: 0.55
     m_Colors:
-    - _Color: {r: 1, g: 0.6666667, b: 0, a: 0.3529412}
+    - _Color: {r: 1, g: 0.92, b: 0.45, a: 0.55}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

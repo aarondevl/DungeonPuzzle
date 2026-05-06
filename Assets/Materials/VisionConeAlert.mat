@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: VisionConeAlert
-  m_Shader: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 0e57ef916252df84e93dd6aa45839817, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -35,7 +35,12 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _ColorMask: 15
+    - _EdgeFade: 0.32
     - _EnableExternalAlpha: 0
+    - _NoiseStrength: 0.4
+    - _PulseAmount: 0.25
+    - _PulseSpeed: 6
+    - _ScrollSpeed: 1.2
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -43,7 +48,7 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.2, b: 0.2, a: 0.85}
+    - _Color: {r: 1, g: 0.18, b: 0.15, a: 0.7}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

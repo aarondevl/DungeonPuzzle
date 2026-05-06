@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDetected()
     {
+        CameraShake.Kick(0.6f);
+        DetectionFlash.Flash();
         Lives--;
         if (Lives <= 0)
             SceneManager.LoadScene("GameOver");

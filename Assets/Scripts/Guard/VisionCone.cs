@@ -5,12 +5,12 @@ public class VisionCone : MonoBehaviour
 {
     [SerializeField] public float angle = 60f;
     [SerializeField] public float distance = 5f;
-    [SerializeField] int rayCount = 30;
+    [SerializeField] int rayCount = 80;
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Material normalMaterial;
     [SerializeField] Material alertMaterial;
-    [SerializeField, Range(0f, 1f)] float coneAlpha = 0.35f;
+    [SerializeField, Range(0f, 1f)] float coneAlpha = 0.5f;
 
     MeshFilter _mf;
     MeshRenderer _mr;

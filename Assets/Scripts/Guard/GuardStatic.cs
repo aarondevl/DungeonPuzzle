@@ -14,11 +14,11 @@ public class GuardStatic : GuardBase
         _baseAngle = transform.eulerAngles.z;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (State == GuardState.Alerted) return;
-        _time += Time.deltaTime * rotationSpeed * Mathf.Deg2Rad;
+        _time += Time.fixedDeltaTime * rotationSpeed * Mathf.Deg2Rad;
         float offset = Mathf.Sin(_time) * maxAngle;
-        transform.rotation = Quaternion.Euler(0, 0, _baseAngle + offset);
+        Rb.MoveRotation(_baseAngle + offset);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class GuardBase : MonoBehaviour
 {
     protected enum GuardState { Normal, Alerted }
@@ -9,9 +10,14 @@ public abstract class GuardBase : MonoBehaviour
     [SerializeField] protected float alertDuration = 3f;
 
     protected VisionCone VisionCone;
+    protected Rigidbody2D Rb;
 
     protected virtual void Awake()
     {
+        Rb = GetComponent<Rigidbody2D>();
+        Rb.bodyType = RigidbodyType2D.Kinematic;
+        Rb.gravityScale = 0f;
+        Rb.freezeRotation = false;
         VisionCone = GetComponentInChildren<VisionCone>();
         VisionCone.OnPlayerDetected += HandlePlayerDetected;
     }

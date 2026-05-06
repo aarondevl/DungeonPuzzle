@@ -8,7 +8,7 @@ public class GuardPatrol : GuardBase
     int _index;
     Vector2 _alertTarget;
 
-    void Update()
+    void FixedUpdate()
     {
         if (State == GuardState.Alerted)
         {
@@ -21,32 +21,27 @@ public class GuardPatrol : GuardBase
     void Patrol()
     {
         if (waypoints == null || waypoints.Length == 0) return;
-        MoveToward(waypoints[_index].position);
-        FaceDirection((Vector2)waypoints[_index].position - (Vector2)transform.position);
+        Vector2 target = waypoints[_index].position;
+        MoveToward(target);
+        FaceDirection(target - Rb.position);
 
-        if (Vector2.Distance(transform.position, waypoints[_index].position) < 0.1f)
+        if (Vector2.Distance(Rb.position, target) < 0.1f)
             _index = (_index + 1) % waypoints.Length;
     }
 
     void MoveToward(Vector2 target)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+        Vector2 next = Vector2.MoveTowards(Rb.position, target, moveSpeed * Time.fixedDeltaTime);
+        Rb.MovePosition(next);
     }
 
     void FaceDirection(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
         float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, -angle);
+        Rb.MoveRotation(-angle);
     }
 
-    protected override void OnNoiseAlerted(Vector2 position)
-    {
-        _alertTarget = position;
-    }
-
-    protected override void OnReturnToNormal()
-    {
-        _alertTarget = Vector2.zero;
-    }
+    protected override void OnNoiseAlerted(Vector2 position) => _alertTarget = position;
+    protected override void OnReturnToNormal() => _alertTarget = Vector2.zero;
 }

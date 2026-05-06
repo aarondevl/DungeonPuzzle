@@ -70,18 +70,24 @@ public class VisionCone : MonoBehaviour
         _mesh.RecalculateNormals();
     }
 
+    public bool IsSeeingPlayer { get; private set; }
+
     void CheckDetection()
     {
+        bool sees = false;
         Collider2D hit = Physics2D.OverlapCircle(transform.position, distance, playerLayer);
-        if (hit == null) return;
-
-        Vector2 toPlayer = hit.transform.position - transform.position;
-        float angleTo = Vector2.Angle(transform.up, toPlayer);
-        if (angleTo < angle / 2f)
+        if (hit != null)
         {
-            RaycastHit2D los = Physics2D.Raycast(transform.position, toPlayer.normalized, distance, wallLayer);
-            if (!los) OnPlayerDetected?.Invoke();
+            Vector2 toPlayer = hit.transform.position - transform.position;
+            float angleTo = Vector2.Angle(transform.up, toPlayer);
+            if (angleTo < angle / 2f)
+            {
+                RaycastHit2D los = Physics2D.Raycast(transform.position, toPlayer.normalized, distance, wallLayer);
+                if (!los) sees = true;
+            }
         }
+        IsSeeingPlayer = sees;
+        if (sees) OnPlayerDetected?.Invoke();
     }
 
     public void SetAlerted(bool alerted) =>

@@ -66,7 +66,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextRoom()
     {
-        string next = _currentRoomScene == "Room_01" ? "Room_02" : "GameOver";
+        string next = _currentRoomScene switch
+        {
+            "Room_01" => "Room_02",
+            "Room_02" => "Room_03",
+            "Room_03" => "Room_04",
+            "Room_04" => "Room_05",
+            _ => "GameOver",
+        };
+        if (next == "GameOver") IsWin = true;
         LoadScene(next);
     }
 

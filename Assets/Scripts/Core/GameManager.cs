@@ -18,9 +18,14 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         _currentRoomScene = SceneManager.GetActiveScene().name;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Allows testing from any scene without going through MainMenu
+    void OnDestroy()
+    {
+        if (Instance == this) SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void AutoCreate()
     {
@@ -69,5 +74,16 @@ public class GameManager : MonoBehaviour
     {
         IsWin = true;
         SceneManager.LoadScene("GameOver");
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var spawn = Object.FindFirstObjectByType<SpawnPoint>();
+        if (spawn == null) return;
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+        player.transform.SetPositionAndRotation(spawn.transform.position, spawn.transform.rotation);
+        var rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
     }
 }

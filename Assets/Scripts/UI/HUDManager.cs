@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUDManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class HUDManager : MonoBehaviour
     [SerializeField] Sprite heartEmptySprite;
     [SerializeField] Image inventoryIcon;
     [SerializeField] Image damageFlash;
+    [SerializeField] TextMeshProUGUI levelLabel;
+    [SerializeField] TextMeshProUGUI timerLabel;
+    [SerializeField] TextMeshProUGUI bestTimeLabel;
 
     PlayerInventory _inventory;
     int _lastLives = -1;
@@ -21,12 +25,31 @@ public class HUDManager : MonoBehaviour
         {
             var c = damageFlash.color; c.a = 0; damageFlash.color = c;
         }
+        UpdateLabels();
     }
 
     void Update()
     {
         UpdateHearts();
         UpdateInventory();
+        UpdateTimer();
+    }
+
+    void UpdateLabels()
+    {
+        if (GameManager.Instance == null) return;
+        if (levelLabel != null) levelLabel.text = $"ROOM {GameManager.Instance.CurrentLevel:00}";
+        if (bestTimeLabel != null)
+        {
+            float best = GameProgress.GetBestTime(GameManager.Instance.CurrentLevel);
+            bestTimeLabel.text = best > 0f ? $"BEST  {GameProgress.FormatTime(best)}" : "BEST  --:--";
+        }
+    }
+
+    void UpdateTimer()
+    {
+        if (timerLabel == null || GameManager.Instance == null) return;
+        timerLabel.text = GameProgress.FormatTime(GameManager.Instance.RoomTime);
     }
 
     void UpdateHearts()

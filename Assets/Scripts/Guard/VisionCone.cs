@@ -13,7 +13,7 @@ public class VisionCone : MonoBehaviour
     [SerializeField] Material alertMaterial;
     [SerializeField, Range(0f, 1f)] float coneAlpha = 0.55f;
 
-    const float CornerEpsilonDeg = 0.5f;
+    const float CornerEpsilonDeg = 0.01f;
 
     MeshFilter _mf;
     MeshRenderer _mr;

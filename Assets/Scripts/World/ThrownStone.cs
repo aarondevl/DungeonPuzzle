@@ -4,6 +4,7 @@ using UnityEngine;
 public class ThrownStone : MonoBehaviour
 {
     [SerializeField] float speed = 8f;
+    [SerializeField] LayerMask noiseTriggerLayers;
 
     Rigidbody2D _rb;
 
@@ -14,6 +15,10 @@ public class ThrownStone : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (!ShouldTriggerNoise(noiseTriggerLayers.value, col.gameObject.layer)) return;
         GetComponent<NoiseSource>().TriggerNoise();
     }
+
+    public static bool ShouldTriggerNoise(int mask, int layer) =>
+        (mask & (1 << layer)) != 0;
 }

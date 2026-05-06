@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrownStone
   speed: 8
+  noiseTriggerLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &655616015374254589
 MonoBehaviour:
   m_ObjectHideFlags: 0

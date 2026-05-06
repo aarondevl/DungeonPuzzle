@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Room_02.unity
     guid: 209c137ae8580f209afa54baa0bf7473
   - enabled: 1
+    path: Assets/Scenes/Room_03.unity
+    guid: 6412767eb0b736941aa4866b388d353a
+  - enabled: 1
+    path: Assets/Scenes/Room_04.unity
+    guid: 9160b4d57b7637346a8cba7fb4bbff8e
+  - enabled: 1
+    path: Assets/Scenes/Room_05.unity
+    guid: 7b8c2781504c3d445be051ead2e7ac72
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 09a1a5d926720f831aa07b6ceaa73362
   m_configObjects:

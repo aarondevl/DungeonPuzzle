@@ -1,9 +1,17 @@
 ---
 name: package-list
-description: List all packages installed in the Unity project (UPM packages). Returns information about each installed package including name, version, source, and description. Use this to check which packages are currently installed before adding or removing packages.
+description: List all UPM packages installed in the Unity project — name, version, source, description. Optionally filter by source (registry, embedded, local, git, built-in, local tarball), by name/display/description substring, and by direct-dependency-only.
 ---
 
 # Package Manager / List Installed
+
+List all packages installed in the Unity project (UPM packages). Returns information about each installed package including name, version, source, and description. Use this to check which packages are currently installed before adding or removing packages.
+
+## Inputs
+
+- `sourceFilter` (default `All`) — restrict by Unity `PackageSource`: `All`, `Registry`, `Embedded`, `Local`, `Git`, `BuiltIn`, `LocalTarball`.
+- `nameFilter` (optional) — case-insensitive substring filter over name / displayName / description. Results are prioritized: exact name → exact displayName → name substring → displayName substring → description substring.
+- `directDependenciesOnly` (default `false`) — when true, return only packages listed in `manifest.json` (no transitive dependencies).
 
 ## How to Call
 
@@ -78,11 +86,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Editor.API.Tool_Package+PackageData>"
+      "$ref": "#/$defs/System.Collections.Generic.List(AIGD.PackageData)"
     }
   },
   "$defs": {
-    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Package+PackageData": {
+    "AIGD.PackageData": {
       "type": "object",
       "properties": {
         "Name": {
@@ -112,10 +120,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       },
       "description": "Package information returned from package list operation."
     },
-    "System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Editor.API.Tool_Package+PackageData>": {
+    "System.Collections.Generic.List(AIGD.PackageData)": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Package+PackageData",
+        "$ref": "#/$defs/AIGD.PackageData",
         "description": "Package information returned from package list operation."
       }
     }

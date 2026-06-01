@@ -1,9 +1,19 @@
 ---
 name: scene-unload
-description: Unload scene from the Opened scenes in Unity Editor. Use 'scene-list-opened' tool to get the list of all opened scenes.
+description: Unload an opened scene from the Unity Editor (asynchronously via `SceneManager.UnloadSceneAsync`). Use 'scene-list-opened' to find the scene name first.
 ---
 
 # Scene / Unload
+
+Unload scene from the Opened scenes in Unity Editor. Use 'scene-list-opened' tool to get the list of all opened scenes.
+
+## Inputs
+
+- `name` — required non-empty scene name. Must match an opened scene; otherwise throws.
+
+## Behavior
+
+Runs `SceneManager.UnloadSceneAsync` on the main thread and awaits completion. Returns an `UnloadSceneResult` containing the scene name and an `AssetObjectRef` to its asset (or `null` if the scene was not backed by an asset on disk).
 
 ## How to Call
 
@@ -62,15 +72,15 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Scene+UnloadSceneResult"
+      "$ref": "#/$defs/AIGD.UnloadSceneResult"
     }
   },
   "$defs": {
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
+    "AIGD.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {
@@ -91,10 +101,14 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
     },
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
     "System.Type": {
       "type": "string"
     },
-    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Scene+UnloadSceneResult": {
+    "AIGD.UnloadSceneResult": {
       "type": "object",
       "properties": {
         "Name": {
@@ -102,7 +116,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Name of the unloaded scene."
         },
         "AssetObjectRef": {
-          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef",
+          "$ref": "#/$defs/AIGD.AssetObjectRef",
           "description": "Reference to the unloaded scene asset."
         }
       }

@@ -1,9 +1,20 @@
 ---
 name: screenshot-camera
-description: Captures a screenshot from a camera and returns it as an image. If no camera is specified, uses the Main Camera. Returns the image directly for visual inspection by the LLM.
+description: Capture a screenshot from a Unity `Camera` and return it as a PNG image for direct LLM inspection. Falls back to `Camera.main` (then any active camera) when `cameraRef` is null. Width and height are capped to keep response size manageable.
 ---
 
 # Screenshot / Camera
+
+Captures a screenshot from a camera and returns it as an image. If no camera is specified, uses the Main Camera. Returns the image directly for visual inspection by the LLM.
+
+## Inputs
+
+- `cameraRef` (optional) — reference to a GameObject hosting a `Camera`. When null, `Camera.main` is used; if there is no main camera, the first entry of `Camera.allCameras` is used.
+- `width` (default 1920) / `height` (default 1080) — output pixels. Must be > 0 and ≤ `MaxDimension`.
+
+## Behavior
+
+Allocates a temporary `RenderTexture`, swaps it onto the chosen camera, calls `Camera.Render`, reads back via `Texture2D.ReadPixels`, encodes as PNG, and restores the camera's prior `targetTexture`. Returns a `ResponseCallTool.Image` with `image/png` MIME and a descriptive caption.
 
 ## How to Call
 
@@ -48,7 +59,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "cameraRef": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
+      "$ref": "#/$defs/AIGD.GameObjectRef"
     },
     "width": {
       "type": "integer"
@@ -58,14 +69,18 @@ Read the /unity-initial-setup skill for detailed installation instructions.
     }
   },
   "$defs": {
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
     "System.Type": {
       "type": "string"
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
+    "AIGD.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {

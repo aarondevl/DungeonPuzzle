@@ -1,9 +1,18 @@
 ---
 name: assets-prefab-instantiate
-description: Instantiates prefab in the current active scene. Use 'assets-find' tool to find prefab assets in the project.
+description: Instantiate a prefab into the currently active scene at an optional position/rotation/scale, parented under an optional scene GameObject path. Use 'assets-find' to locate the prefab asset first.
 ---
 
 # Assets / Prefab / Instantiate
+
+Instantiates prefab in the current active scene. Use 'assets-find' tool to find prefab assets in the project.
+
+## Inputs
+
+- `prefabAssetPath` — project asset path of the prefab to instantiate.
+- `gameObjectPath` — destination path in the scene; the last segment becomes the new GameObject's name, any prefix is looked up as the parent (must already exist).
+- `position` / `rotation` / `scale` — optional transform; default to zero / zero / one.
+- `isLocalSpace` — when `true`, applies the transform in local space relative to the parent.
 
 ## How to Call
 
@@ -110,19 +119,23 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
+      "$ref": "#/$defs/AIGD.GameObjectRef",
       "description": "Find GameObject in opened Prefab or in the active Scene."
     }
   },
   "$defs": {
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
     "System.Type": {
       "type": "string"
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
+    "AIGD.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {

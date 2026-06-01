@@ -1,9 +1,15 @@
 ---
 name: editor-application-get-state
-description: "Returns available information about 'UnityEditor.EditorApplication'. Use it to get information about the current state of the Unity Editor application. Such as: playmode, paused state, compilation state, etc."
+description: Return the current state of `UnityEditor.EditorApplication` — playmode, paused state, compilation state, and related flags.
 ---
 
 # Editor / Application / Get State
+
+Returns available information about 'UnityEditor.EditorApplication'. Use it to get information about the current state of the Unity Editor application. Such as: playmode, paused state, compilation state, etc.
+
+## Behavior
+
+Snapshots Editor state via `EditorStatsData.FromEditor()` on the main thread and returns the result.
 
 ## How to Call
 
@@ -59,12 +65,12 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor+EditorStatsData",
+      "$ref": "#/$defs/AIGD.EditorStatsData",
       "description": "Available information about 'UnityEditor.EditorApplication'."
     }
   },
   "$defs": {
-    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor+EditorStatsData": {
+    "AIGD.EditorStatsData": {
       "type": "object",
       "properties": {
         "IsPlaying": {

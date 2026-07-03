@@ -1,20 +1,9 @@
 ---
 name: editor-application-set-state
-description: Start / stop / pause the Unity Editor 'playmode'. Use 'editor-application-get-state' to inspect the current state first. Throws if the project currently has compilation errors.
+description: Control the Unity Editor application state. You can start, stop, or pause the 'playmode'. Use 'editor-application-get-state' tool to get the current state first.
 ---
 
 # Editor / Application / Set State
-
-Control the Unity Editor application state. You can start, stop, or pause the 'playmode'. Use 'editor-application-get-state' tool to get the current state first.
-
-## Inputs
-
-- `isPlaying` (default `false`) — sets `EditorApplication.isPlaying`.
-- `isPaused` (default `false`) — sets `EditorApplication.isPaused`.
-
-## Behavior
-
-Refuses any state change while `EditorUtility.scriptCompilationFailed` is true — instead throws with the compilation error details so the caller can fix them first. On success returns the post-change `EditorStatsData` snapshot.
 
 ## How to Call
 
@@ -75,12 +64,12 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.EditorStatsData",
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor+EditorStatsData",
       "description": "Available information about 'UnityEditor.EditorApplication'."
     }
   },
   "$defs": {
-    "AIGD.EditorStatsData": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor+EditorStatsData": {
       "type": "object",
       "properties": {
         "IsPlaying": {

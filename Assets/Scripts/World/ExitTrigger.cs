@@ -8,6 +8,7 @@ public class ExitTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         SfxLibrary.Play("SFX/exit");
+        Vfx.Spark(transform.position);
         if (isFinalExit) GameManager.Instance.WinGame();
         else GameManager.Instance.LoadNextRoom();
     }

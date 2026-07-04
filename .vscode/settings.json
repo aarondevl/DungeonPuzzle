@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "DungeonPuzzle-main.slnx"
+    "dotnet.defaultSolution": "DungeonPuzzle.slnx"
 }

@@ -18,7 +18,7 @@ public class GuardVisual : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         if (body == null) body = GetComponentInParent<Rigidbody2D>();
-        _lastPos = body.position;
+        _lastPos = body.transform.position;
     }
 
     void LateUpdate()
@@ -26,8 +26,12 @@ public class GuardVisual : MonoBehaviour
         // Contra-rotación: anula la rotación heredada del padre.
         transform.rotation = Quaternion.identity;
 
-        Vector2 vel = (body.position - _lastPos) / Mathf.Max(Time.deltaTime, 0.0001f);
-        _lastPos = body.position;
+        // Posición del TRANSFORM (interpolada por el rigidbody), no rb.position:
+        // rb.position solo cambia en FixedUpdate y hacía que Speed cayera a 0
+        // entre pasos de física => la animación de caminar no se disparaba.
+        Vector2 pos = body.transform.position;
+        Vector2 vel = (pos - _lastPos) / Mathf.Max(Time.deltaTime, 0.0001f);
+        _lastPos = pos;
 
         Vector2 facing = ComputeFacing(vel, body.rotation, walkThreshold);
         _animator.SetFloat("MoveX", facing.x);

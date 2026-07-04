@@ -39,8 +39,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 3141592001
+    locked: 0
+  - name: FloorFX
+    uniqueID: 3141592002
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 3141592003
+    locked: 0
+  - name: Actors
+    uniqueID: 3141592004
+    locked: 0
+  - name: WallsTop
+    uniqueID: 3141592005
+    locked: 0
+  - name: FX
+    uniqueID: 3141592006
     locked: 0
   m_RenderingLayers:
   - Default

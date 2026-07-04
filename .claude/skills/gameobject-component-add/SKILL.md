@@ -1,20 +1,9 @@
 ---
 name: gameobject-component-add
-description: Add one or more Components to a GameObject in the opened Prefab or active Scene. Component types are looked up by full name (with namespace) or by class-name fallback. Use 'gameobject-find' to locate the host GameObject and 'gameobject-component-list-all' to discover valid component type names.
+description: Add Component to GameObject in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObject first. Use 'gameobject-component-list-all' tool to find the component type names to add.
 ---
 
 # GameObject / Component / Add
-
-Add Component to GameObject in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObject first. Use 'gameobject-component-list-all' tool to find the component type names to add.
-
-## Inputs
-
-- `componentNames` — list of component type names. Each entry may be a fully-qualified type name (preferred) or a bare class name (resolved via fallback to `AllComponentTypes`).
-- `gameObjectRef` — the target GameObject. Required.
-
-## Behavior
-
-Per-name errors (unknown type, type not assignable to `UnityEngine.Component`, add-failed/duplicate) are accumulated in `response.Errors` / `response.Warnings` instead of throwing, so a single bad name does not abort the whole batch. Successful additions populate `response.AddedComponents` with `ComponentDataShallow` snapshots.
 
 ## How to Call
 
@@ -57,31 +46,27 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "componentNames": {
-      "$ref": "#/$defs/System.String-1"
+      "$ref": "#/$defs/System.String[]"
     },
     "gameObjectRef": {
-      "$ref": "#/$defs/AIGD.GameObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
     }
   },
   "$defs": {
-    "System.String-1": {
+    "System.String[]": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -127,21 +112,21 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.AddComponentResponse"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+AddComponentResponse"
     }
   },
   "$defs": {
-    "System.Collections.Generic.List(AIGD.ComponentDataShallow)": {
+    "System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentDataShallow>": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.ComponentDataShallow"
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentDataShallow"
       }
     },
-    "AIGD.ComponentDataShallow": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentDataShallow": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId"
+          "type": "integer"
         },
         "typeName": {
           "type": "string"
@@ -160,33 +145,29 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         "isEnabled"
       ]
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "System.Collections.Generic.List(System.String)": {
+    "System.Collections.Generic.List<System.String>": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "AIGD.AddComponentResponse": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+AddComponentResponse": {
       "type": "object",
       "properties": {
         "AddedComponents": {
-          "$ref": "#/$defs/System.Collections.Generic.List(AIGD.ComponentDataShallow)",
+          "$ref": "#/$defs/System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentDataShallow>",
           "description": "List of successfully added components."
         },
         "Messages": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of success messages for added components."
         },
         "Warnings": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of warnings encountered during component addition."
         },
         "Errors": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of errors encountered during component addition."
         }
       }

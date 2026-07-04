@@ -1,19 +1,9 @@
 ---
 name: gameobject-duplicate
-description: Duplicate a batch of GameObjects in the currently opened Prefab or active Scene. Marks each affected scene as dirty after duplication. Use 'gameobject-find' to locate the source GameObjects first.
+description: Duplicate GameObjects in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObjects first.
 ---
 
 # GameObject / Duplicate
-
-Duplicate GameObjects in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObjects first.
-
-## Inputs
-
-- `gameObjectRefs` — `GameObjectRefList` of source GameObjects.
-
-## Behavior
-
-Resolves every input ref on the main thread (throwing on any unresolved entry to keep the batch atomic). Sets `Selection.entityIds`/`instanceIDs` to the sources and invokes `Unsupported.DuplicateGameObjectsUsingPasteboard()` (Unity's canonical duplicate routine). Marks every distinct affected scene dirty so the duplicated objects are saved with the scene. Returns refs to the sources (the duplicates are reachable via the post-call `Selection`).
 
 ## How to Call
 
@@ -54,15 +44,15 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "gameObjectRefs": {
-      "$ref": "#/$defs/AIGD.GameObjectRefList"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRefList"
     }
   },
   "$defs": {
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -91,17 +81,13 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Find GameObject in opened Prefab or in the active Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.GameObjectRefList": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRefList": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.GameObjectRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
         "description": "Find GameObject in opened Prefab or in the active Scene."
       },
       "description": "Array of GameObjects in opened Prefab or in the active Scene."
@@ -122,15 +108,15 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/System.Collections.Generic.List(AIGD.GameObjectRef)"
+      "$ref": "#/$defs/System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef>"
     }
   },
   "$defs": {
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -159,17 +145,13 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Find GameObject in opened Prefab or in the active Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "System.Collections.Generic.List(AIGD.GameObjectRef)": {
+    "System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef>": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.GameObjectRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
         "description": "Find GameObject in opened Prefab or in the active Scene."
       }
     }

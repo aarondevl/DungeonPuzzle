@@ -1,19 +1,9 @@
 ---
 name: assets-prefab-open
-description: Open the prefab edit stage for a prefab instance or prefab asset GameObject. Modifications inside the edit stage propagate to all instances. Pair with 'assets-prefab-close' to exit the stage when done.
+description: "Open prefab edit mode for a specific GameObject. In the Edit mode you can modify the prefab. The modification will be applied to all instances of the prefab across the project. Note: Please use 'assets-prefab-close' tool later to exit prefab editing mode."
 ---
 
 # Assets / Prefab / Open
-
-Open prefab edit mode for a specific GameObject. In the Edit mode you can modify the prefab. The modification will be applied to all instances of the prefab across the project. Note: Please use 'assets-prefab-close' tool later to exit prefab editing mode.
-
-## Inputs
-
-- `gameObjectRef` — reference to a scene prefab instance OR a prefab asset GameObject. The tool resolves the prefab asset path via `PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot` and opens the appropriate prefab stage.
-
-## Behavior
-
-Asset-side GameObjects open via the simple `OpenPrefab(path)` overload. Scene-instance GameObjects open via `OpenPrefab(path, gameObject)` so the editor remembers which instance prompted the edit. Editor windows are repainted before returning. Throws when the GameObject cannot be resolved or the stage fails to open.
 
 ## How to Call
 
@@ -54,22 +44,18 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "gameObjectRef": {
-      "$ref": "#/$defs/AIGD.GameObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {

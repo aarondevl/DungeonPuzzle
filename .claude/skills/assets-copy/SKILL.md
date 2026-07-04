@@ -1,20 +1,9 @@
 ---
 name: assets-copy
-description: Copy assets at given paths and store them at new paths. Refreshes the AssetDatabase at the end. Use 'assets-find' to locate the source assets first.
+description: Copy assets at given paths and store them at new paths. Does AssetDatabase.Refresh() at the end. Use 'assets-find' tool to find assets before copying.
 ---
 
 # Assets / Copy
-
-Copy assets at given paths and store them at new paths. Does AssetDatabase.Refresh() at the end. Use 'assets-find' tool to find assets before copying.
-
-## Inputs
-
-- `sourcePaths` — paths of the assets to copy.
-- `destinationPaths` — paths to store the copied assets (must match `sourcePaths` length).
-
-## Behavior
-
-Each source/destination pair is copied in order. Per-pair errors are accumulated in the response instead of throwing, so a single bad pair does not abort the whole batch.
 
 ## How to Call
 
@@ -57,14 +46,14 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "sourcePaths": {
-      "$ref": "#/$defs/System.String-1"
+      "$ref": "#/$defs/System.String[]"
     },
     "destinationPaths": {
-      "$ref": "#/$defs/System.String-1"
+      "$ref": "#/$defs/System.String[]"
     }
   },
   "$defs": {
-    "System.String-1": {
+    "System.String[]": {
       "type": "array",
       "items": {
         "type": "string"
@@ -87,22 +76,22 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.CopyAssetsResponse"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CopyAssetsResponse"
     }
   },
   "$defs": {
-    "System.Collections.Generic.List(AIGD.AssetObjectRef)": {
+    "System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef>": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.AssetObjectRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef",
         "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
       }
     },
-    "AIGD.AssetObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {
@@ -123,28 +112,24 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "System.Collections.Generic.List(System.String)": {
+    "System.Collections.Generic.List<System.String>": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "AIGD.CopyAssetsResponse": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CopyAssetsResponse": {
       "type": "object",
       "properties": {
         "CopiedAssets": {
-          "$ref": "#/$defs/System.Collections.Generic.List(AIGD.AssetObjectRef)",
+          "$ref": "#/$defs/System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef>",
           "description": "List of copied assets."
         },
         "Errors": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of errors encountered during copy operations."
         }
       }

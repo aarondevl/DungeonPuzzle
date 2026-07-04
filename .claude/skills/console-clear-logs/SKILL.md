@@ -1,15 +1,9 @@
 ---
 name: console-clear-logs
-description: Clear the MCP log cache (used by 'console-get-logs') and the Unity Editor Console window. Useful for isolating logs to a specific action by clearing the slate first.
+description: Clears the MCP log cache (used by console-get-logs) and the Unity Editor Console window. Useful for isolating errors related to a specific action by clearing logs before performing the action.
 ---
 
 # Console / Clear Logs
-
-Clears the MCP log cache (used by console-get-logs) and the Unity Editor Console window. Useful for isolating errors related to a specific action by clearing logs before performing the action.
-
-## Behavior
-
-Calls `Debug.ClearDeveloperConsole()` to wipe the Editor Console, then clears the MCP-side `LogCollector` cache so subsequent 'console-get-logs' calls only see new entries.
 
 ## How to Call
 

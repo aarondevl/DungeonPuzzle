@@ -1,18 +1,9 @@
 ---
 name: console-get-logs
-description: Retrieve Unity Editor logs from the MCP plugin's `LogCollector`, optionally filtered by log type or time window. Useful for debugging and monitoring Editor activity.
+description: Retrieves Unity Editor logs. Useful for debugging and monitoring Unity Editor activity.
 ---
 
 # Console / Get Logs
-
-Retrieves Unity Editor logs. Useful for debugging and monitoring Unity Editor activity.
-
-## Inputs
-
-- `maxEntries` (default 100, minimum 1) — caps the size of the returned array.
-- `logTypeFilter` — Unity `LogType` filter; `null` returns all severities.
-- `includeStackTrace` (default `false`) — include stack-trace strings in each entry.
-- `lastMinutes` (default 0) — when non-zero, only logs from the last N minutes are returned.
 
 ## How to Call
 
@@ -95,7 +86,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.LogEntry-1"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.LogEntry[]"
     }
   },
   "$defs": {
@@ -128,7 +119,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         "Timestamp"
       ]
     },
-    "com.IvanMurzak.Unity.MCP.LogEntry-1": {
+    "com.IvanMurzak.Unity.MCP.LogEntry[]": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.LogEntry"

@@ -16,6 +16,7 @@ public class ThrownStone : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         if (!ShouldTriggerNoise(noiseTriggerLayers.value, col.gameObject.layer)) return;
+        SfxLibrary.Play("SFX/stone_land");
         GetComponent<NoiseSource>().TriggerNoise();
     }
 

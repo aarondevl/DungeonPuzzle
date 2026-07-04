@@ -91,19 +91,20 @@ public class MainMenuUI : MonoBehaviour
     }
 
     // Root buttons
-    public void OnPlayClicked() => GameManager.Instance.StartGame();
-    public void OnContinueClicked() => GameManager.Instance.ContinueGame();
-    public void OnLevelSelectClicked() { SetPanel(rootPanel, false); SetPanel(levelSelectPanel, true); RefreshLevelButtons(); }
-    public void OnOptionsClicked() { SetPanel(rootPanel, false); SetPanel(optionsPanel, true); }
-    public void OnCreditsClicked() { SetPanel(rootPanel, false); SetPanel(creditsPanel, true); }
-    public void OnQuitClicked() { Application.Quit(); }
+    public void OnPlayClicked() { SfxLibrary.Play("UI/click"); GameManager.Instance.StartGame(); }
+    public void OnContinueClicked() { SfxLibrary.Play("UI/click"); GameManager.Instance.ContinueGame(); }
+    public void OnLevelSelectClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(levelSelectPanel, true); RefreshLevelButtons(); }
+    public void OnOptionsClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(optionsPanel, true); }
+    public void OnCreditsClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(creditsPanel, true); }
+    public void OnQuitClicked() { SfxLibrary.Play("UI/click"); Application.Quit(); }
 
     // Sub-panel actions
-    public void OnBackClicked() { ShowRoot(); RefreshContinueButton(); RefreshStats(); }
-    void OnLevelClicked(int level) => GameManager.Instance.StartLevel(level);
+    public void OnBackClicked() { SfxLibrary.Play("UI/click"); ShowRoot(); RefreshContinueButton(); RefreshStats(); }
+    void OnLevelClicked(int level) { SfxLibrary.Play("UI/click"); GameManager.Instance.StartLevel(level); }
 
     public void OnResetProgressClicked()
     {
+        SfxLibrary.Play("UI/click");
         GameProgress.ResetAll();
         RefreshContinueButton();
         RefreshLevelButtons();
@@ -111,7 +112,7 @@ public class MainMenuUI : MonoBehaviour
     }
 
     void OnMasterVol(float v) { GameProgress.MasterVolume = v; if (AudioMaster.Instance != null) AudioMaster.Instance.Apply(); }
-    void OnMusicVol(float v) { GameProgress.MusicVolume = v; }
+    void OnMusicVol(float v) { GameProgress.MusicVolume = v; if (AudioMaster.Instance != null) AudioMaster.Instance.Apply(); }
     void OnSfxVol(float v) { GameProgress.SfxVolume = v; }
     void OnFullscreen(bool v) { GameProgress.Fullscreen = v; if (AudioMaster.Instance != null) AudioMaster.Instance.Apply(); }
 }

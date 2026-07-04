@@ -1,9 +1,20 @@
 ---
 name: gameobject-component-destroy
-description: Destroy one or many components from target GameObject. Can't destroy missed components. Use 'gameobject-find' tool to find the target GameObject and 'gameobject-component-get' to get component details first.
+description: Destroy one or more Components from a target GameObject. Missing (null) components are skipped — they cannot be destroyed. Use 'gameobject-find' and 'gameobject-component-get' to identify the components first.
 ---
 
 # GameObject / Component / Destroy
+
+Destroy one or many components from target GameObject. Can't destroy missed components. Use 'gameobject-find' tool to find the target GameObject and 'gameobject-component-get' to get component details first.
+
+## Inputs
+
+- `gameObjectRef` — the host GameObject.
+- `destroyComponentRefs` — `ComponentRefList` of components to destroy (matched against the GameObject's components).
+
+## Behavior
+
+Iterates `go.GetComponents<Component>()`, skipping null entries (missing scripts). For each non-null component that matches one of `destroyComponentRefs`, the tool snapshots a `ComponentRef`, calls `Object.DestroyImmediate`, and records the destroyed reference. If no component matches at all, throws with the help text from `Error.NotFoundComponents` (which includes a preview of all available components on the GameObject).
 
 ## How to Call
 
@@ -46,21 +57,25 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "gameObjectRef": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
+      "$ref": "#/$defs/AIGD.GameObjectRef"
     },
     "destroyComponentRefs": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRefList"
+      "$ref": "#/$defs/AIGD.ComponentRefList"
     }
   },
   "$defs": {
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
     "System.Type": {
       "type": "string"
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
+    "AIGD.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -89,7 +104,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Find GameObject in opened Prefab or in the active Scene."
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef": {
+    "AIGD.ComponentRef": {
       "type": "object",
       "properties": {
         "index": {
@@ -101,7 +116,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Component type full name. Sample 'UnityEngine.Transform'. If the gameObject has two components of the same type, the output component is unpredictable. Priority: 3. Default value is null."
         },
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -111,10 +126,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Component reference. Used to find a Component at GameObject."
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRefList": {
+    "AIGD.ComponentRefList": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef",
+        "$ref": "#/$defs/AIGD.ComponentRef",
         "description": "Component reference. Used to find a Component at GameObject."
       },
       "description": "Component reference array. Used to find Component at GameObject."
@@ -136,19 +151,19 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+DestroyComponentsResponse"
+      "$ref": "#/$defs/AIGD.DestroyComponentsResponse"
     }
   },
   "$defs": {
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRefList": {
+    "AIGD.ComponentRefList": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef",
+        "$ref": "#/$defs/AIGD.ComponentRef",
         "description": "Component reference. Used to find a Component at GameObject."
       },
       "description": "Component reference array. Used to find Component at GameObject."
     },
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef": {
+    "AIGD.ComponentRef": {
       "type": "object",
       "properties": {
         "index": {
@@ -160,7 +175,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Component type full name. Sample 'UnityEngine.Transform'. If the gameObject has two components of the same type, the output component is unpredictable. Priority: 3. Default value is null."
         },
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -170,11 +185,15 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Component reference. Used to find a Component at GameObject."
     },
-    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+DestroyComponentsResponse": {
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "AIGD.DestroyComponentsResponse": {
       "type": "object",
       "properties": {
         "DestroyedComponents": {
-          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRefList",
+          "$ref": "#/$defs/AIGD.ComponentRefList",
           "description": "List of destroyed components."
         }
       }

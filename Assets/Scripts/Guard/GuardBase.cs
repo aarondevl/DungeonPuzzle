@@ -37,6 +37,7 @@ public abstract class GuardBase : MonoBehaviour
                 State = GuardState.Alerted;
                 SfxLibrary.Play("SFX/alert");
                 VisionCone.SetAlerted(true);
+                Vfx.Alert(transform.position);
             }
             if (_spotTimer >= spotSustainSeconds)
             {

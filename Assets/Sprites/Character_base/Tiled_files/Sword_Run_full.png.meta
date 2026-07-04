@@ -1,0 +1,949 @@
+fileFormatVersion: 2
+guid: 5b7372216174cd54db9fdf4625e5f490
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9115605762361566855
+    second: Sword_Run_full_0
+  - first:
+      213: -6173353920823168819
+    second: Sword_Run_full_1
+  - first:
+      213: -8112950969915983394
+    second: Sword_Run_full_2
+  - first:
+      213: 960495837419604047
+    second: Sword_Run_full_3
+  - first:
+      213: 439155344071214752
+    second: Sword_Run_full_4
+  - first:
+      213: -9112270784880746051
+    second: Sword_Run_full_5
+  - first:
+      213: -9182051909758612434
+    second: Sword_Run_full_6
+  - first:
+      213: 2334066188345651562
+    second: Sword_Run_full_7
+  - first:
+      213: 5812720159088080610
+    second: Sword_Run_full_8
+  - first:
+      213: 5535760694211273764
+    second: Sword_Run_full_9
+  - first:
+      213: 3751213979948485901
+    second: Sword_Run_full_10
+  - first:
+      213: 8051616686044181645
+    second: Sword_Run_full_11
+  - first:
+      213: 4652296503083377406
+    second: Sword_Run_full_12
+  - first:
+      213: -125529731464440744
+    second: Sword_Run_full_13
+  - first:
+      213: -3311222855801231915
+    second: Sword_Run_full_14
+  - first:
+      213: -1433125498964836916
+    second: Sword_Run_full_15
+  - first:
+      213: -8221081746750982563
+    second: Sword_Run_full_16
+  - first:
+      213: -7734456764368953306
+    second: Sword_Run_full_17
+  - first:
+      213: 2617599428229034899
+    second: Sword_Run_full_18
+  - first:
+      213: -8161230534867783063
+    second: Sword_Run_full_19
+  - first:
+      213: -4395760758590334510
+    second: Sword_Run_full_20
+  - first:
+      213: 5796373176821042186
+    second: Sword_Run_full_21
+  - first:
+      213: 1096292673231906590
+    second: Sword_Run_full_22
+  - first:
+      213: -5536285989144288197
+    second: Sword_Run_full_23
+  - first:
+      213: 2224695350000399578
+    second: Sword_Run_full_24
+  - first:
+      213: -692555917794236058
+    second: Sword_Run_full_25
+  - first:
+      213: -1206783693473764446
+    second: Sword_Run_full_26
+  - first:
+      213: -5892701902021859107
+    second: Sword_Run_full_27
+  - first:
+      213: 6335989728523685439
+    second: Sword_Run_full_28
+  - first:
+      213: -869385091698357596
+    second: Sword_Run_full_29
+  - first:
+      213: -3893102408218215742
+    second: Sword_Run_full_30
+  - first:
+      213: 9184993923268791615
+    second: Sword_Run_full_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sword_Run_full_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 208
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 786a012f423218e70800000000000000
+      internalID: 9115605762361566855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_1
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 208
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc0f19c1157d35aa0800000000000000
+      internalID: -6173353920823168819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 208
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed93ffdb312096f80800000000000000
+      internalID: -8112950969915983394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 208
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4803ad00ed545d00800000000000000
+      internalID: 960495837419604047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_4
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 208
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a6449c6571381600800000000000000
+      internalID: 439155344071214752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_5
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 208
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db163020006ba8180800000000000000
+      internalID: -9112270784880746051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_6
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 208
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c04a9cf6cc29080800000000000000
+      internalID: -9182051909758612434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_7
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 208
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a61b796f4d4446020800000000000000
+      internalID: 2334066188345651562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_8
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 144
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e67235003eeaa050800000000000000
+      internalID: 5812720159088080610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_9
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 144
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 424680c8509f2dc40800000000000000
+      internalID: 5535760694211273764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_10
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 144
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0d0f4f6d3dfe0430800000000000000
+      internalID: 3751213979948485901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_11
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 144
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d84754777b61dbf60800000000000000
+      internalID: 8051616686044181645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_12
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 144
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef2a3184507409040800000000000000
+      internalID: 4652296503083377406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_13
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 144
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854df43df57024ef0800000000000000
+      internalID: -125529731464440744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_14
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 144
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d520d33b5c2c02d0800000000000000
+      internalID: -3311222855801231915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_15
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 144
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccd75a3a3f38c1ce0800000000000000
+      internalID: -1433125498964836916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_16
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 80
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56b57f55b9d8ed80800000000000000
+      internalID: -8221081746750982563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_17
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 80
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 620eb2d3d80b9a490800000000000000
+      internalID: -7734456764368953306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 80
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3937bd3bfc4935420800000000000000
+      internalID: 2617599428229034899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_19
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 80
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962722f811c7dbe80800000000000000
+      internalID: -8161230534867783063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_20
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 80
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d91f9a31ee1ff2c0800000000000000
+      internalID: -4395760758590334510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_21
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 80
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c450e91bad07050800000000000000
+      internalID: 5796373176821042186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_22
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 80
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e17e9ddb060d63f00800000000000000
+      internalID: 1096292673231906590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_23
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 80
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b342512b9392b23b0800000000000000
+      internalID: -5536285989144288197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_24
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 16
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad4bc3642a4bfde10800000000000000
+      internalID: 2224695350000399578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_25
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 16
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669a7c4ef0c8366f0800000000000000
+      internalID: -692555917794236058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_26
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 16
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ab23c5ef94a04fe0800000000000000
+      internalID: -1206783693473764446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_27
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 16
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd8e7ba47dae83ea0800000000000000
+      internalID: -5892701902021859107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_28
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 16
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3e8d2da615fde750800000000000000
+      internalID: 6335989728523685439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_29
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 16
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa8c448dd25fe3f0800000000000000
+      internalID: -869385091698357596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_30
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 16
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca7feb7cfbe8f9c0800000000000000
+      internalID: -3893102408218215742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Run_full_31
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 16
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3dce8c1f47a77f70800000000000000
+      internalID: 9184993923268791615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sword_Run_full_0: 9115605762361566855
+      Sword_Run_full_1: -6173353920823168819
+      Sword_Run_full_10: 3751213979948485901
+      Sword_Run_full_11: 8051616686044181645
+      Sword_Run_full_12: 4652296503083377406
+      Sword_Run_full_13: -125529731464440744
+      Sword_Run_full_14: -3311222855801231915
+      Sword_Run_full_15: -1433125498964836916
+      Sword_Run_full_16: -8221081746750982563
+      Sword_Run_full_17: -7734456764368953306
+      Sword_Run_full_18: 2617599428229034899
+      Sword_Run_full_19: -8161230534867783063
+      Sword_Run_full_2: -8112950969915983394
+      Sword_Run_full_20: -4395760758590334510
+      Sword_Run_full_21: 5796373176821042186
+      Sword_Run_full_22: 1096292673231906590
+      Sword_Run_full_23: -5536285989144288197
+      Sword_Run_full_24: 2224695350000399578
+      Sword_Run_full_25: -692555917794236058
+      Sword_Run_full_26: -1206783693473764446
+      Sword_Run_full_27: -5892701902021859107
+      Sword_Run_full_28: 6335989728523685439
+      Sword_Run_full_29: -869385091698357596
+      Sword_Run_full_3: 960495837419604047
+      Sword_Run_full_30: -3893102408218215742
+      Sword_Run_full_31: 9184993923268791615
+      Sword_Run_full_4: 439155344071214752
+      Sword_Run_full_5: -9112270784880746051
+      Sword_Run_full_6: -9182051909758612434
+      Sword_Run_full_7: 2334066188345651562
+      Sword_Run_full_8: 5812720159088080610
+      Sword_Run_full_9: 5535760694211273764
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

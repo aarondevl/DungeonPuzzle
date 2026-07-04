@@ -35,6 +35,7 @@ public abstract class GuardBase : MonoBehaviour
             if (State == GuardState.Normal)
             {
                 State = GuardState.Alerted;
+                SfxLibrary.Play("SFX/alert");
                 VisionCone.SetAlerted(true);
             }
             if (_spotTimer >= spotSustainSeconds)
@@ -57,6 +58,7 @@ public abstract class GuardBase : MonoBehaviour
     {
         if (State == GuardState.Alerted) return;
         State = GuardState.Alerted;
+        SfxLibrary.Play("SFX/alert");
         VisionCone.SetAlerted(true);
         OnNoiseAlerted(noisePosition);
         StartCoroutine(ReturnToNormalAfter(alertDuration));

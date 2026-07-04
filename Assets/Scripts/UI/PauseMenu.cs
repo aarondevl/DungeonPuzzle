@@ -32,16 +32,18 @@ public class PauseMenu : MonoBehaviour
         else GameManager.Instance.ResumeTime();
     }
 
-    public void OnResumeClicked() => Show(false);
+    public void OnResumeClicked() { SfxLibrary.Play("UI/click"); Show(false); }
 
     public void OnRestartClicked()
     {
+        SfxLibrary.Play("UI/click");
         Show(false);
         GameManager.Instance.RestartCurrentRoom();
     }
 
     public void OnMainMenuClicked()
     {
+        SfxLibrary.Play("UI/click");
         Show(false);
         GameManager.Instance.GoToMainMenu();
     }

@@ -4862,6 +4862,7 @@ GameObject:
   - component: {fileID: 5039959738660516720}
   - component: {fileID: 9160892518976502995}
   - component: {fileID: 7899130474078003720}
+  - component: {fileID: 2768849933817480698}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -4887,7 +4888,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.247}
 --- !u!212 &5012209246776576977
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4930,8 +4931,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1153375292
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 357006442158401228, guid: 9d1955f1078faaa48aa140172b163e87, type: 3}
@@ -4944,6 +4945,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!50 &3000642265663246934
 Rigidbody2D:
   serializedVersion: 5
@@ -5088,3 +5090,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: DungeonPuzzle.Runtime::MovementDust
   dust: {fileID: 4938719210264815201}
   minSpeed: 0.6
+--- !u!114 &2768849933817480698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530351891437327453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c5b5c57aa8c294da9561ce91d1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DungeonPuzzle.Runtime::YSort
+  feetOffset: -0.4

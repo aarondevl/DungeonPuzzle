@@ -1,9 +1,22 @@
 ---
 name: assets-find
-description: Search the asset database using the search filter string. Allows you to search for Assets. The string argument can provide names, labels or types (classnames).
+description: "Search the Unity asset database using a search filter string. The filter accepts names, labels (`l:`), types (`t:`), AssetBundles (`b:`), areas (`a:`), and globs (`glob:`). See the body for the full filter syntax."
 ---
 
 # Assets / Find
+
+Search the asset database using the search filter string. Allows you to search for Assets. The string argument can provide names, labels or types (classnames).
+
+## Filter syntax
+
+- **Name** — filter assets by their filename (without extension). Words separated by whitespace are treated as separate name searches.
+- **Labels (`l:`)** — assets can have labels attached. Use `l:` before each label.
+- **Types (`t:`)** — find assets based on explicitly identified types. Available types include AnimationClip, AudioClip, AudioMixer, ComputeShader, Font, GUISkin, Material, Mesh, Model, PhysicMaterial, Prefab, Scene, Script, Shader, Sprite, Texture, VideoClip, VisualEffectAsset, VisualEffectSubgraph.
+- **AssetBundles (`b:`)** — find assets which are part of an Asset bundle.
+- **Area (`a:`)** — find assets in a specific area. Valid values: `all`, `assets`, `packages`.
+- **Globbing (`glob:`)** — use globbing to match specific rules.
+
+Searching is case-insensitive. Use `searchInFolders` to restrict the search scope. `maxResults` caps the returned list (default 10) — results beyond it are truncated.
 
 ## How to Call
 
@@ -51,14 +64,14 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       "type": "string"
     },
     "searchInFolders": {
-      "$ref": "#/$defs/System.String[]"
+      "$ref": "#/$defs/System.String-1"
     },
     "maxResults": {
       "type": "integer"
     }
   },
   "$defs": {
-    "System.String[]": {
+    "System.String-1": {
       "type": "array",
       "items": {
         "type": "string"
@@ -77,15 +90,15 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef>"
+      "$ref": "#/$defs/System.Collections.Generic.List(AIGD.AssetObjectRef)"
     }
   },
   "$defs": {
-    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
+    "AIGD.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "type": "integer",
+          "$ref": "#/$defs/UnityEngine.EntityId",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {
@@ -106,13 +119,17 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
     },
+    "UnityEngine.EntityId": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
     "System.Type": {
       "type": "string"
     },
-    "System.Collections.Generic.List<com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef>": {
+    "System.Collections.Generic.List(AIGD.AssetObjectRef)": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef",
+        "$ref": "#/$defs/AIGD.AssetObjectRef",
         "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
       }
     }

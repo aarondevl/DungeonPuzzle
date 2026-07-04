@@ -125,11 +125,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6284089928350883644}
-  - component: {fileID: 74250428186225277}
-  - component: {fileID: 7354216270372764474}
   - component: {fileID: 8294801207514900444}
   - component: {fileID: 3914678905418604737}
   - component: {fileID: 150374965160081145}
+  - component: {fileID: 4822686114940070670}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -147,47 +146,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.494506, y: 5.494506, z: 1}
+  m_LocalScale: {x: 2.5514286, y: 2.5514286, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6071249942139578145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &74250428186225277
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2483628292572933859}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0ecc44277e280946bafea3146a70afc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7354216270372764474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2483628292572933859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e3b227bc185484f8bcacdee8a2ab86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: DungeonPuzzle.Runtime::GuardVisual
-  body: {fileID: 0}
-  walkThreshold: 0.05
 --- !u!114 &8294801207514900444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c5b5c57aa8c294da9561ce91d1bb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DungeonPuzzle.Runtime::YSort
-  feetOffset: -0.35
+  feetOffset: 0
 --- !u!210 &3914678905418604737
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -263,7 +226,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3790629738752367944, guid: 5ec17dd16d39510f818a4ddb361a71d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e541978da44b0246a0ce61fbea0b96d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -274,6 +237,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &4822686114940070670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483628292572933859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f396b082c9b1e0c4aa47f78ef7e2bf0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DungeonPuzzle.Runtime::GuardBody
+  body: {fileID: 8566813006301193868}
+  idleFrames:
+  - {fileID: 21300000, guid: 6e541978da44b0246a0ce61fbea0b96d, type: 3}
+  - {fileID: 21300000, guid: 9685d45817e23ac4fb38a8773eca03f3, type: 3}
+  - {fileID: 21300000, guid: f16f4119d70b89248abe83c914078024, type: 3}
+  - {fileID: 21300000, guid: 07f64d2ade6695d46b48516b855aed0e, type: 3}
+  - {fileID: 21300000, guid: 609e837f741387443a25614894f02bb4, type: 3}
+  - {fileID: 21300000, guid: 4ee79ea012f4d8a49a8eae9bb39b01ec, type: 3}
+  - {fileID: 21300000, guid: 1ce09fac438015f4c8703013eb98ebd4, type: 3}
+  - {fileID: 21300000, guid: 8654076b1f392224ca5920ecc9961593, type: 3}
+  - {fileID: 21300000, guid: 558e9db7f365f844eb1e1298bb8435ac, type: 3}
+  - {fileID: 21300000, guid: f62ed41b607cabb40a4a7f433e4f454c, type: 3}
+  - {fileID: 21300000, guid: dce49b119c115284ca9dd4b10c53cc67, type: 3}
+  - {fileID: 21300000, guid: 47a72fc3a7d5d5d4ea70d09721c313d7, type: 3}
+  walkFrames:
+  - {fileID: 21300000, guid: 30d0189a93acd3041ac7626f73e0c1d8, type: 3}
+  - {fileID: 21300000, guid: 49b7b8b41d5218b4f8178299782e5f08, type: 3}
+  - {fileID: 21300000, guid: 9f36ff83a35a2b94f8f87c6ebb1e5fec, type: 3}
+  - {fileID: 21300000, guid: a613a90972565604ebc748bf2a25739c, type: 3}
+  - {fileID: 21300000, guid: 1901367ff836bfa489501018dbe6cea0, type: 3}
+  - {fileID: 21300000, guid: f6d4097ba4a0ac74f850f3cc2ebafea5, type: 3}
+  fps: 8
+  walkThreshold: 0.05
+  spritesFaceLeft: 0
 --- !u!1 &7219057486143681282
 GameObject:
   m_ObjectHideFlags: 0

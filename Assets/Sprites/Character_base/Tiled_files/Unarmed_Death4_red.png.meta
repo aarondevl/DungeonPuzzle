@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 30efe00237f0c6b47a2c8a0bbf10b6ff
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8996634681013112526
+    second: Unarmed_Death4_red_0
+  - first:
+      213: 7282060962894514761
+    second: Unarmed_Death4_red_1
+  - first:
+      213: -9025607004530349373
+    second: Unarmed_Death4_red_2
+  - first:
+      213: -6383736592362438250
+    second: Unarmed_Death4_red_3
+  - first:
+      213: -8178447762020355216
+    second: Unarmed_Death4_red_4
+  - first:
+      213: -2452472983020926009
+    second: Unarmed_Death4_red_5
+  - first:
+      213: 8621306027010709520
+    second: Unarmed_Death4_red_6
+  - first:
+      213: -3716937727687483843
+    second: Unarmed_Death4_red_7
+  - first:
+      213: 7684366897584481543
+    second: Unarmed_Death4_red_8
+  - first:
+      213: 5410315676592178013
+    second: Unarmed_Death4_red_9
+  - first:
+      213: -375387266905398920
+    second: Unarmed_Death4_red_10
+  - first:
+      213: 7943324034982175023
+    second: Unarmed_Death4_red_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_0
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 209
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 231f0408c68852380800000000000000
+      internalID: -8996634681013112526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_1
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 209
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94a011e1dd31f0560800000000000000
+      internalID: 7282060962894514761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_2
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 209
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cae0b4cf3a9eb280800000000000000
+      internalID: -9025607004530349373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_3
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 147
+        width: 22
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691039844696867a0800000000000000
+      internalID: -6383736592362438250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_4
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 145
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07330ba7711508e80800000000000000
+      internalID: -8178447762020355216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_5
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 145
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb8bc1d0d017fdd0800000000000000
+      internalID: -2452472983020926009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_6
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 83
+        width: 22
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01858e7672805a770800000000000000
+      internalID: 8621306027010709520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_7
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 81
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e90f074d8ca6cc0800000000000000
+      internalID: -3716937727687483843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_8
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 81
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7052b46dafa54aa60800000000000000
+      internalID: 7684366897584481543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_9
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 17
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53010a517d451b40800000000000000
+      internalID: 5410315676592178013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_10
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 17
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87126e6054b5acaf0800000000000000
+      internalID: -375387266905398920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death4_red_11
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 17
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f216fe0df1b5c3e60800000000000000
+      internalID: 7943324034982175023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Unarmed_Death4_red_0: -8996634681013112526
+      Unarmed_Death4_red_1: 7282060962894514761
+      Unarmed_Death4_red_10: -375387266905398920
+      Unarmed_Death4_red_11: 7943324034982175023
+      Unarmed_Death4_red_2: -9025607004530349373
+      Unarmed_Death4_red_3: -6383736592362438250
+      Unarmed_Death4_red_4: -8178447762020355216
+      Unarmed_Death4_red_5: -2452472983020926009
+      Unarmed_Death4_red_6: 8621306027010709520
+      Unarmed_Death4_red_7: -3716937727687483843
+      Unarmed_Death4_red_8: 7684366897584481543
+      Unarmed_Death4_red_9: 5410315676592178013
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

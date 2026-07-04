@@ -110,3 +110,7 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]creenshots/
 /[Aa]ssets/[Ss]creenshots.meta
 .claude/scheduled_tasks.lock
+
+# macOS artifacts from asset packs
+.DS_Store
+**/__MACOSX/

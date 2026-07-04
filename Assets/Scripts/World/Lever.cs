@@ -7,6 +7,7 @@ public class Lever : MonoBehaviour, IInteractable
     public void Interact(PlayerInventory inventory)
     {
         SfxLibrary.Play("SFX/lever");
+        Vfx.Spark(transform.position);
         linkedDoor.Toggle();
     }
 }

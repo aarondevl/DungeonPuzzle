@@ -24,6 +24,7 @@ public class Door : MonoBehaviour
         if (_open) return;
         _open = true;
         SfxLibrary.Play("SFX/door_open");
+        Vfx.Spark(transform.position);
         _col.enabled = false;
         if (_running != null) StopCoroutine(_running);
         _running = StartCoroutine(Tween(closedSprite, openSprite));

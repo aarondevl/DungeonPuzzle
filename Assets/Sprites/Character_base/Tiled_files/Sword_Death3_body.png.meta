@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: e958241ec8960914f9809920285d18c0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3066667856469217779
+    second: Sword_Death3_body_0
+  - first:
+      213: 8414026427409169810
+    second: Sword_Death3_body_1
+  - first:
+      213: 7001345202363803585
+    second: Sword_Death3_body_2
+  - first:
+      213: -3367653037540946665
+    second: Sword_Death3_body_3
+  - first:
+      213: 8044146502235626051
+    second: Sword_Death3_body_4
+  - first:
+      213: -3031485721652566061
+    second: Sword_Death3_body_5
+  - first:
+      213: -4521165619642271535
+    second: Sword_Death3_body_6
+  - first:
+      213: 3611173380106850962
+    second: Sword_Death3_body_7
+  - first:
+      213: 5854028735213209997
+    second: Sword_Death3_body_8
+  - first:
+      213: 4781791548379491587
+    second: Sword_Death3_body_9
+  - first:
+      213: 3819291887219415500
+    second: Sword_Death3_body_10
+  - first:
+      213: -4903202117670650924
+    second: Sword_Death3_body_11
+  - first:
+      213: 1860310528653758720
+    second: Sword_Death3_body_12
+  - first:
+      213: 2920583038600976707
+    second: Sword_Death3_body_13
+  - first:
+      213: 6887472797297834330
+    second: Sword_Death3_body_14
+  - first:
+      213: 1374080256197154688
+    second: Sword_Death3_body_15
+  - first:
+      213: 8378511527322114079
+    second: Sword_Death3_body_16
+  - first:
+      213: -2410607385961411632
+    second: Sword_Death3_body_17
+  - first:
+      213: -1385690083145881181
+    second: Sword_Death3_body_18
+  - first:
+      213: 4939524705465876598
+    second: Sword_Death3_body_19
+  - first:
+      213: -4651067839121424971
+    second: Sword_Death3_body_20
+  - first:
+      213: -8033654623455356189
+    second: Sword_Death3_body_21
+  - first:
+      213: -4269254793258458889
+    second: Sword_Death3_body_22
+  - first:
+      213: -6556652776527022422
+    second: Sword_Death3_body_23
+  - first:
+      213: 1039209861639486198
+    second: Sword_Death3_body_24
+  - first:
+      213: -154906810347041944
+    second: Sword_Death3_body_25
+  - first:
+      213: 7922819157979791966
+    second: Sword_Death3_body_26
+  - first:
+      213: 8658145462910870304
+    second: Sword_Death3_body_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sword_Death3_body_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 211
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0e2b0b15d10175d0800000000000000
+      internalID: -3066667856469217779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 211
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29df870d470a4c470800000000000000
+      internalID: 8414026427409169810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 211
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7a7c8ed56c92160800000000000000
+      internalID: 7001345202363803585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 210
+        width: 19
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d4b9aa761b341d0800000000000000
+      internalID: -3367653037540946665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_4
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34a94f2cf9c82af60800000000000000
+      internalID: 8044146502235626051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_5
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d7ea333ccffde5d0800000000000000
+      internalID: -3031485721652566061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d87386b2d79141c0800000000000000
+      internalID: -4521165619642271535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_7
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 147
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2929d9f6e077d1230800000000000000
+      internalID: 3611173380106850962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_8
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 147
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8900536e10bd3150800000000000000
+      internalID: 5854028735213209997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_9
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 147
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30def1704165c5240800000000000000
+      internalID: 4781791548379491587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_10
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 147
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc99e376cb9d00530800000000000000
+      internalID: 3819291887219415500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_11
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db3c4af6a354fbb0800000000000000
+      internalID: -4903202117670650924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_12
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0019358c19621d910800000000000000
+      internalID: 1860310528653758720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_13
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34997d8bccef78820800000000000000
+      internalID: 2920583038600976707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_14
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 83
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a597a1b8408359f50800000000000000
+      internalID: 6887472797297834330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_15
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 83
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087528b76b6b11310800000000000000
+      internalID: 1374080256197154688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_16
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 83
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f18dc84c7d3764470800000000000000
+      internalID: 8378511527322114079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_17
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 83
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0db46daba5dcb8ed0800000000000000
+      internalID: -2410607385961411632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_18
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 83
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a9ee49063a05cce0800000000000000
+      internalID: -1385690083145881181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_19
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 83
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6704f848c87bc8440800000000000000
+      internalID: 4939524705465876598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_20
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 83
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bd7ce65176147fb0800000000000000
+      internalID: -4651067839121424971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_21
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 19
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ead4c02fa9b28090800000000000000
+      internalID: -8033654623455356189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_22
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 18
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f02230926f80c4c0800000000000000
+      internalID: -4269254793258458889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_23
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 18
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa63783d9071205a0800000000000000
+      internalID: -6556652776527022422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_24
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 17
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6faba1afcd30c6e00800000000000000
+      internalID: 1039209861639486198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_25
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86bc9f3a319a9ddf0800000000000000
+      internalID: -154906810347041944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_26
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e528b0b1c0283fd60800000000000000
+      internalID: 7922819157979791966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Death3_body_27
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 023667afc69e72870800000000000000
+      internalID: 8658145462910870304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sword_Death3_body_0: -3066667856469217779
+      Sword_Death3_body_1: 8414026427409169810
+      Sword_Death3_body_10: 3819291887219415500
+      Sword_Death3_body_11: -4903202117670650924
+      Sword_Death3_body_12: 1860310528653758720
+      Sword_Death3_body_13: 2920583038600976707
+      Sword_Death3_body_14: 6887472797297834330
+      Sword_Death3_body_15: 1374080256197154688
+      Sword_Death3_body_16: 8378511527322114079
+      Sword_Death3_body_17: -2410607385961411632
+      Sword_Death3_body_18: -1385690083145881181
+      Sword_Death3_body_19: 4939524705465876598
+      Sword_Death3_body_2: 7001345202363803585
+      Sword_Death3_body_20: -4651067839121424971
+      Sword_Death3_body_21: -8033654623455356189
+      Sword_Death3_body_22: -4269254793258458889
+      Sword_Death3_body_23: -6556652776527022422
+      Sword_Death3_body_24: 1039209861639486198
+      Sword_Death3_body_25: -154906810347041944
+      Sword_Death3_body_26: 7922819157979791966
+      Sword_Death3_body_27: 8658145462910870304
+      Sword_Death3_body_3: -3367653037540946665
+      Sword_Death3_body_4: 8044146502235626051
+      Sword_Death3_body_5: -3031485721652566061
+      Sword_Death3_body_6: -4521165619642271535
+      Sword_Death3_body_7: 3611173380106850962
+      Sword_Death3_body_8: 5854028735213209997
+      Sword_Death3_body_9: 4781791548379491587
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

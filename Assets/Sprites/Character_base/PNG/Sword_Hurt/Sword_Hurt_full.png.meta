@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 3db0229e602a64d488e1e3692ee6c8bf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 470365942150090534
+    second: Sword_Hurt_full_0
+  - first:
+      213: -3094576674511000836
+    second: Sword_Hurt_full_1
+  - first:
+      213: -4274951934513713259
+    second: Sword_Hurt_full_2
+  - first:
+      213: -710332749666580456
+    second: Sword_Hurt_full_3
+  - first:
+      213: 2488653514683054054
+    second: Sword_Hurt_full_4
+  - first:
+      213: 4611366883483076888
+    second: Sword_Hurt_full_5
+  - first:
+      213: -8207342654778356884
+    second: Sword_Hurt_full_6
+  - first:
+      213: -7868935287046874286
+    second: Sword_Hurt_full_7
+  - first:
+      213: 1224554182638267924
+    second: Sword_Hurt_full_8
+  - first:
+      213: 2808015432715728644
+    second: Sword_Hurt_full_9
+  - first:
+      213: 8268028467980092671
+    second: Sword_Hurt_full_10
+  - first:
+      213: -773196758368777146
+    second: Sword_Hurt_full_11
+  - first:
+      213: 6214293073177655421
+    second: Sword_Hurt_full_12
+  - first:
+      213: 1112244836631553457
+    second: Sword_Hurt_full_13
+  - first:
+      213: 30331387191886255
+    second: Sword_Hurt_full_14
+  - first:
+      213: 3598860325236241156
+    second: Sword_Hurt_full_15
+  - first:
+      213: -1142205951503313769
+    second: Sword_Hurt_full_16
+  - first:
+      213: 2691445487753714439
+    second: Sword_Hurt_full_17
+  - first:
+      213: -6329222678915743752
+    second: Sword_Hurt_full_18
+  - first:
+      213: -4174534903858876161
+    second: Sword_Hurt_full_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sword_Hurt_full_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 209
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62f4c401553178600800000000000000
+      internalID: 470365942150090534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 209
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfaef8909eadd05d0800000000000000
+      internalID: -3094576674511000836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 210
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59fe07f7dd15ca4c0800000000000000
+      internalID: -4274951934513713259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 210
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8180ccfa0246426f0800000000000000
+      internalID: -710332749666580456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_4
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 209
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e7f5b7af29798220800000000000000
+      internalID: 2488653514683054054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_5
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 147
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 819420b9fbddeff30800000000000000
+      internalID: 4611366883483076888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_6
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 147
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6b46000759a91e80800000000000000
+      internalID: -8207342654778356884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_7
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 147
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25bd80f3c0debc290800000000000000
+      internalID: -7868935287046874286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_8
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 147
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41e6f588a8d7ef010800000000000000
+      internalID: 1224554182638267924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_9
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 147
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407f5d6982318f620800000000000000
+      internalID: 2808015432715728644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_10
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 83
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff445c2f510fdb270800000000000000
+      internalID: 8268028467980092671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_11
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 82
+        width: 14
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64c02f315ad0545f0800000000000000
+      internalID: -773196758368777146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_12
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 81
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78bce410aa9d3650800000000000000
+      internalID: 6214293073177655421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 81
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b5afa639cc7f6f00800000000000000
+      internalID: 1112244836631553457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_14
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 82
+        width: 14
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa10e176c32cb6000800000000000000
+      internalID: 30331387191886255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_15
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 18
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 403f3f1f568b1f130800000000000000
+      internalID: 3598860325236241156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_16
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 18
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794de402db11620f0800000000000000
+      internalID: -1142205951503313769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 19
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70b53e5496fe95520800000000000000
+      internalID: 2691445487753714439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_18
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 19
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff71e6d1851a28a0800000000000000
+      internalID: -6329222678915743752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt_full_19
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 18
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff0b5016f921116c0800000000000000
+      internalID: -4174534903858876161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sword_Hurt_full_0: 470365942150090534
+      Sword_Hurt_full_1: -3094576674511000836
+      Sword_Hurt_full_10: 8268028467980092671
+      Sword_Hurt_full_11: -773196758368777146
+      Sword_Hurt_full_12: 6214293073177655421
+      Sword_Hurt_full_13: 1112244836631553457
+      Sword_Hurt_full_14: 30331387191886255
+      Sword_Hurt_full_15: 3598860325236241156
+      Sword_Hurt_full_16: -1142205951503313769
+      Sword_Hurt_full_17: 2691445487753714439
+      Sword_Hurt_full_18: -6329222678915743752
+      Sword_Hurt_full_19: -4174534903858876161
+      Sword_Hurt_full_2: -4274951934513713259
+      Sword_Hurt_full_3: -710332749666580456
+      Sword_Hurt_full_4: 2488653514683054054
+      Sword_Hurt_full_5: 4611366883483076888
+      Sword_Hurt_full_6: -8207342654778356884
+      Sword_Hurt_full_7: -7868935287046874286
+      Sword_Hurt_full_8: 1224554182638267924
+      Sword_Hurt_full_9: 2808015432715728644
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

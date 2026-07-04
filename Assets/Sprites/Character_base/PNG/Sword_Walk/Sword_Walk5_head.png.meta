@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 9dbd57e4a6331a14b9f14ce57fb611f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7120895777198519071
+    second: Sword_Walk5_head_0
+  - first:
+      213: 1877985288269959769
+    second: Sword_Walk5_head_1
+  - first:
+      213: 4651987797698355457
+    second: Sword_Walk5_head_2
+  - first:
+      213: -3592097135598925937
+    second: Sword_Walk5_head_3
+  - first:
+      213: 2628562611426106466
+    second: Sword_Walk5_head_4
+  - first:
+      213: 4376380712831982708
+    second: Sword_Walk5_head_5
+  - first:
+      213: 7833688942082509533
+    second: Sword_Walk5_head_6
+  - first:
+      213: 1250112799679293275
+    second: Sword_Walk5_head_7
+  - first:
+      213: 5877183742371507629
+    second: Sword_Walk5_head_8
+  - first:
+      213: 1722383268543835689
+    second: Sword_Walk5_head_9
+  - first:
+      213: -9077307767550230386
+    second: Sword_Walk5_head_10
+  - first:
+      213: -2907503685529353281
+    second: Sword_Walk5_head_11
+  - first:
+      213: 4484368039094063535
+    second: Sword_Walk5_head_12
+  - first:
+      213: -8739113690386219450
+    second: Sword_Walk5_head_13
+  - first:
+      213: -9216176975735857705
+    second: Sword_Walk5_head_14
+  - first:
+      213: 721765540614048521
+    second: Sword_Walk5_head_15
+  - first:
+      213: -4307468109643899284
+    second: Sword_Walk5_head_16
+  - first:
+      213: -6130196853114248491
+    second: Sword_Walk5_head_17
+  - first:
+      213: -440194649187407767
+    second: Sword_Walk5_head_18
+  - first:
+      213: 49236429145765799
+    second: Sword_Walk5_head_19
+  - first:
+      213: -2494942059497978767
+    second: Sword_Walk5_head_20
+  - first:
+      213: -5423255150907637498
+    second: Sword_Walk5_head_21
+  - first:
+      213: -7772247454865048261
+    second: Sword_Walk5_head_22
+  - first:
+      213: -2110232417493669295
+    second: Sword_Walk5_head_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sword_Walk5_head_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 219
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ecc08dc40f7d2d90800000000000000
+      internalID: -7120895777198519071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 221
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9529db07ba1ff0a10800000000000000
+      internalID: 1877985288269959769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 220
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1012345314e2f8040800000000000000
+      internalID: 4651987797698355457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_3
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 219
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f878de9dfae462ec0800000000000000
+      internalID: -3592097135598925937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_4
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 221
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c1de3b4c78a7420800000000000000
+      internalID: 2628562611426106466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_5
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 220
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c983e32170cbc30800000000000000
+      internalID: 4376380712831982708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_6
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 156
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddacbb1969ad6bc60800000000000000
+      internalID: 7833688942082509533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_7
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 158
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b57ad0ac7fa495110800000000000000
+      internalID: 1250112799679293275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_8
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 157
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad21cb9973ff8150800000000000000
+      internalID: 5877183742371507629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_9
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 156
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ea1a8057227e710800000000000000
+      internalID: 1722383268543835689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_10
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 157
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e804646ddace60280800000000000000
+      internalID: -9077307767550230386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_11
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 158
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb342e87dc876a7d0800000000000000
+      internalID: -2907503685529353281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_12
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 92
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1115ce8fcab3e30800000000000000
+      internalID: 4484368039094063535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_13
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 94
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64eb6c0866e68b680800000000000000
+      internalID: -8739113690386219450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_14
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 93
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dd5126bedf891080800000000000000
+      internalID: -9216176975735857705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_15
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 92
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90b0b636fe9340a00800000000000000
+      internalID: 721765540614048521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_16
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 93
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e1a53839cc834c0800000000000000
+      internalID: -4307468109643899284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_17
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 94
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d268e6f07a2deaa0800000000000000
+      internalID: -6130196853114248491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_18
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 28
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 968282f7c4d14e9f0800000000000000
+      internalID: -440194649187407767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_19
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 30
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a7fd3d754ceea000800000000000000
+      internalID: 49236429145765799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 29
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17401786a6f206dd0800000000000000
+      internalID: -2494942059497978767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_21
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 28
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 601c7d38c2abcb4b0800000000000000
+      internalID: -5423255150907637498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_22
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 30
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3db5527e1e632490800000000000000
+      internalID: -7772247454865048261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Walk5_head_23
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 29
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15aa6c9fbc2f6b2e0800000000000000
+      internalID: -2110232417493669295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sword_Walk5_head_0: -7120895777198519071
+      Sword_Walk5_head_1: 1877985288269959769
+      Sword_Walk5_head_10: -9077307767550230386
+      Sword_Walk5_head_11: -2907503685529353281
+      Sword_Walk5_head_12: 4484368039094063535
+      Sword_Walk5_head_13: -8739113690386219450
+      Sword_Walk5_head_14: -9216176975735857705
+      Sword_Walk5_head_15: 721765540614048521
+      Sword_Walk5_head_16: -4307468109643899284
+      Sword_Walk5_head_17: -6130196853114248491
+      Sword_Walk5_head_18: -440194649187407767
+      Sword_Walk5_head_19: 49236429145765799
+      Sword_Walk5_head_2: 4651987797698355457
+      Sword_Walk5_head_20: -2494942059497978767
+      Sword_Walk5_head_21: -5423255150907637498
+      Sword_Walk5_head_22: -7772247454865048261
+      Sword_Walk5_head_23: -2110232417493669295
+      Sword_Walk5_head_3: -3592097135598925937
+      Sword_Walk5_head_4: 2628562611426106466
+      Sword_Walk5_head_5: 4376380712831982708
+      Sword_Walk5_head_6: 7833688942082509533
+      Sword_Walk5_head_7: 1250112799679293275
+      Sword_Walk5_head_8: 5877183742371507629
+      Sword_Walk5_head_9: 1722383268543835689
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

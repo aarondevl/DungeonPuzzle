@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3198419842530136331}
   - component: {fileID: 5016780067145852265}
   - component: {fileID: 3325323254640307879}
+  - component: {fileID: 1702370674165002828}
   m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3198419842530136331
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1153375292
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7341407202210888751, guid: 68c5c8d8bdc507c42bf63b021fc163c8, type: 3}
@@ -93,6 +94,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!61 &5016780067145852265
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,3 +156,16 @@ MonoBehaviour:
   closedSprite: {fileID: -7341407202210888751, guid: 68c5c8d8bdc507c42bf63b021fc163c8, type: 3}
   openSprite: {fileID: 9087207327684497215, guid: 0404b13cf3949a2468fda4184f753241, type: 3}
   tweenSeconds: 0.25
+--- !u!114 &1702370674165002828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6547258690133141366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c5b5c57aa8c294da9561ce91d1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DungeonPuzzle.Runtime::YSort
+  feetOffset: -0.4

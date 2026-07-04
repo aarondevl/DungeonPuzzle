@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx unity-mcp-cli *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(unity-mcp-cli run-system-tool *)"
     ]
   },
   "enableAllProjectMcpServers": true,

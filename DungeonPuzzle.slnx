@@ -1,6 +1,3 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="DungeonPuzzle.Runtime.csproj" />
-  <Project Path="DungeonPuzzle.Tests.csproj" />
-  <Project Path="DungeonPuzzle.Editor.csproj" />
 </Solution>

@@ -1,0 +1,385 @@
+fileFormatVersion: 2
+guid: 583c05d1fd6a6814f9b7e4ef89460bc3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1052585523282480973
+    second: Entorno_Dungeon_Texturas_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_0
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 236
+        width: 96
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0770d1b077461f0800000000000000
+      internalID: -1052585523282480973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_1
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 128
+        width: 116
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043710b06fa0160488ea8a635e9cec5c
+      internalID: -1235114021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 122
+        width: 63
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9e83d41300daf74da674d504cf8096f
+      internalID: 1386045515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_3
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 213
+        width: 16
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 268ee9ce53ad6214e81076b1b8f22b20
+      internalID: 301071763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_4
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 236
+        width: 63
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85c05f760ba73a4dbf23b76e8395feb
+      internalID: -244327992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_5
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 125
+        width: 63
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d521abb29dae2646a89202234915dec
+      internalID: -1077223955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Entorno_Dungeon_Texturas_6
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 23
+        width: 60
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d615086e254108438379895b66e6662
+      internalID: -722434590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8869d667ec108a141870e4cb9c99a6f3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Entorno_Dungeon_Texturas_0: -1052585523282480973
+      Entorno_Dungeon_Texturas_1: -1235114021
+      Entorno_Dungeon_Texturas_10: 1814958497
+      Entorno_Dungeon_Texturas_11: -1833034545
+      Entorno_Dungeon_Texturas_12: -1991702742
+      Entorno_Dungeon_Texturas_13: 1659148567
+      Entorno_Dungeon_Texturas_14: -307646141
+      Entorno_Dungeon_Texturas_15: 684188240
+      Entorno_Dungeon_Texturas_16: -1103223887
+      Entorno_Dungeon_Texturas_17: -813429582
+      Entorno_Dungeon_Texturas_18: 1537354727
+      Entorno_Dungeon_Texturas_19: 999105675
+      Entorno_Dungeon_Texturas_2: 1386045515
+      Entorno_Dungeon_Texturas_20: -2077186517
+      Entorno_Dungeon_Texturas_21: 661255551
+      Entorno_Dungeon_Texturas_22: 295439630
+      Entorno_Dungeon_Texturas_23: -1628409263
+      Entorno_Dungeon_Texturas_24: 1055175795
+      Entorno_Dungeon_Texturas_25: 2027666253
+      Entorno_Dungeon_Texturas_26: 2048647775
+      Entorno_Dungeon_Texturas_27: 139382622
+      Entorno_Dungeon_Texturas_28: 2107473388
+      Entorno_Dungeon_Texturas_29: 1926094202
+      Entorno_Dungeon_Texturas_3: 301071763
+      Entorno_Dungeon_Texturas_30: 655842210
+      Entorno_Dungeon_Texturas_31: -1633144694
+      Entorno_Dungeon_Texturas_32: -1594799854
+      Entorno_Dungeon_Texturas_33: -2054889162
+      Entorno_Dungeon_Texturas_34: 1966095932
+      Entorno_Dungeon_Texturas_35: 1222535130
+      Entorno_Dungeon_Texturas_36: 90498935
+      Entorno_Dungeon_Texturas_37: 1896916706
+      Entorno_Dungeon_Texturas_38: -1919336952
+      Entorno_Dungeon_Texturas_39: 166160681
+      Entorno_Dungeon_Texturas_4: -244327992
+      Entorno_Dungeon_Texturas_40: -38786937
+      Entorno_Dungeon_Texturas_41: -736626545
+      Entorno_Dungeon_Texturas_42: 1036826633
+      Entorno_Dungeon_Texturas_43: 514431466
+      Entorno_Dungeon_Texturas_44: -724573747
+      Entorno_Dungeon_Texturas_45: -1132380692
+      Entorno_Dungeon_Texturas_46: 1993131324
+      Entorno_Dungeon_Texturas_47: -549492858
+      Entorno_Dungeon_Texturas_48: 557861044
+      Entorno_Dungeon_Texturas_49: -1721850643
+      Entorno_Dungeon_Texturas_5: -1077223955
+      Entorno_Dungeon_Texturas_50: -275497386
+      Entorno_Dungeon_Texturas_51: 1328569930
+      Entorno_Dungeon_Texturas_52: 1775982789
+      Entorno_Dungeon_Texturas_53: 1425667639
+      Entorno_Dungeon_Texturas_54: -1809932740
+      Entorno_Dungeon_Texturas_55: -873276605
+      Entorno_Dungeon_Texturas_56: 798006843
+      Entorno_Dungeon_Texturas_57: 1123402402
+      Entorno_Dungeon_Texturas_58: 1667024479
+      Entorno_Dungeon_Texturas_59: -1206005740
+      Entorno_Dungeon_Texturas_6: -722434590
+      Entorno_Dungeon_Texturas_60: -938968503
+      Entorno_Dungeon_Texturas_61: -1763683845
+      Entorno_Dungeon_Texturas_62: 1383412754
+      Entorno_Dungeon_Texturas_63: -419131207
+      Entorno_Dungeon_Texturas_64: 913286749
+      Entorno_Dungeon_Texturas_65: -896280282
+      Entorno_Dungeon_Texturas_66: -1587946893
+      Entorno_Dungeon_Texturas_67: 1579817824
+      Entorno_Dungeon_Texturas_68: -904454901
+      Entorno_Dungeon_Texturas_69: 1267221269
+      Entorno_Dungeon_Texturas_7: 561165255
+      Entorno_Dungeon_Texturas_70: -960944758
+      Entorno_Dungeon_Texturas_71: -666106346
+      Entorno_Dungeon_Texturas_72: -2102913594
+      Entorno_Dungeon_Texturas_73: -2033756400
+      Entorno_Dungeon_Texturas_74: -1320371117
+      Entorno_Dungeon_Texturas_75: -968729595
+      Entorno_Dungeon_Texturas_76: 90346842
+      Entorno_Dungeon_Texturas_77: -1491623091
+      Entorno_Dungeon_Texturas_78: 2118162371
+      Entorno_Dungeon_Texturas_79: -744301136
+      Entorno_Dungeon_Texturas_8: 390474137
+      Entorno_Dungeon_Texturas_80: 2016531308
+      Entorno_Dungeon_Texturas_81: 1271492520
+      Entorno_Dungeon_Texturas_82: -1436845469
+      Entorno_Dungeon_Texturas_83: 1755601859
+      Entorno_Dungeon_Texturas_84: -563307617
+      Entorno_Dungeon_Texturas_85: -893545267
+      Entorno_Dungeon_Texturas_86: -1511568192
+      Entorno_Dungeon_Texturas_87: 1261438483
+      Entorno_Dungeon_Texturas_88: 1716767576
+      Entorno_Dungeon_Texturas_89: 2116022852
+      Entorno_Dungeon_Texturas_9: 1958719360
+      Entorno_Dungeon_Texturas_90: -1351953496
+      Entorno_Dungeon_Texturas_91: 47947662
+      Entorno_Dungeon_Texturas_92: 1641474758
+      Entorno_Dungeon_Texturas_93: 1506297390
+      Entorno_Dungeon_Texturas_94: 1220621209
+      Entorno_Dungeon_Texturas_95: 1759604556
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,21 +1,9 @@
 ---
 name: assets-create-folder
-description: Create a new folder under a parent folder inside 'Assets/'. The parent path must start with 'Assets/' and every intermediate folder in it must already exist. Refreshes the AssetDatabase at the end and returns the GUID(s) of the created folder(s).
+description: Creates a new folder in the specified parent folder. The parent folder string must start with the 'Assets' folder, and all folders within the parent folder string must already exist. For example, when specifying 'Assets/ParentFolder1/ParentFolder2/', the new folder will be created in 'ParentFolder2' only if ParentFolder1 and ParentFolder2 already exist. Use it to organize scripts and assets in the project. Does AssetDatabase.Refresh() at the end. Returns the GUID of the newly created folder, if successful.
 ---
 
 # Assets / Create Folder
-
-Creates a new folder in the specified parent folder. The parent folder string must start with the 'Assets' folder, and all folders within the parent folder string must already exist. For example, when specifying 'Assets/ParentFolder1/ParentFolder2/', the new folder will be created in 'ParentFolder2' only if ParentFolder1 and ParentFolder2 already exist. Use it to organize scripts and assets in the project. Does AssetDatabase.Refresh() at the end. Returns the GUID of the newly created folder, if successful.
-
-## Inputs
-
-- `inputs` — list of `{ParentFolderPath, NewFolderName}` entries. Each entry is processed independently; per-entry errors are collected in the response so a single bad input does not abort the batch.
-
-## Validation
-
-- `NewFolderName` must be non-empty and must not contain any of `/`, `\`, `<`, `>`, `:`, `"`, `|`, `?`, `*`, or control characters (these checks are cross-platform even on Linux/Mac).
-- `ParentFolderPath` must already exist as an `AssetDatabase.IsValidFolder` path.
-- A folder with the same target name must not already exist under the parent.
 
 ## How to Call
 
@@ -56,11 +44,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "inputs": {
-      "$ref": "#/$defs/AIGD.CreateFolderInput-1"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderInput[]"
     }
   },
   "$defs": {
-    "AIGD.CreateFolderInput": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderInput": {
       "type": "object",
       "properties": {
         "ParentFolderPath": {
@@ -73,10 +61,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         }
       }
     },
-    "AIGD.CreateFolderInput-1": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderInput[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.CreateFolderInput"
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderInput"
       }
     }
   },
@@ -95,25 +83,25 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.CreateFolderResponse"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderResponse"
     }
   },
   "$defs": {
-    "System.Collections.Generic.List(System.String)": {
+    "System.Collections.Generic.List<System.String>": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "AIGD.CreateFolderResponse": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Assets+CreateFolderResponse": {
       "type": "object",
       "properties": {
         "CreatedFolderGuids": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of GUIDs of created folders."
         },
         "Errors": {
-          "$ref": "#/$defs/System.Collections.Generic.List(System.String)",
+          "$ref": "#/$defs/System.Collections.Generic.List<System.String>",
           "description": "List of errors encountered during folder creation."
         }
       }

@@ -1,32 +1,16 @@
 ---
 name: assets-modify
-description: Modify an asset file in the project. Use 'assets-get-data' first to inspect the asset structure before modifying. Not allowed to modify asset files in the 'Packages/' folder — modify them in 'Assets/'. Three modification surfaces are available (content, pathPatches, jsonPatch) — see the skill body for details.
+description: Modify asset file in the project. Use 'assets-get-data' tool first to inspect the asset structure before modifying. Not allowed to modify asset file in 'Packages/' folder. Please modify it in 'Assets/' folder.
 ---
 
 # Assets / Modify
-
-## Three modification surfaces
-
-Use whichever fits the task:
-
-1. `content` — full `SerializedMember` override (legacy, backwards compatible).
-2. `pathPatches` — list of `{path, value}` pairs routed through `Reflector.TryModifyAt`.
-3. `jsonPatch` — JSON Merge Patch routed through `Reflector.TryPatch`.
-
-When more than one is supplied they run in this order: `jsonPatch` → `pathPatches` → `content`. At least one is required.
-
-## Path syntax
-
-`fieldName`, `nested/field`, `arrayField/[i]`, `dictField/[key]`. Leading `#/` is stripped.
 
 ## How to Call
 
 ```bash
 unity-mcp-cli run-tool assets-modify --input '{
   "assetRef": "string_value",
-  "content": "string_value",
-  "pathPatches": "string_value",
-  "jsonPatch": "string_value"
+  "content": "string_value"
 }'
 ```
 
@@ -53,9 +37,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `assetRef` | `any` | Yes | Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders. |
-| `content` | `any` | No | Optional. The asset content. It overrides the existing asset content (legacy path). |
-| `pathPatches` | `any` | No | Optional. List of path-scoped patches routed through Reflector.TryModifyAt. |
-| `jsonPatch` | `string` | No | Optional. JSON Merge Patch (RFC 7396, extended with [i]/[key] keys) routed through Reflector.TryPatch. |
+| `content` | `any` | Yes | The asset content. It overrides the existing asset content. |
 
 ### Input JSON Schema
 
@@ -64,31 +46,21 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "assetRef": {
-      "$ref": "#/$defs/AIGD.AssetObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef"
     },
     "content": {
       "$ref": "#/$defs/com.IvanMurzak.ReflectorNet.Model.SerializedMember"
-    },
-    "pathPatches": {
-      "$ref": "#/$defs/System.Collections.Generic.List(AIGD.PathPatch)"
-    },
-    "jsonPatch": {
-      "type": "string"
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.AssetObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {
@@ -150,29 +122,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         "typeName"
       ],
       "additionalProperties": false
-    },
-    "AIGD.PathPatch": {
-      "type": "object",
-      "properties": {
-        "Path": {
-          "type": "string",
-          "description": "Slash-delimited path to the target field/element/entry. Plain segment navigates a field or property (e.g. 'admin' or 'admin/name'). Use '[i]' for array/list index (e.g. 'planets/[0]/orbitRadius'). Use '[key]' for dictionary entry (e.g. 'config/[timeout]'). A leading '#/' is stripped automatically. Required."
-        },
-        "Value": {
-          "$ref": "#/$defs/com.IvanMurzak.ReflectorNet.Model.SerializedMember",
-          "description": "The new value to write at the path. Use the standard SerializedMember envelope: 'typeName' + 'value' for primitives, or nested 'fields'/'props' for complex types. Required — omitting it overwrites the target with a default empty SerializedMember."
-        }
-      }
-    },
-    "System.Collections.Generic.List(AIGD.PathPatch)": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/AIGD.PathPatch"
-      }
     }
   },
   "required": [
-    "assetRef"
+    "assetRef",
+    "content"
   ]
 }
 ```
@@ -186,11 +140,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/System.String-1"
+      "$ref": "#/$defs/System.String[]"
     }
   },
   "$defs": {
-    "System.String-1": {
+    "System.String[]": {
       "type": "array",
       "items": {
         "type": "string"

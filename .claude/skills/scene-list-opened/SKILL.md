@@ -1,15 +1,9 @@
 ---
 name: scene-list-opened
-description: List every scene currently opened in the Unity Editor as a shallow snapshot (name, path, build flags). Use 'scene-get-data' for the deep view of a specific scene.
+description: Returns the list of currently opened scenes in Unity Editor. Use 'scene-get-data' tool to get detailed information about a specific scene.
 ---
 
 # Scene / List Opened
-
-Returns the list of currently opened scenes in Unity Editor. Use 'scene-get-data' tool to get detailed information about a specific scene.
-
-## Behavior
-
-Maps `OpenedScenes` through `ToSceneDataShallow()` on the main thread and returns the resulting array. No filtering or pagination — every opened scene is included.
 
 ## How to Call
 
@@ -65,11 +59,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.SceneDataShallow-1"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow[]"
     }
   },
   "$defs": {
-    "AIGD.SceneDataShallow": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow": {
       "type": "object",
       "properties": {
         "Name": {
@@ -100,7 +94,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Build index of the Scene in the Build Settings."
         },
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -115,14 +109,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Scene reference. Used to find a Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "AIGD.SceneDataShallow-1": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.SceneDataShallow",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow",
         "description": "Scene reference. Used to find a Scene."
       }
     }

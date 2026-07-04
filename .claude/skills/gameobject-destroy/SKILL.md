@@ -1,15 +1,9 @@
 ---
 name: gameobject-destroy
-description: Destroy a GameObject (and all nested children) in the currently opened Prefab or active Scene. Returns the destroyed GameObject's name, path, and instance ID for confirmation. Use 'gameobject-find' to locate the target first.
+description: Destroy GameObject and all nested GameObjects recursively in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObject first.
 ---
 
 # GameObject / Destroy
-
-Destroy GameObject and all nested GameObjects recursively in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObject first.
-
-## Behavior
-
-Validates the `gameObjectRef`, resolves it on the main thread, then calls `Object.DestroyImmediate` (the immediate variant is required for Editor-mode operations). Returns a `DestroyGameObjectResult` containing `DestroyedName`, `DestroyedPath`, and `DestroyedInstanceId` so the caller has a record of what was removed.
 
 ## How to Call
 
@@ -50,22 +44,18 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "gameObjectRef": {
-      "$ref": "#/$defs/AIGD.GameObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -110,15 +100,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.DestroyGameObjectResult"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+DestroyGameObjectResult"
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "AIGD.DestroyGameObjectResult": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_GameObject+DestroyGameObjectResult": {
       "type": "object",
       "properties": {
         "DestroyedName": {
@@ -130,7 +116,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Hierarchy path of the destroyed GameObject."
         },
         "DestroyedInstanceId": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "Instance ID of the destroyed GameObject."
         }
       },

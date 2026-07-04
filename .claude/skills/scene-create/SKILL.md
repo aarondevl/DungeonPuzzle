@@ -1,21 +1,9 @@
 ---
 name: scene-create
-description: Create a new Unity scene asset and save it at the given `.unity` path. Use 'scene-list-opened' to inspect the resulting opened-scene set afterwards.
+description: Create new scene in the project assets. Use 'scene-list-opened' tool to list all opened scenes after creation.
 ---
 
 # Scene / Create
-
-Create new scene in the project assets. Use 'scene-list-opened' tool to list all opened scenes after creation.
-
-## Inputs
-
-- `path` — must end with `.unity`. Non-empty.
-- `newSceneSetup` (default `DefaultGameObjects`) — Unity's `NewSceneSetup` flag (`EmptyScene` or `DefaultGameObjects`).
-- `newSceneMode` (default `Single`) — `Single` closes other scenes, `Additive` keeps them open.
-
-## Behavior
-
-Calls `EditorSceneManager.NewScene` + `SaveScene(path)` on the main thread, repaints editor windows, and returns a `SceneDataShallow` for the newly created scene.
 
 ## How to Call
 
@@ -100,16 +88,12 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.SceneDataShallow",
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow",
       "description": "Scene reference. Used to find a Scene."
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "AIGD.SceneDataShallow": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow": {
       "type": "object",
       "properties": {
         "Name": {
@@ -140,7 +124,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Build index of the Scene in the Build Settings."
         },
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },

@@ -1,15 +1,9 @@
 ---
 name: assets-prefab-save
-description: Save the currently opened prefab edit stage back to its prefab asset without exiting the stage. Pair with 'assets-prefab-open' to enter the edit mode first.
+description: Save a prefab. Use it when you are in prefab editing mode in Unity Editor. Use 'assets-prefab-open' tool to open a prefab first.
 ---
 
 # Assets / Prefab / Save
-
-Save a prefab. Use it when you are in prefab editing mode in Unity Editor. Use 'assets-prefab-open' tool to open a prefab first.
-
-## Behavior
-
-Calls `PrefabUtility.SaveAsPrefabAsset` on the current prefab stage's contents root, clears the stage's dirtiness flag, repaints editor windows, and returns an `AssetObjectRef` to the saved prefab. Throws when no prefab stage is currently open.
 
 ## How to Call
 
@@ -65,23 +59,19 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.AssetObjectRef",
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef",
       "description": "Reference to UnityEngine.Object asset instance. It could be Material, ScriptableObject, Prefab, and any other Asset. Anything located in the Assets and Packages folders."
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.AssetObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {

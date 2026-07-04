@@ -1,20 +1,9 @@
 ---
 name: tool-set-enabled-state
-description: Enable or disable MCP tools by name in batch. Persists the change via `UnityMcpPluginEditor.Instance.Save()` only when at least one tool actually flipped. Returns per-input success flags plus optional operation logs.
+description: Enable or disable MCP tools by name. Allows controlling which tools are available for the AI agent.
 ---
 
 # Tool / Set Enabled State
-
-Enable or disable MCP tools by name. Allows controlling which tools are available for the AI agent.
-
-## Inputs
-
-- `tools` — array of `ToolToggleInput { Name, Enabled }`. Non-empty.
-- `includeLogs` (default `false`) — when true, returns per-step operation logs alongside the success map.
-
-## Behavior
-
-Each entry is resolved against the tool manager's exact-name and case-insensitive lookups. Already-correct state short-circuits as success without writing. The plugin's config is saved once at the end iff at least one tool actually changed state.
 
 ## How to Call
 
@@ -57,14 +46,14 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "tools": {
-      "$ref": "#/$defs/AIGD.ToolToggleInput-1"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+InputData[]"
     },
     "includeLogs": {
       "$ref": "#/$defs/System.Boolean"
     }
   },
   "$defs": {
-    "AIGD.ToolToggleInput": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+InputData": {
       "type": "object",
       "properties": {
         "Name": {
@@ -80,10 +69,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         "Enabled"
       ]
     },
-    "AIGD.ToolToggleInput-1": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+InputData[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.ToolToggleInput"
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+InputData"
       }
     },
     "System.Boolean": {
@@ -105,7 +94,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.ToolToggleResult"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+ResultData"
     }
   },
   "$defs": {
@@ -142,13 +131,13 @@ Read the /unity-initial-setup skill for detailed installation instructions.
         "Type"
       ]
     },
-    "System.Collections.Generic.Dictionary(System.String,System.Boolean)": {
+    "System.Collections.Generic.Dictionary<System.String,System.Boolean>": {
       "type": "object",
       "additionalProperties": {
         "type": "boolean"
       }
     },
-    "AIGD.ToolToggleResult": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Tool+ResultData": {
       "type": "object",
       "properties": {
         "Logs": {
@@ -156,7 +145,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Optional operation logs. Only included when 'includeLogs' is true."
         },
         "Success": {
-          "$ref": "#/$defs/System.Collections.Generic.Dictionary(System.String,System.Boolean)",
+          "$ref": "#/$defs/System.Collections.Generic.Dictionary<System.String,System.Boolean>",
           "description": "Result of each tool operation. Key: original input name as provided by the caller (case preserved as-is). Value: true if the enable/disable operation completed successfully, false if the name was unknown, ambiguous, or empty."
         }
       }

@@ -1,21 +1,9 @@
 ---
 name: gameobject-set-parent
-description: Reparent a batch of GameObjects under a new parent in the currently opened Prefab or active Scene. Per-item failures are reported in the returned status string instead of aborting the batch. Use 'gameobject-find' to locate the GameObjects first.
+description: Set parent GameObject to list of GameObjects in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObjects first.
 ---
 
 # GameObject / Set Parent
-
-Set parent GameObject to list of GameObjects in opened Prefab or in a Scene. Use 'gameobject-find' tool to find the target GameObjects first.
-
-## Inputs
-
-- `gameObjectRefs` — list of children to reparent.
-- `parentGameObjectRef` — new parent. Must resolve, otherwise the call returns early with an error string.
-- `worldPositionStays` (default `true`) — preserve world-space transform when reparenting (passed to `Transform.SetParent`).
-
-## Behavior
-
-Iterates `gameObjectRefs` and reparents each one independently; per-item resolve errors are appended to the returned status string instead of throwing. After the loop, if at least one reparent succeeded, marks the active scene dirty and repaints editor windows.
 
 ## How to Call
 
@@ -60,21 +48,21 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "gameObjectRefs": {
-      "$ref": "#/$defs/AIGD.GameObjectRefList"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRefList"
     },
     "parentGameObjectRef": {
-      "$ref": "#/$defs/AIGD.GameObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef"
     },
     "worldPositionStays": {
       "type": "boolean"
     }
   },
   "$defs": {
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -103,17 +91,13 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Find GameObject in opened Prefab or in the active Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.GameObjectRefList": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRefList": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.GameObjectRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
         "description": "Find GameObject in opened Prefab or in the active Scene."
       },
       "description": "Array of GameObjects in opened Prefab or in the active Scene."

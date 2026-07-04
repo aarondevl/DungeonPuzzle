@@ -1,15 +1,9 @@
 ---
 name: assets-shader-list-all
-description: List all shaders available in the project assets and packages, sorted by name. Use this to discover a valid `shaderName` for 'assets-material-create'.
+description: List all available shaders in the project assets and packages. Returns their names. Use this to find a shader name for 'assets-material-create' tool.
 ---
 
 # Assets / List Shaders
-
-List all available shaders in the project assets and packages. Returns their names. Use this to find a shader name for 'assets-material-create' tool.
-
-## Behavior
-
-Enumerates shaders via `ShaderUtils.GetAllShaders`, filters out nulls, and returns the names alphabetically sorted.
 
 ## How to Call
 
@@ -65,11 +59,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/System.String-1"
+      "$ref": "#/$defs/System.String[]"
     }
   },
   "$defs": {
-    "System.String-1": {
+    "System.String[]": {
       "type": "array",
       "items": {
         "type": "string"

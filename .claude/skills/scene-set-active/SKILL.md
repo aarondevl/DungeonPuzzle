@@ -1,19 +1,9 @@
 ---
 name: scene-set-active
-description: Mark an opened scene as the Editor's active scene (the one new GameObjects are added to and that's used as the default for many operations). Use 'scene-list-opened' to enumerate opened scenes first.
+description: Set the specified opened scene as the active scene. Use 'scene-list-opened' tool to get the list of all opened scenes.
 ---
 
 # Scene / Set Active
-
-Set the specified opened scene as the active scene. Use 'scene-list-opened' tool to get the list of all opened scenes.
-
-## Inputs
-
-- `sceneRef` — `AssetObjectRef` pointing at a `SceneAsset`. The scene must already be opened.
-
-## Behavior
-
-Resolves the `SceneAsset`, finds the matching opened scene (by name then by path), and calls `EditorSceneManager.SetActiveScene`. No-op if the scene is already active. Returns the post-call snapshot of opened scenes.
 
 ## How to Call
 
@@ -54,22 +44,18 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "sceneRef": {
-      "$ref": "#/$defs/AIGD.AssetObjectRef"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef"
     }
   },
   "$defs": {
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.AssetObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.AssetObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0' and 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'."
         },
         "assetType": {
@@ -106,11 +92,11 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.SceneDataShallow-1"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow[]"
     }
   },
   "$defs": {
-    "AIGD.SceneDataShallow": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow": {
       "type": "object",
       "properties": {
         "Name": {
@@ -141,7 +127,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Build index of the Scene in the Build Settings."
         },
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -156,14 +142,10 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Scene reference. Used to find a Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "AIGD.SceneDataShallow-1": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.SceneDataShallow",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.SceneDataShallow",
         "description": "Scene reference. Used to find a Scene."
       }
     }

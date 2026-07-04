@@ -1,22 +1,9 @@
 ---
 name: editor-selection-get
-description: Get information about the current Selection in the Unity Editor — active object, active transform, selected GameObjects, transforms, instance IDs, and asset GUIDs (each enrichment is opt-in). Pair with 'editor-selection-set' to change the selection.
+description: Get information about the current Selection in the Unity Editor. Use 'editor-selection-set' tool to set the selection.
 ---
 
 # Editor / Selection / Get
-
-Get information about the current Selection in the Unity Editor. Use 'editor-selection-set' tool to set the selection.
-
-## Toggles (default off where indicated to keep responses small)
-
-- `includeGameObjects` (default `false`) — populate `GameObjects[]`.
-- `includeTransforms` (default `false`) — populate `Transforms[]` as `ComponentRef`s.
-- `includeInstanceIDs` (default `false`) — populate `InstanceIDs[]`.
-- `includeAssetGUIDs` (default `false`) — populate `AssetGUIDs[]` from project-window selection.
-- `includeActiveObject` (default `true`) — populate `ActiveObject` as a generic `ObjectRef`.
-- `includeActiveTransform` (default `true`) — populate `ActiveTransform` as a `ComponentRef`.
-
-`ActiveGameObject` and `ActiveInstanceID` are always populated.
 
 ## How to Call
 
@@ -97,22 +84,22 @@ Read the /unity-initial-setup skill for detailed installation instructions.
   "type": "object",
   "properties": {
     "result": {
-      "$ref": "#/$defs/AIGD.SelectionData"
+      "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor_Selection+SelectionData"
     }
   },
   "$defs": {
-    "AIGD.GameObjectRef-1": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.GameObjectRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
         "description": "Find GameObject in opened Prefab or in the active Scene."
       }
     },
-    "AIGD.GameObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If it is '0' and 'path', 'name', 'assetPath' and 'assetGuid' is not provided, empty or null, then it will be used as 'null'. Priority: 1 (Recommended)"
         },
         "path": {
@@ -141,21 +128,17 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Find GameObject in opened Prefab or in the active Scene."
     },
-    "UnityEngine.EntityId": {
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
     "System.Type": {
       "type": "string"
     },
-    "AIGD.ComponentRef-1": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/AIGD.ComponentRef",
+        "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef",
         "description": "Component reference. Used to find a Component at GameObject."
       }
     },
-    "AIGD.ComponentRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef": {
       "type": "object",
       "properties": {
         "index": {
@@ -167,7 +150,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
           "description": "Component type full name. Sample 'UnityEngine.Transform'. If the gameObject has two components of the same type, the output component is unpredictable. Priority: 3. Default value is null."
         },
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -177,23 +160,23 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Component reference. Used to find a Component at GameObject."
     },
-    "UnityEngine.EntityId-1": {
+    "System.Int32[]": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/UnityEngine.EntityId"
+        "type": "integer"
       }
     },
-    "System.String-1": {
+    "System.String[]": {
       "type": "array",
       "items": {
         "type": "string"
       }
     },
-    "AIGD.ObjectRef": {
+    "com.IvanMurzak.Unity.MCP.Runtime.Data.ObjectRef": {
       "type": "object",
       "properties": {
         "instanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
+          "type": "integer",
           "description": "instanceID of the UnityEngine.Object. If this is '0', then it will be used as 'null'."
         }
       },
@@ -202,39 +185,39 @@ Read the /unity-initial-setup skill for detailed installation instructions.
       ],
       "description": "Reference to UnityEngine.Object instance. It could be GameObject, Component, Asset, etc. Anything extended from UnityEngine.Object."
     },
-    "AIGD.SelectionData": {
+    "com.IvanMurzak.Unity.MCP.Editor.API.Tool_Editor_Selection+SelectionData": {
       "type": "object",
       "properties": {
         "GameObjects": {
-          "$ref": "#/$defs/AIGD.GameObjectRef-1",
+          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef[]",
           "description": "Returns the actual game object selection. Includes Prefabs, non-modifiable objects."
         },
         "Transforms": {
-          "$ref": "#/$defs/AIGD.ComponentRef-1",
+          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef[]",
           "description": "Returns the top level selection, excluding Prefabs."
         },
         "InstanceIDs": {
-          "$ref": "#/$defs/UnityEngine.EntityId-1",
-          "description": "The actual unfiltered selection from the Scene returned as entity IDs instead of objects."
+          "$ref": "#/$defs/System.Int32[]",
+          "description": "The actual unfiltered selection from the Scene returned as instance ids instead of objects."
         },
         "AssetGUIDs": {
-          "$ref": "#/$defs/System.String-1",
+          "$ref": "#/$defs/System.String[]",
           "description": "Returns the guids of the selected assets."
         },
         "ActiveGameObject": {
-          "$ref": "#/$defs/AIGD.GameObjectRef",
+          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.GameObjectRef",
           "description": "Returns the active game object. (The one shown in the inspector)."
         },
         "ActiveInstanceID": {
-          "$ref": "#/$defs/UnityEngine.EntityId",
-          "description": "Returns the entity ID of the actual object selection. Includes Prefabs, non-modifiable objects"
+          "type": "integer",
+          "description": "Returns the instanceID of the actual object selection. Includes Prefabs, non-modifiable objects"
         },
         "ActiveObject": {
-          "$ref": "#/$defs/AIGD.ObjectRef",
+          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ObjectRef",
           "description": "Returns the actual object selection. Includes Prefabs, non-modifiable objects."
         },
         "ActiveTransform": {
-          "$ref": "#/$defs/AIGD.ComponentRef",
+          "$ref": "#/$defs/com.IvanMurzak.Unity.MCP.Runtime.Data.ComponentRef",
           "description": "Returns the active transform. (The one shown in the inspector)."
         }
       },

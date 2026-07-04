@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: f2270e82963cf9f47b4a53fac57821bf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4681806598138936190
+    second: Sword_Hurt5_head_0
+  - first:
+      213: 4433681389466451275
+    second: Sword_Hurt5_head_1
+  - first:
+      213: -7530831081970783686
+    second: Sword_Hurt5_head_2
+  - first:
+      213: -1671411346019199565
+    second: Sword_Hurt5_head_3
+  - first:
+      213: -3802493368660071099
+    second: Sword_Hurt5_head_4
+  - first:
+      213: 4269534141938346460
+    second: Sword_Hurt5_head_5
+  - first:
+      213: -1688611599487709095
+    second: Sword_Hurt5_head_6
+  - first:
+      213: -4438782365211829038
+    second: Sword_Hurt5_head_7
+  - first:
+      213: 8559771317500164998
+    second: Sword_Hurt5_head_8
+  - first:
+      213: -2738525255020314089
+    second: Sword_Hurt5_head_9
+  - first:
+      213: 3418520298410399666
+    second: Sword_Hurt5_head_10
+  - first:
+      213: 3042126424582146481
+    second: Sword_Hurt5_head_11
+  - first:
+      213: 6995905558304938981
+    second: Sword_Hurt5_head_12
+  - first:
+      213: -7836028638706130112
+    second: Sword_Hurt5_head_13
+  - first:
+      213: -9022465845078357612
+    second: Sword_Hurt5_head_14
+  - first:
+      213: -8216720255594702510
+    second: Sword_Hurt5_head_15
+  - first:
+      213: -1609405246195594358
+    second: Sword_Hurt5_head_16
+  - first:
+      213: -4391211676184058670
+    second: Sword_Hurt5_head_17
+  - first:
+      213: 2813991333960562428
+    second: Sword_Hurt5_head_18
+  - first:
+      213: 9132067440105444692
+    second: Sword_Hurt5_head_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 220
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28449da44b1e60fb0800000000000000
+      internalID: -4681806598138936190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 218
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4d786aabb9978d30800000000000000
+      internalID: 4433681389466451275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 217
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a29afe70d1d7790800000000000000
+      internalID: -7530831081970783686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 217
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b5d7fe7c34fdc8e0800000000000000
+      internalID: -1671411346019199565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 218
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54dec3c7d64da3bc0800000000000000
+      internalID: -3802493368660071099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_5
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 156
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd923ae5eae604b30800000000000000
+      internalID: 4269534141938346460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_6
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 154
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9505ee862b8d098e0800000000000000
+      internalID: -1688611599487709095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_7
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 153
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dcd74ed4f64662c0800000000000000
+      internalID: -4438782365211829038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_8
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 153
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68bbc2269aa6ac670800000000000000
+      internalID: 8559771317500164998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_9
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 154
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71204163acdcef9d0800000000000000
+      internalID: -2738525255020314089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_10
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 92
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7d63c6916017f20800000000000000
+      internalID: 3418520298410399666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_11
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 90
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b94c038dddc73a20800000000000000
+      internalID: 3042126424582146481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_12
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 89
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb52f41a03761160800000000000000
+      internalID: 6995905558304938981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 89
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043222c5875d04390800000000000000
+      internalID: -7836028638706130112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_14
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 90
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4998202fd13c9c280800000000000000
+      internalID: -9022465845078357612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_15
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 28
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259558a267858fd80800000000000000
+      internalID: -8216720255594702510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_16
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 26
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b8cd0a47e3aa9e0800000000000000
+      internalID: -1609405246195594358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 25
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d460830f384f03c0800000000000000
+      internalID: -4391211676184058670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_18
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 25
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf63fb5853e4d0720800000000000000
+      internalID: 2813991333960562428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Hurt5_head_19
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 26
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4555568f3fe9bbe70800000000000000
+      internalID: 9132067440105444692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sword_Hurt5_head_0: -4681806598138936190
+      Sword_Hurt5_head_1: 4433681389466451275
+      Sword_Hurt5_head_10: 3418520298410399666
+      Sword_Hurt5_head_11: 3042126424582146481
+      Sword_Hurt5_head_12: 6995905558304938981
+      Sword_Hurt5_head_13: -7836028638706130112
+      Sword_Hurt5_head_14: -9022465845078357612
+      Sword_Hurt5_head_15: -8216720255594702510
+      Sword_Hurt5_head_16: -1609405246195594358
+      Sword_Hurt5_head_17: -4391211676184058670
+      Sword_Hurt5_head_18: 2813991333960562428
+      Sword_Hurt5_head_19: 9132067440105444692
+      Sword_Hurt5_head_2: -7530831081970783686
+      Sword_Hurt5_head_3: -1671411346019199565
+      Sword_Hurt5_head_4: -3802493368660071099
+      Sword_Hurt5_head_5: 4269534141938346460
+      Sword_Hurt5_head_6: -1688611599487709095
+      Sword_Hurt5_head_7: -4438782365211829038
+      Sword_Hurt5_head_8: 8559771317500164998
+      Sword_Hurt5_head_9: -2738525255020314089
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

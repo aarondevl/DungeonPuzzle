@@ -1,0 +1,845 @@
+fileFormatVersion: 2
+guid: 4613ceb5e37e24d4c93bc854cd737c8a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7201473183786653940
+    second: Unarmed_Death2_body_0
+  - first:
+      213: -4109945983263620135
+    second: Unarmed_Death2_body_1
+  - first:
+      213: 4663817343708735363
+    second: Unarmed_Death2_body_2
+  - first:
+      213: 6553867283858683780
+    second: Unarmed_Death2_body_3
+  - first:
+      213: 3702188326481959015
+    second: Unarmed_Death2_body_4
+  - first:
+      213: -1539579373944298051
+    second: Unarmed_Death2_body_5
+  - first:
+      213: -3182257599300170333
+    second: Unarmed_Death2_body_6
+  - first:
+      213: -6862636976138206488
+    second: Unarmed_Death2_body_7
+  - first:
+      213: -3480142454188755193
+    second: Unarmed_Death2_body_8
+  - first:
+      213: 6303611509804328347
+    second: Unarmed_Death2_body_9
+  - first:
+      213: -5370138921758151854
+    second: Unarmed_Death2_body_10
+  - first:
+      213: -3672415897523311902
+    second: Unarmed_Death2_body_11
+  - first:
+      213: -2561137055807166549
+    second: Unarmed_Death2_body_12
+  - first:
+      213: -1779752505721964661
+    second: Unarmed_Death2_body_13
+  - first:
+      213: 4313400145222630498
+    second: Unarmed_Death2_body_14
+  - first:
+      213: -2198247809511033501
+    second: Unarmed_Death2_body_15
+  - first:
+      213: -3111727924909864345
+    second: Unarmed_Death2_body_16
+  - first:
+      213: -2168925692776836587
+    second: Unarmed_Death2_body_17
+  - first:
+      213: 6083084198332876824
+    second: Unarmed_Death2_body_18
+  - first:
+      213: 1720337217514440812
+    second: Unarmed_Death2_body_19
+  - first:
+      213: -1333574375393187466
+    second: Unarmed_Death2_body_20
+  - first:
+      213: 2887502910772602908
+    second: Unarmed_Death2_body_21
+  - first:
+      213: -7287266796055788522
+    second: Unarmed_Death2_body_22
+  - first:
+      213: 835192565035616308
+    second: Unarmed_Death2_body_23
+  - first:
+      213: -5716452224176038528
+    second: Unarmed_Death2_body_24
+  - first:
+      213: -1721357478727913066
+    second: Unarmed_Death2_body_25
+  - first:
+      213: -217454185272359418
+    second: Unarmed_Death2_body_26
+  - first:
+      213: -6164916739562529684
+    second: Unarmed_Death2_body_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 211
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f8da13a4b5c0f360800000000000000
+      internalID: 7201473183786653940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 211
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d3478557e986f6c0800000000000000
+      internalID: -4109945983263620135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 211
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387a0150a2539b040800000000000000
+      internalID: 4663817343708735363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 210
+        width: 19
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 487737f129304fa50800000000000000
+      internalID: 6553867283858683780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_4
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7681e8bfaa0d06330800000000000000
+      internalID: 3702188326481959015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_5
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db5288867b052aae0800000000000000
+      internalID: -1539579373944298051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 210
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad0de1e29956d3d0800000000000000
+      internalID: -3182257599300170333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_7
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 147
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e242dea70403c0a0800000000000000
+      internalID: -6862636976138206488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_8
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 147
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707b25260ec04bfc0800000000000000
+      internalID: -3480142454188755193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_9
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 147
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9563fb254dea7750800000000000000
+      internalID: 6303611509804328347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_10
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 147
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25b2b165a1f6975b0800000000000000
+      internalID: -5370138921758151854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_11
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea20a0d235f80dc0800000000000000
+      internalID: -3672415897523311902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_12
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7268fca63057cd0800000000000000
+      internalID: -2561137055807166549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_13
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 145
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87b45c868c0d47e0800000000000000
+      internalID: -1779752505721964661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_14
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 83
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26cfc1624964cdb30800000000000000
+      internalID: 4313400145222630498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_15
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 83
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36570d993414e71e0800000000000000
+      internalID: -2198247809511033501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_16
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 83
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76a851e50fbe0d4d0800000000000000
+      internalID: -3111727924909864345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_17
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 83
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51291d9e29d66e1e0800000000000000
+      internalID: -2168925692776836587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_18
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 81
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8184c6c49d47b6450800000000000000
+      internalID: 6083084198332876824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_19
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 81
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6805d7a59ddfd710800000000000000
+      internalID: 1720337217514440812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_20
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 81
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6792021db213e7de0800000000000000
+      internalID: -1333574375393187466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_21
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 19
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c18e1844998721820800000000000000
+      internalID: 2887502910772602908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_22
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 18
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6148895657d6eda90800000000000000
+      internalID: -7287266796055788522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_23
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 18
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438cefd7633379b00800000000000000
+      internalID: 835192565035616308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_24
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 17
+        width: 21
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08dde7a3df41ba0b0800000000000000
+      internalID: -5716452224176038528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_25
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691f5f44e728c18e0800000000000000
+      internalID: -1721357478727913066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_26
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6064be312927bfcf0800000000000000
+      internalID: -217454185272359418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Unarmed_Death2_body_27
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 17
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c148473e0d17aa0800000000000000
+      internalID: -6164916739562529684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Unarmed_Death2_body_0: 7201473183786653940
+      Unarmed_Death2_body_1: -4109945983263620135
+      Unarmed_Death2_body_10: -5370138921758151854
+      Unarmed_Death2_body_11: -3672415897523311902
+      Unarmed_Death2_body_12: -2561137055807166549
+      Unarmed_Death2_body_13: -1779752505721964661
+      Unarmed_Death2_body_14: 4313400145222630498
+      Unarmed_Death2_body_15: -2198247809511033501
+      Unarmed_Death2_body_16: -3111727924909864345
+      Unarmed_Death2_body_17: -2168925692776836587
+      Unarmed_Death2_body_18: 6083084198332876824
+      Unarmed_Death2_body_19: 1720337217514440812
+      Unarmed_Death2_body_2: 4663817343708735363
+      Unarmed_Death2_body_20: -1333574375393187466
+      Unarmed_Death2_body_21: 2887502910772602908
+      Unarmed_Death2_body_22: -7287266796055788522
+      Unarmed_Death2_body_23: 835192565035616308
+      Unarmed_Death2_body_24: -5716452224176038528
+      Unarmed_Death2_body_25: -1721357478727913066
+      Unarmed_Death2_body_26: -217454185272359418
+      Unarmed_Death2_body_27: -6164916739562529684
+      Unarmed_Death2_body_3: 6553867283858683780
+      Unarmed_Death2_body_4: 3702188326481959015
+      Unarmed_Death2_body_5: -1539579373944298051
+      Unarmed_Death2_body_6: -3182257599300170333
+      Unarmed_Death2_body_7: -6862636976138206488
+      Unarmed_Death2_body_8: -3480142454188755193
+      Unarmed_Death2_body_9: 6303611509804328347
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

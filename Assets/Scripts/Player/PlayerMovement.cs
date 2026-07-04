@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D _rb;
     Animator _animator;
     Vector2 _velocity;
+    Vector2 _facing = Vector2.down;
 
     void Awake()
     {
@@ -29,7 +30,17 @@ public class PlayerMovement : MonoBehaviour
         _velocity = StepVelocity(_velocity, target, acceleration, Time.fixedDeltaTime);
         _rb.MovePosition(_rb.position + _velocity * Time.fixedDeltaTime);
 
-        if (_animator != null) _animator.SetFloat("Speed", _velocity.magnitude);
+        if (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f)
+            _facing = Mathf.Abs(h) >= Mathf.Abs(v)
+                ? new Vector2(Mathf.Sign(h), 0f)
+                : new Vector2(0f, Mathf.Sign(v));
+
+        if (_animator != null)
+        {
+            _animator.SetFloat("MoveX", _facing.x);
+            _animator.SetFloat("MoveY", _facing.y);
+            _animator.SetFloat("Speed", _velocity.magnitude);
+        }
     }
 
     public static Vector2 StepVelocity(Vector2 current, Vector2 target, float acceleration, float deltaTime)

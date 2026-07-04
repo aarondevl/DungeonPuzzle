@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   icon: {fileID: 0}
   linkedDoor: {fileID: 0}
-  pickupSfx: {fileID: 0}
+  pickupSfx: {fileID: 8300000, guid: 14793738feb4ab94c8600eb788271aca, type: 3}
   pickupSfxVolume: 1
 --- !u!114 &115204102170183082
 MonoBehaviour:

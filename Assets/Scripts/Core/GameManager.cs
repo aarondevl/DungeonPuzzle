@@ -44,14 +44,18 @@ public class GameManager : MonoBehaviour
         if (Instance != null) return;
         var go = new GameObject("GameManager");
         go.AddComponent<GameManager>();
+    }
 
-        if (Object.FindFirstObjectByType<EventSystem>() == null)
-        {
-            var esGO = new GameObject("EventSystem");
-            esGO.AddComponent<EventSystem>();
-            esGO.AddComponent<InputSystemUIInputModule>();
-            Object.DontDestroyOnLoad(esGO);
-        }
+    // Después de cargar la escena: así vemos el EventSystem que la escena ya
+    // trae y evitamos crear un duplicado (warning "2 event systems").
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void EnsureEventSystem()
+    {
+        if (Object.FindAnyObjectByType<EventSystem>() != null) return;
+        var esGO = new GameObject("EventSystem");
+        esGO.AddComponent<EventSystem>();
+        esGO.AddComponent<InputSystemUIInputModule>();
+        Object.DontDestroyOnLoad(esGO);
     }
 
     public void StartGame() => StartLevel(1);
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDetected()
     {
+        SfxLibrary.Play("SFX/detected");
         CameraShake.Kick(0.6f);
         DetectionFlash.Flash();
         Lives--;

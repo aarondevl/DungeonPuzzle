@@ -23,6 +23,7 @@ public class Door : MonoBehaviour
     {
         if (_open) return;
         _open = true;
+        SfxLibrary.Play("SFX/door_open");
         _col.enabled = false;
         if (_running != null) StopCoroutine(_running);
         _running = StartCoroutine(Tween(closedSprite, openSprite));
@@ -33,6 +34,7 @@ public class Door : MonoBehaviour
     void Close()
     {
         _open = false;
+        SfxLibrary.Play("SFX/door_open", 0.8f);
         _col.enabled = true;
         if (_running != null) StopCoroutine(_running);
         _running = StartCoroutine(Tween(openSprite, closedSprite));

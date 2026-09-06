@@ -23,6 +23,9 @@ public abstract class GuardBase : MonoBehaviour
         Rb.gravityScale = 0f;
         Rb.freezeRotation = false;
         Rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        // Un cuerpo cinemático solo reporta contactos si se le pide explícitamente:
+        // sin esto, chocar de frente con un guardia no disparaba ningún callback.
+        Rb.useFullKinematicContacts = true;
         VisionCone = GetComponentInChildren<VisionCone>();
     }
 
@@ -53,6 +56,22 @@ public abstract class GuardBase : MonoBehaviour
                 StartCoroutine(ReturnToNormalAfter(alertDuration));
             }
         }
+    }
+
+    /// <summary>
+    /// Contacto físico: si el héroe choca con el guardia queda descubierto al
+    /// instante, sin esperar al cono de visión. Cubre el punto ciego de pegarse a
+    /// su espalda, donde el cono nunca llega.
+    /// </summary>
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (_spotConfirmed) return;
+        if (!CollisionLayers.Contains(CollisionLayers.PlayerMask, collision.gameObject.layer)) return;
+        _spotConfirmed = true;
+        State = GuardState.Alerted;
+        VisionCone.SetAlerted(true);
+        Vfx.Alert(transform.position);
+        OnAlerted();
     }
 
     public void AlertAt(Vector2 noisePosition)

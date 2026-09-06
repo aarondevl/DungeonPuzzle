@@ -27,8 +27,15 @@ public class VisionCone : MonoBehaviour
     public bool IsSeeingPlayer { get; private set; }
     public event System.Action OnPlayerDetected;
 
+    // Máscaras efectivas: si el prefab dejó el campo vacío se usa la capa canónica,
+    // en vez de fallar en silencio (un wallLayer a 0 hacía el cono atravesar muros).
+    int _wallMask;
+    int _playerMask;
+
     void Awake()
     {
+        _wallMask = CollisionLayers.Resolve(wallLayer, CollisionLayers.WallsMask);
+        _playerMask = CollisionLayers.Resolve(playerLayer, CollisionLayers.PlayerMask);
         _mf = GetComponent<MeshFilter>();
         _mr = GetComponent<MeshRenderer>();
         _mesh = new Mesh { name = "VisionConeMesh" };
@@ -53,7 +60,7 @@ public class VisionCone : MonoBehaviour
             _angleBuffer.Add(-halfAngle + angleStep * i);
 
         Vector2 origin = transform.position;
-        int wallCount = Physics2D.OverlapCircleNonAlloc(origin, distance, _wallBuffer, wallLayer);
+        int wallCount = Physics2D.OverlapCircleNonAlloc(origin, distance, _wallBuffer, _wallMask);
         float forwardWorldDeg = Mathf.Atan2(transform.up.x, transform.up.y) * Mathf.Rad2Deg;
 
         for (int w = 0; w < wallCount; w++)
@@ -90,7 +97,7 @@ public class VisionCone : MonoBehaviour
             float rad = a * Mathf.Deg2Rad;
             Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
             Vector2 worldDir = transform.TransformDirection(localDir);
-            RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, distance, wallLayer);
+            RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, distance, _wallMask);
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
@@ -140,7 +147,7 @@ public class VisionCone : MonoBehaviour
     void CheckDetection()
     {
         bool sees = false;
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, distance, playerLayer);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, distance, _playerMask);
         if (hit != null && _polyCount >= 2)
         {
             Vector3 localPlayer = transform.InverseTransformPoint(hit.transform.position);

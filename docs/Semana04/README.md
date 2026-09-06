@@ -327,7 +327,8 @@ uno.
 3. `Window ▸ General ▸ Test Runner ▸ EditMode ▸ Run All` (42 casos de prueba: 15 previos + 27 nuevos).
 4. Play desde `MainMenu` o directamente desde cualquier `Room_0N`.
 
-El guion de la demostración está en [`DEMO.md`](DEMO.md).
+El guion de la demostración está en [`DEMO.md`](DEMO.md) y la guía de
+capturas para la presentación, en [`CAPTURAS.md`](CAPTURAS.md).
 
 ## 7. Archivos entregables de la Semana 4
 
@@ -341,7 +342,8 @@ El guion de la demostración está en [`DEMO.md`](DEMO.md).
 - `Assets/Sprites/Game/plate_up.png`, `plate_down.png`, `spikes_hidden.png`,
   `spikes_rising.png`, `spikes_out.png`
 - 6 archivos de pruebas EditMode
-- `docs/Semana04/README.md`, `docs/Semana04/DEMO.md`
+- `docs/Semana04/README.md`, `docs/Semana04/DEMO.md`,
+  `docs/Semana04/CAPTURAS.md`
 
 **Modificados**
 

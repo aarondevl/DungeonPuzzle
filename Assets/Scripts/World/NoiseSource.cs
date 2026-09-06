@@ -8,7 +8,8 @@ public class NoiseSource : MonoBehaviour
 
     public void TriggerNoise()
     {
-        Collider2D[] guards = Physics2D.OverlapCircleAll(transform.position, noiseRadius, guardLayer);
+        int mask = CollisionLayers.Resolve(guardLayer, CollisionLayers.GuardMask);
+        Collider2D[] guards = Physics2D.OverlapCircleAll(transform.position, noiseRadius, mask);
         foreach (var col in guards)
         {
             var g = col.GetComponent<GuardBase>();

@@ -17,8 +17,8 @@ TagManager:
   - Walls
   - Items
   - Interactable
-  - 
-  - 
+  - Projectile
+  - Hazard
   - 
   - 
   - 

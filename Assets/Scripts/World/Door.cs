@@ -32,7 +32,16 @@ public class Door : MonoBehaviour
 
     public void Toggle() { if (_open) Close(); else Open(); }
 
-    void Close()
+    /// <summary>Estado explícito, para mecanismos que mantienen la puerta abierta mientras se cumplan (placas de presión).</summary>
+    public void SetOpen(bool open)
+    {
+        if (open) Open();
+        else if (_open) Close();
+    }
+
+    public bool IsOpen => _open;
+
+    public void Close()
     {
         _open = false;
         SfxLibrary.Play("SFX/door_open", 0.8f);

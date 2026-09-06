@@ -6,6 +6,9 @@ public class Key : PickupItem
     [SerializeField] AudioClip pickupSfx;
     [SerializeField] float pickupSfxVolume = 1f;
 
+    /// <summary>La llave abre su puerta al recogerla; no tiene sentido conservarla.</summary>
+    public override bool ConsumedOnPickup => true;
+
     public override void OnPickedUp(PlayerInventory inventory)
     {
         // Feedback visual: se lanza ANTES de que PlayerInventory desactive la llave.

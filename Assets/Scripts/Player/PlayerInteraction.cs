@@ -50,9 +50,11 @@ public class PlayerInteraction : MonoBehaviour
 
     Component FindTarget()
     {
-        // Los objetos recogibles tienen prioridad sobre los accionables.
+        // Los objetos recogibles tienen prioridad sobre los accionables. Un
+        // consumible (la llave) se puede recoger aunque la mano esté ocupada.
         var pickup = _sensor.Closest<PickupItem>(CollisionLayers.ItemsMask);
-        if (pickup != null && _inventory.HeldItem == null) return pickup;
+        if (pickup != null && PlayerInventory.CanPickUp(pickup.ConsumedOnPickup, _inventory.HeldItem != null))
+            return pickup;
         return _sensor.Closest<IInteractable>(CollisionLayers.InteractableMask) as Component;
     }
 

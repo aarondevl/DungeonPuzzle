@@ -27,6 +27,7 @@ public static class Semana04Builder
         CreatePrefabs();
         PopulateRooms();
         UpgradePlayerPrefab();
+        BuildDemoRoom();
         Debug.Log(Validate());
     }
 
@@ -54,9 +55,11 @@ public static class Semana04Builder
 
         var plate = go.AddComponent<PressurePlate>();
         var so = new SerializedObject(plate);
-        // La piedra lanzada también pesa: permite resolver el puzle sin quedarse encima.
+        // Solo cuerpos que pueden REPOSAR encima. Una piedra en vuelo la sobrevuela
+        // (un trigger no frena a un cuerpo dinámico) y solo causaría un parpadeo de
+        // la puerta al entrar y salir en el mismo instante.
         so.FindProperty("acceptedLayers").intValue =
-            CollisionLayers.PlayerMask | CollisionLayers.ProjectileMask | CollisionLayers.GuardMask;
+            CollisionLayers.PlayerMask | CollisionLayers.GuardMask;
         so.FindProperty("plateRenderer").objectReferenceValue = sr;
         so.FindProperty("releasedSprite").objectReferenceValue = LoadSprite("plate_up");
         so.FindProperty("pressedSprite").objectReferenceValue = LoadSprite("plate_down");
@@ -244,6 +247,225 @@ public static class Semana04Builder
         PrefabUtility.SaveAsPrefabAsset(root, path);
         PrefabUtility.UnloadPrefabContents(root);
         Debug.Log("[Semana04] Player.prefab: InteractionSensor añadido.");
+    }
+
+
+    // ------------------------------------------------------- sala de demostración
+
+    /// <summary>
+    /// Construye <c>Room_Demo</c>: un banco de pruebas con TODAS las mecánicas de la
+    /// Semana 04 en una sola pantalla, para sustentar en 90 segundos en vez de
+    /// recorrer cinco salas.
+    ///
+    /// Se clona Room_02 y se vacía su contenido, igual que hace <see cref="RoomBuilder"/>,
+    /// para heredar cámara, HUD, luz global y post-proceso sin reconstruirlos.
+    ///
+    /// Recorrido previsto, de izquierda a derecha:
+    ///   1. salida del spawn y rodeo del bloque → DESLIZAMIENTO contra el muro
+    ///   2. dos piedras: una al muro del fondo (RUIDO → el guardia gira) y otra
+    ///      contra la puerta cerrada (el proyectil NO la atraviesa y hace ruido ahí)
+    ///   3. pasillo de tres TRAMPAS desfasadas
+    ///   4. PLACA DE PRESIÓN que abre la puerta; palanca al lado como rescate manual
+    ///   5. espalda del guardia estático → DETECCIÓN POR CONTACTO
+    ///   6. puerta y salida
+    /// </summary>
+    [MenuItem("DungeonPuzzle/Semana 04/5. Construir sala de demostración")]
+    public static void BuildDemoRoom()
+    {
+        var platePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PlatePrefabPath);
+        var spikePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SpikePrefabPath);
+        var doorPrefab  = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Door.prefab");
+        var leverPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Lever.prefab");
+        var stonePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Stone.prefab");
+        var guardStaticPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Guard_Static.prefab");
+        var guardPatrolPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Guard_Patrol.prefab");
+        if (platePrefab == null || spikePrefab == null)
+        {
+            Debug.LogError("[Semana04] Faltan los prefabs de la Semana 04. Ejecuta primero el paso 1.");
+            return;
+        }
+
+        EditorSceneManager.OpenScene("Assets/Scenes/Room_02.unity", OpenSceneMode.Single);
+        var src = EditorSceneManager.GetActiveScene();
+        const string dst = "Assets/Scenes/Room_Demo.unity";
+        EditorSceneManager.SaveScene(src, dst, false);
+        Scene s = EditorSceneManager.OpenScene(dst, OpenSceneMode.Single);
+
+        // Plantilla de muro capturada antes de vaciar, para heredar textura y capa.
+        var topWall = GameObject.Find("Wall_Top");
+        GameObject wallTemplate = topWall != null ? Object.Instantiate(topWall) : null;
+        if (wallTemplate != null) { wallTemplate.name = "__WallTemplate"; wallTemplate.SetActive(false); }
+
+        StripDemoScene(s);
+
+        // ── Cascarón: la sala mide x ∈ [-8, 8], y ∈ [-5, 5] ──
+        Wall(wallTemplate, "Wall_Top",    new Vector2(0, 5),   new Vector2(16, 0.5f));
+        Wall(wallTemplate, "Wall_Bottom", new Vector2(0, -5),  new Vector2(16, 0.5f));
+        Wall(wallTemplate, "Wall_Left",   new Vector2(-8, 0),  new Vector2(0.5f, 10));
+        Wall(wallTemplate, "Wall_Right",  new Vector2(8, 0),   new Vector2(0.5f, 10));
+
+        // Bloque que obliga a rodear rozando: cubre y ∈ [-4.75, -1.25], sin hueco
+        // por abajo, así que el jugador TIENE que subir bordeándolo.
+        Wall(wallTemplate, "Wall_Slide",  new Vector2(-3.5f, -3f), new Vector2(0.6f, 3.5f));
+        // Tapia que aísla la salida: cubre y ∈ [-3, 5]; el hueco de abajo lo tapa la puerta.
+        Wall(wallTemplate, "Wall_Gate",   new Vector2(5f, 1f),     new Vector2(0.6f, 8f));
+
+        MoveSpawnTo(new Vector2(-6.5f, -4f));
+
+        // ── Puerta que cierra el hueco y ∈ [-5, -3] ──
+        var door = Place(doorPrefab, "Door_Exit", new Vector2(5f, -4f));
+        Door doorComp = null;
+        if (door != null)
+        {
+            door.transform.localScale = new Vector3(0.5f, 0.67f, 1f);
+            doorComp = door.GetComponent<Door>();
+        }
+
+        // ── Estación 2: dos piedras (ruido lejano y proyectil contra la puerta) ──
+        Place(stonePrefab, "Stone_Ruido",  new Vector2(-6.8f, -2.6f));
+        Place(stonePrefab, "Stone_Puerta", new Vector2(-5.6f, -2.6f));
+
+        // ── Estación 3: tres trampas desfasadas un tercio de ciclo ──
+        for (int i = 0; i < 3; i++)
+        {
+            var trap = Place(spikePrefab, $"SpikeTrap_{i + 1}", new Vector2(-1f + i, -4f));
+            if (trap == null) continue;
+            var so = new SerializedObject(trap.GetComponent<SpikeTrap>());
+            so.FindProperty("startOffset").floatValue = i;   // periodo 3 s / 3 trampas
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        // ── Estación 4: placa y palanca sobre la MISMA puerta. Es el caso de los
+        //    "dos dueños": la placa la suelta al salirse, así que puede cerrar lo que
+        //    la palanca abrió. Aquí es deliberado —es el beat que se explica— y por
+        //    eso en las salas 02-05 el constructor pone la placa en modo latching. ──
+        var plate = Place(platePrefab, "PressurePlate", new Vector2(3f, -4f));
+        if (plate != null && doorComp != null)
+        {
+            var so = new SerializedObject(plate.GetComponent<PressurePlate>());
+            so.FindProperty("linkedDoor").objectReferenceValue = doorComp;
+            so.FindProperty("latching").boolValue = false;   // aquí SÍ queremos ver que se suelta
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+        var lever = Place(leverPrefab, "Lever_Rescate", new Vector2(3.6f, -2.6f));
+        if (lever != null && doorComp != null)
+        {
+            var so = new SerializedObject(lever.GetComponent<Lever>());
+            so.FindProperty("linkedDoor").objectReferenceValue = doorComp;
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        // ── Estación 5: guardia estático de espaldas al pasillo ──
+        var gs = Place(guardStaticPrefab, "Guard_Static", new Vector2(2.5f, -1.2f));
+        if (gs != null) gs.transform.rotation = Quaternion.identity;   // 0° = mira al norte
+
+        // ── Guardia de patrulla arriba: reacciona al ruido de la piedra ──
+        var wpA = Waypoint("Waypoint_A", new Vector2(-2f, 3f));
+        var wpB = Waypoint("Waypoint_B", new Vector2(3.5f, 3f));
+        var gp = Place(guardPatrolPrefab, "Guard_Patrol", new Vector2(-2f, 3f));
+        if (gp != null)
+        {
+            var so = new SerializedObject(gp.GetComponent<GuardPatrol>());
+            var arr = so.FindProperty("waypoints");
+            arr.arraySize = 2;
+            arr.GetArrayElementAtIndex(0).objectReferenceValue = wpA.transform;
+            arr.GetArrayElementAtIndex(1).objectReferenceValue = wpB.transform;
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        // ── Salida: marcada como final, para que la demo termine en victoria ──
+        DemoExit("ExitTrigger", new Vector2(6.8f, -4f), new Vector2(1.6f, 1.6f));
+
+        if (wallTemplate != null) Object.DestroyImmediate(wallTemplate);
+        EditorSceneManager.MarkSceneDirty(s);
+        EditorSceneManager.SaveScene(s);
+        AddDemoToBuildSettings();
+
+        Debug.Log("[Semana04] Room_Demo construida. Ábrela y pulsa Play; F1 muestra el panel de estado.");
+    }
+
+    static void StripDemoScene(Scene s)
+    {
+        foreach (var go in s.GetRootGameObjects())
+        {
+            string n = go.name;
+            if (n.StartsWith("Wall_") || n.StartsWith("Corner_") || n.StartsWith("Guard_") ||
+                n.StartsWith("Waypoint_") || n.StartsWith("PointLight_") || n.StartsWith("SpikeTrap") ||
+                n.StartsWith("Stone") || n.StartsWith("Lever") || n.StartsWith("Key") ||
+                n.StartsWith("Door") || n == "PressurePlate" || n == "ExitTrigger")
+            {
+                Object.DestroyImmediate(go);
+            }
+        }
+    }
+
+    static GameObject Wall(GameObject template, string name, Vector2 pos, Vector2 size)
+    {
+        GameObject go;
+        if (template != null)
+        {
+            go = Object.Instantiate(template);
+            go.SetActive(true);
+            go.hideFlags = HideFlags.None;
+        }
+        else
+        {
+            // Sin plantilla: muro mínimo pero funcional, en la capa correcta.
+            go = new GameObject(name);
+            go.AddComponent<BoxCollider2D>();
+        }
+        go.name = name;
+        go.layer = CollisionLayers.Walls;
+        go.transform.position = new Vector3(pos.x, pos.y, 0f);
+        go.transform.localScale = new Vector3(size.x, size.y, 1f);
+        return go;
+    }
+
+    static GameObject Place(GameObject prefab, string name, Vector2 pos)
+    {
+        if (prefab == null) { Debug.LogWarning($"[Semana04] Falta el prefab para '{name}'."); return null; }
+        var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+        go.name = name;
+        go.transform.position = new Vector3(pos.x, pos.y, 0f);
+        return go;
+    }
+
+    static GameObject Waypoint(string name, Vector2 pos)
+    {
+        var go = new GameObject(name);
+        go.transform.position = new Vector3(pos.x, pos.y, 0f);
+        return go;
+    }
+
+    static void DemoExit(string name, Vector2 pos, Vector2 size)
+    {
+        var go = new GameObject(name);
+        go.transform.position = new Vector3(pos.x, pos.y, 0f);
+        var box = go.AddComponent<BoxCollider2D>();
+        box.size = size;
+        box.isTrigger = true;
+        var trigger = go.AddComponent<ExitTrigger>();
+        var so = new SerializedObject(trigger);
+        so.FindProperty("isFinalExit").boolValue = true;
+        so.ApplyModifiedPropertiesWithoutUndo();
+    }
+
+    static void MoveSpawnTo(Vector2 pos)
+    {
+        var spawn = Object.FindFirstObjectByType<SpawnPoint>();
+        if (spawn != null) spawn.transform.position = new Vector3(pos.x, pos.y, 0f);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) player.transform.position = new Vector3(pos.x, pos.y, 0f);
+    }
+
+    /// <summary>Añade Room_Demo al final de Build Settings sin tocar el orden de las salas.</summary>
+    static void AddDemoToBuildSettings()
+    {
+        const string path = "Assets/Scenes/Room_Demo.unity";
+        var scenes = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
+        if (scenes.Exists(sc => sc.path == path)) return;
+        scenes.Add(new EditorBuildSettingsScene(path, true));
+        EditorBuildSettings.scenes = scenes.ToArray();
     }
 
     // -------------------------------------------------------------- validación

@@ -8,9 +8,14 @@ using UnityEngine;
 ///
 /// Es el caso que obliga a distinguir entrada de PERMANENCIA: <c>OnTriggerEnter2D</c>
 /// y <c>OnTriggerExit2D</c> no bastan por sí solos porque pueden solaparse varios
-/// cuerpos (el héroe y una piedra) y el segundo Exit apagaría la placa aunque el
-/// primero siga encima. Por eso se lleva un CONJUNTO de ocupantes en vez de un bool:
-/// la placa se suelta cuando el conjunto queda vacío.
+/// cuerpos y el segundo Exit apagaría la placa aunque el primero siga encima. Ocurre
+/// de verdad: el héroe aporta DOS colliders (el sólido y el trigger del sensor), y un
+/// guardia puede pisarla a la vez. Por eso se lleva un CONJUNTO de ocupantes en vez
+/// de un bool: la placa se suelta solo cuando el conjunto queda vacío.
+///
+/// Solo cuentan cuerpos que puedan REPOSAR encima. Una piedra en vuelo no sirve: un
+/// trigger no frena a un cuerpo dinámico, así que la sobrevuela y solo produciría un
+/// Enter y un Exit en el mismo instante.
 ///
 /// El conjunto se limpia de referencias muertas en cada consulta, porque un objeto
 /// destruido o desactivado (una piedra recogida) no siempre emite su Exit.
@@ -45,7 +50,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        int mask = CollisionLayers.Resolve(acceptedLayers, CollisionLayers.PlayerMask | CollisionLayers.ProjectileMask);
+        int mask = CollisionLayers.Resolve(acceptedLayers, CollisionLayers.PlayerMask | CollisionLayers.GuardMask);
         if (!CollisionLayers.Contains(mask, other.gameObject.layer)) return;
         if (_occupants.Contains(other)) return;
         _occupants.Add(other);

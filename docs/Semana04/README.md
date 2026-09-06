@@ -160,8 +160,9 @@ Las tres casillas que arreglan bugs reales:
   empujaba al lanzarla.
 - **Guard ✘ Guard** — dos guardias cinemáticos solapados generaban contactos
   inútiles cada frame.
-- **Projectile ✔ Interactable** — permite el nuevo puzle: dejar caer la piedra
-  sobre una placa de presión para mantenerla accionada.
+- **Projectile ✔ Interactable** — una piedra lanzada contra una puerta **cerrada**
+  choca y hace ruido ahí en vez de atravesarla; contra una puerta abierta pasa,
+  porque `Door.Open()` apaga su collider.
 
 La gravedad global pasó de `(0, -9.81)` a `(0, 0)`: es un juego cenital, y
 depender de que cada prefab recuerde poner `gravityScale = 0` es frágil.
@@ -232,6 +233,7 @@ físico descubre al héroe al instante.
 | `Lever` | Trigger + tecla `E` (`IInteractable`) | Conmuta su puerta |
 | `Stone` | Trigger + `E` recoger, `F` lanzar | Genera un `ThrownStone` |
 | `Door` | Mensaje de otro objeto | Anima escala + apaga su collider |
+| `Key` ★ | Trigger + `E` | Se **consume**: ya no ocupa el inventario |
 | `ExitTrigger` | `OnTriggerEnter2D` | Siguiente sala o victoria |
 | **`PressurePlate`** ★ | **Solo colisión, sin tecla** | Mantiene la puerta abierta |
 
@@ -249,10 +251,31 @@ Por eso se lleva un **conjunto de ocupantes** y la placa se suelta solo cuando
 queda vacío. A eso se suma un barrido que descarta ocupantes destruidos o
 desactivados: un objeto que desaparece no siempre emite su `Exit`.
 
+Ocurre de verdad, y por dos vías: el héroe aporta **dos** colliders (el sólido y
+el trigger del sensor), y un guardia puede pisar la placa al mismo tiempo.
+
+Solo cuentan cuerpos que puedan **reposar** encima —el héroe y los guardias—. Una
+piedra en vuelo no: un trigger no frena a un cuerpo dinámico, así que la
+sobrevuela y solo produciría un `Enter` y un `Exit` en el mismo instante, con la
+puerta parpadeando.
+
 La regla vive en una función pura, `ShouldBePressed(ocupantes, latching, yaFijada)`,
 cubierta por tests. El modo `latching` (una vez pisada, queda accionada) es lo
 que permite colocar la placa en salas donde la puerta ya la controla una palanca
 o una llave sin que un mecanismo cierre lo que abrió el otro.
+
+### Un callejón sin salida en el inventario
+
+Revisando el recorrido de la demo apareció un fallo que no era de la Semana 4 pero
+la rompía: `Key.OnPickedUp()` abre su puerta **en el acto**, pero la llave se
+quedaba ocupando la única ranura del inventario. Como `TakeItem()` solo se llama al
+lanzar una piedra, y lanzar exige `HasItem<Stone>()`, el jugador que recogía la
+llave **no podía volver a recoger ni lanzar nada** en toda la sala. `Room_05` tiene
+llave y dos piedras: era imposible de completar como se diseñó.
+
+`PickupItem` distingue ahora los objetos que se **consumen** al recogerse (la
+llave) de los que se **guardan** (la piedra). Un consumible surte efecto y
+desaparece sin tocar la ranura.
 
 ---
 
@@ -323,9 +346,14 @@ uno.
    - crea `PressurePlate.prefab` y `SpikeTrap.prefab`;
    - coloca 3 trampas y 1 placa en `Room_02` … `Room_05`;
    - añade `InteractionSensor` al prefab del jugador;
+   - construye **`Room_Demo`**, un banco de pruebas con todas las mecánicas de la
+     semana en una sola pantalla, para sustentar en ~90 segundos;
    - imprime el informe de validación de física en la consola.
-3. `Window ▸ General ▸ Test Runner ▸ EditMode ▸ Run All` (42 casos de prueba: 15 previos + 27 nuevos).
-4. Play desde `MainMenu` o directamente desde cualquier `Room_0N`.
+3. `Window ▸ General ▸ Test Runner ▸ EditMode ▸ Run All` (45 casos de prueba: 15 previos + 30 nuevos).
+4. Play desde `Room_Demo` (o desde `MainMenu` para el juego completo).
+   Ya en Play, **`F1`** abre el panel de estado: velocidad real del héroe, estado
+   de cada guardia, fase de cada trampa y ocupantes de cada placa. Casi todo lo
+   que se evalúa en colisiones es invisible sin él.
 
 El guion de la demostración está en [`DEMO.md`](DEMO.md) y la guía de
 capturas para la presentación, en [`CAPTURAS.md`](CAPTURAS.md).
@@ -339,6 +367,8 @@ capturas para la presentación, en [`CAPTURAS.md`](CAPTURAS.md).
 - `Assets/Scripts/World/PressurePlate.cs`
 - `Assets/Scripts/World/SpikeTrap.cs`
 - `Assets/Editor/Semana04Builder.cs`
+- `Assets/Scripts/Core/DemoOverlay.cs` — panel de estado en vivo (`F1`)
+- `Assets/Scenes/Room_Demo.unity` — generado por el menú
 - `Assets/Sprites/Game/plate_up.png`, `plate_down.png`, `spikes_hidden.png`,
   `spikes_rising.png`, `spikes_out.png`
 - 6 archivos de pruebas EditMode
@@ -349,5 +379,6 @@ capturas para la presentación, en [`CAPTURAS.md`](CAPTURAS.md).
 
 - `ProjectSettings/Physics2DSettings.asset` — matriz de colisiones y gravedad
 - `ProjectSettings/TagManager.asset` — capas `Projectile` y `Hazard`
-- `PlayerMovement.cs`, `PlayerInteraction.cs`, `ThrownStone.cs`, `Stone.cs`,
-  `Door.cs`, `NoiseSource.cs`, `GuardBase.cs`, `VisionCone.cs`
+- `PlayerMovement.cs`, `PlayerInteraction.cs`, `PlayerInventory.cs`,
+  `PickupItem.cs`, `Key.cs`, `ThrownStone.cs`, `Stone.cs`, `Door.cs`,
+  `NoiseSource.cs`, `GuardBase.cs`, `VisionCone.cs`

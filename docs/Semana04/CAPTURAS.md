@@ -93,7 +93,7 @@ que leerse casilla por casilla.
 - Que se lean los nombres de las clases: `SpikeTrapCycleTests`,
   `PressurePlateTests`, `ThrownStoneBounceTests`, `CollisionLayersTests`,
   `InteractionSensorTests`, `PlayerFacingTests`.
-- El contador total debe decir **42**.
+- El contador total debe decir **45**.
 
 ---
 

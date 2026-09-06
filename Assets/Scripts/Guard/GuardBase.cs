@@ -16,6 +16,10 @@ public abstract class GuardBase : MonoBehaviour
     float _spotTimer;
     bool _spotConfirmed;
 
+    /// <summary>Estado legible desde fuera (HUD de demostración, herramientas).</summary>
+    public bool IsAlerted => State == GuardState.Alerted;
+    public bool IsSeeingPlayer => VisionCone != null && VisionCone.IsSeeingPlayer;
+
     protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();

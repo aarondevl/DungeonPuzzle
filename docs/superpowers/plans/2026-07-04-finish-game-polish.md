@@ -14,7 +14,7 @@
 - El editor Unity está abierto y conectado por MCP: TODO cambio de assets nativos (.controller, .anim, .prefab, escenas) se hace vía `npx unity-mcp-cli run-tool script-execute` (código editor C#), nunca editando YAML a mano — EXCEPTO `ProjectSettings/TagManager.asset` (Task 1) que se edita como YAML con Unity notificado vía `assets-refresh`.
 - Después de crear/editar archivos `.cs` desde fuera: `npx unity-mcp-cli run-tool assets-refresh --input '{}'` y verificar `console-get-logs` sin errores de compilación.
 - Los WAV van bajo `Assets/Resources/Audio/` (los singletons se auto-crean por código y no pueden serializar clips).
-- Convención de commits del repo: prefijos `feat:`/`fix:`/`chore:` en español, con `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`.
+- Convención de commits del repo: prefijos `feat:`/`fix:`/`chore:` en español.
 - Tests EditMode viven en `Assets/Scripts/Tests/EditMode/` (infra ya funciona; ver `PlayerMovementSmoothingTests.cs` como referencia de estilo).
 - Ejecutar tests: `npx unity-mcp-cli run-tool tests-run --input '{"testMode":"EditMode"}'` — todas las escenas deben estar guardadas antes.
 

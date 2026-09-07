@@ -1266,19 +1266,5 @@ pre.tree i { color: var(--accent); font-style: normal; }
       ["catch"](function () { return "no se pudo guardar; visible solo aquí"; });
   }
 
-  /* Almacén compartido: si no está disponible, la página funciona igual. */
-  if (window.claude && typeof window.claude.use === "function") {
-    window.claude.use("db").then(function (db) {
-      if (!db) return;
-      store = db;
-      shots.forEach(function (shot) {
-        db.doc("shots/" + shot.dataset.shot).get().then(function (snap) {
-          if (!snap || !snap.exists || !shot.api) return;
-          var body = snap.data();
-          if (body && typeof body.data === "string") shot.api.show(body.data);
-        })["catch"](function () { /* sin captura guardada */ });
-      });
-    })["catch"](function () { /* sin almacén */ });
-  }
 })();
 </script>

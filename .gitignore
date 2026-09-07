@@ -109,7 +109,7 @@ InitTestScene*.unity*
 # Local debug screenshots and runtime locks
 /[Aa]ssets/[Ss]creenshots/
 /[Aa]ssets/[Ss]creenshots.meta
-.claude/scheduled_tasks.lock
+.claude/
 
 # macOS artifacts from asset packs
 .DS_Store

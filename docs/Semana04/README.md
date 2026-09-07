@@ -2,7 +2,7 @@
 
 **Proyecto:** DungeonPuzzle — juego de sigilo y puzles top-down 2D
 **Motor:** Unity `6000.5.0b10` · Universal Render Pipeline (2D Renderer) · Input System
-**Rama:** `claude/videojuego-semana4-colisiones-2npbgu`
+**Rama:** `feat/semana04-colisiones`
 
 Este documento cubre los cinco puntos pedidos para la Semana 4. Cada sección
 enlaza a los archivos reales del repositorio para que se puedan revisar en la

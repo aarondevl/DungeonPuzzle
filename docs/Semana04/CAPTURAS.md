@@ -5,6 +5,10 @@ Unity listo para cada una. Se suben desde la propia presentación: cada lámina
 tiene un botón **Añadir captura**; la imagen se comprime en el navegador y queda
 guardada para quien abra el enlace.
 
+> **Ya tomadas.** Las seis capturas están en `docs/Semana04/capturas/` y
+> referenciadas desde `PRESENTACION.md`. Esta guía queda como referencia para
+> repetirlas o mejorar alguna.
+
 ## Preparación común (una sola vez)
 
 1. Abrir el proyecto con Unity `6000.5.0b10`.

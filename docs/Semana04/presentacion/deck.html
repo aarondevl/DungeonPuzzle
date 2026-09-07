@@ -1,0 +1,1257 @@
+<title>DungeonPuzzle Semana 04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+/* ── Tokens ─────────────────────────────────────────────────────────────────
+   Paleta derivada de los sprites del propio proyecto: la piedra de la mazmorra,
+   el ámbar de la runa apagada y el verde de la placa accionada.              */
+:root {
+  --stone-900:#23222A; --stone-700:#3A3842; --stone-500:#605E6E;
+  --stone-300:#8C8A9C; --stone-150:#C9C6D2; --stone-050:#EFEDF3;
+
+  --bg:#F6F5F9;
+  --surface:#FFFFFF;
+  --surface-2:#EFEDF3;
+  --line:#D9D6E1;
+  --line-soft:#E8E5EE;
+  --ink:#23222A;
+  --ink-2:#4E4B59;
+  --ink-3:#7A7787;
+
+  --accent:#9A681F;
+  --accent-bright:#B07A2C;
+  --accent-wash:#F6EEDE;
+  --ok:#2F7F4C;
+  --ok-wash:#E4F2E8;
+  --bad:#B23A30;
+  --bad-wash:#F8E7E5;
+  --cool:#3E6E8E;
+
+  --shadow: 0 1px 2px rgba(35,34,42,.06), 0 8px 24px -12px rgba(35,34,42,.18);
+
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#131218;
+    --surface:#1C1B23;
+    --surface-2:#26242E;
+    --line:#37343F;
+    --line-soft:#2C2A34;
+    --ink:#EBE9F1;
+    --ink-2:#B9B5C4;
+    --ink-3:#878394;
+
+    --accent:#E7A93F;
+    --accent-bright:#F0BC5C;
+    --accent-wash:#2A2317;
+    --ok:#6CE084;
+    --ok-wash:#17281C;
+    --bad:#E0574B;
+    --bad-wash:#2B1917;
+    --cool:#7FB6D6;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#131218;
+  --surface:#1C1B23;
+  --surface-2:#26242E;
+  --line:#37343F;
+  --line-soft:#2C2A34;
+  --ink:#EBE9F1;
+  --ink-2:#B9B5C4;
+  --ink-3:#878394;
+
+  --accent:#E7A93F;
+  --accent-bright:#F0BC5C;
+  --accent-wash:#2A2317;
+  --ok:#6CE084;
+  --ok-wash:#17281C;
+  --bad:#E0574B;
+  --bad-wash:#2B1917;
+  --cool:#7FB6D6;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 800; margin: 0; text-wrap: balance; letter-spacing: -0.018em; line-height: 1.05; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 1.15em; }
+li::marker { color: var(--accent); }
+code, .mono { font-family: var(--mono); font-size: .86em; }
+a { color: var(--accent); }
+
+:where(button, a, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ── Estructura del deck ───────────────────────────────────────────────── */
+.deck {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.rail {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 22px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.rail-mark {
+  font-family: var(--display); font-weight: 800; font-size: 14px;
+  letter-spacing: -.01em; white-space: nowrap;
+}
+.rail-mark span { color: var(--accent); }
+.rail-track {
+  flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden;
+}
+.rail-fill { height: 100%; background: var(--accent-bright); width: 0; transition: width .28s ease; }
+.rail-count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.rail-theme {
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+  font-family: var(--mono); font-size: 11px; padding: 4px 9px; border-radius: 4px; cursor: pointer;
+}
+.rail-theme:hover { border-color: var(--accent-bright); color: var(--ink); }
+
+.stage { display: grid; align-items: start; padding: 30px 22px 28px; }
+
+.slide {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  animation: rise .28s ease both;
+}
+@keyframes rise { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .slide { animation: none; }
+  .rail-fill { transition: none; }
+}
+
+.eyebrow {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-3);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.eyebrow b { color: var(--accent); font-weight: 700; }
+
+.slide h2 { font-size: clamp(28px, 3.4vw, 44px); }
+.slide h1 { font-size: clamp(38px, 6vw, 74px); }
+.lede { font-size: clamp(16px, 1.35vw, 19px); color: var(--ink-2); max-width: 66ch; }
+
+/* ── Piezas ────────────────────────────────────────────────────────────── */
+.cols { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); align-items: start; }
+.cols-2 { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; align-items: start; }
+@media (max-width: 860px) { .cols-2 { grid-template-columns: 1fr; } }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: grid; gap: 10px; align-content: start;
+}
+.panel h3 { font-size: 17px; }
+.panel p, .panel li { font-size: 14.5px; color: var(--ink-2); }
+
+.tag {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px; display: inline-block; white-space: nowrap;
+}
+.tag-bad { background: var(--bad-wash); color: var(--bad); }
+.tag-ok  { background: var(--ok-wash);  color: var(--ok); }
+.tag-neutral { background: var(--surface-2); color: var(--ink-3); }
+.panel > .tag, .shot > .tag { justify-self: start; }
+
+/* pares antes/después: el borde izquierdo codifica el estado, no decora */
+.ba { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 780px) { .ba { grid-template-columns: 1fr; } }
+.ba > div {
+  border: 1px solid var(--line); border-left-width: 3px; border-radius: 6px;
+  padding: 14px 16px; display: grid; gap: 7px; align-content: start;
+  background: var(--surface);
+}
+.ba .before { border-left-color: var(--bad); }
+.ba .after  { border-left-color: var(--ok); }
+.ba h4 { margin: 0; font-family: var(--display); font-size: 15px; font-weight: 700; }
+.ba p { font-size: 14px; color: var(--ink-2); }
+
+.figure { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; overflow-x: auto; }
+.figure svg { display: block; width: 100%; height: auto; min-width: 460px; }
+.figcap { font-size: 12.5px; color: var(--ink-3); margin-top: 8px; font-family: var(--mono); }
+
+/* matriz de colisiones */
+.matrix-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table.matrix { border-collapse: collapse; width: 100%; min-width: 620px; font-family: var(--mono); font-size: 12.5px; }
+table.matrix th, table.matrix td { border: 1px solid var(--line-soft); padding: 8px 6px; text-align: center; }
+table.matrix thead th { background: var(--surface-2); color: var(--ink-2); font-weight: 700; font-size: 11px; letter-spacing: .04em; }
+table.matrix tbody th { background: var(--surface-2); text-align: left; padding-left: 12px; color: var(--ink-2); font-weight: 700; white-space: nowrap; }
+table.matrix td.on  { color: var(--ok); font-weight: 700; }
+table.matrix td.off { color: var(--ink-3); }
+table.matrix td.self { background: var(--surface-2); color: var(--ink-3); }
+table.matrix td.key { background: var(--accent-wash); color: var(--accent); font-weight: 700; box-shadow: inset 0 0 0 1px var(--accent-bright); }
+.legend { display: grid; gap: 8px 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  font-family: var(--mono); font-size: 11.5px; line-height: 1.45; color: var(--ink-3); }
+.legend b { color: var(--accent); }
+kbd { font-family: var(--mono); font-size: .84em; border: 1px solid var(--line);
+  background: var(--surface-2); border-radius: 3px; padding: 1px 5px; color: var(--ink); }
+
+/* tabla simple */
+table.plain { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.plain th, table.plain td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.plain thead th { font-family: var(--mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+table.plain td:first-child { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; }
+table.plain td em { font-style: normal; color: var(--accent); font-family: var(--mono); font-size: 11px; }
+
+/* árbol de carpetas */
+pre.tree {
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.62; margin: 0;
+  color: var(--ink-2); overflow-x: auto; white-space: pre;
+}
+pre.tree b { color: var(--ink); font-weight: 700; }
+pre.tree i { color: var(--accent); font-style: normal; }
+
+/* cifras */
+.stats { display: flex; flex-wrap: wrap; gap: 26px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+
+/* ── Huecos de captura ─────────────────────────────────────────────────── */
+.shot {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+.shot.filled { border-style: solid; }
+.shot-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.shot-title { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.shot-how { font-size: 13.5px; color: var(--ink-2); max-width: 70ch; }
+.shot-how b { color: var(--ink); font-weight: 600; }
+.shot-frame {
+  border-radius: 5px; overflow: hidden; background: var(--surface-2);
+  display: grid; place-items: center; min-height: 130px;
+  border: 1px solid var(--line-soft);
+}
+.shot-frame img { display: block; width: 100%; height: auto; }
+.shot-empty { font-family: var(--mono); font-size: 12px; color: var(--ink-3); padding: 26px 14px; text-align: center; }
+.shot-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+  padding: 6px 12px; border-radius: 4px; cursor: pointer;
+}
+.btn:hover { border-color: var(--accent-bright); }
+.btn-quiet { background: transparent; color: var(--ink-3); }
+.shot-status { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+.shot-status.err { color: var(--bad); }
+.shot input[type=file] { display: none; }
+
+/* ── Navegación inferior ───────────────────────────────────────────────── */
+.nav {
+  position: sticky; bottom: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px 16px;
+  background: linear-gradient(to top, var(--bg) 62%, transparent);
+}
+.nav > button {
+  font-family: var(--mono); font-size: 12px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 7px 14px; border-radius: 4px; cursor: pointer;
+}
+.nav > button:hover:not(:disabled) { border-color: var(--accent-bright); }
+.nav > button:disabled { opacity: .38; cursor: default; }
+.dots { display: flex; gap: 5px; padding: 0 8px; flex-wrap: wrap; justify-content: center; }
+.dot {
+  width: 9px; height: 9px; border-radius: 50%; padding: 0;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer;
+}
+.dot[aria-current="true"] { background: var(--accent-bright); border-color: var(--accent-bright); }
+.hint { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: 10px; }
+@media (max-width: 700px) { .hint { display: none; } }
+
+/* portada */
+.cover { display: grid; gap: 26px; padding-top: clamp(10px, 4vh, 50px); }
+.cover-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  font-family: var(--mono); font-size: 11.5px; padding: 5px 11px;
+  border: 1px solid var(--line); border-radius: 4px; color: var(--ink-2); background: var(--surface);
+}
+.cover-list { display: grid; gap: 9px; max-width: 62ch; }
+.cover-list div { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: baseline; font-size: 15px; color: var(--ink-2); }
+.cover-list em { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--accent); }
+</style>
+
+<div class="deck">
+  <header class="rail">
+    <div class="rail-mark">Dungeon<span>Puzzle</span> · Semana 04</div>
+    <div class="rail-track"><div class="rail-fill" id="railFill"></div></div>
+    <div class="rail-count" id="railCount">1 / 13</div>
+    <button class="rail-theme" id="themeBtn" type="button">tema</button>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- 1 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide cover" data-title="Portada">
+      <div class="eyebrow"><b>Semana 04</b> Avance de proyecto · Videojuego 2D</div>
+      <h1>Colisiones, objetos<br>interactivos y trampas</h1>
+      <p class="lede">Juego de sigilo y puzles top-down en Unity. Este avance recorta la
+        matriz de colisiones 2D, cambia cómo el héroe responde a los muros y añade dos
+        elementos accionados por contacto: una placa de presión y una trampa de pinchos.</p>
+      <div class="cover-meta">
+        <span class="chip">Unity 6000.5.0b10</span>
+        <span class="chip">URP · 2D Renderer</span>
+        <span class="chip">Input System</span>
+        <span class="chip">C# · 45 pruebas EditMode</span>
+      </div>
+      <div class="cover-list">
+        <div><em>01</em><span>Organización de escenas, objetos, componentes y scripts</span></div>
+        <div><em>02</em><span>Detección y respuesta de colisiones entre objetos 2D</span></div>
+        <div><em>03</em><span>Comportamientos de objetos interactivos</span></div>
+        <div><em>04</em><span>Obstáculo con animación y comportamiento propio</span></div>
+        <div><em>05</em><span>Decisiones de arquitectura para crecer</span></div>
+      </div>
+    </section>
+
+    <!-- 2 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Estructura">
+      <div class="eyebrow"><b>01</b> Organización del proyecto</div>
+      <h2>Una carpeta por responsabilidad, tres assemblies por dependencia</h2>
+      <div class="cols-2">
+        <div class="panel">
+          <pre class="tree"><b>Assets/</b>
+├── <b>Scenes/</b>      MainMenu · Room_01..05 · GameOver
+├── <b>Prefabs/</b>     Player, Guard_*, Door, Lever, Key,
+│                Stone, <i>PressurePlate</i>, <i>SpikeTrap</i>
+├── <b>Scripts/</b>
+│   ├── Core/     GameManager, GameProgress, AudioMaster,
+│   │             SfxLibrary, <i>CollisionLayers</i>
+│   ├── Player/   PlayerMovement, PlayerInteraction,
+│   │             PlayerInventory, <i>InteractionSensor</i>
+│   ├── Guard/    GuardBase, GuardStatic, GuardPatrol,
+│   │             VisionCone, GuardVisual
+│   ├── World/    Door, Lever, Key, Stone, ThrownStone,
+│   │             NoiseSource, <i>PressurePlate</i>, <i>SpikeTrap</i>
+│   ├── UI/  FX/  HUD, pausa · VFX, YSort, sacudidas
+│   └── Tests/    EditMode — lógica pura
+├── <b>Editor/</b>      RoomBuilder, <i>Semana04Builder</i>
+└── Sprites/ Audio/ Animations/ Resources/
+
+<i>cursiva</i> = añadido en la Semana 04</pre>
+        </div>
+        <div style="display:grid; gap:20px; align-content:start;">
+          <div class="panel">
+            <h3>La regla de dependencia</h3>
+            <table class="plain">
+              <thead><tr><th>Assembly</th><th>Contenido</th><th>¿Al build?</th></tr></thead>
+              <tbody>
+                <tr><td>Runtime</td><td>Assets/Scripts/**</td><td>Sí</td></tr>
+                <tr><td>Editor</td><td>Assets/Editor/**</td><td>No</td></tr>
+                <tr><td>Tests</td><td>Scripts/Tests/**</td><td>No</td></tr>
+              </tbody>
+            </table>
+            <p>El Editor puede usar el Runtime, nunca al revés. Eso garantiza que las
+              herramientas que construyen las salas jamás se cuelen en la versión jugable.</p>
+          </div>
+          <div class="panel">
+            <h3>Cualquier sala se ejecuta sola</h3>
+            <p><code>GameManager</code> se autocrea con <code>[RuntimeInitializeOnLoadMethod]</code>
+              y sobrevive a los cambios de escena. Cada integrante prueba su sala sin
+              recorrer el juego entero desde el menú.</p>
+          </div>
+        </div>
+      </div>
+      <div class="shot" data-shot="project-panel">
+        <div class="shot-head">
+          <span class="shot-title">Captura 1 · panel Project</span>
+          <span class="shot-status"></span>
+        </div>
+        <p class="shot-how"><b>Qué encuadrar:</b> el panel <b>Project</b> con
+          <code>Assets/Scripts</code> desplegado hasta ver las seis subcarpetas y los tres
+          archivos <code>.asmdef</code>. Ancho suficiente para leer los nombres.</p>
+        <div class="shot-frame"></div>
+        <div class="shot-actions"></div>
+      </div>
+    </section>
+
+    <!-- 3 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Flujo de escenas">
+      <div class="eyebrow"><b>01</b> Organización del proyecto</div>
+      <h2>Flujo de escenas y qué las conecta</h2>
+      <div class="figure">
+        <svg viewBox="0 0 900 260" role="img" aria-label="Diagrama de flujo entre escenas: MainMenu, cinco salas, y GameOver">
+          <defs>
+            <marker id="ar-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <g font-family="JetBrains Mono, monospace" font-size="12">
+            <!-- MainMenu -->
+            <rect x="14" y="98" width="112" height="46" rx="5" fill="var(--surface-2)" stroke="var(--line)"/>
+            <text x="70" y="126" text-anchor="middle" fill="var(--ink)">MainMenu</text>
+
+            <!-- salas -->
+            <g>
+              <rect x="176" y="98" width="92" height="46" rx="5" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+              <text x="222" y="126" text-anchor="middle" fill="var(--accent)">Room_01</text>
+              <rect x="298" y="98" width="92" height="46" rx="5" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+              <text x="344" y="126" text-anchor="middle" fill="var(--accent)">Room_02</text>
+              <rect x="420" y="98" width="92" height="46" rx="5" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+              <text x="466" y="126" text-anchor="middle" fill="var(--accent)">Room_03</text>
+              <rect x="542" y="98" width="92" height="46" rx="5" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+              <text x="588" y="126" text-anchor="middle" fill="var(--accent)">Room_04</text>
+              <rect x="664" y="98" width="92" height="46" rx="5" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+              <text x="710" y="126" text-anchor="middle" fill="var(--accent)">Room_05</text>
+            </g>
+
+            <!-- GameOver -->
+            <rect x="792" y="98" width="94" height="46" rx="5" fill="var(--surface-2)" stroke="var(--line)"/>
+            <text x="839" y="126" text-anchor="middle" fill="var(--ink)">GameOver</text>
+
+            <!-- flechas de avance -->
+            <g stroke="var(--ink-3)" fill="none" marker-end="url(#ar-flow)" color="var(--ink-3)">
+              <path d="M128 121 H172"/>
+              <path d="M270 121 H294"/>
+              <path d="M392 121 H416"/>
+              <path d="M514 121 H538"/>
+              <path d="M636 121 H660"/>
+              <path d="M758 121 H788"/>
+            </g>
+            <text x="222" y="88" text-anchor="middle" fill="var(--ink-3)" font-size="10.5">ExitTrigger</text>
+            <text x="466" y="88" text-anchor="middle" fill="var(--ink-3)" font-size="10.5">ExitTrigger</text>
+            <text x="710" y="88" text-anchor="middle" fill="var(--ink-3)" font-size="10.5">ExitTrigger</text>
+            <text x="839" y="88" text-anchor="middle" fill="var(--ink-3)" font-size="10.5">WinGame()</text>
+
+            <!-- detección: reinicia la sala -->
+            <g stroke="var(--bad)" fill="none" marker-end="url(#ar-flow)" color="var(--bad)">
+              <path d="M466 152 C466 190, 380 190, 380 168 L380 152"/>
+            </g>
+            <text x="428" y="205" text-anchor="middle" fill="var(--bad)" font-size="10.5">PlayerDetected() · quedan vidas</text>
+
+            <!-- sin vidas -->
+            <g stroke="var(--bad)" fill="none" marker-end="url(#ar-flow)" color="var(--bad)" stroke-dasharray="4 3">
+              <path d="M710 152 C710 232, 839 232, 839 150"/>
+            </g>
+            <text x="775" y="248" text-anchor="middle" fill="var(--bad)" font-size="10.5">Lives == 0</text>
+
+            <!-- continuar -->
+            <g stroke="var(--cool)" fill="none" marker-end="url(#ar-flow)" color="var(--cool)" stroke-dasharray="4 3">
+              <path d="M70 96 C70 34, 588 34, 588 94"/>
+            </g>
+            <text x="330" y="26" text-anchor="middle" fill="var(--cool)" font-size="10.5">ContinueGame() → última sala desbloqueada</text>
+          </g>
+        </svg>
+        <p class="figcap">GameManager sobrevive a los cambios de escena; GameProgress persiste desbloqueos y mejores tiempos.</p>
+      </div>
+    </section>
+
+    <!-- 4 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Composición">
+      <div class="eyebrow"><b>01</b> Organización del proyecto</div>
+      <h2>Composición sobre herencia: un guardia es una suma de piezas</h2>
+      <div class="cols">
+        <div class="panel">
+          <h3>Player <span class="tag tag-neutral">capa 6</span></h3>
+          <ul>
+            <li>Rigidbody2D dinámico, rotación congelada</li>
+            <li>CircleCollider2D sólido <code>r=0.4</code></li>
+            <li>CircleCollider2D <b>trigger</b> <code>r=1.0</code> — el sensor</li>
+            <li>PlayerMovement · PlayerInteraction · PlayerInventory · InteractionSensor</li>
+            <li>Hijo <i>Visual</i>: SpriteRenderer + Animator 4 direcciones</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Guard_* <span class="tag tag-neutral">capa 7</span></h3>
+          <ul>
+            <li>Rigidbody2D cinemático con contactos completos</li>
+            <li>CircleCollider2D sólido</li>
+            <li><code>GuardBase</code> → <code>GuardStatic</code> o <code>GuardPatrol</code></li>
+            <li>Hijo <i>VisionCone</i>: malla generada por raycasts</li>
+            <li>Hijo <i>Visual</i>: contra-rota para verse de pie</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Por qué importa</h3>
+          <p>Cambiar la política de movimiento (quieto ↔ patrulla) no toca ni la detección
+            ni la animación. Un <code>GuardChaser</code> nuevo es una subclase de treinta
+            líneas: hereda el ciclo <i>detectar → alertar → volver</i> y solo aporta cómo se mueve.</p>
+        </div>
+      </div>
+      <div class="shot" data-shot="inspector-player">
+        <div class="shot-head">
+          <span class="shot-title">Captura 2 · Inspector del Player</span>
+          <span class="shot-status"></span>
+        </div>
+        <p class="shot-how"><b>Qué encuadrar:</b> selecciona <code>Player</code> en la
+          jerarquía y captura el <b>Inspector</b> completo, con los <b>dos</b> Circle
+          Collider 2D visibles (uno con <i>Is Trigger</i> marcado) y el Rigidbody 2D.
+          Colapsa el Animator si no cabe.</p>
+        <div class="shot-frame"></div>
+        <div class="shot-actions"></div>
+      </div>
+    </section>
+
+    <!-- 5 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="El problema">
+      <div class="eyebrow"><b>02</b> Detección y respuesta de colisiones</div>
+      <h2>Punto de partida: todo chocaba contra todo</h2>
+      <p class="lede">La matriz de colisiones 2D estaba entera en <code>ffff…ff</code>. El motor
+        evaluaba pares que no pueden interactuar y, peor, pares que <b>no deben</b>.</p>
+      <div class="cols">
+        <div class="panel">
+          <span class="tag tag-bad">bug</span>
+          <h3>La piedra empujaba al héroe</h3>
+          <p>El proyectil nacía en la posición exacta del jugador y en la capa
+            <code>Default</code>: al lanzarla, el solver los separaba a empujones.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-bad">bug</span>
+          <h3>Atravesaba muros finos</h3>
+          <p>Radio <code>0.1</code> a <code>8 u/s</code> con detección discreta: avanza
+            <code>0.16 u</code> por paso de física y podía aparecer al otro lado sin contacto.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-bad">bug</span>
+          <h3>El héroe se enganchaba</h3>
+          <p><code>MovePosition</code> teletransporta el cuerpo; el solver solo corrige
+            <i>después</i> del solape. Resultado: tirones al rozar y esquinas pegajosas.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-bad">bug</span>
+          <h3>Punto ciego a la espalda</h3>
+          <p>El cono de visión no llega detrás del guardia y el contacto físico no se
+            comprobaba: pegarse a su espalda era impunidad total.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-bad">riesgo</span>
+          <h3>Gravedad <code>-9.81</code></h3>
+          <p>En un juego cenital, dependiendo de que cada prefab recordara poner
+            <code>gravityScale = 0</code>.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-bad">riesgo</span>
+          <h3>Máscaras vacías</h3>
+          <p>Cada script declaraba su <code>LayerMask</code> en el Inspector. Un campo sin
+            marcar rompía la detección <b>en silencio</b>, sin error ni aviso.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="La matriz">
+      <div class="eyebrow"><b>02</b> Detección y respuesta de colisiones</div>
+      <h2>La matriz, recortada a lo que el juego necesita</h2>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr><th></th><th>Player<br>6</th><th>Guard<br>7</th><th>Walls<br>8</th><th>Items<br>9</th><th>Interact<br>10</th><th>Projectile<br>11</th><th>Hazard<br>12</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Player</th>     <td class="self">—</td><td class="on">✔</td><td class="on">✔</td><td class="on">✔</td><td class="on">✔</td><td class="key">✘</td><td class="on">✔</td></tr>
+            <tr><th>Guard</th>      <td class="on">✔</td><td class="key">✘</td><td class="on">✔</td><td class="off">✘</td><td class="on">✔</td><td class="off">✘</td><td class="off">✘</td></tr>
+            <tr><th>Walls</th>      <td class="on">✔</td><td class="on">✔</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="on">✔</td><td class="off">✘</td></tr>
+            <tr><th>Items</th>      <td class="on">✔</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td></tr>
+            <tr><th>Interactable</th><td class="on">✔</td><td class="on">✔</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="key">✔</td><td class="off">✘</td></tr>
+            <tr><th>Projectile</th> <td class="key">✘</td><td class="off">✘</td><td class="on">✔</td><td class="off">✘</td><td class="key">✔</td><td class="off">✘</td><td class="off">✘</td></tr>
+            <tr><th>Hazard</th>     <td class="on">✔</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td><td class="off">✘</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><b>Player ✘ Projectile</b> — la piedra ya no empuja a quien la lanza</span>
+        <span><b>Guard ✘ Guard</b> — dos cinemáticos solapados generaban contactos inútiles</span>
+        <span><b>Projectile ✔ Interactable</b> — la piedra choca contra una puerta cerrada y hace ruido ahí, en vez de atravesarla</span>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Capas nuevas</h3>
+          <p><code>Projectile (11)</code> y <code>Hazard (12)</code>. Antes el proyectil vivía
+            en <code>Default</code>, donde chocaba con absolutamente todo.</p>
+          <p>Gravedad global a <code>(0, 0)</code>: es un juego cenital y la gravedad no se
+            delega a cada prefab.</p>
+        </div>
+        <div class="shot" data-shot="physics-matrix">
+          <div class="shot-head">
+            <span class="shot-title">Captura 3 · Physics 2D</span>
+            <span class="shot-status"></span>
+          </div>
+          <p class="shot-how"><b>Qué encuadrar:</b> <code>Edit ▸ Project Settings ▸ Physics 2D</code>,
+            desplazado hasta <b>Layer Collision Matrix</b>, con <i>Gravity</i> visible arriba si
+            entra. Contrástala con esta tabla en vivo.</p>
+          <div class="shot-frame"></div>
+          <div class="shot-actions"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Tunneling">
+      <div class="eyebrow"><b>02</b> Detección y respuesta de colisiones</div>
+      <h2>Detección continua: la piedra deja de atravesar el muro</h2>
+      <div class="figure">
+        <svg viewBox="0 0 880 250" role="img" aria-label="Comparación entre detección discreta, que atraviesa el muro, y continua, que barre el trayecto">
+          <g font-family="JetBrains Mono, monospace" font-size="11.5">
+            <!-- discreta -->
+            <text x="16" y="24" fill="var(--bad)" font-size="12" font-weight="700">DISCRETA · el motor solo mira posiciones</text>
+            <rect x="330" y="36" width="14" height="76" fill="var(--stone-500)"/>
+            <text x="337" y="128" text-anchor="middle" fill="var(--ink-3)" font-size="10">muro 0.14 u</text>
+            <circle cx="250" cy="74" r="9" fill="none" stroke="var(--ink-3)" stroke-dasharray="3 2"/>
+            <text x="250" y="30" text-anchor="middle" fill="var(--ink-3)" font-size="10">paso n</text>
+            <circle cx="426" cy="74" r="9" fill="none" stroke="var(--bad)"/>
+            <text x="426" y="30" text-anchor="middle" fill="var(--bad)" font-size="10">paso n+1</text>
+            <path d="M262 74 H414" stroke="var(--bad)" stroke-dasharray="5 4" fill="none"/>
+            <text x="560" y="70" fill="var(--bad)" font-size="11.5">ninguna de las dos posiciones toca el muro</text>
+            <text x="560" y="88" fill="var(--bad)" font-size="11.5">→ la piedra aparece al otro lado</text>
+
+            <!-- separador -->
+            <path d="M16 140 H864" stroke="var(--line)" fill="none"/>
+
+            <!-- continua -->
+            <text x="16" y="170" fill="var(--ok)" font-size="12" font-weight="700">CONTINUA · el motor barre el trayecto</text>
+            <rect x="330" y="182" width="14" height="52" fill="var(--stone-500)"/>
+            <circle cx="250" cy="208" r="9" fill="none" stroke="var(--ink-3)" stroke-dasharray="3 2"/>
+            <path d="M262 208 H318" stroke="var(--ok)" fill="none" stroke-width="8" stroke-opacity=".25" stroke-linecap="round"/>
+            <path d="M262 208 H322" stroke="var(--ok)" fill="none"/>
+            <circle cx="322" cy="208" r="9" fill="none" stroke="var(--ok)"/>
+            <text x="560" y="204" fill="var(--ok)" font-size="11.5">impacto detectado en el barrido</text>
+            <text x="560" y="222" fill="var(--ok)" font-size="11.5">→ ruido, chispa y aviso a los guardias</text>
+          </g>
+        </svg>
+        <p class="figcap">r = 0.1 · v = 8 u/s · paso de física 0.02 s → 0.16 u recorridos por paso</p>
+      </div>
+      <div class="ba">
+        <div class="before">
+          <h4>Antes</h4>
+          <p>El modo de detección dependía de lo que tuviera marcado el prefab, y la piedra
+            que no golpeaba una superficie válida se quedaba rebotando <b>para siempre</b>.</p>
+        </div>
+        <div class="after">
+          <h4>Ahora</h4>
+          <p><code>Awake()</code> fuerza <code>Continuous</code> + interpolación. Si la superficie
+            no genera ruido, la velocidad se <b>refleja sobre la normal del contacto</b> con
+            pérdida de energía; y <code>maxLifetime</code> garantiza que ninguna piedra sobreviva
+            indefinidamente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Deslizamiento">
+      <div class="eyebrow"><b>02</b> Detección y respuesta de colisiones</div>
+      <h2>La respuesta al muro: de empujón correctivo a deslizamiento</h2>
+      <div class="cols-2">
+        <div class="figure">
+          <svg viewBox="0 0 440 230" role="img" aria-label="Con MovePosition el cuerpo se solapa con el muro y es corregido a empujones; con linearVelocity desliza a lo largo de la pared">
+            <defs>
+              <marker id="ar-slide" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+              </marker>
+            </defs>
+            <g font-family="JetBrains Mono, monospace" font-size="11">
+              <text x="12" y="18" fill="var(--bad)" font-weight="700" font-size="11.5">MovePosition</text>
+              <rect x="250" y="26" width="20" height="76" fill="var(--stone-500)"/>
+              <circle cx="196" cy="64" r="13" fill="none" stroke="var(--ink-3)" stroke-dasharray="3 2"/>
+              <circle cx="256" cy="64" r="13" fill="var(--bad-wash)" stroke="var(--bad)"/>
+              <path d="M212 58 L240 58" stroke="var(--ink-3)" fill="none" marker-end="url(#ar-slide)" color="var(--ink-3)"/>
+              <path d="M262 84 L238 96" stroke="var(--bad)" fill="none" marker-end="url(#ar-slide)" color="var(--bad)"/>
+              <text x="300" y="60" fill="var(--bad)" font-size="10.5">1. se solapa</text>
+              <text x="300" y="78" fill="var(--bad)" font-size="10.5">2. se corrige</text>
+              <text x="300" y="96" fill="var(--bad)" font-size="10.5">3. tirón visible</text>
+
+              <path d="M12 124 H428" stroke="var(--line)" fill="none"/>
+
+              <text x="12" y="150" fill="var(--ok)" font-weight="700" font-size="11.5">linearVelocity</text>
+              <rect x="250" y="158" width="20" height="62" fill="var(--stone-500)"/>
+              <circle cx="232" cy="200" r="13" fill="var(--ok-wash)" stroke="var(--ok)"/>
+              <path d="M204 172 L226 190" stroke="var(--ink-3)" fill="none" marker-end="url(#ar-slide)" color="var(--ink-3)"/>
+              <path d="M232 186 L232 166" stroke="var(--ok)" fill="none" marker-end="url(#ar-slide)" color="var(--ok)" stroke-width="1.6"/>
+              <text x="300" y="180" fill="var(--ok)" font-size="10.5">el solver resuelve</text>
+              <text x="300" y="198" fill="var(--ok)" font-size="10.5">el contacto y el héroe</text>
+              <text x="300" y="216" fill="var(--ok)" font-size="10.5">desliza por la pared</text>
+            </g>
+          </svg>
+          <p class="figcap">Se refuerzan además interpolación, rotación congelada y material sin fricción.</p>
+        </div>
+        <div style="display:grid; gap:20px; align-content:start;">
+          <div class="panel">
+            <h3>Un detalle que se nota al jugar</h3>
+            <p>El <code>Animator</code> recibe la velocidad <b>real</b> del cuerpo, no la deseada.
+              Al empujar contra un muro el héroe deja de caminar en pantalla aunque el jugador
+              siga pulsando la tecla: la animación y la física dejan de contar cosas distintas.</p>
+          </div>
+          <div class="panel">
+            <span class="tag tag-ok">nuevo</span>
+            <h3>El punto ciego, cerrado</h3>
+            <p>Un Rigidbody2D cinemático <b>no reporta contactos</b> salvo que se le pida.
+              <code>GuardBase</code> activa <code>useFullKinematicContacts</code> y añade
+              <code>OnCollisionEnter2D</code>: chocar con un guardia te descubre al instante,
+              aunque su cono mire al otro lado.</p>
+          </div>
+        </div>
+      </div>
+      <div class="shot" data-shot="colliders-gizmos">
+        <div class="shot-head">
+          <span class="shot-title">Captura 4 · colliders en la Scene view</span>
+          <span class="shot-status"></span>
+        </div>
+        <p class="shot-how"><b>Cómo prepararla:</b> en <code>Project Settings ▸ Physics 2D</code>
+          marca <b>Always Show Colliders</b>, entra en Play y encuadra la <b>Scene view</b> con el
+          héroe pegado a un muro. Se deben ver el collider sólido, el trigger del sensor y el cono
+          del guardia.</p>
+        <div class="shot-frame"></div>
+        <div class="shot-actions"></div>
+      </div>
+    </section>
+
+    <!-- 9 ─────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Sensor">
+      <div class="eyebrow"><b>02</b> Detección y respuesta de colisiones</div>
+      <h2>De sondear el espacio a escuchar al motor</h2>
+      <div class="ba">
+        <div class="before">
+          <h4>Antes · consulta al pulsar</h4>
+          <p><code>Physics2D.OverlapCircle</code> en el instante de pulsar <kbd>E</kbd>: una
+            consulta espacial fuera del ciclo de física que devolvía <b>un</b> collider
+            arbitrario del montón.</p>
+          <p>Nada podía avisar al jugador antes de la pulsación, y con dos objetos cerca se
+            accionaba el que el motor devolviera primero.</p>
+        </div>
+        <div class="after">
+          <h4>Ahora · eventos del motor</h4>
+          <p><code>InteractionSensor</code> mantiene el conjunto de candidatos con
+            <code>OnTriggerEnter2D</code> / <code>OnTriggerExit2D</code>, cálculo que la
+            simulación ya hace de todos modos.</p>
+          <p>Coste amortizado, se elige el <b>más cercano</b>, y lo que se acciona es
+            exactamente lo que el HUD podría anunciar.</p>
+        </div>
+      </div>
+      <div class="cols">
+        <div class="panel">
+          <h3>El efecto secundario que había que blindar</h3>
+          <p>El jugador pasó a llevar <b>dos</b> colliders, así que cada trigger de la escena
+            recibía el evento dos veces. Sin protección, <code>ExitTrigger</code> cargaba la
+            sala siguiente dos veces —saltándose un nivel— y la trampa restaba dos vidas.</p>
+          <p>Ambos llevan ahora un pestillo de un solo uso.</p>
+        </div>
+        <div class="panel">
+          <h3><code>CollisionLayers</code>, fuente única</h3>
+          <p>Índices y máscaras nombrados por <b>intención</b>, no por número:
+            <code>NoiseSurfacesMask</code>, <code>UsableMask</code>. Y
+            <code>Resolve(configurado, porDefecto)</code> cae en la capa canónica si el prefab
+            dejó el campo vacío, en vez de fallar sin decir nada.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Objetos interactivos">
+      <div class="eyebrow"><b>03</b> Comportamientos de objetos interactivos</div>
+      <h2>Seis objetos, tres formas de activarse</h2>
+      <div class="cols-2">
+        <div class="panel" style="padding-bottom: 6px;">
+          <table class="plain">
+            <thead><tr><th>Objeto</th><th>Se activa por</th><th>Respuesta</th></tr></thead>
+            <tbody>
+              <tr><td>Key</td><td>trigger + <kbd>E</kbd></td><td>Abre su puerta, VFX y SFX</td></tr>
+              <tr><td>Lever</td><td>trigger + <kbd>E</kbd></td><td>Conmuta su puerta</td></tr>
+              <tr><td>Stone</td><td><kbd>E</kbd> recoger · <kbd>F</kbd> lanzar</td><td>Genera un proyectil</td></tr>
+              <tr><td>Door</td><td>mensaje de otro objeto</td><td>Anima escala y apaga su collider</td></tr>
+              <tr><td>ExitTrigger</td><td>solo colisión</td><td>Siguiente sala o victoria</td></tr>
+              <tr><td>PressurePlate <em>nuevo</em></td><td>solo colisión</td><td>Mantiene la puerta abierta</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h3>Por qué la placa no puede usar un <code>bool</code></h3>
+          <p>Con un par <code>Enter</code>/<code>Exit</code> y una bandera, basta que haya dos
+            cuerpos encima para romperla:</p>
+          <ol style="font-size:14px; color:var(--ink-2); padding-left:1.2em; display:grid; gap:4px;">
+            <li>el héroe entra → <code>true</code></li>
+            <li>la piedra entra → <code>true</code></li>
+            <li>la piedra sale → <code>false</code></li>
+          </ol>
+          <p>…y la puerta se cierra con el héroe todavía de pie sobre la placa.</p>
+          <p>Por eso lleva un <b>conjunto de ocupantes</b> y solo se suelta cuando queda vacío,
+            más un barrido que descarta ocupantes destruidos: un objeto que desaparece no
+            siempre emite su <code>Exit</code>.</p>
+        </div>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <span class="tag tag-bad">lo que NO funciona</span>
+          <h3>Una piedra no puede pesar sobre la placa</h3>
+          <p>Un trigger <b>no frena</b> a un cuerpo dinámico: la piedra lanzada sobrevuela la
+            placa y produce un <code>Enter</code> y un <code>Exit</code> en el mismo instante.
+            Aceptarla como ocupante solo haría parpadear la puerta, así que la placa cuenta
+            únicamente cuerpos que puedan <b>reposar</b> encima: el héroe y los guardias.</p>
+        </div>
+        <div class="panel">
+          <h3>Modo <code>latching</code>: el problema de los dos dueños</h3>
+          <p>En salas donde la puerta ya la controla una palanca o una llave, la placa solo
+            puede <b>abrir</b>. Sin ese modo, bajarse de ella cerraría lo que el otro mecanismo
+            abrió.</p>
+          <p>La sala de demostración lo deja <b>a propósito</b> sin <code>latching</code>, con
+            placa y palanca sobre la misma puerta, para poder enseñar el conflicto en vivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 ────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Trampa de pinchos">
+      <div class="eyebrow"><b>04</b> Obstáculo con animación y comportamiento</div>
+      <h2>SpikeTrap: cuatro fases, tres trampas desfasadas</h2>
+      <div class="figure">
+        <svg viewBox="0 0 880 246" role="img" aria-label="Línea de tiempo de tres trampas con ciclo de tres segundos desfasadas un segundo cada una; las ventanas letales nunca se solapan">
+          <g font-family="JetBrains Mono, monospace" font-size="10.5">
+            <!-- etiquetas de fase, referidas a la Trampa 1 -->
+            <g fill="var(--ink-3)" text-anchor="middle">
+              <text x="309" y="24">oculta 1.6 s</text>
+              <text x="538" y="24">sube</text>
+              <text x="679" y="24" fill="var(--bad)">CLAVADA 0.9 s</text>
+              <text x="821" y="24">baja</text>
+            </g>
+
+            <!-- Trampa 1 · desfase 0 s -->
+            <text x="16" y="54" fill="var(--ink-2)">Trampa 1</text>
+            <rect x="112" y="40" width="740" height="20" rx="3" fill="var(--surface-2)" stroke="var(--line-soft)"/>
+            <rect x="507" y="40" width="61" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+            <rect x="568" y="40" width="222" height="20" fill="var(--bad-wash)" stroke="var(--bad)"/>
+            <rect x="790" y="40" width="62" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+
+            <!-- Trampa 2 · desfase 1 s -->
+            <text x="16" y="100" fill="var(--ink-2)">Trampa 2</text>
+            <rect x="112" y="86" width="740" height="20" rx="3" fill="var(--surface-2)" stroke="var(--line-soft)"/>
+            <rect x="260" y="86" width="62" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+            <rect x="322" y="86" width="222" height="20" fill="var(--bad-wash)" stroke="var(--bad)"/>
+            <rect x="544" y="86" width="61" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+
+            <!-- Trampa 3 · desfase 2 s: su ventana letal cruza el fin del ciclo -->
+            <text x="16" y="146" fill="var(--ink-2)">Trampa 3</text>
+            <rect x="112" y="132" width="740" height="20" rx="3" fill="var(--surface-2)" stroke="var(--line-soft)"/>
+            <rect x="112" y="132" width="185" height="20" fill="var(--bad-wash)" stroke="var(--bad)"/>
+            <rect x="297" y="132" width="62" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+            <rect x="754" y="132" width="61" height="20" fill="var(--accent-wash)" stroke="var(--accent-bright)"/>
+            <rect x="815" y="132" width="37" height="20" fill="var(--bad-wash)" stroke="var(--bad)"/>
+
+            <!-- huecos entre ventanas letales -->
+            <g stroke="var(--ok)" fill="none" stroke-width="1.2">
+              <path d="M297 164 V172 M322 164 V172 M297 168 H322"/>
+              <path d="M544 164 V172 M568 164 V172 M544 168 H568"/>
+              <path d="M790 164 V172 M815 164 V172 M790 168 H815"/>
+            </g>
+            <text x="309" y="188" fill="var(--ok)" text-anchor="middle" font-size="10">0.10 s</text>
+            <text x="556" y="188" fill="var(--ok)" text-anchor="middle" font-size="10">0.10 s</text>
+            <text x="802" y="188" fill="var(--ok)" text-anchor="middle" font-size="10">0.10 s</text>
+
+            <!-- eje -->
+            <g stroke="var(--line)" fill="none">
+              <path d="M112 208 H852"/>
+              <path d="M112 208 V214 M359 208 V214 M605 208 V214 M852 208 V214"/>
+            </g>
+            <g fill="var(--ink-3)" text-anchor="middle">
+              <text x="112" y="230">0 s</text><text x="359" y="230">1 s</text>
+              <text x="605" y="230">2 s</text><text x="852" y="230">3 s</text>
+            </g>
+            <text x="112" y="244" fill="var(--ok)" font-size="10">Las tres ventanas letales se turnan sin solaparse: siempre hay paso, pero hay que leer el ritmo.</text>
+          </g>
+        </svg>
+        <p class="figcap">Un solo prefab. El desfase es un campo serializado, no una copia del objeto.</p>
+      </div>
+      <div class="cols">
+        <div class="panel">
+          <h3>Animación por código, no por Animator</h3>
+          <p>Tres sprites conmutados según la fase. Para cuatro estados deterministas un
+            Animator es peso muerto, y así la fase <b>visible</b> y la fase <b>lógica</b> no
+            se pueden desincronizar.</p>
+        </div>
+        <div class="panel">
+          <h3>El collider se apaga, no se consulta</h3>
+          <p>Durante la fase inofensiva el motor deja de reportar el contacto por completo,
+            en vez de reportarlo y descartarlo con un <code>if</code>.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-ok">el detalle fino</span>
+          <h3>Quien ya estaba encima</h3>
+          <p>Un cuerpo quieto no vuelve a emitir <code>OnTriggerEnter2D</code> cuando el
+            collider se reactiva. Al armarse, un <code>Collider2D.Overlap</code> comprueba
+            quién está dentro <b>en ese instante</b>: quedarse parado sobre los pinchos también
+            mata.</p>
+        </div>
+      </div>
+      <div class="shot" data-shot="spikes-game">
+        <div class="shot-head">
+          <span class="shot-title">Captura 5 · las trampas en Game view</span>
+          <span class="shot-status"></span>
+        </div>
+        <p class="shot-how"><b>Qué encuadrar:</b> en Play, la <b>Game view</b> con las tres
+          trampas en el trayecto y el héroe cerca — idealmente en un instante donde una esté
+          clavada y las otras dos ocultas, que es lo que demuestra el desfase.</p>
+        <div class="shot-frame"></div>
+        <div class="shot-actions"></div>
+      </div>
+    </section>
+
+    <!-- 12 ────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Arquitectura">
+      <div class="eyebrow"><b>05</b> Decisiones de arquitectura</div>
+      <h2>Qué hicimos para que añadir lo siguiente sea barato</h2>
+      <div class="cols">
+        <div class="panel">
+          <h3>Fuente única de capas</h3>
+          <p><code>CollisionLayers</code> concentra índices y máscaras. Los scripts declaran su
+            intención; ningún prefab puede romper la detección dejando un campo vacío.</p>
+        </div>
+        <div class="panel">
+          <h3>Herencia solo donde hay jerarquía real</h3>
+          <p><code>GuardBase</code> define el ciclo detectar → alertar → volver. Las subclases
+            aportan únicamente <i>cómo se mueven</i>.</p>
+        </div>
+        <div class="panel">
+          <h3>Contrato, no lista de tipos</h3>
+          <p><code>PlayerInteraction</code> no conoce <code>Lever</code> ni <code>Door</code>:
+            pide <code>IInteractable</code>. Un objeto accionable nuevo no obliga a tocar al
+            jugador.</p>
+        </div>
+        <div class="panel">
+          <h3>Lógica pura fuera del MonoBehaviour</h3>
+          <p><code>PhaseAt</code>, <code>ShouldBePressed</code>, <code>Bounce</code>,
+            <code>SnapFacing</code>, <code>ClosestIndex</code>: estáticas y sin motor, se prueban
+            en milisegundos sin abrir una escena.</p>
+        </div>
+        <div class="panel">
+          <h3>Servicios estáticos por nombre</h3>
+          <p><code>SfxLibrary</code> y <code>Vfx</code> cargan desde <code>Resources/</code>.
+            Ningún prefab cablea referencias de audio o partículas; añadir un efecto no toca
+            ningún prefab.</p>
+        </div>
+        <div class="panel">
+          <h3>Contenido generado por código</h3>
+          <p><code>Semana04Builder</code> crea los prefabs, los coloca en las salas y
+            <b>valida</b> capas, matriz y gravedad imprimiendo OK/FALLA. El avance es
+            reproducible y el diff de git, legible.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 ────────────────────────────────────────────────────────────── -->
+    <section class="slide" data-title="Verificación">
+      <div class="eyebrow"><b>05</b> Verificación y cierre</div>
+      <h2>Lo que se puede comprobar sin abrir el juego</h2>
+      <div class="stats">
+        <div class="stat"><b>45</b><span>casos EditMode</span></div>
+        <div class="stat"><b>30</b><span>nuevos esta semana</span></div>
+        <div class="stat"><b>7</b><span>capas de física</span></div>
+        <div class="stat"><b>5</b><span>salas jugables</span></div>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <h3>Cómo reproducir el avance</h3>
+          <ol style="font-size:14.5px; color:var(--ink-2); padding-left:1.2em; display:grid; gap:6px;">
+            <li>Abrir el proyecto con Unity <code>6000.5.0b10</code>.</li>
+            <li>Menú <code>DungeonPuzzle ▸ Semana 04 ▸ Construir todo</code>: crea los prefabs,
+              los coloca en <code>Room_02..05</code>, actualiza el prefab del jugador, construye
+              <code>Room_Demo</code> e imprime el informe de validación.</li>
+            <li><code>Window ▸ General ▸ Test Runner ▸ EditMode ▸ Run All</code>.</li>
+            <li>Play desde <code>Room_Demo</code>, y <kbd>F1</kbd> para el panel de estado.</li>
+          </ol>
+        </div>
+        <div class="shot" data-shot="test-runner">
+          <div class="shot-head">
+            <span class="shot-title">Captura 6 · Test Runner</span>
+            <span class="shot-status"></span>
+          </div>
+          <p class="shot-how"><b>Qué encuadrar:</b> <code>Test Runner</code> en pestaña
+            <b>EditMode</b> tras <i>Run All</i>, con el árbol desplegado y los checks verdes.
+            Que se lean los nombres de las clases de prueba.</p>
+          <div class="shot-frame"></div>
+          <div class="shot-actions"></div>
+        </div>
+      </div>
+      <div class="cols-2">
+        <div class="panel">
+          <span class="tag tag-ok">para sustentar</span>
+          <h3><code>Room_Demo</code>, todo en una pantalla</h3>
+          <p>Un banco de pruebas con las mecánicas de la semana en fila, de izquierda a
+            derecha: bloque para deslizar → dos piedras → pasillo de tres trampas → placa y
+            palanca → espalda del guardia → puerta y salida. La demostración dura ~90
+            segundos en vez de recorrer cinco salas.</p>
+        </div>
+        <div class="panel">
+          <span class="tag tag-ok">para que se vea</span>
+          <h3>Panel de estado con <kbd>F1</kbd></h3>
+          <p>Casi todo lo que se evalúa en colisiones es invisible en pantalla. El panel
+            escribe en vivo la velocidad <b>real</b> del héroe, el estado de cada guardia, la
+            fase de cada trampa y cuántos colliders hay sobre la placa — que es donde se ve
+            que el héroe aporta dos.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Lo que sigue</h3>
+        <p>Con <code>GuardBase</code> y <code>IInteractable</code> en su sitio, lo siguiente es
+          barato: un guardia que persigue en vez de patrullar, una puerta que exige dos placas
+          a la vez, o una trampa cuyo ritmo dependa del ruido de la sala. Ninguno de los tres
+          obliga a tocar el jugador ni la configuración de física.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button id="prevBtn" type="button">← anterior</button>
+    <div class="dots" id="dots"></div>
+    <button id="nextBtn" type="button">siguiente →</button>
+    <span class="hint">← → · inicio/fin</span>
+  </nav>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ── Navegación ──────────────────────────────────────────────────────── */
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var dotsBox = document.getElementById("dots");
+  var prevBtn = document.getElementById("prevBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var railFill = document.getElementById("railFill");
+  var railCount = document.getElementById("railCount");
+  var index = 0;
+
+  slides.forEach(function (s, i) {
+    var d = document.createElement("button");
+    d.className = "dot";
+    d.type = "button";
+    d.title = (i + 1) + ". " + (s.dataset.title || "");
+    d.setAttribute("aria-label", "Ir a la lámina " + (i + 1) + ": " + (s.dataset.title || ""));
+    d.addEventListener("click", function () { go(i); });
+    dotsBox.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsBox.children);
+
+  function go(i) {
+    index = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, n) { s.hidden = n !== index; });
+    dots.forEach(function (d, n) { d.setAttribute("aria-current", n === index ? "true" : "false"); });
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === slides.length - 1;
+    railFill.style.width = ((index + 1) / slides.length * 100) + "%";
+    railCount.textContent = (index + 1) + " / " + slides.length;
+    window.scrollTo(0, 0);
+  }
+
+  prevBtn.addEventListener("click", function () { go(index - 1); });
+  nextBtn.addEventListener("click", function () { go(index + 1); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown") { go(index + 1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { go(index - 1); e.preventDefault(); }
+    else if (e.key === "Home") { go(0); e.preventDefault(); }
+    else if (e.key === "End") { go(slides.length - 1); e.preventDefault(); }
+  });
+
+  go(0);
+
+  /* ── Tema ────────────────────────────────────────────────────────────── */
+  var themeBtn = document.getElementById("themeBtn");
+  var stored = null;
+  try { stored = localStorage.getItem("dp-theme"); } catch (err) { stored = null; }
+  if (stored === "dark" || stored === "light") document.documentElement.setAttribute("data-theme", stored);
+
+  themeBtn.addEventListener("click", function () {
+    var current = document.documentElement.getAttribute("data-theme");
+    if (!current) {
+      var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      current = prefersDark ? "dark" : "light";
+    }
+    var next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("dp-theme", next); } catch (err) { /* sin almacenamiento */ }
+  });
+
+  /* ── Capturas ────────────────────────────────────────────────────────────
+     Las imágenes se comprimen en el navegador y se guardan en el almacén
+     compartido del artefacto, para que quien abra el enlace vea el deck
+     completo. Sin almacén disponible, la captura se muestra solo en esta
+     sesión.                                                                */
+  // El almacén acepta documentos de hasta 256 KiB, así que la imagen se
+  // reduce hasta caber con margen. WebP conserva mejor el texto de una
+  // captura de UI que JPEG al mismo tamaño.
+  var EDGES = [1400, 1100, 860, 640];
+  var MAX_BYTES = 200 * 1024;
+  var shots = Array.prototype.slice.call(document.querySelectorAll(".shot"));
+  var store = null;
+
+  shots.forEach(function (shot) { buildShot(shot); });
+
+  function buildShot(shot) {
+    var id = shot.dataset.shot;
+    var frame = shot.querySelector(".shot-frame");
+    var actions = shot.querySelector(".shot-actions");
+    var status = shot.querySelector(".shot-status");
+
+    var empty = document.createElement("p");
+    empty.className = "shot-empty";
+    empty.textContent = "sin captura todavía";
+    frame.appendChild(empty);
+
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    var addBtn = document.createElement("button");
+    addBtn.type = "button";
+    addBtn.className = "btn";
+    addBtn.textContent = "Añadir captura";
+    addBtn.addEventListener("click", function () { input.click(); });
+
+    var clearBtn = document.createElement("button");
+    clearBtn.type = "button";
+    clearBtn.className = "btn btn-quiet";
+    clearBtn.textContent = "Quitar";
+    clearBtn.hidden = true;
+    clearBtn.addEventListener("click", function () { remove(); });
+
+    actions.appendChild(addBtn);
+    actions.appendChild(clearBtn);
+    actions.appendChild(input);
+
+    input.addEventListener("change", function () {
+      var file = input.files && input.files[0];
+      input.value = "";
+      if (!file) return;
+      say("comprimiendo…", false);
+      compress(file).then(function (dataUrl) {
+        show(dataUrl);
+        return save(id, dataUrl, file.name);
+      }).then(function (msg) {
+        say(msg, false);
+      })["catch"](function (err) {
+        say(err && err.message ? err.message : "no se pudo cargar la imagen", true);
+      });
+    });
+
+    shot.api = { show: show, remove: remove };
+
+    function show(dataUrl) {
+      frame.innerHTML = "";
+      var img = document.createElement("img");
+      img.src = dataUrl;
+      img.alt = "Captura: " + shot.querySelector(".shot-title").textContent;
+      frame.appendChild(img);
+      shot.classList.add("filled");
+      addBtn.textContent = "Reemplazar";
+      clearBtn.hidden = false;
+    }
+
+    function remove() {
+      frame.innerHTML = "";
+      frame.appendChild(empty);
+      shot.classList.remove("filled");
+      addBtn.textContent = "Añadir captura";
+      clearBtn.hidden = true;
+      say("", false);
+      if (store) {
+        store.doc("shots/" + id)["delete"]()["catch"](function () { /* nada que hacer */ });
+      }
+    }
+
+    function say(text, isError) {
+      status.textContent = text;
+      status.className = "shot-status" + (isError ? " err" : "");
+    }
+  }
+
+  function compress(file) {
+    return new Promise(function (resolve, reject) {
+      if (!/^image\//.test(file.type)) { reject(new Error("eso no es una imagen")); return; }
+      var reader = new FileReader();
+      reader.onerror = function () { reject(new Error("no se pudo leer el archivo")); };
+      reader.onload = function () {
+        var img = new Image();
+        img.onerror = function () { reject(new Error("formato de imagen no soportado")); };
+        img.onload = function () {
+          var best = null;
+          for (var e = 0; e < EDGES.length && !best; e++) {
+            for (var q = 0.86; q >= 0.38; q -= 0.12) {
+              var out = encode(img, EDGES[e], q);
+              if (out.length <= MAX_BYTES) { best = out; break; }
+            }
+          }
+          if (!best) { reject(new Error("imagen demasiado pesada; recorta el encuadre y reintenta")); return; }
+          resolve(best);
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function encode(img, maxEdge, quality) {
+    var scale = Math.min(1, maxEdge / Math.max(img.width, img.height));
+    var w = Math.max(1, Math.round(img.width * scale));
+    var h = Math.max(1, Math.round(img.height * scale));
+    var canvas = document.createElement("canvas");
+    canvas.width = w; canvas.height = h;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, w, h);
+    var webp = canvas.toDataURL("image/webp", quality);
+    if (webp.indexOf("data:image/webp") === 0) return webp;
+    return canvas.toDataURL("image/jpeg", quality);
+  }
+
+  function save(id, dataUrl, name) {
+    if (!store) return Promise.resolve("guardada solo en esta sesión");
+    return store.doc("shots/" + id).set({ data: dataUrl, name: name, at: Date.now() })
+      .then(function () { return "guardada · la verá quien abra el enlace"; })
+      ["catch"](function () { return "no se pudo guardar; visible solo aquí"; });
+  }
+
+  /* Almacén compartido: si no está disponible, la página funciona igual. */
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("db").then(function (db) {
+      if (!db) return;
+      store = db;
+      shots.forEach(function (shot) {
+        db.doc("shots/" + shot.dataset.shot).get().then(function (snap) {
+          if (!snap || !snap.exists || !shot.api) return;
+          var body = snap.data();
+          if (body && typeof body.data === "string") shot.api.show(body.data);
+        })["catch"](function () { /* sin captura guardada */ });
+      });
+    })["catch"](function () { /* sin almacén */ });
+  }
+})();
+</script>

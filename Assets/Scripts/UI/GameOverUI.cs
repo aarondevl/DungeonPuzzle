@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class GameOverUI : MonoBehaviour
@@ -41,6 +42,14 @@ public class GameOverUI : MonoBehaviour
             }
             statsText.color = Cream;
         }
+    }
+
+    void Update()
+    {
+        // Reintentar rápido con R (backup del botón).
+        var kb = Keyboard.current;
+        if (kb != null && kb.rKey.wasPressedThisFrame)
+            OnRestartClicked();
     }
 
     public void OnRestartClicked() => GameManager.Instance.StartGame();

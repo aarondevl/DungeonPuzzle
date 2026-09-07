@@ -5003,6 +5003,7 @@ GameObject:
   - component: {fileID: 5909430860833398625}
   - component: {fileID: 5039959738660516720}
   - component: {fileID: 7899130474078003720}
+  - component: {fileID: 638977350856878665}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -5128,13 +5129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f89130e28f1d6cd8745087a2f885cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  interactRadius: 1
-  interactLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  itemLayer:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &7899130474078003720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,3 +5143,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: DungeonPuzzle.Runtime::MovementDust
   dust: {fileID: 4938719210264815201}
   minSpeed: 0.6
+--- !u!114 &638977350856878665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530351891437327453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e376f1e15297bd60716a99a37785572d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DungeonPuzzle.Runtime::InteractionSensor
+  radius: 1
+  sensorCollider: {fileID: 0}

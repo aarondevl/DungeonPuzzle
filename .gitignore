@@ -117,6 +117,7 @@ InitTestScene*.unity*
 
 # Scratch de generacion de los pptx de sustentacion
 /.codex-room01-build/
+/.codex-capturas-build/
 
 # DLLs de Roslyn que instala MCP for Unity (RoslynInstaller los descarga solo)
 /Assets/Plugins/Roslyn/

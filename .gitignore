@@ -114,3 +114,10 @@ InitTestScene*.unity*
 # macOS artifacts from asset packs
 .DS_Store
 **/__MACOSX/
+
+# Scratch de generacion de los pptx de sustentacion
+/.codex-room01-build/
+
+# DLLs de Roslyn que instala MCP for Unity (RoslynInstaller los descarga solo)
+/Assets/Plugins/Roslyn/
+/Assets/Plugins/Roslyn.meta

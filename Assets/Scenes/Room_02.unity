@@ -3515,7 +3515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296554704349eb0f3b6fe0fbd955c2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitTrigger
-  isFinalExit: 1
+  isFinalExit: 0
 --- !u!61 &1088631389
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4316,6 +4316,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard_Patrol
       objectReference: {fileID: 0}
+    - target: {fileID: 1225657346995196087, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
+      propertyPath: distance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250421188171691008, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
+      propertyPath: turnSpeed
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 2250421188171691008, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
@@ -4328,14 +4336,6 @@ PrefabInstance:
       propertyPath: 'waypoints.Array.data[1]'
       value: 
       objectReference: {fileID: 1220591804}
-    - target: {fileID: 2250421188171691008, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
-      propertyPath: turnSpeed
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225657346995196087, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
-      propertyPath: distance
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4111399342646092149, guid: 7adbcd14ae4f09d74a83c642685b5804, type: 3}
       propertyPath: m_SortingOrder
       value: 3

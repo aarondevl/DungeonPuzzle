@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -101,11 +102,32 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        StartCoroutine(TravelRoutine(destinationScene, destinationEntryId));
+    }
+
+    IEnumerator TravelRoutine(string sceneName, string entryId)
+    {
         _isTransitioning = true;
-        _pendingSpawnId = destinationEntryId;
-        _currentRoomScene = destinationScene;
+        _pendingSpawnId = entryId;
+        _currentRoomScene = sceneName;
+        PauseTime();
+
+        if (SceneTransition.Instance != null)
+            yield return SceneTransition.Instance.FadeOut();
+
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+        var identity = RoomIdentity.Current;
+        string title = identity != null
+            ? identity.ResolvedDisplayName(sceneName)
+            : sceneName;
+        Color accent = identity != null ? identity.AccentColor : Color.cyan;
+
+        if (SceneTransition.Instance != null)
+            yield return SceneTransition.Instance.FadeIn(title, accent);
+
+        _isTransitioning = false;
         ResumeTime();
-        SceneManager.LoadScene(destinationScene);
     }
 
     public void PlayerDetected()
@@ -191,7 +213,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ResumeTime();
+        if (!_isTransitioning) ResumeTime();
         // detect current level from scene name
         if (scene.name.StartsWith("Room_") && int.TryParse(scene.name.Substring(5), out var idx))
         {
@@ -208,7 +230,6 @@ public class GameManager : MonoBehaviour
             Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None),
             pendingSpawnId);
         _pendingSpawnId = null;
-        _isTransitioning = false;
 
         if (spawn == null)
         {

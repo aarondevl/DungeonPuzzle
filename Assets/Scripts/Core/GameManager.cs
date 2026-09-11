@@ -169,6 +169,8 @@ public class GameManager : MonoBehaviour
         {
             IsWin = true;
             _trackTimer = false;
+            if (RoomIdentity.Current != null)
+                GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
             SceneManager.LoadScene("GameOver");
             return;
         }

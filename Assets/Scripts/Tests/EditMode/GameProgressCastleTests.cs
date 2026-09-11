@@ -133,6 +133,26 @@ public class GameProgressCastleTests
     }
 
     [Test]
+    public void TerminalLinearDeparture_CompletesCurrentRoom()
+    {
+        var originalBestTime = CaptureFloats(new[] { "DP.BestTime.Room_05" });
+        NewIdentity(Room);
+        var manager = NewManager();
+        SetField(manager, "<CurrentLevel>k__BackingField", GameProgress.TotalLevels);
+
+        try
+        {
+            Assert.Throws<InvalidOperationException>(() => manager.LoadNextRoom());
+            Assert.That(GameProgress.IsRoomCompleted(Room), Is.True);
+        }
+        finally
+        {
+            RestoreFloats(originalBestTime);
+            PlayerPrefs.Save();
+        }
+    }
+
+    [Test]
     public void InvalidConfiguredExit_CanBeTriggeredAgain()
     {
         NewIdentity(Room);

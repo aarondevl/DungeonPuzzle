@@ -4,18 +4,31 @@ using TMPro;
 
 public class MainMenuUI : MonoBehaviour
 {
-    static readonly Color UnlockedNode = new Color(0.93f, 0.67f, 0.28f, 1f);
-    static readonly Color CompletedNode = new Color(0.38f, 0.78f, 0.55f, 1f);
-    static readonly Color LockedNode = new Color(0.22f, 0.22f, 0.27f, 1f);
-    static readonly Color LockedText = new Color(0.62f, 0.61f, 0.66f, 1f);
+    static readonly Color UnlockedNode = new Color(0.27f, 0.22f, 0.16f, 1f);
+    static readonly Color CompletedNode = new Color(0.18f, 0.3f, 0.23f, 1f);
+    static readonly Color LockedNode = new Color(0.19f, 0.19f, 0.23f, 1f);
+    static readonly Color UnlockedBorder = new Color(0.69f, 0.48f, 0.18f, 1f);
+    static readonly Color CompletedBorder = new Color(0.42f, 0.78f, 0.55f, 1f);
+    static readonly Color LockedBorder = new Color(0.34f, 0.34f, 0.39f, 1f);
+    static readonly Color PrimaryText = new Color(0.93f, 0.89f, 0.78f, 1f);
+    static readonly Color LockedText = new Color(0.57f, 0.57f, 0.62f, 1f);
 
     static readonly string[] LevelTitles =
     {
-        "THE OUTER WATCH",
-        "THE SPIKE PASSAGE",
-        "THE GUARDED HALL",
-        "CROSSING PATROL",
-        "THE FINAL CRYPT"
+        "OUTER WATCH",
+        "SPIKE PASS",
+        "GUARDED HALL",
+        "CROSSING",
+        "FINAL CRYPT"
+    };
+
+    static readonly Vector2[] LevelNodePositions =
+    {
+        new Vector2(-360f, 95f),
+        new Vector2(-180f, -70f),
+        new Vector2(0f, 95f),
+        new Vector2(180f, -70f),
+        new Vector2(360f, 95f)
     };
 
     [Header("Panels")]
@@ -23,6 +36,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] GameObject levelSelectPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject menuTitle;
 
     [Header("Continue button (root panel)")]
     [SerializeField] Button continueButton;
@@ -56,9 +70,17 @@ public class MainMenuUI : MonoBehaviour
         SetPanel(levelSelectPanel, false);
         SetPanel(optionsPanel, false);
         SetPanel(creditsPanel, false);
+        SetPanel(ResolveMenuTitle(), true);
     }
 
     void SetPanel(GameObject p, bool v) { if (p != null) p.SetActive(v); }
+
+    GameObject ResolveMenuTitle()
+    {
+        if (menuTitle != null) return menuTitle;
+        Transform title = transform.Find("Title");
+        return title != null ? title.gameObject : null;
+    }
 
     void BuildLevelPath()
     {
@@ -73,13 +95,38 @@ public class MainMenuUI : MonoBehaviour
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.anchoredPosition = new Vector2(-180f, 145f - i * 110f);
-            rect.sizeDelta = new Vector2(8f, 72f);
+
+            Vector2 start = LevelNodePositions[i];
+            Vector2 end = LevelNodePositions[i + 1];
+            Vector2 delta = end - start;
+            rect.anchoredPosition = (start + end) * 0.5f;
+                rect.sizeDelta = new Vector2(delta.magnitude, 3f);
+            rect.localRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
 
             Image image = connector.GetComponent<Image>();
-            image.color = new Color(0.78f, 0.58f, 0.28f, 0.55f);
+            image.color = new Color(0.48f, 0.36f, 0.2f, 0.7f);
             image.raycastTarget = false;
             rect.SetAsFirstSibling();
+        }
+
+        for (int i = 0; i < levelButtons.Length && i < LevelNodePositions.Length; i++)
+        {
+            RectTransform node = levelButtons[i].GetComponent<RectTransform>();
+            if (node != null)
+            {
+                node.anchorMin = new Vector2(0.5f, 0.5f);
+                node.anchorMax = new Vector2(0.5f, 0.5f);
+                node.anchoredPosition = LevelNodePositions[i];
+                    node.sizeDelta = new Vector2(160f, 86f);
+            }
+
+            if (levelBestTimes != null && i < levelBestTimes.Length && levelBestTimes[i] != null)
+            {
+                RectTransform time = levelBestTimes[i].rectTransform;
+                time.anchorMin = new Vector2(0.5f, 0.5f);
+                time.anchorMax = new Vector2(0.5f, 0.5f);
+                time.anchoredPosition = LevelNodePositions[i] + new Vector2(0f, -62f);
+            }
         }
     }
 
@@ -117,6 +164,23 @@ public class MainMenuUI : MonoBehaviour
                 levelBestTimes[i].color = unlocked ? Color.white : LockedText;
             }
         }
+
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject connector = levelSelectPanel != null
+                ? levelSelectPanel.transform.Find($"MapConnector_{i + 1:00}")?.gameObject
+                : null;
+            Image image = connector != null ? connector.GetComponent<Image>() : null;
+            if (image == null) continue;
+
+            bool completedPath = GameProgress.GetBestTime(i + 1) > 0f;
+            bool openPath = GameProgress.IsUnlocked(i + 2);
+            image.color = completedPath
+                ? new Color(0.3f, 0.58f, 0.42f, 0.82f)
+                : openPath
+                    ? new Color(0.69f, 0.48f, 0.18f, 0.82f)
+                    : new Color(0.3f, 0.3f, 0.34f, 0.65f);
+        }
     }
 
     void ApplyNodeStyle(Button button, bool unlocked, bool completed)
@@ -133,12 +197,25 @@ public class MainMenuUI : MonoBehaviour
             int index = System.Array.IndexOf(levelButtons, button);
             string title = index >= 0 && index < LevelTitles.Length ? LevelTitles[index] : "DUNGEON ROOM";
             label.text = unlocked ? $"ROOM {index + 1:00}\n{title}" : $"ROOM {index + 1:00}\nLOCKED";
-            label.color = unlocked ? Color.white : LockedText;
+                label.color = unlocked ? PrimaryText : LockedText;
+                label.fontSize = 18f;
+                label.enableAutoSizing = false;
+                label.enableWordWrapping = true;
+                label.overflowMode = TMPro.TextOverflowModes.Ellipsis;
+                label.alignment = TMPro.TextAlignmentOptions.Center;
+                label.margin = new Vector4(6f, 4f, 6f, 4f);
         }
+
+            Outline outline = button.GetComponent<Outline>();
+            if (outline == null) outline = button.gameObject.AddComponent<Outline>();
+            Color borderColor = !unlocked ? LockedBorder : completed ? CompletedBorder : UnlockedBorder;
+            outline.effectColor = borderColor;
+            outline.effectDistance = new Vector2(3f, 3f);
+            outline.useGraphicAlpha = true;
 
         ColorBlock colors = button.colors;
         colors.normalColor = nodeColor;
-        colors.highlightedColor = unlocked ? Color.Lerp(nodeColor, Color.white, 0.22f) : nodeColor;
+            colors.highlightedColor = unlocked ? Color.Lerp(nodeColor, borderColor, 0.2f) : nodeColor;
         colors.pressedColor = unlocked ? Color.Lerp(nodeColor, Color.black, 0.18f) : nodeColor;
         colors.selectedColor = colors.highlightedColor;
         colors.disabledColor = LockedNode;
@@ -162,7 +239,7 @@ public class MainMenuUI : MonoBehaviour
     // Root buttons
     public void OnPlayClicked() { SfxLibrary.Play("UI/click"); GameManager.Instance.StartGame(); }
     public void OnContinueClicked() { SfxLibrary.Play("UI/click"); GameManager.Instance.ContinueGame(); }
-    public void OnLevelSelectClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(levelSelectPanel, true); RefreshLevelButtons(); }
+    public void OnLevelSelectClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(levelSelectPanel, true); SetPanel(ResolveMenuTitle(), false); RefreshLevelButtons(); }
     public void OnOptionsClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(optionsPanel, true); }
     public void OnCreditsClicked() { SfxLibrary.Play("UI/click"); SetPanel(rootPanel, false); SetPanel(creditsPanel, true); }
     public void OnQuitClicked() { SfxLibrary.Play("UI/click"); Application.Quit(); }

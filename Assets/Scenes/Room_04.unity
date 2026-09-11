@@ -707,6 +707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: DungeonPuzzle.Runtime::ExitTrigger
   isFinalExit: 0
+  destinationScene: Room_05
+  destinationEntryId: South
 --- !u!61 &137731966
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3383,6 +3385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f434b12c35c8f4099c4d2138196a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnId: South
+  isDefault: 1
 --- !u!1 &994384001
 GameObject:
   m_ObjectHideFlags: 0
@@ -5382,6 +5386,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1825217771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825217773}
+  - component: {fileID: 1825217772}
+  m_Layer: 0
+  m_Name: RoomIdentity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1825217772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825217771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edd8d0dea2ce46408d3c15733627340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DungeonPuzzle.Runtime::RoomIdentity
+  roomId: dungeons
+  displayName: Calabozos Espectrales
+  accentColor: {r: 0.35, g: 0.95, b: 0.55, a: 1}
+  ambienceKey: Music/dungeons_ambient
+--- !u!4 &1825217773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825217771}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1940122162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5833,3 +5885,4 @@ SceneRoots:
   - {fileID: 647662880}
   - {fileID: 2115208515}
   - {fileID: 1736377450}
+  - {fileID: 1825217773}

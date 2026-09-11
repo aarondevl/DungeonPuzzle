@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private string _pendingSpawnId;
     private bool _trackTimer;
     private bool _isTransitioning;
+    private System.Func<string, bool> _canLoadScene = Application.CanStreamedLevelBeLoaded;
+    private System.Action<string, string> _startTravel;
 
     public bool IsTransitioning => _isTransitioning;
 
@@ -85,24 +87,30 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public void TravelTo(string destinationScene, string destinationEntryId)
+    public bool TravelTo(string destinationScene, string destinationEntryId)
     {
-        TravelTo(destinationScene, destinationEntryId, null);
+        return TravelTo(destinationScene, destinationEntryId, null);
     }
 
-    public void TravelTo(string destinationScene, string destinationEntryId, GameObject sourceDoor)
+    public bool TravelTo(string destinationScene, string destinationEntryId, GameObject sourceDoor)
     {
-        if (!CastleTravelRules.CanStart(_isTransitioning, destinationScene,
-                Application.CanStreamedLevelBeLoaded))
+        var canLoadScene = _canLoadScene ?? Application.CanStreamedLevelBeLoaded;
+        if (!CastleTravelRules.CanStart(_isTransitioning, destinationScene, canLoadScene))
         {
             if (sourceDoor == null)
                 Debug.LogError($"Castle travel rejected: '{destinationScene}'.");
             else
                 Debug.LogError($"Castle travel rejected by door '{sourceDoor.name}': '{destinationScene}'.", sourceDoor);
-            return;
+            return false;
         }
 
-        StartCoroutine(TravelRoutine(destinationScene, destinationEntryId));
+        if (RoomIdentity.Current != null)
+            GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
+        if (_startTravel != null)
+            _startTravel(destinationScene, destinationEntryId);
+        else
+            StartCoroutine(TravelRoutine(destinationScene, destinationEntryId));
+        return true;
     }
 
     IEnumerator TravelRoutine(string sceneName, string entryId)
@@ -168,6 +176,8 @@ public class GameManager : MonoBehaviour
         GameProgress.Unlock(next);
         CurrentLevel = next;
         RoomTime = 0f;
+        if (RoomIdentity.Current != null)
+            GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
         LoadScene($"Room_{CurrentLevel:00}");
     }
 

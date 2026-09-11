@@ -10,6 +10,19 @@ public static class GameProgress
     const string KeyVolMusic = "DP.Vol.Music";
     const string KeyVolSfx = "DP.Vol.Sfx";
     const string KeyFullscreen = "DP.Display.Fullscreen";
+    const string KeyRoomCompleteFmt = "DP.Castle.Room.{0}.Complete";
+    const string KeySecretFmt = "DP.Castle.Secret.{0}";
+
+    static readonly string[] CastleRoomIds =
+    {
+        "patio_hall",
+        "guard_wing",
+        "arcane_library",
+        "dungeons",
+        "warden_tower"
+    };
+
+    static string SafeId(string id) => string.IsNullOrWhiteSpace(id) ? "unknown" : id.Trim();
 
     public static int HighestUnlocked
     {
@@ -73,12 +86,43 @@ public static class GameProgress
         set { PlayerPrefs.SetInt(KeyFullscreen, value ? 1 : 0); PlayerPrefs.Save(); }
     }
 
+    public static bool IsRoomCompleted(string roomId) =>
+        PlayerPrefs.GetInt(string.Format(KeyRoomCompleteFmt, SafeId(roomId)), 0) == 1;
+
+    public static void MarkRoomCompleted(string roomId)
+    {
+        PlayerPrefs.SetInt(string.Format(KeyRoomCompleteFmt, SafeId(roomId)), 1);
+        PlayerPrefs.Save();
+    }
+
+    public static void ClearRoomCompleted(string roomId)
+    {
+        PlayerPrefs.DeleteKey(string.Format(KeyRoomCompleteFmt, SafeId(roomId)));
+    }
+
+    public static bool IsSecretDiscovered(string secretId) =>
+        PlayerPrefs.GetInt(string.Format(KeySecretFmt, SafeId(secretId)), 0) == 1;
+
+    public static void DiscoverSecret(string secretId)
+    {
+        PlayerPrefs.SetInt(string.Format(KeySecretFmt, SafeId(secretId)), 1);
+        PlayerPrefs.Save();
+    }
+
+    public static void ClearSecret(string secretId)
+    {
+        PlayerPrefs.DeleteKey(string.Format(KeySecretFmt, SafeId(secretId)));
+    }
+
     public static void ResetAll()
     {
         PlayerPrefs.DeleteKey(KeyHighest);
         PlayerPrefs.DeleteKey(KeyDeaths);
         for (int i = 1; i <= TotalLevels; i++)
             PlayerPrefs.DeleteKey(string.Format(KeyBestTimeFmt, i));
+        foreach (string roomId in CastleRoomIds)
+            ClearRoomCompleted(roomId);
+        ClearSecret("room_04_passage");
         PlayerPrefs.Save();
     }
 

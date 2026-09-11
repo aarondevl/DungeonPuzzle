@@ -21,13 +21,30 @@ public class ExitTrigger : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         _used = true;
 
-        SfxLibrary.Play("SFX/exit");
-        Vfx.Spark(transform.position);
         if (isFinalExit)
+        {
+            SfxLibrary.Play("SFX/exit");
+            Vfx.Spark(transform.position);
+            if (RoomIdentity.Current != null)
+                GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
             GameManager.Instance.WinGame();
+        }
         else if (!string.IsNullOrWhiteSpace(destinationScene))
-            GameManager.Instance.TravelTo(destinationScene, destinationEntryId, gameObject);
+        {
+            if (!GameManager.Instance.TravelTo(destinationScene, destinationEntryId, gameObject))
+            {
+                _used = false;
+                return;
+            }
+
+            SfxLibrary.Play("SFX/exit");
+            Vfx.Spark(transform.position);
+        }
         else
+        {
+            SfxLibrary.Play("SFX/exit");
+            Vfx.Spark(transform.position);
             GameManager.Instance.LoadNextRoom();
+        }
     }
 }

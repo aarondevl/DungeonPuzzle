@@ -10,6 +10,8 @@ using UnityEngine;
 public class ExitTrigger : MonoBehaviour
 {
     [SerializeField] bool isFinalExit;
+    [SerializeField] string destinationScene;
+    [SerializeField] string destinationEntryId = "Default";
 
     bool _used;
 
@@ -21,7 +23,11 @@ public class ExitTrigger : MonoBehaviour
 
         SfxLibrary.Play("SFX/exit");
         Vfx.Spark(transform.position);
-        if (isFinalExit) GameManager.Instance.WinGame();
-        else GameManager.Instance.LoadNextRoom();
+        if (isFinalExit)
+            GameManager.Instance.WinGame();
+        else if (!string.IsNullOrWhiteSpace(destinationScene))
+            GameManager.Instance.TravelTo(destinationScene, destinationEntryId, gameObject);
+        else
+            GameManager.Instance.LoadNextRoom();
     }
 }

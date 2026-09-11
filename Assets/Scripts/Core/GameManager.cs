@@ -16,7 +16,11 @@ public class GameManager : MonoBehaviour
     public bool LastWinIsBest { get; private set; }
 
     private string _currentRoomScene;
+    private string _pendingSpawnId;
     private bool _trackTimer;
+    private bool _isTransitioning;
+
+    public bool IsTransitioning => _isTransitioning;
 
     void Awake()
     {
@@ -80,8 +84,33 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void TravelTo(string destinationScene, string destinationEntryId)
+    {
+        TravelTo(destinationScene, destinationEntryId, null);
+    }
+
+    public void TravelTo(string destinationScene, string destinationEntryId, GameObject sourceDoor)
+    {
+        if (!CastleTravelRules.CanStart(_isTransitioning, destinationScene,
+                Application.CanStreamedLevelBeLoaded))
+        {
+            if (sourceDoor == null)
+                Debug.LogError($"Castle travel rejected: '{destinationScene}'.");
+            else
+                Debug.LogError($"Castle travel rejected by door '{sourceDoor.name}': '{destinationScene}'.", sourceDoor);
+            return;
+        }
+
+        _isTransitioning = true;
+        _pendingSpawnId = destinationEntryId;
+        _currentRoomScene = destinationScene;
+        ResumeTime();
+        SceneManager.LoadScene(destinationScene);
+    }
+
     public void PlayerDetected()
     {
+        if (_isTransitioning) return;
         SfxLibrary.Play("SFX/detected", 0.45f);
         CameraShake.Kick(0.6f);
         DetectionFlash.Flash();
@@ -174,8 +203,25 @@ public class GameManager : MonoBehaviour
             _trackTimer = false;
         }
 
-        var spawn = Object.FindFirstObjectByType<SpawnPoint>();
-        if (spawn == null) return;
+        var pendingSpawnId = _pendingSpawnId;
+        var spawn = SpawnPoint.Resolve(
+            Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None),
+            pendingSpawnId);
+        _pendingSpawnId = null;
+        _isTransitioning = false;
+
+        if (spawn == null)
+        {
+            Debug.LogError($"No SpawnPoint exists in scene '{scene.name}'.");
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(pendingSpawnId)
+            && !string.Equals(spawn.Id, pendingSpawnId, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.LogWarning($"Requested SpawnPoint '{pendingSpawnId}' was not found in destination scene '{scene.name}'; using default SpawnPoint '{spawn.Id}'.");
+        }
+
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
         player.transform.SetPositionAndRotation(spawn.transform.position, spawn.transform.rotation);

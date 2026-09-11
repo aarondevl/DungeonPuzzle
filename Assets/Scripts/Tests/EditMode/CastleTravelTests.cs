@@ -40,4 +40,25 @@ public class CastleTravelTests
     {
         Assert.That(SpawnPoint.Resolve(System.Array.Empty<SpawnPoint>(), "South"), Is.Null);
     }
+
+    [Test]
+    public void CanStart_RejectsBlankSceneAndActiveTransition()
+    {
+        Assert.That(CastleTravelRules.CanStart(false, "", _ => true), Is.False);
+        Assert.That(CastleTravelRules.CanStart(true, "Room_02", _ => true), Is.False);
+    }
+
+    [Test]
+    public void CanStart_UsesSceneLoadabilityProbe()
+    {
+        Assert.That(CastleTravelRules.CanStart(false, "Room_02", s => s == "Room_02"), Is.True);
+        Assert.That(CastleTravelRules.CanStart(false, "Missing", s => s == "Room_02"), Is.False);
+    }
+
+    [Test]
+    public void NextScene_StopsAfterFinalRoom()
+    {
+        Assert.That(CastleTravelRules.NextScene(4, 5), Is.EqualTo("Room_05"));
+        Assert.That(CastleTravelRules.NextScene(5, 5), Is.Null);
+    }
 }

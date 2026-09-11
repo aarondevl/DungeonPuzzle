@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDetected()
     {
-        SfxLibrary.Play("SFX/detected");
+        SfxLibrary.Play("SFX/detected", 0.45f);
         CameraShake.Kick(0.6f);
         DetectionFlash.Flash();
         Lives--;

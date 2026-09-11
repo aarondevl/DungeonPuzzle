@@ -25,6 +25,7 @@ public class VisionCone : MonoBehaviour
     static readonly Collider2D[] _wallBuffer = new Collider2D[16];
 
     public bool IsSeeingPlayer { get; private set; }
+    public Vector2 LastSeenPlayerPosition { get; private set; }
     public event System.Action OnPlayerDetected;
 
     // Máscaras efectivas: si el prefab dejó el campo vacío se usa la capa canónica,
@@ -152,6 +153,7 @@ public class VisionCone : MonoBehaviour
         {
             Vector3 localPlayer = transform.InverseTransformPoint(hit.transform.position);
             sees = PointInsideCone(localPlayer);
+            if (sees) LastSeenPlayerPosition = hit.transform.position;
         }
         IsSeeingPlayer = sees;
         if (sees) OnPlayerDetected?.Invoke();

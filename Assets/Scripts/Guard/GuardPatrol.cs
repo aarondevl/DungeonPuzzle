@@ -14,6 +14,7 @@ public class GuardPatrol : GuardBase
         if (State == GuardState.Alerted)
         {
             MoveToward(_alertTarget);
+            FaceDirection(_alertTarget - Rb.position);
             return;
         }
         Patrol();
@@ -41,10 +42,14 @@ public class GuardPatrol : GuardBase
         if (dir == Vector2.zero) return;
         float target = -Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         float current = Rb.rotation;
-        float next = Mathf.MoveTowardsAngle(current, target, turnSpeed * Time.fixedDeltaTime);
-        Rb.MoveRotation(next);
+        float maxTurn = turnSpeed * Time.fixedDeltaTime;
+        if (Mathf.Abs(Mathf.DeltaAngle(current, target)) <= maxTurn)
+            Rb.rotation = target;
+        else
+            Rb.MoveRotation(Mathf.MoveTowardsAngle(current, target, maxTurn));
     }
 
+    protected override void OnVisionAlerted(Vector2 position) => _alertTarget = position;
     protected override void OnNoiseAlerted(Vector2 position) => _alertTarget = position;
     protected override void OnReturnToNormal() => _alertTarget = Vector2.zero;
 }

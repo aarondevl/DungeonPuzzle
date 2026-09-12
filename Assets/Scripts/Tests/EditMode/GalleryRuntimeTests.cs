@@ -75,4 +75,13 @@ public class GalleryRuntimeTests
         Object.DestroyImmediate(portalObject);
         Object.DestroyImmediate(destinationObject);
     }
+
+    [Test]
+    public void OccluderAlpha_MovesTowardTargetWithoutOvershoot()
+    {
+        Assert.That(ForegroundOccluder.StepAlpha(1f, 0.3f, 4f, 0.1f),
+            Is.EqualTo(0.6f).Within(0.001f));
+        Assert.That(ForegroundOccluder.StepAlpha(0.35f, 0.3f, 4f, 0.1f),
+            Is.EqualTo(0.3f).Within(0.001f));
+    }
 }

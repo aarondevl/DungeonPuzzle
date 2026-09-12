@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -84,6 +85,55 @@ public class CastleFailureRecoveryPlayModeTests
     }
 
     static GameObject Player() => GameObject.FindGameObjectWithTag("Player");
+
+    [UnityTest]
+    public IEnumerator SpikeInteractionSensorOutsidePhysicalBody_DoesNotCostLifeWhenTrapExtends()
+    {
+        var gm = GameManager.Instance;
+        Assert.That(gm, Is.Not.Null, "GameManager.Instance missing");
+
+        gm.StartLevel(2);
+        yield return WaitForSceneLoad("Room_02");
+        Assert.That(gm.Lives, Is.EqualTo(3));
+
+        var trap = Object.FindFirstObjectByType<SpikeTrap>(FindObjectsInactive.Include);
+        var player = Player();
+        Assert.That(trap, Is.Not.Null, "Room_02 has no SpikeTrap");
+        Assert.That(player, Is.Not.Null, "Room_02 has no Player");
+
+        var physicalBody = System.Array.Find(player.GetComponents<Collider2D>(), c => !c.isTrigger);
+        var interactionSensor = System.Array.Find(player.GetComponents<Collider2D>(), c => c.isTrigger);
+        Assert.That(physicalBody, Is.Not.Null, "Player has no physical collider");
+        Assert.That(interactionSensor, Is.Not.Null, "Player has no interaction trigger");
+
+        // A 0.8-unit separation leaves the physical body clear of the 0.4-wide
+        // spikes, while the larger interaction sensor still overlaps them.
+        player.transform.position = trap.transform.position + Vector3.right * 0.8f;
+        var trapCollider = trap.GetComponent<Collider2D>();
+        trapCollider.enabled = true;
+        Physics2D.SyncTransforms();
+        Assert.That(physicalBody.Distance(trapCollider).isOverlapped, Is.False,
+            "test setup error: the player's physical body still overlaps the spikes");
+        Assert.That(interactionSensor.Distance(trapCollider).isOverlapped, Is.True,
+            "test setup error: the interaction sensor does not overlap the spikes");
+        trapCollider.enabled = false;
+
+        MethodInfo apply = typeof(SpikeTrap).GetMethod("Apply", BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.That(apply, Is.Not.Null);
+        apply.Invoke(trap, new object[] { SpikeTrap.Phase.Hidden });
+        apply.Invoke(trap, new object[] { SpikeTrap.Phase.Extended });
+
+        Assert.That(gm.Lives, Is.EqualTo(3),
+            "spikes must ignore the interaction trigger when the physical body is outside");
+
+        MethodInfo onTriggerEnter = typeof(SpikeTrap).GetMethod(
+            "OnTriggerEnter2D", BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.That(onTriggerEnter, Is.Not.Null);
+        onTriggerEnter.Invoke(trap, new object[] { interactionSensor });
+
+        Assert.That(gm.Lives, Is.EqualTo(3),
+            "walking an interaction trigger into extended spikes must not cost a life");
+    }
 
     [UnityTest]
     public IEnumerator ThreeDetections_ReloadTwiceThenGameOver_AndRetryKeepsProgress(

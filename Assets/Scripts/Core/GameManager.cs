@@ -238,10 +238,18 @@ public class GameManager : MonoBehaviour
         }
 
         var pendingSpawnId = _pendingSpawnId;
+        _pendingSpawnId = null;
+
+        // Quien decide si esta escena necesita SpawnPoint es el propio jugador: MainMenu
+        // y GameOver no lo traen y tampoco deben exigirlo. Resolver el spawn antes de
+        // mirar eso hacia que cada derrota y cada victoria escupieran un error rojo
+        // ("No SpawnPoint exists in scene 'GameOver'") en una ruta perfectamente normal.
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+
         var spawn = SpawnPoint.Resolve(
             Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None),
             pendingSpawnId);
-        _pendingSpawnId = null;
 
         if (spawn == null)
         {
@@ -255,8 +263,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning($"Requested SpawnPoint '{pendingSpawnId}' was not found in destination scene '{scene.name}'; using default SpawnPoint '{spawn.Id}'.");
         }
 
-        var player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) return;
         player.transform.SetPositionAndRotation(spawn.transform.position, spawn.transform.rotation);
         var rb = player.GetComponent<Rigidbody2D>();
         if (rb != null) rb.linearVelocity = Vector2.zero;

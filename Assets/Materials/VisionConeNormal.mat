@@ -35,11 +35,12 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _ColorMask: 15
-    - _EdgeFade: 0.32
+    - _EdgeFade: 0.35
     - _EnableExternalAlpha: 0
     - _NoiseStrength: 0.4
     - _PulseAmount: 0.12
     - _PulseSpeed: 2.2
+    - _RimWidth: 0.16
     - _ScrollSpeed: 0.55
     - _Stencil: 0
     - _StencilComp: 8
@@ -48,8 +49,9 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.92, b: 0.45, a: 0.55}
+    - _Color: {r: 1, g: 0.94, b: 0.66, a: 0.62}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.72, g: 0.95, b: 1, a: 0.92}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

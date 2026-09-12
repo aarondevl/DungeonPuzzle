@@ -99,10 +99,15 @@ public class VisionCone : MonoBehaviour
         var vertices = new Vector3[n + 1];
         var triangles = new int[(n - 1) * 3];
         var colors = new Color[n + 1];
+        var uvs = new Vector2[n + 1];
         Color uniform = new Color(1, 1, 1, coneAlpha);
 
         vertices[0] = Vector3.zero;
         colors[0] = uniform;
+        // uv.x normaliza el radio: 0 en el guardia, 1 en el perimetro del cono. El shader
+        // lo usa para el degradado y el reborde, de modo que el cono se lee hasta su
+        // alcance real aunque un muro lo recorte o cambie "distance".
+        uvs[0] = Vector2.zero;
 
         for (int i = 0; i < n; i++)
         {
@@ -115,6 +120,7 @@ public class VisionCone : MonoBehaviour
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
             colors[i + 1] = uniform;
+            uvs[i + 1] = new Vector2(1f, 0f);
             _polyLocal[i] = point;
         }
         _polyCount = n;
@@ -130,6 +136,7 @@ public class VisionCone : MonoBehaviour
         _mesh.vertices = vertices;
         _mesh.triangles = triangles;
         _mesh.colors = colors;
+        _mesh.uv = uvs;
         _mesh.RecalculateNormals();
     }
 

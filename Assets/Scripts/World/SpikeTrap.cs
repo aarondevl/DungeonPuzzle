@@ -40,8 +40,8 @@ public class SpikeTrap : MonoBehaviour
     Collider2D _col;
     Phase _phase = Phase.Hidden;
     float _timer;
-    // Un mismo cuerpo puede reportarse dos veces en el mismo asomo (el jugador
-    // lleva collider sólido + trigger del sensor). Se cobra una sola vez por ciclo.
+    // Un mismo cuerpo puede reportarse varias veces en el mismo asomo. Se cobra
+    // una sola vez por ciclo; los triggers auxiliares nunca cuentan como cuerpo.
     bool _punishedThisCycle;
     bool _started;
 
@@ -97,7 +97,7 @@ public class SpikeTrap : MonoBehaviour
     void PunishOverlapping()
     {
         int mask = CollisionLayers.Resolve(victimLayers, CollisionLayers.PlayerMask);
-        var filter = new ContactFilter2D { useTriggers = true, useLayerMask = true, layerMask = mask };
+        var filter = new ContactFilter2D { useTriggers = false, useLayerMask = true, layerMask = mask };
         var hits = new Collider2D[4];
         int count = _col.Overlap(filter, hits);
         for (int i = 0; i < count; i++) Punish(hits[i]);
@@ -107,7 +107,7 @@ public class SpikeTrap : MonoBehaviour
 
     void Punish(Collider2D victim)
     {
-        if (!IsDeadly || _punishedThisCycle || victim == null) return;
+        if (!IsDeadly || _punishedThisCycle || victim == null || victim.isTrigger) return;
         int mask = CollisionLayers.Resolve(victimLayers, CollisionLayers.PlayerMask);
         if (!CollisionLayers.Contains(mask, victim.gameObject.layer)) return;
         _punishedThisCycle = true;

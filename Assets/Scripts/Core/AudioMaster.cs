@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class AudioMaster : MonoBehaviour
 
     AudioSource _sfx;
     AudioSource _music;
+    AudioSource _nextMusic;
     AudioListener _fallbackListener;
     float _musicBaseVolume = 0.6f;
 
@@ -25,6 +27,11 @@ public class AudioMaster : MonoBehaviour
         _music.spatialBlend = 0f;
         _music.loop = true;
 
+        _nextMusic = gameObject.AddComponent<AudioSource>();
+        _nextMusic.playOnAwake = false;
+        _nextMusic.spatialBlend = 0f;
+        _nextMusic.loop = true;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         EnsureListener();
         Apply();
@@ -36,7 +43,17 @@ public class AudioMaster : MonoBehaviour
         if (Instance == this) SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) => EnsureListener();
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnsureListener();
+        StartCoroutine(ApplyRoomNextFrame());
+    }
+
+    IEnumerator ApplyRoomNextFrame()
+    {
+        yield return null;
+        ApplyRoom(RoomIdentity.Current);
+    }
 
     /// <summary>
     /// Garantiza que siempre exista exactamente un AudioListener: si la escena
@@ -83,6 +100,40 @@ public class AudioMaster : MonoBehaviour
         _music.clip = clip;
         _music.volume = _musicBaseVolume * GameProgress.MusicVolume;
         _music.Play();
+    }
+
+    public static bool ShouldSwitchAmbience(AudioClip current, AudioClip next, bool currentPlaying)
+    {
+        return next != null && (current != next || !currentPlaying);
+    }
+
+    public void ApplyRoom(RoomIdentity identity)
+    {
+        if (identity == null) return;
+        AudioClip next = SfxLibrary.Get(identity.ResolvedAmbienceKey);
+        if (!ShouldSwitchAmbience(_music.clip, next, _music.isPlaying)) return;
+        StopAllCoroutines();
+        StartCoroutine(CrossfadeMusic(next, 0.6f));
+    }
+
+    IEnumerator CrossfadeMusic(AudioClip next, float seconds)
+    {
+        _nextMusic.clip = next;
+        _nextMusic.loop = true;
+        _nextMusic.volume = 0f;
+        _nextMusic.Play();
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / seconds);
+            _music.volume = (1f - t) * _musicBaseVolume * GameProgress.MusicVolume;
+            _nextMusic.volume = t * _musicBaseVolume * GameProgress.MusicVolume;
+            yield return null;
+        }
+        _music.Stop();
+        (_music, _nextMusic) = (_nextMusic, _music);
+        Apply();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

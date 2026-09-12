@@ -9,6 +9,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI statsText;
 
     static readonly Color Cream   = new Color(0.910f, 0.875f, 0.784f, 1f);
+    static readonly Color Gold    = new Color(1.000f, 0.880f, 0.450f, 1f);
     static readonly Color Crimson = new Color(0.722f, 0.137f, 0.173f, 1f);
 
     void Start()
@@ -19,13 +20,13 @@ public class GameOverUI : MonoBehaviour
         if (messageText != null)
         {
             messageText.text  = win ? "ESCAPE\nCOMPLETE" : "ATTEMPT\nFAILED";
-            messageText.color = Cream;
+            messageText.color = win ? Gold : Crimson;
         }
         if (subtitleText != null)
         {
             subtitleText.text  = win ? "—   YOU SLIPPED THROUGH THE DUNGEON"
                                      : "—   THE DUNGEON KEEPS YOU FOR ANOTHER TRY";
-            subtitleText.color = win ? Cream : Crimson;
+            subtitleText.color = Cream;
         }
         if (statsText != null)
         {

@@ -91,6 +91,30 @@ public class CastleRoutePlayModeTests
     }
 
     [UnityTest]
+    public IEnumerator Room04Spawn_StartsOutsidePatrolBDetectionRange()
+    {
+        var gm = GameManager.Instance;
+        Assert.That(gm, Is.Not.Null, "GameManager.Instance missing");
+
+        gm.StartLevel(4);
+        yield return WaitForScene("Room_04");
+
+        var spawn = SpawnPoint.Resolve(
+            Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None), null);
+        var patrol = GameObject.Find("Guard_Patrol_B");
+        var cone = patrol != null ? patrol.GetComponentInChildren<VisionCone>() : null;
+
+        Assert.That(spawn, Is.Not.Null, "Room_04 has no default SpawnPoint");
+        Assert.That(patrol, Is.Not.Null, "Room_04 has no Guard_Patrol_B");
+        Assert.That(cone, Is.Not.Null, "Guard_Patrol_B has no VisionCone");
+
+        float worldReach = cone.distance * Mathf.Abs(cone.transform.lossyScale.x);
+        float clearance = Vector2.Distance(spawn.transform.position, patrol.transform.position);
+        Assert.That(clearance, Is.GreaterThan(worldReach + 0.25f),
+            $"Room_04 spawn clearance is {clearance:0.00}, but Patrol B reaches {worldReach:0.00}");
+    }
+
+    [UnityTest]
     public IEnumerator FreshSave_RunsPatioToTowerWithoutReturningToTheMenu()
     {
         foreach (string id in RoomIds) GameProgress.ClearRoomCompleted(id);

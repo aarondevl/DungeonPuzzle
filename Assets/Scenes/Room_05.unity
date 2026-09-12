@@ -1760,50 +1760,50 @@ MonoBehaviour:
       type: {class: ShadowMesh2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
         m_Vertices:
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: 0.3999939}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: 1.3062439}
         m_Indices: 000000000400000005000000050000000100000000000000010000000800000009000000090000000200000001000000020000000c0000000d0000000d0000000300000002000000030000001000000011000000110000000000000003000000000000000600000007000000010000000a0000000b000000020000000e0000000f000000030000001200000013000000
         m_LocalBounds:
           m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0.3999939, y: 0.3999939, z: 0}
+          m_Extent: {x: 1.3999939, y: 1.3062439, z: 0}
         m_EdgeProcessing: 1
         m_TrimEdge: 0.1
         m_FlipX: 0
@@ -1858,13 +1858,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3, y: 2.8125}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!212 &295255513
 SpriteRenderer:
@@ -1915,12 +1915,12 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 396299cb6aaca930693919cc1c0bd320, type: 3}
-  m_Color: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  m_Sprite: {fileID: -1052585523282480973, guid: 583c05d1fd6a6814f9b7e4ef89460bc3, type: 3}
+  m_Color: {r: 0.55, g: 0.55, b: 0.55, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_DrawMode: 2
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1936,7 +1936,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5481,50 +5481,50 @@ MonoBehaviour:
       type: {class: ShadowMesh2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
         m_Vertices:
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: 0.3999939}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: 1.3062439}
         m_Indices: 000000000400000005000000050000000100000000000000010000000800000009000000090000000200000001000000020000000c0000000d0000000d0000000300000002000000030000001000000011000000110000000000000003000000000000000600000007000000010000000a0000000b000000020000000e0000000f000000030000001200000013000000
         m_LocalBounds:
           m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0.3999939, y: 0.3999939, z: 0}
+          m_Extent: {x: 1.3999939, y: 1.3062439, z: 0}
         m_EdgeProcessing: 1
         m_TrimEdge: 0.1
         m_FlipX: 0
@@ -5579,13 +5579,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3, y: 2.8125}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!212 &1416376991
 SpriteRenderer:
@@ -5636,12 +5636,12 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 396299cb6aaca930693919cc1c0bd320, type: 3}
-  m_Color: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  m_Sprite: {fileID: -1052585523282480973, guid: 583c05d1fd6a6814f9b7e4ef89460bc3, type: 3}
+  m_Color: {r: 0.55, g: 0.55, b: 0.55, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_DrawMode: 2
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5657,7 +5657,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6970,50 +6970,50 @@ MonoBehaviour:
       type: {class: ShadowMesh2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
         m_Vertices:
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: 0.3999939}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: 1.3062439}
         m_Indices: 000000000400000005000000050000000100000000000000010000000800000009000000090000000200000001000000020000000c0000000d0000000d0000000300000002000000030000001000000011000000110000000000000003000000000000000600000007000000010000000a0000000b000000020000000e0000000f000000030000001200000013000000
         m_LocalBounds:
           m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0.3999939, y: 0.3999939, z: 0}
+          m_Extent: {x: 1.3999939, y: 1.3062439, z: 0}
         m_EdgeProcessing: 1
         m_TrimEdge: 0.1
         m_FlipX: 0
@@ -7068,13 +7068,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3, y: 2.8125}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!212 &1690101196
 SpriteRenderer:
@@ -7125,12 +7125,12 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 396299cb6aaca930693919cc1c0bd320, type: 3}
-  m_Color: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  m_Sprite: {fileID: -1052585523282480973, guid: 583c05d1fd6a6814f9b7e4ef89460bc3, type: 3}
+  m_Color: {r: 0.55, g: 0.55, b: 0.55, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_DrawMode: 2
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7146,7 +7146,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: -2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7485,50 +7485,50 @@ MonoBehaviour:
       type: {class: ShadowMesh2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
         m_Vertices:
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: -1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: 0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: -0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: -0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: 0.3999939, z: 0}
-          tangent: {x: 0, y: 0, z: 0.3999939, w: -0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 1, y: 0, z: 0.3999939, w: 0.3999939}
-        - position: {x: 0.3999939, y: -0.3999939, z: 0}
-          tangent: {x: 3, y: 0, z: 0.3999939, w: 0.3999939}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: -1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: 1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: -1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: -1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: 1.3062439, z: 0}
+          tangent: {x: 0, y: 0, z: 1.3999939, w: -1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 1, y: 0, z: 1.3999939, w: 1.3062439}
+        - position: {x: 1.3999939, y: -1.3062439, z: 0}
+          tangent: {x: 3, y: 0, z: 1.3999939, w: 1.3062439}
         m_Indices: 000000000400000005000000050000000100000000000000010000000800000009000000090000000200000001000000020000000c0000000d0000000d0000000300000002000000030000001000000011000000110000000000000003000000000000000600000007000000010000000a0000000b000000020000000e0000000f000000030000001200000013000000
         m_LocalBounds:
           m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0.3999939, y: 0.3999939, z: 0}
+          m_Extent: {x: 1.3999939, y: 1.3062439, z: 0}
         m_EdgeProcessing: 1
         m_TrimEdge: 0.1
         m_FlipX: 0
@@ -7583,13 +7583,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3, y: 2.8125}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!212 &1834380710
 SpriteRenderer:
@@ -7640,12 +7640,12 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 396299cb6aaca930693919cc1c0bd320, type: 3}
-  m_Color: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  m_Sprite: {fileID: -1052585523282480973, guid: 583c05d1fd6a6814f9b7e4ef89460bc3, type: 3}
+  m_Color: {r: 0.55, g: 0.55, b: 0.55, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_DrawMode: 2
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7661,7 +7661,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: -2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

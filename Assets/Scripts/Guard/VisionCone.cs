@@ -33,6 +33,17 @@ public class VisionCone : MonoBehaviour
     int _wallMask;
     int _playerMask;
 
+    /// <summary>
+    /// <see cref="distance"/> mide el cono en espacio LOCAL: el vertice sin obstaculo
+    /// se coloca en <c>localDir * distance</c> y la malla lo dibuja ya escalado. La
+    /// fisica, en cambio, trabaja en mundo, asi que hay que convertir antes de
+    /// preguntarle. Los guardias vienen escalados a 0.7, de modo que usar
+    /// <c>distance</c> en bruto consultaba 5 unidades de mundo para un cono que solo
+    /// llega a 3.5: cualquier muro en esa franja fijaba el vertice sobre el muro y el
+    /// guardia reconocia al jugador mucho mas lejos de donde termina el cono visible.
+    /// </summary>
+    float WorldReach => distance * Mathf.Abs(transform.lossyScale.x);
+
     void Awake()
     {
         _wallMask = CollisionLayers.Resolve(wallLayer, CollisionLayers.WallsMask);
@@ -61,7 +72,8 @@ public class VisionCone : MonoBehaviour
             _angleBuffer.Add(-halfAngle + angleStep * i);
 
         Vector2 origin = transform.position;
-        int wallCount = Physics2D.OverlapCircleNonAlloc(origin, distance, _wallBuffer, _wallMask);
+        float worldReach = WorldReach;
+        int wallCount = Physics2D.OverlapCircleNonAlloc(origin, worldReach, _wallBuffer, _wallMask);
         float forwardWorldDeg = Mathf.Atan2(transform.up.x, transform.up.y) * Mathf.Rad2Deg;
 
         for (int w = 0; w < wallCount; w++)
@@ -71,7 +83,7 @@ public class VisionCone : MonoBehaviour
             {
                 Vector2 corner = new Vector2(c < 2 ? b.min.x : b.max.x, (c & 1) == 0 ? b.min.y : b.max.y);
                 Vector2 toCorner = corner - origin;
-                if (toCorner.sqrMagnitude > distance * distance) continue;
+                if (toCorner.sqrMagnitude > worldReach * worldReach) continue;
                 float worldDeg = Mathf.Atan2(toCorner.x, toCorner.y) * Mathf.Rad2Deg;
                 float localDeg = Mathf.DeltaAngle(forwardWorldDeg, worldDeg);
                 if (Mathf.Abs(localDeg) > halfAngle) continue;
@@ -87,10 +99,15 @@ public class VisionCone : MonoBehaviour
         var vertices = new Vector3[n + 1];
         var triangles = new int[(n - 1) * 3];
         var colors = new Color[n + 1];
+        var uvs = new Vector2[n + 1];
         Color uniform = new Color(1, 1, 1, coneAlpha);
 
         vertices[0] = Vector3.zero;
         colors[0] = uniform;
+        // uv.x normaliza el radio: 0 en el guardia, 1 en el perimetro del cono. El shader
+        // lo usa para el degradado y el reborde, de modo que el cono se lee hasta su
+        // alcance real aunque un muro lo recorte o cambie "distance".
+        uvs[0] = Vector2.zero;
 
         for (int i = 0; i < n; i++)
         {
@@ -98,11 +115,12 @@ public class VisionCone : MonoBehaviour
             float rad = a * Mathf.Deg2Rad;
             Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
             Vector2 worldDir = transform.TransformDirection(localDir);
-            RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, distance, _wallMask);
+            RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, worldReach, _wallMask);
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
             colors[i + 1] = uniform;
+            uvs[i + 1] = new Vector2(1f, 0f);
             _polyLocal[i] = point;
         }
         _polyCount = n;
@@ -118,6 +136,7 @@ public class VisionCone : MonoBehaviour
         _mesh.vertices = vertices;
         _mesh.triangles = triangles;
         _mesh.colors = colors;
+        _mesh.uv = uvs;
         _mesh.RecalculateNormals();
     }
 
@@ -148,7 +167,7 @@ public class VisionCone : MonoBehaviour
     void CheckDetection()
     {
         bool sees = false;
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, distance, _playerMask);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, WorldReach, _playerMask);
         if (hit != null && _polyCount >= 2)
         {
             Vector3 localPlayer = transform.InverseTransformPoint(hit.transform.position);

@@ -119,6 +119,13 @@ InitTestScene*.unity*
 /.codex-room01-build/
 /.codex-capturas-build/
 
+# Local visual brainstorming companion
+/.superpowers/
+
 # DLLs de Roslyn que instala MCP for Unity (RoslynInstaller los descarga solo)
 /Assets/Plugins/Roslyn/
 /Assets/Plugins/Roslyn.meta
+
+# Escenas que Unity deja al recuperarse de un cierre inesperado
+/[Aa]ssets/_[Rr]ecovery/
+/[Aa]ssets/_[Rr]ecovery.meta

@@ -38,7 +38,14 @@ public class HUDManager : MonoBehaviour
     void UpdateLabels()
     {
         if (GameManager.Instance == null) return;
-        if (levelLabel != null) levelLabel.text = $"ROOM {GameManager.Instance.CurrentLevel:00}";
+        if (levelLabel != null)
+        {
+            var identity = RoomIdentity.Current;
+            levelLabel.text = identity != null
+                ? identity.ResolvedDisplayName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+                : $"ROOM {GameManager.Instance.CurrentLevel:00}";
+            if (identity != null) levelLabel.color = identity.AccentColor;
+        }
         if (bestTimeLabel != null)
         {
             float best = GameProgress.GetBestTime(GameManager.Instance.CurrentLevel);

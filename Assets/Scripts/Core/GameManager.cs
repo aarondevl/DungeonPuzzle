@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -16,7 +17,13 @@ public class GameManager : MonoBehaviour
     public bool LastWinIsBest { get; private set; }
 
     private string _currentRoomScene;
+    private string _pendingSpawnId;
     private bool _trackTimer;
+    private bool _isTransitioning;
+    private System.Func<string, bool> _canLoadScene = Application.CanStreamedLevelBeLoaded;
+    private System.Action<string, string> _startTravel;
+
+    public bool IsTransitioning => _isTransitioning;
 
     void Awake()
     {
@@ -80,8 +87,60 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public bool TravelTo(string destinationScene, string destinationEntryId)
+    {
+        return TravelTo(destinationScene, destinationEntryId, null);
+    }
+
+    public bool TravelTo(string destinationScene, string destinationEntryId, GameObject sourceDoor)
+    {
+        var canLoadScene = _canLoadScene ?? Application.CanStreamedLevelBeLoaded;
+        if (!CastleTravelRules.CanStart(_isTransitioning, destinationScene, canLoadScene))
+        {
+            if (sourceDoor == null)
+                Debug.LogError($"Castle travel rejected: '{destinationScene}'.");
+            else
+                Debug.LogError($"Castle travel rejected by door '{sourceDoor.name}': '{destinationScene}'.", sourceDoor);
+            return false;
+        }
+
+        if (RoomIdentity.Current != null)
+            GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
+        if (_startTravel != null)
+            _startTravel(destinationScene, destinationEntryId);
+        else
+            StartCoroutine(TravelRoutine(destinationScene, destinationEntryId));
+        return true;
+    }
+
+    IEnumerator TravelRoutine(string sceneName, string entryId)
+    {
+        _isTransitioning = true;
+        _pendingSpawnId = entryId;
+        _currentRoomScene = sceneName;
+        PauseTime();
+
+        if (SceneTransition.Instance != null)
+            yield return SceneTransition.Instance.FadeOut();
+
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+        var identity = RoomIdentity.Current;
+        string title = identity != null
+            ? identity.ResolvedDisplayName(sceneName)
+            : sceneName;
+        Color accent = identity != null ? identity.AccentColor : Color.cyan;
+
+        if (SceneTransition.Instance != null)
+            yield return SceneTransition.Instance.FadeIn(title, accent);
+
+        _isTransitioning = false;
+        ResumeTime();
+    }
+
     public void PlayerDetected()
     {
+        if (_isTransitioning) return;
         SfxLibrary.Play("SFX/detected", 0.45f);
         CameraShake.Kick(0.6f);
         DetectionFlash.Flash();
@@ -110,6 +169,8 @@ public class GameManager : MonoBehaviour
         {
             IsWin = true;
             _trackTimer = false;
+            if (RoomIdentity.Current != null)
+                GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
             SceneManager.LoadScene("GameOver");
             return;
         }
@@ -117,6 +178,8 @@ public class GameManager : MonoBehaviour
         GameProgress.Unlock(next);
         CurrentLevel = next;
         RoomTime = 0f;
+        if (RoomIdentity.Current != null)
+            GameProgress.MarkRoomCompleted(RoomIdentity.Current.RoomId);
         LoadScene($"Room_{CurrentLevel:00}");
     }
 
@@ -162,7 +225,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ResumeTime();
+        if (!_isTransitioning) ResumeTime();
         // detect current level from scene name
         if (scene.name.StartsWith("Room_") && int.TryParse(scene.name.Substring(5), out var idx))
         {
@@ -174,10 +237,32 @@ public class GameManager : MonoBehaviour
             _trackTimer = false;
         }
 
-        var spawn = Object.FindFirstObjectByType<SpawnPoint>();
-        if (spawn == null) return;
+        var pendingSpawnId = _pendingSpawnId;
+        _pendingSpawnId = null;
+
+        // Quien decide si esta escena necesita SpawnPoint es el propio jugador: MainMenu
+        // y GameOver no lo traen y tampoco deben exigirlo. Resolver el spawn antes de
+        // mirar eso hacia que cada derrota y cada victoria escupieran un error rojo
+        // ("No SpawnPoint exists in scene 'GameOver'") en una ruta perfectamente normal.
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
+
+        var spawn = SpawnPoint.Resolve(
+            Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None),
+            pendingSpawnId);
+
+        if (spawn == null)
+        {
+            Debug.LogError($"No SpawnPoint exists in scene '{scene.name}'.");
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(pendingSpawnId)
+            && !string.Equals(spawn.Id, pendingSpawnId, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.LogWarning($"Requested SpawnPoint '{pendingSpawnId}' was not found in destination scene '{scene.name}'; using default SpawnPoint '{spawn.Id}'.");
+        }
+
         player.transform.SetPositionAndRotation(spawn.transform.position, spawn.transform.rotation);
         var rb = player.GetComponent<Rigidbody2D>();
         if (rb != null) rb.linearVelocity = Vector2.zero;

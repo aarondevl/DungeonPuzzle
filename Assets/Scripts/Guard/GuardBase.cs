@@ -45,7 +45,7 @@ public abstract class GuardBase : MonoBehaviour
             if (State == GuardState.Normal)
             {
                 State = GuardState.Alerted;
-                SfxLibrary.Play("SFX/alert");
+                SfxLibrary.Play("SFX/alert", 0.35f);
                 VisionCone.SetAlerted(true);
                 Vfx.Alert(transform.position);
             }
@@ -85,7 +85,7 @@ public abstract class GuardBase : MonoBehaviour
         if (State == GuardState.Alerted) return;
         State = GuardState.Alerted;
         CancelReturn();
-        SfxLibrary.Play("SFX/alert");
+        SfxLibrary.Play("SFX/alert", 0.35f);
         VisionCone.SetAlerted(true);
         OnNoiseAlerted(noisePosition);
         ScheduleReturn();

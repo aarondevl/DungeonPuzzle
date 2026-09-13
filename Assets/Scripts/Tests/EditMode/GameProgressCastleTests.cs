@@ -142,7 +142,10 @@ public class GameProgressCastleTests
 
         try
         {
-            Assert.Throws<InvalidOperationException>(() => manager.LoadNextRoom());
+            // La salida ahora arranca una secuencia (cartel + fundido) y carga la escena
+            // después; en EditMode la corrutina se detiene en su primer yield, así que
+            // lo verificable es que la sala queda completada ANTES de cualquier carga.
+            manager.LoadNextRoom();
             Assert.That(GameProgress.IsRoomCompleted(Room), Is.True);
         }
         finally

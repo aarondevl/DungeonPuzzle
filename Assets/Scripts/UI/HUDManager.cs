@@ -88,10 +88,42 @@ public class HUDManager : MonoBehaviour
 
     void UpdateInventory()
     {
+        if (inventoryIcon == null) return;
         if (_inventory == null) { inventoryIcon.enabled = false; return; }
         bool hasItem = _inventory.HeldItem != null;
         inventoryIcon.enabled = hasItem;
         if (hasItem && _inventory.HeldItem.icon != null)
             inventoryIcon.sprite = _inventory.HeldItem.icon;
+
+        // Rebote del icono al recoger algo nuevo, para que el HUD "acuse" la recogida.
+        if (_inventory.HeldItem != _lastHeld)
+        {
+            _lastHeld = _inventory.HeldItem;
+            if (hasItem)
+            {
+                if (_iconPunch != null) StopCoroutine(_iconPunch);
+                _iconPunch = StartCoroutine(PunchIcon());
+            }
+        }
+    }
+
+    PickupItem _lastHeld;
+    Coroutine _iconPunch;
+
+    IEnumerator PunchIcon()
+    {
+        var rt = inventoryIcon.rectTransform;
+        const float seconds = 0.28f;
+        float t = 0f;
+        while (t < seconds)
+        {
+            t += Time.unscaledDeltaTime;
+            float u = Mathf.Clamp01(t / seconds);
+            float s = Mathf.Lerp(1.6f, 1f, 1f - (1f - u) * (1f - u));   // ease-out
+            rt.localScale = Vector3.one * s;
+            yield return null;
+        }
+        rt.localScale = Vector3.one;
+        _iconPunch = null;
     }
 }

@@ -30,7 +30,7 @@ public class GuardVisual : MonoBehaviour
         // rb.position solo cambia en FixedUpdate y hacía que Speed cayera a 0
         // entre pasos de física => la animación de caminar no se disparaba.
         Vector2 pos = body.transform.position;
-        Vector2 vel = (pos - _lastPos) / Mathf.Max(Time.deltaTime, 0.0001f);
+        Vector2 vel = (pos - _lastPos) / Mathf.Max(Time.deltaTime, 0.0001f);   // Δposición / Δt
         _lastPos = pos;
 
         Vector2 facing = ComputeFacing(vel, body.rotation, walkThreshold);
@@ -45,16 +45,10 @@ public class GuardVisual : MonoBehaviour
         Vector2 dir = velocity.magnitude > walkThreshold
             ? velocity
             : RotationToDirection(bodyRotationDeg);
-        if (dir == Vector2.zero) return Vector2.down;
-        return Mathf.Abs(dir.x) >= Mathf.Abs(dir.y)
-            ? new Vector2(Mathf.Sign(dir.x), 0f)
-            : new Vector2(0f, Mathf.Sign(dir.y));
+        return VectorMath.ToCardinal(dir, Vector2.down);
     }
 
-    /// <summary>Inversa de GuardPatrol.FaceDirection: 0° = arriba, -90° = derecha.</summary>
-    public static Vector2 RotationToDirection(float rotationDeg)
-    {
-        float rad = rotationDeg * Mathf.Deg2Rad;
-        return new Vector2(-Mathf.Sin(rad), Mathf.Cos(rad));
-    }
+    /// <summary>Rotación Z del cuerpo → vector unitario (0° = arriba, -90° = derecha).</summary>
+    public static Vector2 RotationToDirection(float rotationDeg) =>
+        VectorMath.AngleToDirection(rotationDeg);
 }

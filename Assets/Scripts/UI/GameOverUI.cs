@@ -53,7 +53,7 @@ public class GameOverUI : MonoBehaviour
             OnRestartClicked();
     }
 
-    public void OnRestartClicked() => GameManager.Instance.StartGame();
+    public void OnRestartClicked() => GameManager.Instance.RetryLevel();
     public void OnMainMenuClicked() => GameManager.Instance.GoToMainMenu();
     public void OnQuitClicked()    => Application.Quit();
 }

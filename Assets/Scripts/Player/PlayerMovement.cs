@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
+        // Reacciones visibles (rebotes, captura, salida): se añade en caliente si el
+        // prefab no lo trae, para no depender de editar la escena.
+        if (GetComponent<PlayerFeedback>() == null) gameObject.AddComponent<PlayerFeedback>();
 
         _rb.gravityScale = 0f;
         _rb.freezeRotation = true;

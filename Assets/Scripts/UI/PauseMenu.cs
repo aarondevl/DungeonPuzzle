@@ -14,6 +14,9 @@ public class PauseMenu : MonoBehaviour
     {
         var kb = Keyboard.current;
         if (kb == null) return;
+        // Durante una captura o un cambio de sala no se puede pausar: la pausa
+        // congelaría el fundido a medias.
+        if (GameManager.Instance != null && GameManager.Instance.IsTransitioning) return;
         if (kb.escapeKey.wasPressedThisFrame || kb.pKey.wasPressedThisFrame)
             Toggle();
     }

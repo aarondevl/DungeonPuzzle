@@ -113,7 +113,7 @@ public class SpikeTrap : MonoBehaviour
         _punishedThisCycle = true;
 
         Vfx.Spark(victim.transform.position);
-        if (GameManager.Instance != null) GameManager.Instance.PlayerDetected();
+        if (GameManager.Instance != null) GameManager.Instance.PlayerHitByTrap();
     }
 
     /// <summary>

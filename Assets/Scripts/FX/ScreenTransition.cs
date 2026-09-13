@@ -138,6 +138,74 @@ public class ScreenTransition : MonoBehaviour
         _black.color = new Color(0f, 0f, 0f, targetAlpha);
     }
 
+    // ---------- final ----------
+
+    /// <summary>
+    /// Secuencia de escape: sobre negro, el héroe cruza la pantalla caminando mientras
+    /// aparecen tres frases, y termina con "FIN" y el tiempo total. Los cuadros del
+    /// héroe se pasan desde fuera (los saca PlayerFeedback de su animación de andar).
+    /// </summary>
+    public static Coroutine PlayEnding(Sprite[] walkFrames, string statsLine) =>
+        Instance != null ? Instance.StartCoroutine(Instance.Ending(walkFrames, statsLine)) : null;
+
+    IEnumerator Ending(Sprite[] frames, string statsLine)
+    {
+        _black.color = Color.black;
+        HideBanner();
+
+        // Héroe caminando (imagen en el canvas, animada a mano con los cuadros).
+        var heroGo = new GameObject("EndingHero", typeof(RectTransform));
+        heroGo.transform.SetParent(transform, false);
+        var heroRt = (RectTransform)heroGo.transform;
+        heroRt.anchorMin = heroRt.anchorMax = new Vector2(0.5f, 0.5f);
+        heroRt.sizeDelta = new Vector2(220f, 220f);
+        var hero = heroGo.AddComponent<Image>();
+        hero.raycastTarget = false;
+        hero.preserveAspect = true;
+        bool hasFrames = frames != null && frames.Length > 0;
+        hero.enabled = hasFrames;
+
+        // Suelo: una línea tenue por la que camina.
+        var ground = NewStretched<Image>("EndingGround", transform);
+        var grt = (RectTransform)ground.transform;
+        grt.anchorMin = new Vector2(0.15f, 0.5f); grt.anchorMax = new Vector2(0.85f, 0.5f);
+        grt.offsetMin = new Vector2(0f, -120f); grt.offsetMax = new Vector2(0f, -118f);
+        ground.color = new Color(1f, 1f, 1f, 0.15f);
+        ground.raycastTarget = false;
+
+        string[] lines =
+        {
+            "SALISTE DEL CALABOZO",
+            "LA NOCHE CUBRE TU HUIDA",
+            "VUELVES CON TU FAMILIA",
+        };
+        const float walkSeconds = 7.5f;
+        float t = 0f;
+        int line = -1;
+        while (t < walkSeconds)
+        {
+            t += Time.unscaledDeltaTime;
+            float u = Mathf.Clamp01(t / walkSeconds);
+            heroRt.anchoredPosition = new Vector2(Mathf.Lerp(-760f, 760f, u), -20f);
+            if (hasFrames) hero.sprite = frames[Mathf.FloorToInt(t * 8f) % frames.Length];
+
+            int wanted = Mathf.Min(lines.Length - 1, Mathf.FloorToInt(u * lines.Length));
+            if (wanted != line)
+            {
+                line = wanted;
+                ShowBanner(lines[line], "", walkSeconds / lines.Length - 0.7f);
+            }
+            yield return null;
+        }
+
+        hero.enabled = false;
+        ShowBanner("FIN", statsLine, 2.4f);
+        yield return new WaitForSecondsRealtime(3.2f);
+
+        Destroy(heroGo);
+        Destroy(ground.gameObject);
+    }
+
     // ---------- carteles ----------
 
     /// <summary>Cartel centrado con título y subtítulo; entra con un golpe de escala y se desvanece solo.</summary>

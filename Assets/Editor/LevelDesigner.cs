@@ -55,85 +55,87 @@ public static class LevelDesigner
             "##########################",
         },
 
-        // Room_02 — LA LLAVE. Primera puerta: la llave está en la zona de partida y
-        // abre la reja del pasillo izquierdo. Una patrulla rodea el bloque central y un
-        // guardia fijo cubre la salida.
+        // Room_02 — LA LLAVE. La salida está tras la reja A, abajo a la derecha. La llave
+        // está en la esquina superior derecha, dentro de la ronda de la patrulla, y un
+        // guardia fijo cubre la mitad baja. Sin la llave no hay salida.
         new[]
         {
             "##########################",
-            "#P.......#...............#",
-            "#........#..m.......m....#",
-            "#..a.....#...............#",
-            "#........#.....####......#",
-            "#....#####.....####......#",
-            "#....#.........####......#",
-            "#....#.........####......#",
-            "#....A...................#",
-            "#....#......m.......m....#",
-            "#....#...................#",
-            "#....#####...G...........#",
-            "#..*.#...............E...#",
+            "#P.......#......m......m.#",
+            "#........#...............#",
+            "#........#..........a....#",
+            "#........#....####.......#",
+            "#....######...####.......#",
+            "#.............####.......#",
+            "#.............####.......#",
+            "#........................#",
+            "#...G...........m......m.#",
+            "#........................#",
+            "#...........##########A###",
+            "#..*........#........E...#",
             "##########################",
         },
 
-        // Room_03 — LOS PASILLOS. Piedra y palanca: la palanca abre la reja doble de la
-        // celda; el guardia del puesto central mira por su ventana y la patrulla de la
-        // derecha se puede atraer con la piedra. Pinchos en el tramo bajo.
+        // Room_03 — LOS PASILLOS. La reja doble AA de la salida la abre la palanca de la
+        // esquina superior derecha, en plena ronda de la patrulla: la piedra sirve para
+        // atraerla al lado contrario antes de entrar. El guardia del puesto central mira
+        // por su ventana hacia el corredor. Pinchos en el tramo bajo.
         new[]
         {
             "##########################",
             "#P....#..........m.....m.#",
             "#..S..#..................#",
+            "#.....#....#######.....1.#",
             "#.....#....#######.......#",
-            "#.....#....#.....#.......#",
-            "#.....#....#..G..#.......#",
-            "#..1..#....#.....#.......#",
+            "#.....#....##.G.##.......#",
+            "#.....#....##...##.......#",
             "#.....#....###.###.......#",
-            "#....AA..........m.....m.#",
-            "#######..................#",
-            "#.....T..........T.......#",
-            "#........#####...........#",
-            "#..*.....#####.......E...#",
+            "#................m.....m.#",
+            "#......#.................#",
+            "#......#..T..........T...#",
+            "#......#....###########AA#",
+            "#..*...#....#........E...#",
             "##########################",
         },
 
-        // Room_04 — LA ARMERÍA. Placa y dos puertas: la placa de la celda abre la A y
-        // da al pasillo de pinchos que patrulla un guardia; la llave b está en la esquina
-        // opuesta y abre la reja doble B de la sala de la salida. Hay que ir y volver.
+        // Room_04 — LA ARMERÍA. La celda da al corredor de pinchos que patrulla un
+        // guardia; la placa está en la esquina inferior derecha y abre la reja doble BB
+        // de la sala de la salida, arriba a la derecha. Hay que cruzar el patio dos veces.
         new[]
         {
             "##########################",
             "#P...#.......#.......*...#",
             "#....#...q...#......E....#",
             "#....#.......#...........#",
-            "#....A.......######BB#####",
+            "#....#.......######BB#####",
             "#....#..T....#...........#",
-            "#....#...q...#....n......#",
-            "#.5..#....T..#...........#",
+            "#........q...#....n......#",
+            "#....#....T..#...........#",
             "#....#.......#...........#",
             "######.....###....n......#",
             "#........................#",
-            "#..*....G.............b..#",
+            "#..*....G.............6..#",
             "#........................#",
             "##########################",
         },
 
-        // Room_05 — EL PATIO. Final: placa en la celda, dos piedras, dos patrullas que
-        // se cruzan, dos guardias fijos, y la llave del portón doble junto a los pinchos.
+        // Room_05 — EL PATIO. Final: la placa de abajo a la izquierda (vigilada) abre la
+        // reja C del cuarto de la llave; la llave abre el portón doble BB de la salida.
+        // Dos patrullas se cruzan en el patio y las piedras sirven para apartarlas.
         new[]
         {
             "##########################",
             "#P....#.....m.......m....#",
             "#..S..#..................#",
             "#..S..#......####........#",
-            "#.....A......####.....G..#",
-            "#..5..#......####........#",
-            "######.......####....#####",
-            "#.......n........n....b..#",
-            "#.......................T#",
-            "#.....G.....m.......m....#",
-            "#......n.........n....T..#",
-            "#..*.........####BB#######",
+            "#.....#......####.....G..#",
+            "#.....#......####........#",
+            "#....##......####....#####",
+            "#.......n........n...C.b.#",
+            "#.....................#.T#",
+            "#.....G.....m.......m.#..#",
+            "#......n.........n...#T..#",
+            "#..7.........####BB#######",
             "#............#.......E...#",
             "##########################",
         },
@@ -310,8 +312,10 @@ public static class LevelDesigner
                     case 'G': statics.Add((r, c)); break;
                     case 'T': spikes.Add(pos); break;
                     case 'S':
-                        // La piedra mide media unidad: se agranda para que se vea desde lejos.
-                        Place(P("Assets/Prefabs/Stone.prefab"), $"Stone_{r}_{c}", pos).transform.localScale = Vector3.one * 1.6f;
+                        // La piedra mide media unidad: se agranda y brilla para que se vea desde lejos.
+                        var stone = Place(P("Assets/Prefabs/Stone.prefab"), $"Stone_{r}_{c}", pos);
+                        stone.transform.localScale = Vector3.one * 1.8f;
+                        Highlight(stone);
                         break;
                     case '*': Torch($"PointLight_{r}_{c}", pos, theme.Torch); break;
                     case >= 'A' and <= 'D':
@@ -351,6 +355,11 @@ public static class LevelDesigner
                 case 'l':
                     var lever = Place(P("Assets/Prefabs/Lever.prefab"), $"Lever_{door}", pos);
                     Link(lever.GetComponent<Lever>(), "linkedDoor", target);
+                    // El prefab trae un cuadrado blanco genérico: sprite de palanca real y brillo.
+                    var lsr = lever.GetComponent<SpriteRenderer>();
+                    if (lsr != null) { lsr.sprite = Sprite("lever") ?? lsr.sprite; lsr.color = Color.white; }
+                    lever.transform.localScale = Vector3.one;
+                    Highlight(lever);
                     break;
                 case 'p':
                     var plate = Place(P("Assets/Prefabs/PressurePlate.prefab"), $"PressurePlate_{door}", pos);
@@ -358,6 +367,8 @@ public static class LevelDesigner
                     so.FindProperty("linkedDoor").objectReferenceValue = target;
                     so.FindProperty("latching").boolValue = true;      // pisarla una vez abre para siempre
                     so.ApplyModifiedPropertiesWithoutUndo();
+                    plate.transform.localScale = Vector3.one * 1.6f;
+                    Highlight(plate);
                     break;
             }
         }
@@ -365,8 +376,10 @@ public static class LevelDesigner
         for (int i = 0; i < spikes.Count; i++)
         {
             var trap = Place(P("Assets/Prefabs/SpikeTrap.prefab"), $"SpikeTrap_{i + 1}", spikes[i]);
+            trap.transform.localScale = Vector3.one * 1.5f;          // pinchos grandes: se ven venir
             var so = new SerializedObject(trap.GetComponent<SpikeTrap>());
             so.FindProperty("startOffset").floatValue = i * 1.0f;   // periodo 3 s: nunca todas fuera a la vez
+            so.FindProperty("risingSeconds").floatValue = 0.45f;   // aviso más largo antes de clavarse
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
@@ -537,6 +550,13 @@ public static class LevelDesigner
         foreach (var p in points) centroid += p;
         centroid /= points.Count;
         return points.OrderBy(p => Mathf.Atan2(p.y - centroid.y, p.x - centroid.x)).ToList();
+    }
+
+    /// <summary>Brillo pulsante y balanceo suave: marca "esto se puede usar".</summary>
+    static void Highlight(GameObject go)
+    {
+        if (go.GetComponent<GlowPulse>() == null) go.AddComponent<GlowPulse>();
+        if (go.GetComponent<FloatBob>() == null) go.AddComponent<FloatBob>();
     }
 
     static void Torch(string name, Vector2 pos, Color color)

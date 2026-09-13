@@ -15,8 +15,11 @@ public class PlayerInteraction : MonoBehaviour
     Collider2D _ownCollider;
     Camera _cam;
 
-    /// <summary>Objeto que se accionaría al pulsar E ahora mismo (lo consume el HUD).</summary>
+    /// <summary>Objeto que se accionaría al pulsar E ahora mismo (lo consume el letrero de ayuda).</summary>
     public Component CurrentTarget { get; private set; }
+
+    /// <summary>Sensor de proximidad, para que el letrero pueda avisar de placas y otros objetos cercanos.</summary>
+    public InteractionSensor Sensor => _sensor;
 
     void Awake()
     {

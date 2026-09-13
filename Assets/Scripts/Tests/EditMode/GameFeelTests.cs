@@ -52,6 +52,15 @@ public class GameFeelTests
     }
 
     [Test]
+    public void StatsFor_VictoriaYDerrotaMuestranLoQueImporta()
+    {
+        string win = GameOverUI.StatsFor(true, 65.5f, true, 60f, 3, 5, 5);
+        Assert.That(win, Does.Contain("01:05.50").And.Contain("RÉCORD").And.Contain("CAPTURAS  3"));
+        string lose = GameOverUI.StatsFor(false, 0f, false, 0f, 7, 2, 5);
+        Assert.That(lose, Does.Contain("CAPTURAS  7").And.Contain("2/5"));
+    }
+
+    [Test]
     public void RoomHint_LaPrimeraSalaEnsenaLosControles()
     {
         Assert.That(GameManager.RoomHint(1), Does.Contain("WASD"));

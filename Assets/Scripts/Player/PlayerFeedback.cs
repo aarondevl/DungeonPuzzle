@@ -133,6 +133,31 @@ public class PlayerFeedback : MonoBehaviour
         _visual.localScale = Vector3.zero;
     }
 
+    /// <summary>
+    /// Cuadros de la animación de caminar hacia la derecha, muestreando el clip sobre
+    /// un objeto temporal. Se usan en la secuencia final, cuando el héroe ya no existe.
+    /// </summary>
+    public Sprite[] WalkRightFrames()
+    {
+        if (_animator == null || _animator.runtimeAnimatorController == null) return null;
+        AnimationClip clip = null;
+        foreach (var c in _animator.runtimeAnimatorController.animationClips)
+            if (c.name.EndsWith("Walk_right")) { clip = c; break; }
+        if (clip == null) return null;
+
+        var temp = new GameObject("WalkSampler");
+        var sr = temp.AddComponent<SpriteRenderer>();
+        var frames = new System.Collections.Generic.List<Sprite>();
+        int n = Mathf.Max(1, Mathf.RoundToInt(clip.length * clip.frameRate));
+        for (int i = 0; i < n; i++)
+        {
+            clip.SampleAnimation(temp, i / clip.frameRate);
+            if (sr.sprite != null && (frames.Count == 0 || frames[frames.Count - 1] != sr.sprite)) frames.Add(sr.sprite);
+        }
+        Destroy(temp);
+        return frames.Count > 0 ? frames.ToArray() : null;
+    }
+
     void Tint(Color c)
     {
         for (int i = 0; i < _renderers.Length; i++)

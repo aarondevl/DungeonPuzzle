@@ -31,6 +31,7 @@ public class GuardStatic : GuardBase
     public const int ScanRays = 72;                   // uno cada 5°
 
     float _baseAngle;
+    Vector2 _home;
     float _centerAngle;
     float _halfRange;
     float _time;
@@ -48,16 +49,26 @@ public class GuardStatic : GuardBase
     {
         base.Awake();
         _baseAngle = transform.eulerAngles.z;
+        _home = transform.position;
         _centerAngle = _baseAngle;
         _halfRange = maxAngle;
         if (adaptToWalls) Scan();
     }
 
-    void FixedUpdate()
+    protected override void OnFixedUpdate()
     {
         float maxTurn = turnSpeed * Time.fixedDeltaTime;
 
-        if (adaptToWalls)
+        if (State == GuardState.Returning)
+        {
+            // Tras una persecución vuelve andando a su puesto y retoma el barrido.
+            MoveToward(_home, chaseSpeed * 0.8f);
+            FaceDirection(_home - Rb.position, turnSpeed);
+            if (Arrived(_home, 0.15f)) { Rb.MovePosition(_home); FinishReturn(); _resuming = true; }
+            return;
+        }
+
+        if (adaptToWalls && State == GuardState.Normal)
         {
             _scanTimer -= Time.fixedDeltaTime;
             if (_scanTimer <= 0f) { Scan(); _scanTimer = rescanSeconds; }

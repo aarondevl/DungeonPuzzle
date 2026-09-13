@@ -209,11 +209,19 @@ public class GameManager : MonoBehaviour
     {
         IsTransitioning = true;
         var feedback = FindPlayerFeedback();
+        Sprite[] walkFrames = feedback != null ? feedback.WalkRightFrames() : null;
         // El héroe se desliza hasta el centro del hueco mientras desaparece por él.
         if (feedback != null) feedback.PlayEscape(0.5f, hatch);
         ScreenTransition.ShowBanner(title, subtitle, 0.9f);
         yield return new WaitForSecondsRealtime(0.9f);
         yield return ScreenTransition.FadeOut(FadeSeconds);
+
+        // Escapaste de la última sala: secuencia final antes de la pantalla de victoria.
+        if (IsWin && nextScene == "GameOver")
+        {
+            string stats = $"CAPTURAS {GameProgress.TotalDeaths}   ·   ÚLTIMA SALA {GameProgress.FormatTime(LastWinTime)}";
+            yield return ScreenTransition.PlayEnding(walkFrames, stats);
+        }
 
         if (nextScene.StartsWith("Room_"))
         {
@@ -272,10 +280,10 @@ public class GameManager : MonoBehaviour
     public static string RoomHint(int level) => level switch
     {
         1 => "LA CELDA · WASD MOVER · ESQUIVA LOS CONOS DE LOS GUARDIAS",
-        2 => "LA LLAVE · E RECOGE LA LLAVE · VUELA SOLA HASTA SU PUERTA",
-        3 => "LOS PASILLOS · F LANZA LA PIEDRA · LA PALANCA ABRE LA REJA",
-        4 => "LA ARMERÍA · PISA LA PLACA · LA LLAVE ESTÁ AL OTRO LADO",
-        5 => "EL PATIO · ÚLTIMA SALA · EL PORTÓN NECESITA SU LLAVE",
+        2 => "LA LLAVE · ESTÁ VIGILADA ARRIBA · ABRE LA REJA DE LA SALIDA",
+        3 => "LOS PASILLOS · F LANZA LA PIEDRA · LA PALANCA ABRE LA SALIDA",
+        4 => "LA ARMERÍA · LA PLACA DEL FONDO ABRE LA SALA DE LA SALIDA",
+        5 => "EL PATIO · LA PLACA ABRE EL CUARTO DE LA LLAVE DEL PORTÓN",
         _ => "ENCUENTRA LA SALIDA SIN QUE TE VEAN",
     };
 

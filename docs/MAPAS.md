@@ -16,6 +16,7 @@ Una celda = una unidad del mundo; cada sala mide 26x14 y la cámara se ajusta so
 | `a`-`d` | llave de la puerta A-D |
 | `1`-`4` | palanca de la puerta A-D |
 | `5`-`8` | placa de presión de la puerta A-D (se queda abierta al pisarla) |
+| `E`-letrero | al acercarte a algo usable aparece "E  RECOGER", "E  ACCIONAR PALANCA" o "PISA LA PLACA"; con piedra en mano, "F  LANZAR" |
 | `G` | guardia fijo (barre hacia el espacio abierto) |
 | `m` `n` `q` `r` | rutas de patrulla: las celdas de una misma letra son sus puntos |
 | `T` | trampa de pinchos (desfasadas entre sí) |
@@ -24,11 +25,15 @@ Una celda = una unidad del mundo; cada sala mide 26x14 y la cámara se ajusta so
 
 ## Recorrido previsto
 
+Cada herramienta que aparece es necesaria para salir; no hay objetos decorativos.
+
 1. **La celda**: solo sigilo. La reja de la celda está rota; una patrulla rodea el bloque de arriba y un guardia fijo vigila la salida. El corredor entre los dos bloques es la ruta segura.
-2. **La llave**: primera puerta. La llave está en la zona de partida y vuela sola hasta la reja del pasillo; una patrulla rodea el bloque central y un guardia cubre la salida.
-3. **Los pasillos**: piedra y palanca. La palanca abre la reja doble de la celda, el guardia del puesto central mira por su ventana y la patrulla de la derecha se puede atraer con la piedra. Pinchos en el tramo bajo.
-4. **La armería**: placa y dos puertas. La placa de la celda abre el pasillo de pinchos que patrulla un guardia; la llave está en la esquina opuesta y abre la reja doble de la sala de la salida. Hay que ir y volver.
-5. **El patio**: final. Placa en la celda, dos piedras, dos patrullas que se cruzan, dos guardias fijos y la llave del portón doble junto a los pinchos.
+2. **La llave**: la salida está tras una reja abajo a la derecha. La llave está arriba a la derecha, dentro de la ronda de la patrulla, y un guardia fijo cubre la mitad baja.
+3. **Los pasillos**: la reja doble de la salida la abre la palanca de la esquina superior derecha, en plena ronda de la patrulla. La piedra sirve para atraer a la patrulla al lado contrario antes de entrar. El guardia del puesto central vigila el corredor y hay pinchos en el tramo bajo.
+4. **La armería**: la celda da al corredor de pinchos que patrulla un guardia. La placa del fondo (abajo a la derecha) abre la reja doble de la sala de la salida, arriba a la derecha: hay que cruzar el patio dos veces.
+5. **El patio**: la placa de abajo a la izquierda, vigilada por un guardia fijo, abre el cuarto de la llave; la llave abre el portón doble de la salida. Dos patrullas se cruzan en el patio y las dos piedras sirven para apartarlas.
+
+Los guardias ya no atrapan con solo verte: al verte medio segundo salen a perseguirte y solo te atrapan si te alcanzan. El héroe corre algo más rápido, así que cortar la línea de visión tras una esquina o una reja permite escapar; después buscan un momento y vuelven a su puesto o ruta.
 
 Cada sala tiene su propio tinte de muros, suelo y antorchas (piedra fría, arenisca, musgo, ladrillo rojizo, noche azul) para reconocerla de un vistazo.
 

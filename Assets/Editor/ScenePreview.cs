@@ -12,7 +12,7 @@ using UnityEngine;
 /// </summary>
 public static class ScenePreview
 {
-    static readonly string[] Rooms = { "Room_01", "Room_02", "Room_03", "Room_04", "Room_05" };
+    static readonly string[] Rooms = { "Room_01", "Room_02", "Room_03", "Room_04", "Room_05", "GameOver", "MainMenu" };
 
     [MenuItem("DungeonPuzzle/Niveles/Fotografiar salas")]
     public static void RenderAll()

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
+/// <summary>Pantalla final: derrota (sin vidas) o victoria (escapaste del calabozo).</summary>
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI messageText;
@@ -10,6 +11,7 @@ public class GameOverUI : MonoBehaviour
 
     static readonly Color Cream   = new Color(0.910f, 0.875f, 0.784f, 1f);
     static readonly Color Crimson = new Color(0.722f, 0.137f, 0.173f, 1f);
+    static readonly Color Gold    = new Color(0.95f, 0.80f, 0.35f, 1f);
 
     void Start()
     {
@@ -18,35 +20,40 @@ public class GameOverUI : MonoBehaviour
         bool win = GameManager.Instance.IsWin;
         if (messageText != null)
         {
-            messageText.text  = win ? "ESCAPE\nCOMPLETE" : "ATTEMPT\nFAILED";
-            messageText.color = Cream;
+            messageText.text  = win ? "¡ESCAPASTE!" : "TE ATRAPARON";
+            messageText.color = win ? Gold : Cream;
         }
         if (subtitleText != null)
         {
-            subtitleText.text  = win ? "—   YOU SLIPPED THROUGH THE DUNGEON"
-                                     : "—   THE DUNGEON KEEPS YOU FOR ANOTHER TRY";
+            subtitleText.text  = win ? "SALISTE DEL CALABOZO Y VUELVES CON TU FAMILIA"
+                                     : $"EL CALABOZO TE RETIENE EN LA SALA {GameManager.Instance.CurrentLevel:00}";
             subtitleText.color = win ? Cream : Crimson;
         }
         if (statsText != null)
         {
-            if (win)
-            {
-                string best = GameProgress.FormatTime(GameProgress.GetBestTime(GameProgress.TotalLevels));
-                string runLast = GameProgress.FormatTime(GameManager.Instance.LastWinTime);
-                string newBest = GameManager.Instance.LastWinIsBest ? "  NEW BEST" : "";
-                statsText.text = $"FINAL ROOM  {runLast}{newBest}\nBEST  {best}\nDEATHS  {GameProgress.TotalDeaths}";
-            }
-            else
-            {
-                statsText.text = $"DEATHS  {GameProgress.TotalDeaths}    UNLOCKED  {GameProgress.HighestUnlocked}/{GameProgress.TotalLevels}";
-            }
+            statsText.text = StatsFor(win, GameManager.Instance.LastWinTime, GameManager.Instance.LastWinIsBest,
+                GameProgress.GetBestTime(GameProgress.TotalLevels), GameProgress.TotalDeaths,
+                GameProgress.HighestUnlocked, GameProgress.TotalLevels);
             statsText.color = Cream;
         }
     }
 
+    /// <summary>Texto de estadísticas. Función pura, cubierta por tests.</summary>
+    public static string StatsFor(bool win, float lastTime, bool isBest, float bestFinal, int deaths, int unlocked, int total)
+    {
+        if (win)
+        {
+            string record = isBest ? "   ·   ¡NUEVO RÉCORD!" : "";
+            return $"ÚLTIMA SALA  {GameProgress.FormatTime(lastTime)}{record}\n" +
+                   $"MEJOR TIEMPO  {GameProgress.FormatTime(bestFinal)}\n" +
+                   $"CAPTURAS  {deaths}";
+        }
+        return $"CAPTURAS  {deaths}      SALAS DESBLOQUEADAS  {unlocked}/{total}";
+    }
+
     void Update()
     {
-        // Reintentar rápido con R (backup del botón).
+        // Reintentar rápido con R (respaldo del botón).
         var kb = Keyboard.current;
         if (kb != null && kb.rKey.wasPressedThisFrame)
             OnRestartClicked();

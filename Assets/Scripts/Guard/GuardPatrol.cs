@@ -1,8 +1,9 @@
 using UnityEngine;
 
 /// <summary>
-/// Guardia que recorre una lista de puntos (waypoints) y, al alertarse, va a
-/// investigar el punto donde vio al héroe u oyó el ruido.
+/// Guardia que recorre una lista de puntos (waypoints). Al oír un ruido va a
+/// investigar el punto; al ver al héroe lo persigue (eso lo hace <see cref="GuardBase"/>)
+/// y, si lo pierde, retoma su ruta por el waypoint más cercano.
 ///
 /// Todo el movimiento se expresa con vectores:
 ///   dirección = normalizar(destino - posición)
@@ -16,24 +17,24 @@ public class GuardPatrol : GuardBase
     [SerializeField] float turnSpeed = 360f;
     [Tooltip("Distancia a la que se considera alcanzado un waypoint.")]
     [SerializeField] float waypointRadius = 0.1f;
-    [Tooltip("Distancia a la que se detiene al investigar un ruido o una posición vista.")]
+    [Tooltip("Distancia a la que se detiene al investigar un ruido.")]
     [SerializeField] float investigateRadius = 0.4f;
 
     int _index;
     Vector2 _alertTarget;
     bool _hasAlertTarget;
 
-    /// <summary>Punto que está investigando (solo válido mientras <see cref="GuardBase.IsAlerted"/>).</summary>
+    /// <summary>Punto que está investigando (solo válido mientras está alertado).</summary>
     public Vector2 AlertTarget => _alertTarget;
 
-    void FixedUpdate()
+    protected override void OnFixedUpdate()
     {
-        if (State == GuardState.Alerted)
+        switch (State)
         {
-            Investigate();
-            return;
+            case GuardState.Alerted: Investigate(); break;
+            case GuardState.Returning: ReturnToRoute(); break;
+            default: Patrol(); break;
         }
-        Patrol();
     }
 
     void Patrol()
@@ -42,8 +43,8 @@ public class GuardPatrol : GuardBase
         Vector2 target = waypoints[_index].position;
         Vector2 toTarget = target - Rb.position;                 // vector hasta el waypoint
 
-        MoveToward(target);
-        FaceDirection(toTarget);
+        MoveToward(target, moveSpeed);
+        FaceDirection(toTarget, turnSpeed);
 
         if (toTarget.magnitude < waypointRadius)
             _index = (_index + 1) % waypoints.Length;
@@ -55,26 +56,18 @@ public class GuardPatrol : GuardBase
         Vector2 toTarget = _alertTarget - Rb.position;
         // Ya está encima del punto: se queda mirando hacia él sin vibrar alrededor.
         if (toTarget.magnitude <= investigateRadius) return;
-        MoveToward(_alertTarget);
-        FaceDirection(toTarget);
+        MoveToward(_alertTarget, moveSpeed);
+        FaceDirection(toTarget, turnSpeed);
     }
 
-    void MoveToward(Vector2 target)
+    /// <summary>Tras una persecución, camina hasta el waypoint más cercano y retoma la ruta.</summary>
+    void ReturnToRoute()
     {
-        Vector2 next = VectorMath.StepTowards(Rb.position, target, moveSpeed, Time.fixedDeltaTime);
-        Rb.MovePosition(next);
-    }
-
-    void FaceDirection(Vector2 dir)
-    {
-        if (dir == Vector2.zero) return;
-        float target = VectorMath.DirectionToAngle(dir);
-        float current = Rb.rotation;
-        float maxTurn = turnSpeed * Time.fixedDeltaTime;
-        if (Mathf.Abs(Mathf.DeltaAngle(current, target)) <= maxTurn)
-            Rb.rotation = target;
-        else
-            Rb.MoveRotation(Mathf.MoveTowardsAngle(current, target, maxTurn));
+        if (waypoints == null || waypoints.Length == 0) { FinishReturn(); return; }
+        Vector2 target = waypoints[_index].position;
+        MoveToward(target, moveSpeed);
+        FaceDirection(target - Rb.position, turnSpeed);
+        if (Arrived(target, waypointRadius * 3f)) FinishReturn();
     }
 
     void SetAlertTarget(Vector2 position)
@@ -89,6 +82,19 @@ public class GuardPatrol : GuardBase
     {
         _alertTarget = Vector2.zero;
         _hasAlertTarget = false;
+    }
+
+    protected override void OnStartReturning()
+    {
+        // Elige el waypoint más cercano para no cruzar media sala de vuelta.
+        if (waypoints == null || waypoints.Length == 0) { FinishReturn(); return; }
+        float best = float.MaxValue;
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            if (waypoints[i] == null) continue;
+            float d = VectorMath.Distance(Rb.position, waypoints[i].position);
+            if (d < best) { best = d; _index = i; }
+        }
     }
 
     void OnDrawGizmosSelected()

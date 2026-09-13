@@ -1,10 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// Piedra recogible. Al lanzarla (F) se convierte en <see cref="ThrownStone"/>; cuando
+/// esta cae, la piedra reaparece en el suelo para poder recogerla de nuevo: la
+/// mecánica se puede repetir hasta acertar.
+/// </summary>
 public class Stone : PickupItem
 {
     [SerializeField] GameObject thrownStonePrefab;
     [Tooltip("Distancia a la que aparece la piedra por delante del lanzador.")]
     [SerializeField] float spawnOffset = 0.55f;
+    [Tooltip("Alcance máximo del lanzamiento (también lo usa la línea de puntería).")]
+    [SerializeField] float maxRange = 7f;
+
+    public float MaxRange => maxRange;
 
     public override void OnPickedUp(PlayerInventory inventory)
     {
@@ -23,8 +32,9 @@ public class Stone : PickupItem
         GameObject thrown = Instantiate(thrownStonePrefab, origin + dir * spawnOffset, Quaternion.identity);
         var stone = thrown.GetComponent<ThrownStone>();
         stone.IgnoreThrower(thrower);
-        stone.Launch(dir);
-        Destroy(gameObject);
+        stone.Launch(dir, this);
+        // No se destruye: ThrownStone la vuelve a activar donde caiga.
+        gameObject.SetActive(false);
     }
 
     /// <summary>Dirección normalizada del lanzamiento; hacia arriba si origen y destino coinciden.</summary>

@@ -124,6 +124,7 @@ public class InteractionPrompt : MonoBehaviour
     /// <summary>Texto según el tipo de objeto. Función pura, cubierta por tests.</summary>
     public static string PromptFor(Component target) => target switch
     {
+        Prisoner => "E  LIBERAR AL PRESO (SEÑUELO)",
         Key => "E  RECOGER LLAVE",
         Stone => "E  RECOGER PIEDRA",
         Lever => "E  ACCIONAR PALANCA",

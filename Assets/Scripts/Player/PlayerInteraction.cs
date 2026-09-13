@@ -11,6 +11,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerInventory _inventory;
     PlayerMovement _movement;
+    ThrowAim _aim;
     InteractionSensor _sensor;
     Collider2D _ownCollider;
     Camera _cam;
@@ -31,6 +32,8 @@ public class PlayerInteraction : MonoBehaviour
         if (_sensor == null) _sensor = gameObject.AddComponent<InteractionSensor>();
         _ownCollider = SolidCollider();
         _cam = Camera.main;
+        _aim = GetComponent<ThrowAim>();
+        if (_aim == null) _aim = gameObject.AddComponent<ThrowAim>();
     }
 
     /// <summary>
@@ -49,8 +52,22 @@ public class PlayerInteraction : MonoBehaviour
         var kb = Keyboard.current;
         if (kb == null) return;
         CurrentTarget = FindTarget();
+        UpdateAim();
         if (kb.eKey.wasPressedThisFrame) TryInteract();
         if (kb.fKey.wasPressedThisFrame) TryThrow();
+    }
+
+    void OnDisable() { if (_aim != null) _aim.Hide(); }
+
+    /// <summary>Con una piedra en mano se dibuja hacia dónde caerá.</summary>
+    void UpdateAim()
+    {
+        if (_aim == null) return;
+        var stone = _inventory.HeldItem as Stone;
+        if (stone == null) { _aim.Hide(); return; }
+        Vector2 origin = transform.position;
+        Vector2 target = ThrowAim.ClampTarget(origin, AimPoint(origin), stone.MaxRange);
+        _aim.Show(origin, target);
     }
 
     Component FindTarget()
@@ -80,6 +97,8 @@ public class PlayerInteraction : MonoBehaviour
         Vector2 origin = transform.position;                       // punto de lanzamiento
         Vector2 target = AimPoint(origin);
         var stone = _inventory.TakeItem() as Stone;
+        target = ThrowAim.ClampTarget(origin, target, stone.MaxRange);
+        if (_aim != null) _aim.Hide();
         stone.Throw(origin, target, _ownCollider);
     }
 

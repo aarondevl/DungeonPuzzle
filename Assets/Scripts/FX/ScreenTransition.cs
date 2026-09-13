@@ -142,68 +142,122 @@ public class ScreenTransition : MonoBehaviour
 
     /// <summary>
     /// Secuencia de escape: sobre negro, el héroe cruza la pantalla caminando mientras
-    /// aparecen tres frases, y termina con "FIN" y el tiempo total. Los cuadros del
-    /// héroe se pasan desde fuera (los saca PlayerFeedback de su animación de andar).
+    /// aparecen frases; al final le espera su familia (dos figuras con sus propios
+    /// cuadros, tintadas), se abrazan con corazones y sale "FIN" con las estadísticas.
     /// </summary>
-    public static Coroutine PlayEnding(Sprite[] walkFrames, string statsLine) =>
-        Instance != null ? Instance.StartCoroutine(Instance.Ending(walkFrames, statsLine)) : null;
+    public static Coroutine PlayEnding(Sprite[] walkFrames, Sprite[] idleFrames, string statsLine) =>
+        Instance != null ? Instance.StartCoroutine(Instance.Ending(walkFrames, idleFrames, statsLine)) : null;
 
-    IEnumerator Ending(Sprite[] frames, string statsLine)
+    IEnumerator Ending(Sprite[] walk, Sprite[] idle, string statsLine)
     {
         _black.color = Color.black;
         HideBanner();
-
-        // Héroe caminando (imagen en el canvas, animada a mano con los cuadros).
-        var heroGo = new GameObject("EndingHero", typeof(RectTransform));
-        heroGo.transform.SetParent(transform, false);
-        var heroRt = (RectTransform)heroGo.transform;
-        heroRt.anchorMin = heroRt.anchorMax = new Vector2(0.5f, 0.5f);
-        heroRt.sizeDelta = new Vector2(220f, 220f);
-        var hero = heroGo.AddComponent<Image>();
-        hero.raycastTarget = false;
-        hero.preserveAspect = true;
-        bool hasFrames = frames != null && frames.Length > 0;
-        hero.enabled = hasFrames;
+        bool hasWalk = walk != null && walk.Length > 0;
+        bool hasIdle = idle != null && idle.Length > 0;
 
         // Suelo: una línea tenue por la que camina.
         var ground = NewStretched<Image>("EndingGround", transform);
         var grt = (RectTransform)ground.transform;
-        grt.anchorMin = new Vector2(0.15f, 0.5f); grt.anchorMax = new Vector2(0.85f, 0.5f);
-        grt.offsetMin = new Vector2(0f, -120f); grt.offsetMax = new Vector2(0f, -118f);
+        grt.anchorMin = new Vector2(0.1f, 0.5f); grt.anchorMax = new Vector2(0.9f, 0.5f);
+        grt.offsetMin = new Vector2(0f, -150f); grt.offsetMax = new Vector2(0f, -148f);
         ground.color = new Color(1f, 1f, 1f, 0.15f);
         ground.raycastTarget = false;
 
-        string[] lines =
-        {
-            "SALISTE DEL CALABOZO",
-            "LA NOCHE CUBRE TU HUIDA",
-            "VUELVES CON TU FAMILIA",
-        };
-        const float walkSeconds = 7.5f;
+        // Familia esperando a la derecha: madre (tinte cálido) y niño (más pequeño).
+        var mother = Figure("Mother", new Vector2(520f, -40f), 220f, new Color(1f, 0.75f, 0.8f), hasIdle ? idle[0] : null);
+        var child = Figure("Child", new Vector2(640f, -70f), 150f, new Color(1f, 0.95f, 0.6f), hasIdle ? idle[0] : null);
+        var hero = Figure("Hero", new Vector2(-760f, -40f), 220f, Color.white, hasWalk ? walk[0] : null);
+
+        string[] lines = { "SALISTE DEL CALABOZO", "LA NOCHE CUBRE TU HUIDA", "ALGUIEN TE ESPERA" };
+        const float walkSeconds = 7f;
         float t = 0f;
         int line = -1;
         while (t < walkSeconds)
         {
             t += Time.unscaledDeltaTime;
             float u = Mathf.Clamp01(t / walkSeconds);
-            heroRt.anchoredPosition = new Vector2(Mathf.Lerp(-760f, 760f, u), -20f);
-            if (hasFrames) hero.sprite = frames[Mathf.FloorToInt(t * 8f) % frames.Length];
-
-            int wanted = Mathf.Min(lines.Length - 1, Mathf.FloorToInt(u * lines.Length));
-            if (wanted != line)
+            hero.rect.anchoredPosition = new Vector2(Mathf.Lerp(-760f, 400f, u), -40f);
+            if (hasWalk) hero.image.sprite = walk[Mathf.FloorToInt(t * 8f) % walk.Length];
+            if (hasIdle)
             {
-                line = wanted;
-                ShowBanner(lines[line], "", walkSeconds / lines.Length - 0.7f);
+                mother.image.sprite = idle[Mathf.FloorToInt(t * 6f) % idle.Length];
+                child.image.sprite = idle[Mathf.FloorToInt(t * 6f + 2f) % idle.Length];
+            }
+            int wanted = Mathf.Min(lines.Length - 1, Mathf.FloorToInt(u * lines.Length));
+            if (wanted != line) { line = wanted; ShowBanner(lines[line], "", walkSeconds / lines.Length - 0.7f); }
+            yield return null;
+        }
+
+        // Reencuentro: la familia se acerca, salta un poco y suben corazones.
+        if (hasIdle) hero.image.sprite = idle[0];
+        ShowBanner("VUELVES CON TU FAMILIA", "", 2.6f);
+        float hug = 0f;
+        var hearts = new System.Collections.Generic.List<(RectTransform rt, float born, float x)>();
+        while (hug < 3.2f)
+        {
+            hug += Time.unscaledDeltaTime;
+            float u = Mathf.Clamp01(hug / 0.8f);
+            mother.rect.anchoredPosition = new Vector2(Mathf.Lerp(520f, 470f, u), -40f + Mathf.Abs(Mathf.Sin(hug * 6f)) * 18f * (1f - u));
+            child.rect.anchoredPosition = new Vector2(Mathf.Lerp(640f, 560f, u), -70f + Mathf.Abs(Mathf.Sin(hug * 7f + 1f)) * 26f);
+            hero.rect.anchoredPosition = new Vector2(Mathf.Lerp(400f, 410f, u), -40f + Mathf.Abs(Mathf.Sin(hug * 6f + 0.5f)) * 14f * (1f - u));
+            if (hasIdle) { hero.image.sprite = idle[Mathf.FloorToInt(hug * 6f) % idle.Length]; mother.image.sprite = idle[Mathf.FloorToInt(hug * 6f + 1f) % idle.Length]; child.image.sprite = idle[Mathf.FloorToInt(hug * 6f + 3f) % idle.Length]; }
+
+            if (hearts.Count < 10 && Mathf.Repeat(hug, 0.3f) < Time.unscaledDeltaTime)
+            {
+                float x = 380f + Random.Range(0f, 220f);
+                var h = Heart(new Vector2(x, 60f));
+                hearts.Add((h, hug, x));
+            }
+            foreach (var (rt, born, x) in hearts)
+            {
+                float age = hug - born;
+                rt.anchoredPosition = new Vector2(x + Mathf.Sin(age * 4f) * 12f, 60f + age * 90f);
+                var tmp = rt.GetComponent<TextMeshProUGUI>();
+                if (tmp != null) tmp.color = new Color(1f, 0.35f, 0.45f, Mathf.Clamp01(1.6f - age * 0.6f));
             }
             yield return null;
         }
 
-        hero.enabled = false;
         ShowBanner("FIN", statsLine, 2.4f);
         yield return new WaitForSecondsRealtime(3.2f);
 
-        Destroy(heroGo);
+        foreach (var (rt, _, _) in hearts) Destroy(rt.gameObject);
+        Destroy(hero.rect.gameObject); Destroy(mother.rect.gameObject); Destroy(child.rect.gameObject);
         Destroy(ground.gameObject);
+    }
+
+    (RectTransform rect, Image image) Figure(string name, Vector2 pos, float size, Color tint, Sprite sprite)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        go.transform.SetParent(transform, false);
+        var rt = (RectTransform)go.transform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(size, size);
+        rt.anchoredPosition = pos;
+        var img = go.AddComponent<Image>();
+        img.raycastTarget = false;
+        img.preserveAspect = true;
+        img.color = tint;
+        img.sprite = sprite;
+        img.enabled = sprite != null;
+        return (rt, img);
+    }
+
+    RectTransform Heart(Vector2 pos)
+    {
+        var go = new GameObject("Heart", typeof(RectTransform));
+        go.transform.SetParent(transform, false);
+        var rt = (RectTransform)go.transform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(80f, 80f);
+        rt.anchoredPosition = pos;
+        var tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.text = "\u2665";
+        tmp.fontSize = 54f;
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = new Color(1f, 0.35f, 0.45f, 1f);
+        tmp.raycastTarget = false;
+        return rt;
     }
 
     // ---------- carteles ----------

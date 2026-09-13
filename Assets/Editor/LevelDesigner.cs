@@ -18,9 +18,12 @@ using UnityEngine.SceneManagement;
 ///   #  muro            .  suelo           P  aparición del héroe     E  salida (trampilla)
 ///   A-D puertas (letras contiguas = una sola puerta más ancha)
 ///   a-d llave que abre la puerta A-D      1-4 palanca de la puerta A-D    5-8 placa de la puerta A-D
-///   G  guardia fijo (mira hacia donde hay más espacio; luego se adapta solo a los muros)
+///   G  guardia fijo que barre (mira hacia donde hay más espacio y se adapta a los muros)
+///   ^ v < >  CENTINELA: guardia fijo que NO barre y mira en esa dirección. Solo se pasa
+///            aturdiéndolo con una piedra o distrayéndolo (ruido o señuelo).
 ///   m n q r  rutas de patrulla: cada letra es una ruta, sus celdas son los puntos (ordenados en círculo)
-///   T  trampa de pinchos (desfasadas entre sí)      S  piedra      *  antorcha (luz puntual)
+///   Z  prisionero encadenado (E lo libera y hace de señuelo)   z  puntos de la ruta por la que huye
+///   T  trampa de pinchos (desfasadas entre sí)      S  piedra (reutilizable)      *  antorcha
 ///
 /// Cada sala se genera clonando Room_02 (para heredar cámara, HUD, luz global y post-proceso)
 /// y reconstruyendo todo el contenido. Es reproducible: menú DungeonPuzzle → Niveles, o
@@ -55,20 +58,21 @@ public static class LevelDesigner
             "##########################",
         },
 
-        // Room_02 — LA LLAVE. La salida está tras la reja A, abajo a la derecha. La llave
-        // está en la esquina superior derecha, dentro de la ronda de la patrulla, y un
-        // guardia fijo cubre la mitad baja. Sin la llave no hay salida.
+        // Room_02 — LA PIEDRA Y LA LLAVE. La llave está en un cuarto cuya única entrada
+        // vigila un centinela que no se mueve. Hay que acercarse por fuera de su cono,
+        // aturdirlo con la piedra y entrar mientras ve estrellas. La llave abre la reja
+        // de la salida, abajo a la derecha, con un guardia fijo cubriendo la zona.
         new[]
         {
             "##########################",
-            "#P.......#......m......m.#",
+            "#P.......#...............#",
+            "#..S.....#...m.......m...#",
             "#........#...............#",
-            "#........#..........a....#",
             "#........#....####.......#",
-            "#....######...####.......#",
+            "#....######...####...#####",
+            "#.............####..<...a#",
             "#.............####.......#",
-            "#.............####.......#",
-            "#........................#",
+            "#....................#####",
             "#...G...........m......m.#",
             "#........................#",
             "#...........##########A###",
@@ -76,37 +80,38 @@ public static class LevelDesigner
             "##########################",
         },
 
-        // Room_03 — LOS PASILLOS. La reja doble AA de la salida la abre la palanca de la
-        // esquina superior derecha, en plena ronda de la patrulla: la piedra sirve para
-        // atraerla al lado contrario antes de entrar. El guardia del puesto central mira
-        // por su ventana hacia el corredor. Pinchos en el tramo bajo.
+        // Room_03 — EL SEÑUELO. La palanca de la salida está arriba a la derecha, entre
+        // un centinela que mira hacia abajo y la ronda de una patrulla. En la celda hay
+        // otro preso: al liberarlo corre por el patio, los guardias van a por él y
+        // dejan libre el camino a la palanca. Pinchos en el tramo bajo.
         new[]
         {
             "##########################",
             "#P....#..........m.....m.#",
-            "#..S..#..................#",
+            "#..Z..#..................#",
             "#.....#....#######.....1.#",
             "#.....#....#######.......#",
-            "#.....#....##.G.##.......#",
+            "#.....#....##.G.##...v...#",
             "#.....#....##...##.......#",
             "#.....#....###.###.......#",
-            "#................m.....m.#",
-            "#......#.................#",
-            "#......#..T..........T...#",
+            "#.........z......m.....m.#",
+            "#......#............z....#",
+            "#......#..T....z.....T...#",
             "#......#....###########AA#",
             "#..*...#....#........E...#",
             "##########################",
         },
 
         // Room_04 — LA ARMERÍA. La celda da al corredor de pinchos que patrulla un
-        // guardia; la placa está en la esquina inferior derecha y abre la reja doble BB
-        // de la sala de la salida, arriba a la derecha. Hay que cruzar el patio dos veces.
+        // guardia; la placa del fondo abre la reja doble BB de la sala de la salida,
+        // arriba a la derecha. Un centinela da la espalda a la placa: se llega por
+        // arriba, fuera de su cono, o se le aturde con la piedra.
         new[]
         {
             "##########################",
             "#P...#.......#.......*...#",
             "#....#...q...#......E....#",
-            "#....#.......#...........#",
+            "#..S.#.......#...........#",
             "#....#.......######BB#####",
             "#....#..T....#...........#",
             "#........q...#....n......#",
@@ -114,34 +119,35 @@ public static class LevelDesigner
             "#....#.......#...........#",
             "######.....###....n......#",
             "#........................#",
-            "#..*....G.............6..#",
+            "#..*....G..........<..6..#",
             "#........................#",
             "##########################",
         },
 
-        // Room_05 — EL PATIO. Final: la placa de abajo a la izquierda (vigilada) abre la
-        // reja C del cuarto de la llave; la llave abre el portón doble BB de la salida.
-        // Dos patrullas se cruzan en el patio y las piedras sirven para apartarlas.
+        // Room_05 — EL PATIO. Final: todo junto. La placa de abajo a la izquierda,
+        // vigilada, abre el cuarto de la llave; la llave abre el portón doble. Dos
+        // patrullas se cruzan en el patio, un centinela guarda el cuarto de la llave,
+        // y hay dos piedras y un preso que liberar para apartarlos.
         new[]
         {
             "##########################",
             "#P....#.....m.......m....#",
             "#..S..#..................#",
             "#..S..#......####........#",
-            "#.....#......####.....G..#",
+            "#..Z..#......####.....G..#",
             "#.....#......####........#",
             "#....##......####....#####",
             "#.......n........n...C.b.#",
-            "#.....................#.T#",
-            "#.....G.....m.......m.#..#",
-            "#......n.........n...#T..#",
+            "#..........z........>#.T.#",
+            "#.....G.....m.......m#...#",
+            "#......n....z....n...#T..#",
             "#..7.........####BB#######",
             "#............#.......E...#",
             "##########################",
         },
     };
 
-    static readonly string[] Titles = { "La celda", "La llave", "Los pasillos", "La armería", "El patio" };
+    static readonly string[] Titles = { "La celda", "La piedra y la llave", "El señuelo", "La armería", "El patio" };
 
     /// <summary>Aspecto por sala: tinte de muros, de suelo y color de antorchas, para que cada una se reconozca.</summary>
     struct Theme { public Color Wall, Floor, Torch; }
@@ -167,6 +173,7 @@ public static class LevelDesigner
             return;
         }
         Debug.Log(report);
+        PrefabForge.EnsurePrisoner();
 
         // Room_02 es la plantilla: se reconstruye la última para que las demás
         // puedan clonarla intacta. Tras reconstruirla conserva los mismos nombres
@@ -297,6 +304,9 @@ public static class LevelDesigner
         var patrols = new Dictionary<char, List<Vector2>>();
         var spikes = new List<Vector2>();
         var statics = new List<(int r, int c)>();
+        var sentinels = new List<(int r, int c, Vector2 facing)>();
+        var decoyRoute = new List<Vector2>();
+        Vector2? prisoner = null;
         var openers = new List<(char kind, char door, Vector2 pos)>();
         Vector2 spawn = Vector2.zero, exit = Vector2.zero;
 
@@ -310,6 +320,12 @@ public static class LevelDesigner
                     case 'P': spawn = pos; break;
                     case 'E': exit = pos; break;
                     case 'G': statics.Add((r, c)); break;
+                    case '^': sentinels.Add((r, c, Vector2.up)); break;
+                    case 'v': sentinels.Add((r, c, Vector2.down)); break;
+                    case '<': sentinels.Add((r, c, Vector2.left)); break;
+                    case '>': sentinels.Add((r, c, Vector2.right)); break;
+                    case 'Z': prisoner = pos; break;
+                    case 'z': decoyRoute.Add(pos); break;
                     case 'T': spikes.Add(pos); break;
                     case 'S':
                         // La piedra mide media unidad: se agranda y brilla para que se vea desde lejos.
@@ -389,6 +405,30 @@ public static class LevelDesigner
             var g = Place(P("Assets/Prefabs/Guard_Static.prefab"), $"Guard_Static_{++gi}", World(r, c));
             Vector2 facing = OpenestDirection(map, r, c);
             g.transform.rotation = Quaternion.Euler(0f, 0f, VectorMath.DirectionToAngle(facing));
+        }
+
+        foreach (var (r, c, facing) in sentinels)
+        {
+            var g = Place(P("Assets/Prefabs/Guard_Static.prefab"), $"Guard_Sentinel_{++gi}", World(r, c));
+            g.transform.rotation = Quaternion.Euler(0f, 0f, VectorMath.DirectionToAngle(facing));
+            var gso = new SerializedObject(g.GetComponent<GuardStatic>());
+            gso.FindProperty("sweep").boolValue = false;
+            gso.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        if (prisoner.HasValue)
+        {
+            var pr = Place(PrefabForge.EnsurePrisoner(), "Prisoner", prisoner.Value);
+            var pts = OrderAroundCentroid(decoyRoute);
+            var wps = new Object[pts.Count];
+            for (int i = 0; i < pts.Count; i++)
+            {
+                var wp = new GameObject($"Waypoint_z_{i + 1}");
+                wp.transform.position = pts[i];
+                wps[i] = wp.transform;
+            }
+            LinkArray(pr.GetComponent<Prisoner>(), "route", wps);
+            Highlight(pr);
         }
 
         foreach (var kv in patrols)
@@ -555,8 +595,10 @@ public static class LevelDesigner
     /// <summary>Brillo pulsante y balanceo suave: marca "esto se puede usar".</summary>
     static void Highlight(GameObject go)
     {
-        if (go.GetComponent<GlowPulse>() == null) go.AddComponent<GlowPulse>();
-        if (go.GetComponent<FloatBob>() == null) go.AddComponent<FloatBob>();
+        var target = go.GetComponentInChildren<SpriteRenderer>() != null ? go.GetComponentInChildren<SpriteRenderer>().gameObject : go;
+        if (target.GetComponent<GlowPulse>() == null) target.AddComponent<GlowPulse>();
+        // Los cuerpos cinemáticos (prisionero) no se balancean: se moverían de verdad.
+        if (go.GetComponent<Rigidbody2D>() == null && target.GetComponent<FloatBob>() == null) target.AddComponent<FloatBob>();
     }
 
     static void Torch(string name, Vector2 pos, Color color)
@@ -602,7 +644,7 @@ public static class LevelDesigner
             if (n.StartsWith("__")) continue;
             if (n.StartsWith("Wall_") || n.StartsWith("Corner_") || n.StartsWith("Guard_") || n.StartsWith("Waypoint_") ||
                 n.StartsWith("PointLight_") || n.StartsWith("SpikeTrap") || n.StartsWith("Stone") || n.StartsWith("Lever") ||
-                n.StartsWith("Key") || n.StartsWith("Door") || n.StartsWith("PressurePlate") || n == "ExitTrigger" || n == "FloorTiled")
+                n.StartsWith("Key") || n.StartsWith("Door") || n.StartsWith("PressurePlate") || n.StartsWith("Prisoner") || n == "ExitTrigger" || n == "FloorTiled")
                 Object.DestroyImmediate(go);
         }
     }

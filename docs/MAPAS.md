@@ -17,25 +17,35 @@ Una celda = una unidad del mundo; cada sala mide 26x14 y la cámara se ajusta so
 | `1`-`4` | palanca de la puerta A-D |
 | `5`-`8` | placa de presión de la puerta A-D (se queda abierta al pisarla) |
 | `E`-letrero | al acercarte a algo usable aparece "E  RECOGER", "E  ACCIONAR PALANCA" o "PISA LA PLACA"; con piedra en mano, "F  LANZAR" |
-| `G` | guardia fijo (barre hacia el espacio abierto) |
+| `G` | guardia fijo que barre hacia el espacio abierto |
+| `^` `v` `<` `>` | centinela: guardia fijo que no barre y mira en esa dirección; solo se pasa aturdiéndolo o distrayéndolo |
+| `Z` / `z` | prisionero encadenado (E lo libera y hace de señuelo) y los puntos de la ruta por la que huye |
 | `m` `n` `q` `r` | rutas de patrulla: las celdas de una misma letra son sus puntos |
 | `T` | trampa de pinchos (desfasadas entre sí) |
 | `S` | piedra lanzable |
 | `*` | antorcha (luz puntual) |
 
+## Mecánicas y cómo se ven
+
+| Mecánica | Qué hace | Cómo se ve |
+|---|---|---|
+| Piedra (F) | Al llevarla aparece una línea de puntería hasta donde caerá. Si golpea a un guardia lo **aturde 4 s**; si cae al suelo hace **ruido** y los guardias cercanos van a mirar. Queda en el suelo para recogerla otra vez. | Línea y círculo de puntería; estrellas girando y cono apagado en el guardia aturdido; anillo de ruido y "?" sobre los que lo oyen. |
+| Prisionero señuelo (E) | Al liberarlo corre por su ruta. Los guardias que lo ven **lo persiguen a él** y, si lo alcanzan, se lo llevan. | "¡CORRE!" al liberarlo, "!" en los guardias que lo ven, "JA" cuando lo atrapan. |
+| Centinela | Guardia fijo que no barre. Bloquea un paso hasta que lo aturdes o lo distraes. | Cono fijo; al aturdirlo se apaga. |
+| Persecución | Verte medio segundo no es perder: el guardia corre tras de ti y solo te atrapa si te alcanza. Cortar la línea de visión permite escapar. | "!" y cono rojo al empezar; busca girando al perderte; vuelve a su puesto. |
+| Llave, palanca, placa | Abren la puerta a la que están enlazadas (la llave vuela sola hasta la suya). | Letrero con la tecla al acercarse; palanca que se vuelca; puerta que se abre con chispa. |
+
 ## Recorrido previsto
 
 Cada herramienta que aparece es necesaria para salir; no hay objetos decorativos.
 
-1. **La celda**: solo sigilo. La reja de la celda está rota; una patrulla rodea el bloque de arriba y un guardia fijo vigila la salida. El corredor entre los dos bloques es la ruta segura.
-2. **La llave**: la salida está tras una reja abajo a la derecha. La llave está arriba a la derecha, dentro de la ronda de la patrulla, y un guardia fijo cubre la mitad baja.
-3. **Los pasillos**: la reja doble de la salida la abre la palanca de la esquina superior derecha, en plena ronda de la patrulla. La piedra sirve para atraer a la patrulla al lado contrario antes de entrar. El guardia del puesto central vigila el corredor y hay pinchos en el tramo bajo.
-4. **La armería**: la celda da al corredor de pinchos que patrulla un guardia. La placa del fondo (abajo a la derecha) abre la reja doble de la sala de la salida, arriba a la derecha: hay que cruzar el patio dos veces.
-5. **El patio**: la placa de abajo a la izquierda, vigilada por un guardia fijo, abre el cuarto de la llave; la llave abre el portón doble de la salida. Dos patrullas se cruzan en el patio y las dos piedras sirven para apartarlas.
+1. **La celda**: solo sigilo. La reja de la celda está rota; una patrulla rodea el bloque de arriba y un guardia fijo vigila la salida.
+2. **La piedra y la llave**: la llave está en un cuarto cuya única entrada vigila un centinela. Acércate por fuera de su cono, aturdirlo con la piedra y entra mientras ve estrellas. La llave abre la reja de la salida.
+3. **El señuelo**: la palanca de la salida está entre un centinela y una patrulla. En la celda hay otro preso: libéralo y corre por el patio, los guardias van a por él y dejan libre el camino a la palanca.
+4. **La armería**: corredor de pinchos con patrulla; la placa del fondo abre la sala de la salida. Un centinela da la espalda a la placa: se llega por arriba, fuera de su cono, o con la piedra.
+5. **El patio**: la placa vigilada abre el cuarto de la llave (custodiado por un centinela); la llave abre el portón. Dos patrullas, dos piedras y un preso para apartarlas.
 
-Los guardias ya no atrapan con solo verte: al verte medio segundo salen a perseguirte y solo te atrapan si te alcanzan. El héroe corre algo más rápido, así que cortar la línea de visión tras una esquina o una reja permite escapar; después buscan un momento y vuelven a su puesto o ruta.
-
-Cada sala tiene su propio tinte de muros, suelo y antorchas (piedra fría, arenisca, musgo, ladrillo rojizo, noche azul) para reconocerla de un vistazo.
+Al escapar de la última sala, el héroe cruza la pantalla, se reúne con su familia y aparece "FIN" con las estadísticas.
 
 Para cambiar un nivel: edita el mapa en el archivo, valida con **Niveles → Validar mapas**
 (comprueba anchos, que haya un `P` y un `E`, que cada puerta tenga forma de abrirse y que

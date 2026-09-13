@@ -137,12 +137,17 @@ public class PlayerFeedback : MonoBehaviour
     /// Cuadros de la animación de caminar hacia la derecha, muestreando el clip sobre
     /// un objeto temporal. Se usan en la secuencia final, cuando el héroe ya no existe.
     /// </summary>
-    public Sprite[] WalkRightFrames()
+    public Sprite[] WalkRightFrames() => SampleFrames("Walk_right");
+
+    /// <summary>Cuadros del idle de frente, para la familia que espera en el final.</summary>
+    public Sprite[] IdleDownFrames() => SampleFrames("Idle_down");
+
+    Sprite[] SampleFrames(string clipSuffix)
     {
         if (_animator == null || _animator.runtimeAnimatorController == null) return null;
         AnimationClip clip = null;
         foreach (var c in _animator.runtimeAnimatorController.animationClips)
-            if (c.name.EndsWith("Walk_right")) { clip = c; break; }
+            if (c.name.EndsWith(clipSuffix)) { clip = c; break; }
         if (clip == null) return null;
 
         var temp = new GameObject("WalkSampler");

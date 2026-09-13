@@ -18,6 +18,9 @@ public class GuardStatic : GuardBase
     [Tooltip("Grados por segundo al girar hacia un ruido o al volver al barrido.")]
     [SerializeField] float turnSpeed = 180f;
 
+    [Tooltip("Si está desmarcado es un CENTINELA: no barre, mira fijo hacia donde apunta. Solo se pasa aturdiéndolo o distrayéndolo.")]
+    [SerializeField] bool sweep = true;
+
     [Header("Barrido adaptado a los muros")]
     [Tooltip("Mide con raycasts dónde hay espacio y barre solo el arco abierto.")]
     [SerializeField] bool adaptToWalls = true;
@@ -52,8 +55,10 @@ public class GuardStatic : GuardBase
         _home = transform.position;
         _centerAngle = _baseAngle;
         _halfRange = maxAngle;
-        if (adaptToWalls) Scan();
+        if (adaptToWalls && sweep) Scan();
     }
+
+    public bool IsSentinel => !sweep;
 
     protected override void OnFixedUpdate()
     {
@@ -65,6 +70,18 @@ public class GuardStatic : GuardBase
             MoveToward(_home, chaseSpeed * 0.8f);
             FaceDirection(_home - Rb.position, turnSpeed);
             if (Arrived(_home, 0.15f)) { Rb.MovePosition(_home); FinishReturn(); _resuming = true; }
+            return;
+        }
+
+        if (!sweep)
+        {
+            // Centinela: vuelve a su orientación fija y se queda quieto.
+            if (State == GuardState.Normal) Rb.MoveRotation(Mathf.MoveTowardsAngle(Rb.rotation, _baseAngle, maxTurn));
+            if (State == GuardState.Alerted && _hasLookTarget)
+            {
+                Vector2 to = _lookTarget - Rb.position;
+                if (to.sqrMagnitude > 1e-6f) Rb.MoveRotation(Mathf.MoveTowardsAngle(Rb.rotation, VectorMath.DirectionToAngle(to), maxTurn));
+            }
             return;
         }
 
@@ -84,13 +101,13 @@ public class GuardStatic : GuardBase
             return;
         }
 
-        float sweep = SweepAngle(_centerAngle, _time, _halfRange);
+        float sweepAngle = SweepAngle(_centerAngle, _time, _halfRange);
         if (_resuming)
         {
             // Volver al barrido girando, no saltando.
-            float next = Mathf.MoveTowardsAngle(Rb.rotation, sweep, maxTurn);
+            float next = Mathf.MoveTowardsAngle(Rb.rotation, sweepAngle, maxTurn);
             Rb.MoveRotation(next);
-            if (Mathf.Abs(Mathf.DeltaAngle(next, sweep)) < 0.5f) _resuming = false;
+            if (Mathf.Abs(Mathf.DeltaAngle(next, sweepAngle)) < 0.5f) _resuming = false;
             return;
         }
 

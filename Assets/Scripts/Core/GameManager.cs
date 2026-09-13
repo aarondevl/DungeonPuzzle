@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
         IsTransitioning = true;
         var feedback = FindPlayerFeedback();
         Sprite[] walkFrames = feedback != null ? feedback.WalkRightFrames() : null;
+        Sprite[] idleFrames = feedback != null ? feedback.IdleDownFrames() : null;
         // El héroe se desliza hasta el centro del hueco mientras desaparece por él.
         if (feedback != null) feedback.PlayEscape(0.5f, hatch);
         ScreenTransition.ShowBanner(title, subtitle, 0.9f);
@@ -220,7 +221,7 @@ public class GameManager : MonoBehaviour
         if (IsWin && nextScene == "GameOver")
         {
             string stats = $"CAPTURAS {GameProgress.TotalDeaths}   ·   ÚLTIMA SALA {GameProgress.FormatTime(LastWinTime)}";
-            yield return ScreenTransition.PlayEnding(walkFrames, stats);
+            yield return ScreenTransition.PlayEnding(walkFrames, idleFrames, stats);
         }
 
         if (nextScene.StartsWith("Room_"))

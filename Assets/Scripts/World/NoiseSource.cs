@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Fuente de ruido puntual (la piedra al caer). Avisa a los guardias dentro del
+/// radio y lo hace VISIBLE: un anillo que se expande hasta ese radio y un "?" sobre
+/// cada guardia que va a mirar.
+/// </summary>
 public class NoiseSource : MonoBehaviour
 {
     [SerializeField] float noiseRadius = 8f;
@@ -9,10 +14,11 @@ public class NoiseSource : MonoBehaviour
     public void TriggerNoise()
     {
         int mask = CollisionLayers.Resolve(guardLayer, CollisionLayers.GuardMask);
+        Vfx.NoiseRing(transform.position, noiseRadius);
         Collider2D[] guards = Physics2D.OverlapCircleAll(transform.position, noiseRadius, mask);
         foreach (var col in guards)
         {
-            var g = col.GetComponent<GuardBase>();
+            var g = col.GetComponentInParent<GuardBase>();
             if (g != null) g.AlertAt(transform.position);
         }
         Destroy(gameObject);

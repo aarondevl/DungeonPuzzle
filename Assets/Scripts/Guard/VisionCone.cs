@@ -6,10 +6,14 @@ using UnityEngine;
 ///
 ///   * DIBUJO: una malla en abanico generada cada frame y recortada con raycasts
 ///     contra los muros, para que el jugador vea exactamente qué zona es peligrosa.
-///   * DETECCIÓN: puramente vectorial. El héroe es visto si el vector que va del
-///     guardia al héroe (1) mide menos que el alcance, (2) forma con la dirección
-///     de mirada un ángulo menor que la mitad de la apertura y (3) no lo corta
-///     ningún muro (raycast de línea de visión).
+///   * DETECCIÓN: puramente vectorial. Un objetivo es visto si el vector que va del
+///     guardia a él (1) mide menos que el alcance, (2) forma con la dirección de
+///     mirada un ángulo menor que la mitad de la apertura y (3) no lo corta ningún
+///     muro (raycast de línea de visión).
+///
+/// Los objetivos son todo lo que está en la capa Player: el héroe y los prisioneros
+/// liberados que hacen de señuelo. Si ve a los dos, prefiere al señuelo: para eso
+/// se le libera.
 ///
 /// La dirección de mirada es <c>transform.up</c>: el cono es hijo del guardia y
 /// hereda su rotación, así que 0° = arriba, -90° = derecha (ver VectorMath).
@@ -31,12 +35,16 @@ public class VisionCone : MonoBehaviour
     MeshFilter _mf;
     MeshRenderer _mr;
     Mesh _mesh;
+    bool _enabled = true;
 
     static readonly List<float> _angleBuffer = new List<float>(256);
     static readonly Collider2D[] _wallBuffer = new Collider2D[16];
+    static readonly Collider2D[] _targetBuffer = new Collider2D[8];
 
     public bool IsSeeingPlayer { get; private set; }
     public Vector2 LastSeenPlayerPosition { get; private set; }
+    /// <summary>Collider del último objetivo visto (héroe o señuelo).</summary>
+    public Collider2D LastSeenCollider { get; private set; }
     public event System.Action OnPlayerDetected;
 
     /// <summary>Vector unitario de la dirección de mirada, en coordenadas del mundo.</summary>
@@ -45,10 +53,10 @@ public class VisionCone : MonoBehaviour
     /// <summary>Punto del mundo desde el que mira el guardia.</summary>
     public Vector2 Origin => transform.position;
 
-    /// <summary>Distancia al héroe en el último chequeo (infinito si no está en alcance).</summary>
+    /// <summary>Distancia al objetivo en el último chequeo (infinito si no hay ninguno en alcance).</summary>
     public float DistanceToPlayer { get; private set; } = float.PositiveInfinity;
 
-    /// <summary>Ángulo entre la mirada y el héroe en el último chequeo (grados).</summary>
+    /// <summary>Ángulo entre la mirada y el objetivo en el último chequeo (grados).</summary>
     public float AngleToPlayer { get; private set; } = float.PositiveInfinity;
 
     // Máscaras efectivas: si el prefab dejó el campo vacío se usa la capa canónica,
@@ -69,8 +77,17 @@ public class VisionCone : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!_enabled) { IsSeeingPlayer = false; return; }
         BuildMesh();
         CheckDetection();
+    }
+
+    /// <summary>Apaga el cono (guardia aturdido): no ve ni se dibuja.</summary>
+    public void SetEnabled(bool enabled)
+    {
+        _enabled = enabled;
+        _mr.enabled = enabled;
+        if (!enabled) IsSeeingPlayer = false;
     }
 
     void BuildMesh()
@@ -149,18 +166,32 @@ public class VisionCone : MonoBehaviour
         bool sees = false;
         DistanceToPlayer = float.PositiveInfinity;
         AngleToPlayer = float.PositiveInfinity;
+        Collider2D best = null;
+        bool bestIsDecoy = false;
 
-        Collider2D hit = Physics2D.OverlapCircle(Origin, distance, _playerMask);
-        if (hit != null)
+        int count = Physics2D.OverlapCircleNonAlloc(Origin, distance, _targetBuffer, _playerMask);
+        for (int i = 0; i < count; i++)
         {
-            Vector2 playerPoint = hit.bounds.center;
-            Vector2 toPlayer = playerPoint - Origin;                     // vector guardia → héroe
-            DistanceToPlayer = toPlayer.magnitude;
-            AngleToPlayer = VectorMath.AngleBetween(Forward, toPlayer);
+            var col = _targetBuffer[i];
+            if (col == null || col.isTrigger) continue;               // el sensor del héroe no cuenta
+            Vector2 point = col.bounds.center;
+            Vector2 toTarget = point - Origin;                          // vector guardia → objetivo
+            float dist = toTarget.magnitude;
+            float ang = VectorMath.AngleBetween(Forward, toTarget);
+            if (dist < DistanceToPlayer) { DistanceToPlayer = dist; AngleToPlayer = ang; }
 
-            sees = VectorMath.IsInsideCone(Origin, Forward, playerPoint, angle * 0.5f, distance)
-                && HasLineOfSight(Origin, playerPoint);
-            if (sees) LastSeenPlayerPosition = playerPoint;
+            if (!VectorMath.IsInsideCone(Origin, Forward, point, angle * 0.5f, distance)) continue;
+            if (!HasLineOfSight(Origin, point)) continue;
+
+            bool isDecoy = col.GetComponentInParent<Prisoner>() != null;
+            if (best == null || (isDecoy && !bestIsDecoy)) { best = col; bestIsDecoy = isDecoy; }
+        }
+
+        if (best != null)
+        {
+            sees = true;
+            LastSeenCollider = best;
+            LastSeenPlayerPosition = best.bounds.center;
         }
 
         IsSeeingPlayer = sees;
@@ -180,8 +211,6 @@ public class VisionCone : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Vista de escena: bordes del cono (blanco), mirada (verde) y vector al héroe
-        // (rojo si lo ve, gris si no).
         Vector3 o = transform.position;
         Vector2 fwd = Application.isPlaying ? Forward : (Vector2)transform.up;
         float half = angle * 0.5f;

@@ -52,6 +52,17 @@ public class GameFeelTests
     }
 
     [Test]
+    public void ClampTarget_RecortaAlAlcanceSinCambiarLaDireccion()
+    {
+        var origin = new Vector2(1f, 1f);
+        var near = ThrowAim.ClampTarget(origin, new Vector2(3f, 1f), 7f);
+        Assert.That(near.x, Is.EqualTo(3f).Within(Eps));
+        var far = ThrowAim.ClampTarget(origin, new Vector2(1f, 21f), 7f);
+        Assert.That(far.x, Is.EqualTo(1f).Within(Eps));
+        Assert.That(far.y, Is.EqualTo(8f).Within(Eps));
+    }
+
+    [Test]
     public void StatsFor_VictoriaYDerrotaMuestranLoQueImporta()
     {
         string win = GameOverUI.StatsFor(true, 65.5f, true, 60f, 3, 5, 5);

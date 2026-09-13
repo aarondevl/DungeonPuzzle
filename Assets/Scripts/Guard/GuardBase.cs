@@ -4,21 +4,22 @@ using UnityEngine;
 /// <summary>
 /// Máquina de estados común a todos los guardias.
 ///
-///   Normal ──ve al héroe──▶ Alerted (cono rojo, sospecha) ──lo sigue viendo 0.4 s──▶ Chasing
-///   Chasing: corre hacia el héroe (o hacia donde lo vio por última vez). Lo ATRAPA
+///   Normal ──ve un objetivo──▶ Alerted (cono rojo, sospecha) ──lo sigue viendo 0.4 s──▶ Chasing
+///   Chasing: corre hacia el objetivo (o hacia donde lo vio por última vez). Lo ATRAPA
 ///            solo si lo alcanza (contacto o distancia menor que captureRadius).
+///            Si el objetivo es un prisionero señuelo, se lo lleva y vuelve; si es el héroe, captura.
 ///   Chasing ──pierde de vista y llega al último punto──▶ Searching (mira alrededor)
 ///   Searching ──no lo encuentra──▶ Returning (vuelve a su puesto o ruta) ──▶ Normal
 ///   Normal ──oye una piedra──▶ Alerted (investiga el ruido) ──alertDuration──▶ Normal
+///   cualquiera ──le da una piedra──▶ Stunned (sin cono, estrellas) ──stunSeconds──▶ Returning
 ///
-/// Antes ver al héroe medio segundo era captura instantánea. Ahora hay persecución:
-/// el héroe es un poco más rápido que el guardia, así que puede escapar cortando la
+/// El héroe es un poco más rápido que el guardia, así que puede escapar cortando la
 /// línea de visión tras una esquina o una puerta.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class GuardBase : MonoBehaviour
 {
-    protected enum GuardState { Normal, Alerted, Chasing, Searching, Returning }
+    protected enum GuardState { Normal, Alerted, Chasing, Searching, Returning, Stunned }
     protected GuardState State = GuardState.Normal;
 
     [SerializeField] protected float alertDuration = 3f;
@@ -28,12 +29,15 @@ public abstract class GuardBase : MonoBehaviour
     [Tooltip("Velocidad al perseguir. El héroe corre a 4: algo menos para que pueda escapar.")]
     [SerializeField] protected float chaseSpeed = 3.4f;
     [SerializeField] protected float chaseTurnSpeed = 540f;
-    [Tooltip("Distancia a la que el guardia atrapa al héroe.")]
+    [Tooltip("Distancia a la que el guardia atrapa a su objetivo.")]
     [SerializeField] protected float captureRadius = 0.6f;
     [Tooltip("Segundos sin verlo antes de darse por vencido al llegar al último punto visto.")]
     [SerializeField] protected float loseSightSeconds = 1.5f;
     [Tooltip("Segundos mirando alrededor antes de volver.")]
     [SerializeField] protected float searchSeconds = 1.6f;
+
+    [Header("Aturdimiento")]
+    [SerializeField] protected float stunSeconds = 4f;
 
     protected VisionCone VisionCone;
     protected Rigidbody2D Rb;
@@ -42,13 +46,19 @@ public abstract class GuardBase : MonoBehaviour
     bool _captured;
     Coroutine _returnRoutine;
     Vector2 _lastSeen;
+    Collider2D _lastSeenCollider;
     float _unseenTimer;
     float _searchTimer;
     float _searchDir = 1f;
+    float _stunTimer;
+    GameObject _stunFx;
+    SpriteRenderer[] _renderers;
+    Color[] _baseColors;
 
     /// <summary>Estado legible desde fuera (HUD de demostración, herramientas).</summary>
     public bool IsAlerted => State != GuardState.Normal;
     public bool IsChasing => State == GuardState.Chasing;
+    public bool IsStunned => State == GuardState.Stunned;
     public bool IsSeeingPlayer => VisionCone != null && VisionCone.IsSeeingPlayer;
     public string StateName => State.ToString();
 
@@ -63,13 +73,28 @@ public abstract class GuardBase : MonoBehaviour
         // sin esto, chocar de frente con un guardia no disparaba ningún callback.
         Rb.useFullKinematicContacts = true;
         VisionCone = GetComponentInChildren<VisionCone>();
+        _renderers = GetComponentsInChildren<SpriteRenderer>();
+        _baseColors = new Color[_renderers.Length];
+        for (int i = 0; i < _renderers.Length; i++) _baseColors[i] = _renderers[i].color;
     }
 
     void Update()
     {
         if (_captured || VisionCone == null) return;
+
+        if (State == GuardState.Stunned)
+        {
+            _stunTimer -= Time.deltaTime;
+            if (_stunTimer <= 0f) EndStun();
+            return;
+        }
+
         bool sees = VisionCone.IsSeeingPlayer;
-        if (sees) _lastSeen = VisionCone.LastSeenPlayerPosition;
+        if (sees)
+        {
+            _lastSeen = VisionCone.LastSeenPlayerPosition;
+            _lastSeenCollider = VisionCone.LastSeenCollider;
+        }
 
         switch (State)
         {
@@ -99,7 +124,7 @@ public abstract class GuardBase : MonoBehaviour
 
             case GuardState.Chasing:
                 _unseenTimer = sees ? 0f : _unseenTimer + Time.deltaTime;
-                if (VectorMath.Distance(Rb.position, _lastSeen) <= captureRadius && sees) { Capture(); return; }
+                if (sees && VectorMath.Distance(Rb.position, _lastSeen) <= captureRadius) { Catch(_lastSeenCollider); return; }
                 if (!sees && _unseenTimer >= loseSightSeconds && VectorMath.Distance(Rb.position, _lastSeen) <= 0.6f)
                 {
                     State = GuardState.Searching;
@@ -125,6 +150,8 @@ public abstract class GuardBase : MonoBehaviour
         if (_captured) return;
         switch (State)
         {
+            case GuardState.Stunned:
+                break;
             case GuardState.Chasing:
                 MoveToward(_lastSeen, chaseSpeed);
                 FaceDirection(_lastSeen - Rb.position, chaseTurnSpeed);
@@ -155,6 +182,7 @@ public abstract class GuardBase : MonoBehaviour
         SfxLibrary.Play("SFX/alert", 0.9f);
         VisionCone.SetAlerted(true);
         Vfx.Alert(transform.position + Vector3.up * 0.7f);
+        Vfx.FloatingText(transform.position + Vector3.up * 0.9f, "!", new Color(1f, 0.3f, 0.3f, 1f), 0.8f, 8f);
         OnChaseStarted();
     }
 
@@ -174,6 +202,23 @@ public abstract class GuardBase : MonoBehaviour
         _spotTimer = 0f;
     }
 
+    /// <summary>Ha alcanzado a su objetivo: héroe (captura) o prisionero señuelo (se lo lleva).</summary>
+    void Catch(Collider2D target)
+    {
+        // El objetivo ya no existe (otro guardia se llevó al señuelo): no hay a quién atrapar.
+        if (target == null) { BeginReturn(); return; }
+        var decoy = target.GetComponentInParent<Prisoner>();
+        if (decoy != null)
+        {
+            decoy.OnCaught();
+            Vfx.FloatingText(transform.position + Vector3.up * 0.9f, "JA", new Color(1f, 0.8f, 0.5f, 1f), 1f, 6f);
+            _lastSeenCollider = null;
+            BeginReturn();
+            return;
+        }
+        Capture();
+    }
+
     void Capture()
     {
         if (_captured) return;
@@ -185,25 +230,63 @@ public abstract class GuardBase : MonoBehaviour
     }
 
     /// <summary>
-    /// Contacto físico: chocar con el guardia es captura inmediata en cualquier estado.
-    /// Cubre el punto ciego de pegarse a su espalda, donde el cono nunca llega.
+    /// Contacto físico: chocar con el guardia es captura inmediata en cualquier estado
+    /// (salvo aturdido). Cubre el punto ciego de pegarse a su espalda.
     /// </summary>
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_captured) return;
+        if (_captured || State == GuardState.Stunned) return;
         if (!CollisionLayers.Contains(CollisionLayers.PlayerMask, collision.gameObject.layer)) return;
         Vfx.Alert(transform.position);
-        Capture();
+        Catch(collision.collider);
     }
+
+    // ---------- aturdimiento ----------
+
+    /// <summary>Una piedra le ha dado: queda fuera de juego unos segundos, sin ver nada.</summary>
+    public void Stun(float seconds = -1f)
+    {
+        if (_captured) return;
+        float dur = seconds > 0f ? seconds : stunSeconds;
+        CancelReturn();
+        State = GuardState.Stunned;
+        _stunTimer = dur;
+        VisionCone.SetEnabled(false);
+        Tint(new Color(0.6f, 0.7f, 1f, 1f));
+        SfxLibrary.Play("SFX/stone_land", 1f);
+        Vfx.Spark(transform.position + Vector3.up * 0.5f);
+        if (_stunFx != null) Destroy(_stunFx);
+        _stunFx = Vfx.StunStars(transform, dur);
+        OnReturnToNormal();
+    }
+
+    void EndStun()
+    {
+        Tint(Color.white);
+        VisionCone.SetEnabled(true);
+        VisionCone.SetAlerted(false);
+        _stunFx = null;
+        State = GuardState.Returning;
+        OnStartReturning();
+    }
+
+    void Tint(Color c)
+    {
+        for (int i = 0; i < _renderers.Length; i++)
+            if (_renderers[i] != null) _renderers[i].color = _baseColors[i] * c;
+    }
+
+    // ---------- ruido ----------
 
     public void AlertAt(Vector2 noisePosition)
     {
-        if (State == GuardState.Chasing || State == GuardState.Searching) return;
+        if (State == GuardState.Chasing || State == GuardState.Searching || State == GuardState.Stunned) return;
         if (State == GuardState.Alerted) return;
         State = GuardState.Alerted;
         CancelReturn();
         SfxLibrary.Play("SFX/alert");
         VisionCone.SetAlerted(true);
+        Vfx.Question(transform.position);
         OnNoiseAlerted(noisePosition);
         ScheduleReturn();
     }

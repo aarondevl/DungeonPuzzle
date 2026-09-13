@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
     static void EnsureEventSystem()
     {
         if (Object.FindAnyObjectByType<EventSystem>() != null) return;
+        // Ninguna escena trae EventSystem: sin este objeto persistente los botones
+        // de pausa, game over y menú no reciben clics.
         var esGO = new GameObject("EventSystem");
         esGO.AddComponent<EventSystem>();
         esGO.AddComponent<InputSystemUIInputModule>();
@@ -80,6 +82,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame() => StartLevel(1);
+
+    /// <summary>
+    /// "Reintentar" desde Game Over: si perdiste, repite la sala en la que caíste
+    /// (antes te mandaba a la sala 1); si ganaste, vuelve a empezar la partida.
+    /// </summary>
+    public void RetryLevel() => StartLevel(IsWin ? 1 : CurrentLevel);
 
     public void ContinueGame() => StartLevel(GameProgress.HighestUnlocked);
 
@@ -163,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     // ---------- salida de sala ----------
 
-    public void LoadNextRoom()
+    public void LoadNextRoom(Vector3? hatch = null)
     {
         if (IsTransitioning) return;
         float completedTime = RoomTime;
@@ -175,33 +183,34 @@ public class GameManager : MonoBehaviour
         {
             IsWin = true;
             _trackTimer = false;
-            StartCoroutine(ExitSequence("GameOver", "¡ESCAPASTE!", ExitSubtitle(completedTime, LastWinIsBest)));
+            StartCoroutine(ExitSequence("GameOver", "¡ESCAPASTE!", ExitSubtitle(completedTime, LastWinIsBest), hatch));
             return;
         }
 
         GameProgress.Unlock(next);
-        StartCoroutine(ExitSequence($"Room_{next:00}", "SALA SUPERADA", ExitSubtitle(completedTime, LastWinIsBest)));
+        StartCoroutine(ExitSequence($"Room_{next:00}", "SALA SUPERADA", ExitSubtitle(completedTime, LastWinIsBest), hatch));
     }
 
-    public void WinGame()
+    public void WinGame(Vector3? hatch = null)
     {
         if (IsTransitioning) return;
         LastWinTime = RoomTime;
         LastWinIsBest = GameProgress.TrySetBestTime(CurrentLevel, RoomTime);
         IsWin = true;
         _trackTimer = false;
-        StartCoroutine(ExitSequence("GameOver", "¡ESCAPASTE!", ExitSubtitle(LastWinTime, LastWinIsBest)));
+        StartCoroutine(ExitSequence("GameOver", "¡ESCAPASTE!", ExitSubtitle(LastWinTime, LastWinIsBest), hatch));
     }
 
     /// <summary>Texto bajo el cartel de salida: tiempo de la sala y si es récord.</summary>
     public static string ExitSubtitle(float seconds, bool isBest) =>
         $"TIEMPO {GameProgress.FormatTime(seconds)}" + (isBest ? " · ¡NUEVO RÉCORD!" : "");
 
-    IEnumerator ExitSequence(string nextScene, string title, string subtitle)
+    IEnumerator ExitSequence(string nextScene, string title, string subtitle, Vector3? hatch)
     {
         IsTransitioning = true;
         var feedback = FindPlayerFeedback();
-        if (feedback != null) feedback.PlayEscape(0.5f);
+        // El héroe se desliza hasta el centro del hueco mientras desaparece por él.
+        if (feedback != null) feedback.PlayEscape(0.5f, hatch);
         ScreenTransition.ShowBanner(title, subtitle, 0.9f);
         yield return new WaitForSecondsRealtime(0.9f);
         yield return ScreenTransition.FadeOut(FadeSeconds);
@@ -275,6 +284,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         ResumeTime();
+        EnsureEventSystem();
         // detect current level from scene name
         if (IsRoomScene(scene.name, out var idx))
         {

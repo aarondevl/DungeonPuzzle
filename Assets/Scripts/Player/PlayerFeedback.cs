@@ -108,18 +108,23 @@ public class PlayerFeedback : MonoBehaviour
         }
     }
 
-    /// <summary>Salida por la trampilla: gira, se encoge hasta desaparecer.</summary>
-    public Coroutine PlayEscape(float seconds) => StartCoroutine(EscapeRoutine(seconds));
+    /// <summary>Salida por la trampilla: se desliza hasta el hueco, gira y se encoge hasta desaparecer.</summary>
+    public Coroutine PlayEscape(float seconds, Vector3? target = null) => StartCoroutine(EscapeRoutine(seconds, target));
 
-    IEnumerator EscapeRoutine(float seconds)
+    IEnumerator EscapeRoutine(float seconds, Vector3? target)
     {
         SetControl(false);
+        // Sin física durante la salida: el hueco no es un obstáculo y el cuerpo no debe rebotar.
+        if (_rb != null) _rb.simulated = false;
+        Vector3 from = transform.position;
+        Vector3 to = target.HasValue ? new Vector3(target.Value.x, target.Value.y, from.z) : from;
         float t = 0f;
         while (t < seconds)
         {
             t += Time.unscaledDeltaTime;
             float u = Mathf.Clamp01(t / seconds);
             float e = u * u;
+            transform.position = Vector3.Lerp(from, to, 1f - (1f - u) * (1f - u));   // llega pronto al hueco
             _visual.localScale = _baseScale * (1f - e);
             _visual.localRotation = Quaternion.Euler(0f, 0f, 540f * e);
             Tint(Color.Lerp(Color.white, new Color(0.3f, 0.3f, 0.4f, 1f), u));

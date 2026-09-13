@@ -1,0 +1,453 @@
+fileFormatVersion: 2
+guid: 59b50484b51d1b7448d65448c03ab2a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3929779896579925976
+    second: SwampACTG_0
+  - first:
+      213: -3225574463628406358
+    second: SwampACTG_1
+  - first:
+      213: -2847547371316072930
+    second: SwampACTG_2
+  - first:
+      213: 4275755309719252235
+    second: SwampACTG_3
+  - first:
+      213: 3847242557139267145
+    second: SwampACTG_4
+  - first:
+      213: -432384877347919799
+    second: SwampACTG_5
+  - first:
+      213: 693159648275163386
+    second: SwampACTG_6
+  - first:
+      213: 4068089228353353662
+    second: SwampACTG_7
+  - first:
+      213: 7481798418509961930
+    second: SwampACTG_8
+  - first:
+      213: 1685924153158129825
+    second: SwampACTG_9
+  - first:
+      213: 549553259587396501
+    second: SwampACTG_10
+  - first:
+      213: -7762138370808043175
+    second: SwampACTG_11
+  - first:
+      213: -1130972127694297783
+    second: SwampACTG_12
+  - first:
+      213: -8673808317356841293
+    second: SwampACTG_13
+  - first:
+      213: 4550693086198626269
+    second: SwampACTG_14
+  - first:
+      213: 7254997300470585392
+    second: SwampACTG_15
+  - first:
+      213: 8147432587412210683
+    second: SwampACTG_16
+  - first:
+      213: 1412038648942771831
+    second: SwampACTG_17
+  - first:
+      213: 1453041658305653705
+    second: SwampACTG_18
+  - first:
+      213: 1328772403799241259
+    second: SwampACTG_19
+  - first:
+      213: 4862757157129287403
+    second: SwampACTG_20
+  - first:
+      213: -6411857148379838564
+    second: SwampACTG_21
+  - first:
+      213: -4565615433540119311
+    second: SwampACTG_22
+  - first:
+      213: -1747549082499792506
+    second: SwampACTG_23
+  - first:
+      213: 546953623463140026
+    second: SwampACTG_24
+  - first:
+      213: 5279318206496693594
+    second: SwampACTG_25
+  - first:
+      213: 7559966950640034046
+    second: SwampACTG_26
+  - first:
+      213: 4787387885431494923
+    second: SwampACTG_27
+  - first:
+      213: -5737784902196467787
+    second: SwampACTG_28
+  - first:
+      213: -445283636785945306
+    second: SwampACTG_29
+  - first:
+      213: 3939781092925755628
+    second: SwampACTG_30
+  - first:
+      213: -8482710238072173034
+    second: SwampACTG_31
+  - first:
+      213: -3737156869685869553
+    second: ACTG_Willow
+  - first:
+      213: 5405521999649864844
+    second: ACTG_GreenTreeA
+  - first:
+      213: -143402544525849543
+    second: ACTG_DeadTree
+  - first:
+      213: 6467831671413241660
+    second: ACTG_GreenTreeB
+  - first:
+      213: -1948221640730516340
+    second: ACTG_GroundMoss
+  - first:
+      213: -7804918640442952945
+    second: ACTG_Bridge
+  - first:
+      213: -1882553803467037430
+    second: ACTG_HutA
+  - first:
+      213: 7704697756451265969
+    second: ACTG_HutB
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ACTG_Willow
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 440
+        width: 172
+        height: 120
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04867890a3f22cc0800000000000000
+      internalID: -3737156869685869553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_GreenTreeA
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 236
+        width: 105
+        height: 194
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c70b67e95440b40800000000000000
+      internalID: 5405521999649864844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_DeadTree
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 236
+        width: 65
+        height: 194
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c46a14528820ef0800000000000000
+      internalID: -143402544525849543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_GreenTreeB
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 236
+        width: 105
+        height: 198
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c377b9913aa52c950800000000000000
+      internalID: 6467831671413241660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_GroundMoss
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 334
+        width: 96
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8467886db686f4e0800000000000000
+      internalID: -1948221640730516340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_Bridge
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 228
+        width: 168
+        height: 132
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f03b29749db5fa390800000000000000
+      internalID: -7804918640442952945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_HutA
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 126
+        height: 190
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0569c93a43dfd5e0800000000000000
+      internalID: -1882553803467037430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ACTG_HutB
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 28
+        width: 140
+        height: 190
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bdd60bc9c59cea60800000000000000
+      internalID: 7704697756451265969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ACTG_Bridge: -7804918640442952945
+      ACTG_DeadTree: -143402544525849543
+      ACTG_GreenTreeA: 5405521999649864844
+      ACTG_GreenTreeB: 6467831671413241660
+      ACTG_GroundMoss: -1948221640730516340
+      ACTG_HutA: -1882553803467037430
+      ACTG_HutB: 7704697756451265969
+      ACTG_Willow: -3737156869685869553
+      SwampACTG_0: -3929779896579925976
+      SwampACTG_1: -3225574463628406358
+      SwampACTG_10: 549553259587396501
+      SwampACTG_11: -7762138370808043175
+      SwampACTG_12: -1130972127694297783
+      SwampACTG_13: -8673808317356841293
+      SwampACTG_14: 4550693086198626269
+      SwampACTG_15: 7254997300470585392
+      SwampACTG_16: 8147432587412210683
+      SwampACTG_17: 1412038648942771831
+      SwampACTG_18: 1453041658305653705
+      SwampACTG_19: 1328772403799241259
+      SwampACTG_2: -2847547371316072930
+      SwampACTG_20: 4862757157129287403
+      SwampACTG_21: -6411857148379838564
+      SwampACTG_22: -4565615433540119311
+      SwampACTG_23: -1747549082499792506
+      SwampACTG_24: 546953623463140026
+      SwampACTG_25: 5279318206496693594
+      SwampACTG_26: 7559966950640034046
+      SwampACTG_27: 4787387885431494923
+      SwampACTG_28: -5737784902196467787
+      SwampACTG_29: -445283636785945306
+      SwampACTG_3: 4275755309719252235
+      SwampACTG_30: 3939781092925755628
+      SwampACTG_31: -8482710238072173034
+      SwampACTG_4: 3847242557139267145
+      SwampACTG_5: -432384877347919799
+      SwampACTG_6: 693159648275163386
+      SwampACTG_7: 4068089228353353662
+      SwampACTG_8: 7481798418509961930
+      SwampACTG_9: 1685924153158129825
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

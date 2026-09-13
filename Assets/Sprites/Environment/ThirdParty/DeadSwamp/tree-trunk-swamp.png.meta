@@ -1,0 +1,327 @@
+fileFormatVersion: 2
+guid: b6ee03c5bfb39ad4d8e311576a078496
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7671420534842005343
+    second: tree-trunk-swamp_0
+  - first:
+      213: 1751707705442675825
+    second: tree-trunk-swamp_1
+  - first:
+      213: 3982158711436698998
+    second: tree-trunk-swamp_2
+  - first:
+      213: 7784057258492571667
+    second: tree-trunk-swamp_3
+  - first:
+      213: -9067736427076532055
+    second: tree-trunk-swamp_4
+  - first:
+      213: 7966734394223773945
+    second: tree-trunk-swamp_5
+  - first:
+      213: 5782940520505397896
+    second: tree-trunk-swamp_6
+  - first:
+      213: -4138074846362924978
+    second: tree-trunk-swamp_7
+  - first:
+      213: -6577002963442667062
+    second: tree-trunk-swamp_8
+  - first:
+      213: 7835749032354802573
+    second: tree-trunk-swamp_9
+  - first:
+      213: -6071784925634385600
+    second: tree-trunk-swamp_10
+  - first:
+      213: 1260759767570120909
+    second: tree-trunk-swamp_11
+  - first:
+      213: -8276416670004941465
+    second: tree-trunk-swamp_12
+  - first:
+      213: 6861454943583334947
+    second: tree-trunk-swamp_13
+  - first:
+      213: -4977357512897887699
+    second: tree-trunk-swamp_14
+  - first:
+      213: 6646372722704634157
+    second: tree-trunk-swamp_15
+  - first:
+      213: -7540811743611593871
+    second: tree-trunk-swamp_16
+  - first:
+      213: -6788964106016733238
+    second: tree-trunk-swamp_17
+  - first:
+      213: 5867788615265225095
+    second: tree-trunk-swamp_18
+  - first:
+      213: -7422638549175056465
+    second: tree-trunk-swamp_19
+  - first:
+      213: -4967131390299921877
+    second: tree-trunk-swamp_20
+  - first:
+      213: 1451046945184004877
+    second: tree-trunk-swamp_21
+  - first:
+      213: 2974358017224992987
+    second: tree-trunk-swamp_22
+  - first:
+      213: -6709635130192343214
+    second: tree-trunk-swamp_23
+  - first:
+      213: 8366837282321722573
+    second: tree-trunk-swamp_24
+  - first:
+      213: -3259856147578286268
+    second: tree-trunk-swamp_25
+  - first:
+      213: -8063434902152287443
+    second: tree-trunk-swamp_26
+  - first:
+      213: 2065983972321266563
+    second: tree-trunk-swamp_27
+  - first:
+      213: -2618327391402291950
+    second: tree-trunk-swamp_28
+  - first:
+      213: 557525257650896721
+    second: tree-trunk-swamp_29
+  - first:
+      213: -8828539779605891260
+    second: tree-trunk-swamp_30
+  - first:
+      213: 4385254525819416059
+    second: tree-trunk-swamp_31
+  - first:
+      213: -8441634498999035191
+    second: tree-trunk-swamp_32
+  - first:
+      213: -1716109107184668312
+    second: DS_GiantStumpA
+  - first:
+      213: 3024315856859590611
+    second: DS_GiantStumpB
+  - first:
+      213: 1539574084229544608
+    second: DS_GiantStumpC
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DS_GiantStumpA
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 870
+        width: 256
+        height: 470
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 861f17efbd72f28e0800000000000000
+      internalID: -1716109107184668312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_GiantStumpB
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 256
+        height: 370
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3df62b09f3788f920800000000000000
+      internalID: 3024315856859590611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_GiantStumpC
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa36ebf87aad5510800000000000000
+      internalID: 1539574084229544608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DS_GiantStumpA: -1716109107184668312
+      DS_GiantStumpB: 3024315856859590611
+      DS_GiantStumpC: 1539574084229544608
+      tree-trunk-swamp_0: 7671420534842005343
+      tree-trunk-swamp_1: 1751707705442675825
+      tree-trunk-swamp_10: -6071784925634385600
+      tree-trunk-swamp_11: 1260759767570120909
+      tree-trunk-swamp_12: -8276416670004941465
+      tree-trunk-swamp_13: 6861454943583334947
+      tree-trunk-swamp_14: -4977357512897887699
+      tree-trunk-swamp_15: 6646372722704634157
+      tree-trunk-swamp_16: -7540811743611593871
+      tree-trunk-swamp_17: -6788964106016733238
+      tree-trunk-swamp_18: 5867788615265225095
+      tree-trunk-swamp_19: -7422638549175056465
+      tree-trunk-swamp_2: 3982158711436698998
+      tree-trunk-swamp_20: -4967131390299921877
+      tree-trunk-swamp_21: 1451046945184004877
+      tree-trunk-swamp_22: 2974358017224992987
+      tree-trunk-swamp_23: -6709635130192343214
+      tree-trunk-swamp_24: 8366837282321722573
+      tree-trunk-swamp_25: -3259856147578286268
+      tree-trunk-swamp_26: -8063434902152287443
+      tree-trunk-swamp_27: 2065983972321266563
+      tree-trunk-swamp_28: -2618327391402291950
+      tree-trunk-swamp_29: 557525257650896721
+      tree-trunk-swamp_3: 7784057258492571667
+      tree-trunk-swamp_30: -8828539779605891260
+      tree-trunk-swamp_31: 4385254525819416059
+      tree-trunk-swamp_32: -8441634498999035191
+      tree-trunk-swamp_4: -9067736427076532055
+      tree-trunk-swamp_5: 7966734394223773945
+      tree-trunk-swamp_6: 5782940520505397896
+      tree-trunk-swamp_7: -4138074846362924978
+      tree-trunk-swamp_8: -6577002963442667062
+      tree-trunk-swamp_9: 7835749032354802573
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,6 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Cono de visión del guardia. Dos responsabilidades separadas:
+///
+///   * DIBUJO: una malla en abanico generada cada frame y recortada con raycasts
+///     contra los muros, para que el jugador vea exactamente qué zona es peligrosa.
+///   * DETECCIÓN: puramente vectorial. El héroe es visto si el vector que va del
+///     guardia al héroe (1) mide menos que el alcance, (2) forma con la dirección
+///     de mirada un ángulo menor que la mitad de la apertura y (3) no lo corta
+///     ningún muro (raycast de línea de visión).
+///
+/// La dirección de mirada es <c>transform.up</c>: el cono es hijo del guardia y
+/// hereda su rotación, así que 0° = arriba, -90° = derecha (ver VectorMath).
+/// </summary>
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class VisionCone : MonoBehaviour
 {
@@ -18,8 +31,6 @@ public class VisionCone : MonoBehaviour
     MeshFilter _mf;
     MeshRenderer _mr;
     Mesh _mesh;
-    Vector3[] _polyLocal;       // perimeter vertices in local space (excluding origin)
-    int _polyCount;
 
     static readonly List<float> _angleBuffer = new List<float>(256);
     static readonly Collider2D[] _wallBuffer = new Collider2D[16];
@@ -27,6 +38,18 @@ public class VisionCone : MonoBehaviour
     public bool IsSeeingPlayer { get; private set; }
     public Vector2 LastSeenPlayerPosition { get; private set; }
     public event System.Action OnPlayerDetected;
+
+    /// <summary>Vector unitario de la dirección de mirada, en coordenadas del mundo.</summary>
+    public Vector2 Forward => transform.up;
+
+    /// <summary>Punto del mundo desde el que mira el guardia.</summary>
+    public Vector2 Origin => transform.position;
+
+    /// <summary>Distancia al héroe en el último chequeo (infinito si no está en alcance).</summary>
+    public float DistanceToPlayer { get; private set; } = float.PositiveInfinity;
+
+    /// <summary>Ángulo entre la mirada y el héroe en el último chequeo (grados).</summary>
+    public float AngleToPlayer { get; private set; } = float.PositiveInfinity;
 
     // Máscaras efectivas: si el prefab dejó el campo vacío se usa la capa canónica,
     // en vez de fallar en silencio (un wallLayer a 0 hacía el cono atravesar muros).
@@ -42,7 +65,6 @@ public class VisionCone : MonoBehaviour
         _mesh = new Mesh { name = "VisionConeMesh" };
         _mf.mesh = _mesh;
         _mr.material = normalMaterial;
-        _polyLocal = new Vector3[256];
     }
 
     void LateUpdate()
@@ -60,10 +82,12 @@ public class VisionCone : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
             _angleBuffer.Add(-halfAngle + angleStep * i);
 
-        Vector2 origin = transform.position;
+        Vector2 origin = Origin;
         int wallCount = Physics2D.OverlapCircleNonAlloc(origin, distance, _wallBuffer, _wallMask);
-        float forwardWorldDeg = Mathf.Atan2(transform.up.x, transform.up.y) * Mathf.Rad2Deg;
+        float forwardWorldDeg = Mathf.Atan2(Forward.x, Forward.y) * Mathf.Rad2Deg;
 
+        // Rayos extra hacia cada esquina de muro visible para que el borde del
+        // recorte sea nítido en lugar de escalonado.
         for (int w = 0; w < wallCount; w++)
         {
             var b = _wallBuffer[w].bounds;
@@ -83,7 +107,6 @@ public class VisionCone : MonoBehaviour
         _angleBuffer.Sort();
 
         int n = _angleBuffer.Count;
-        if (_polyLocal.Length < n) _polyLocal = new Vector3[n];
         var vertices = new Vector3[n + 1];
         var triangles = new int[(n - 1) * 3];
         var colors = new Color[n + 1];
@@ -96,16 +119,16 @@ public class VisionCone : MonoBehaviour
         {
             float a = _angleBuffer[i];
             float rad = a * Mathf.Deg2Rad;
+            // Dirección local del rayo: (sin, cos) porque 0° es "arriba" (+Y local).
             Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
             Vector2 worldDir = transform.TransformDirection(localDir);
             RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, distance, _wallMask);
+            // El vértice se guarda en coordenadas LOCALES del cono (la malla rota con él).
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
             colors[i + 1] = uniform;
-            _polyLocal[i] = point;
         }
-        _polyCount = n;
 
         for (int i = 0; i < n - 1; i++)
         {
@@ -121,44 +144,59 @@ public class VisionCone : MonoBehaviour
         _mesh.RecalculateNormals();
     }
 
-    bool PointInsideCone(Vector3 localPoint)
-    {
-        // Fan polygon: origin + perimeter[0..n-1]. Inside if any triangle (origin, p[i], p[i+1]) contains the point.
-        Vector2 p = localPoint;
-        for (int i = 0; i < _polyCount - 1; i++)
-        {
-            if (PointInTriangle(p, Vector2.zero, _polyLocal[i], _polyLocal[i + 1])) return true;
-        }
-        return false;
-    }
-
-    static bool PointInTriangle(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
-    {
-        float d1 = Sign(p, a, b);
-        float d2 = Sign(p, b, c);
-        float d3 = Sign(p, c, a);
-        bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-        bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-        return !(hasNeg && hasPos);
-    }
-
-    static float Sign(Vector2 p1, Vector2 p2, Vector2 p3) =>
-        (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-
     void CheckDetection()
     {
         bool sees = false;
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, distance, _playerMask);
-        if (hit != null && _polyCount >= 2)
+        DistanceToPlayer = float.PositiveInfinity;
+        AngleToPlayer = float.PositiveInfinity;
+
+        Collider2D hit = Physics2D.OverlapCircle(Origin, distance, _playerMask);
+        if (hit != null)
         {
-            Vector3 localPlayer = transform.InverseTransformPoint(hit.transform.position);
-            sees = PointInsideCone(localPlayer);
-            if (sees) LastSeenPlayerPosition = hit.transform.position;
+            Vector2 playerPoint = hit.bounds.center;
+            Vector2 toPlayer = playerPoint - Origin;                     // vector guardia → héroe
+            DistanceToPlayer = toPlayer.magnitude;
+            AngleToPlayer = VectorMath.AngleBetween(Forward, toPlayer);
+
+            sees = VectorMath.IsInsideCone(Origin, Forward, playerPoint, angle * 0.5f, distance)
+                && HasLineOfSight(Origin, playerPoint);
+            if (sees) LastSeenPlayerPosition = playerPoint;
         }
+
         IsSeeingPlayer = sees;
         if (sees) OnPlayerDetected?.Invoke();
     }
 
+    /// <summary>Un muro entre los dos puntos bloquea la visión aunque el ángulo cuadre.</summary>
+    bool HasLineOfSight(Vector2 from, Vector2 to)
+    {
+        Vector2 dir = VectorMath.Direction(from, to);
+        float len = VectorMath.Distance(from, to);
+        return !Physics2D.Raycast(from, dir, len, _wallMask);
+    }
+
     public void SetAlerted(bool alerted) =>
         _mr.material = alerted ? alertMaterial : normalMaterial;
+
+    void OnDrawGizmosSelected()
+    {
+        // Vista de escena: bordes del cono (blanco), mirada (verde) y vector al héroe
+        // (rojo si lo ve, gris si no).
+        Vector3 o = transform.position;
+        Vector2 fwd = Application.isPlaying ? Forward : (Vector2)transform.up;
+        float half = angle * 0.5f;
+        Vector3 left = VectorMath.AngleToDirection(VectorMath.DirectionToAngle(fwd) + half) * distance;
+        Vector3 right = VectorMath.AngleToDirection(VectorMath.DirectionToAngle(fwd) - half) * distance;
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(o, o + left);
+        Gizmos.DrawLine(o, o + right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(o, o + (Vector3)fwd * distance);
+
+        if (Application.isPlaying && !float.IsInfinity(DistanceToPlayer))
+        {
+            Gizmos.color = IsSeeingPlayer ? Color.red : Color.gray;
+            Gizmos.DrawLine(o, LastSeenPlayerPosition);
+        }
+    }
 }

@@ -2,19 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Movimiento top-down del héroe.
+/// Movimiento top-down del héroe, expresado con puntos y vectores:
 ///
-/// Cambio de la Semana 04: se pasó de <c>Rigidbody2D.MovePosition</c> a fijar
-/// <c>linearVelocity</c>. Con MovePosition el cuerpo se teletransporta cada paso de
-/// física y el solver solo puede "empujarlo" hacia fuera después del solape, lo que
-/// producía tirones al rozar un muro y esquinas donde el jugador se quedaba pegado.
-/// Fijando la velocidad, el solver resuelve el contacto y el jugador DESLIZA a lo
-/// largo de la pared, que es la respuesta de colisión esperada en un top-down.
+///   entrada (teclas)  →  vector dirección unitario
+///   dirección · rapidez  →  velocidad deseada (vector)
+///   velocidad actual  →  se acerca a la deseada a ritmo de <c>acceleration</c>
+///   posición nueva  =  posición + velocidad · Δt   (lo integra el Rigidbody2D)
 ///
-/// Se refuerzan además tres ajustes que antes dependían del prefab:
-/// interpolación (movimiento suave a 50 Hz de física), rotación congelada (un
-/// choque en diagonal no debe hacer girar al héroe) y material sin fricción
-/// (sin él, el roce contra un muro frena el deslizamiento).
+/// Se fija <c>linearVelocity</c> en vez de usar MovePosition para que el solver
+/// resuelva el contacto y el héroe DESLICE a lo largo de los muros. Se refuerzan
+/// interpolación, rotación congelada y material sin fricción por si el prefab no
+/// los trae.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -27,7 +25,14 @@ public class PlayerMovement : MonoBehaviour
     Vector2 _velocity;
     Vector2 _facing = Vector2.down;
 
+    /// <summary>Dirección cardinal hacia la que mira el héroe (vector unitario).</summary>
     public Vector2 Facing => _facing;
+
+    /// <summary>Punto del mundo donde está el héroe (coordenadas x, y).</summary>
+    public Vector2 Position => _rb != null ? _rb.position : (Vector2)transform.position;
+
+    /// <summary>Vector velocidad real del cuerpo (unidades/segundo).</summary>
+    public Vector2 Velocity => _rb != null ? _rb.linearVelocity : Vector2.zero;
 
     void Awake()
     {
@@ -44,11 +49,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 target = ReadInput() * speed;
+        Vector2 direction = ReadInput();                       // vector unitario (o cero)
+        Vector2 target = direction * speed;                    // velocidad deseada
         _velocity = StepVelocity(_velocity, target, acceleration, Time.fixedDeltaTime);
         _rb.linearVelocity = _velocity;
 
-        if (target.sqrMagnitude > 0.0001f) _facing = SnapFacing(target);
+        if (direction != Vector2.zero) _facing = SnapFacing(direction);
 
         if (_animator != null)
         {
@@ -68,9 +74,11 @@ public class PlayerMovement : MonoBehaviour
                 - (kb.aKey.isPressed || kb.leftArrowKey.isPressed ? 1f : 0f);
         float v = (kb.wKey.isPressed || kb.upArrowKey.isPressed ? 1f : 0f)
                 - (kb.sKey.isPressed || kb.downArrowKey.isPressed ? 1f : 0f);
+        // Normalizar evita que la diagonal (1,1) sea √2 veces más rápida que un eje.
         return new Vector2(h, v).normalized;
     }
 
+    /// <summary>Acerca la velocidad actual a la deseada sin superar acceleration · Δt.</summary>
     public static Vector2 StepVelocity(Vector2 current, Vector2 target, float acceleration, float deltaTime)
     {
         float maxDelta = acceleration * deltaTime;
@@ -78,11 +86,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>Redondea una dirección libre a las 4 direcciones cardinales de la animación.</summary>
-    public static Vector2 SnapFacing(Vector2 direction)
+    public static Vector2 SnapFacing(Vector2 direction) =>
+        VectorMath.ToCardinal(direction, Vector2.down);
+
+    void OnDrawGizmosSelected()
     {
-        if (direction == Vector2.zero) return Vector2.down;
-        return Mathf.Abs(direction.x) >= Mathf.Abs(direction.y)
-            ? new Vector2(Mathf.Sign(direction.x), 0f)
-            : new Vector2(0f, Mathf.Sign(direction.y));
+        // Vectores visibles en la vista de escena: amarillo = velocidad, cian = facing.
+        Vector3 p = transform.position;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(p, p + (Vector3)Velocity * 0.25f);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(p, p + (Vector3)_facing * 0.6f);
     }
 }

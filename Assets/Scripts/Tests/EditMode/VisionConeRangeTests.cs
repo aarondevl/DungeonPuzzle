@@ -34,17 +34,19 @@ public class VisionConeRangeTests
     static void Rebuild(VisionCone cone) =>
         typeof(VisionCone).GetMethod("BuildMesh", Inst).Invoke(cone, null);
 
-    /// <summary>Distancia en mundo, sobre el eje frontal, hasta donde el cono reconoce.</summary>
+    /// <summary>
+    /// Distancia en mundo, sobre el eje frontal, hasta donde el cono reconoce. Usa la
+    /// misma regla vectorial que la detección real (<see cref="VisionCone.CanSee"/>):
+    /// alcance en mundo, apertura y línea de visión contra los muros.
+    /// </summary>
     static float DetectionReach(VisionCone cone)
     {
-        var inside = typeof(VisionCone).GetMethod("PointInsideCone", Inst);
-        Vector3 origin = cone.transform.position;
-        Vector3 forward = cone.transform.up;
+        Vector2 origin = cone.transform.position;
+        Vector2 forward = cone.transform.up;
         float reach = 0f;
         for (float d = 0.05f; d <= 12f; d += 0.05f)
         {
-            var local = cone.transform.InverseTransformPoint(origin + forward * d);
-            if ((bool)inside.Invoke(cone, new object[] { local })) reach = d;
+            if (cone.CanSee(origin + forward * d)) reach = d;
         }
         return reach;
     }

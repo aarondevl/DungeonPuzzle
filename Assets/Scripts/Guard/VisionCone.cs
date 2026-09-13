@@ -1,6 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Cono de visión del guardia. Dos responsabilidades separadas:
+///
+///   * DIBUJO: una malla en abanico generada cada frame y recortada con raycasts
+///     contra los muros, para que el jugador vea exactamente qué zona es peligrosa.
+///   * DETECCIÓN: puramente vectorial. El héroe es visto si el vector que va del
+///     guardia al héroe (1) mide menos que el alcance, (2) forma con la dirección
+///     de mirada un ángulo menor que la mitad de la apertura y (3) no lo corta
+///     ningún muro (raycast de línea de visión).
+///
+/// La dirección de mirada es <c>transform.up</c>: el cono es hijo del guardia y
+/// hereda su rotación, así que 0° = arriba, -90° = derecha (ver VectorMath).
+/// </summary>
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class VisionCone : MonoBehaviour
 {
@@ -18,8 +31,6 @@ public class VisionCone : MonoBehaviour
     MeshFilter _mf;
     MeshRenderer _mr;
     Mesh _mesh;
-    Vector3[] _polyLocal;       // perimeter vertices in local space (excluding origin)
-    int _polyCount;
 
     static readonly List<float> _angleBuffer = new List<float>(256);
     static readonly Collider2D[] _wallBuffer = new Collider2D[16];
@@ -28,21 +39,33 @@ public class VisionCone : MonoBehaviour
     public Vector2 LastSeenPlayerPosition { get; private set; }
     public event System.Action OnPlayerDetected;
 
+    /// <summary>Vector unitario de la dirección de mirada, en coordenadas del mundo.</summary>
+    public Vector2 Forward => transform.up;
+
+    /// <summary>Punto del mundo desde el que mira el guardia.</summary>
+    public Vector2 Origin => transform.position;
+
+    /// <summary>Distancia al héroe en el último chequeo (infinito si no está en alcance).</summary>
+    public float DistanceToPlayer { get; private set; } = float.PositiveInfinity;
+
+    /// <summary>Ángulo entre la mirada y el héroe en el último chequeo (grados).</summary>
+    public float AngleToPlayer { get; private set; } = float.PositiveInfinity;
+
+    /// <summary>
+    /// <see cref="distance"/> mide el cono en espacio LOCAL: el vértice sin obstáculo
+    /// se coloca en <c>localDir * distance</c> y la malla lo dibuja ya escalada. La
+    /// física, en cambio, trabaja en mundo, así que hay que convertir antes de
+    /// preguntarle. Los guardias vienen escalados a 0.7, de modo que usar
+    /// <c>distance</c> en bruto consultaba 5 unidades de mundo para un cono que solo
+    /// llega a 3.5: el guardia reconocía al jugador mucho más lejos de donde termina
+    /// el cono visible. Todo lo que toque Physics2D debe usar este alcance.
+    /// </summary>
+    public float WorldReach => distance * Mathf.Abs(transform.lossyScale.x);
+
     // Máscaras efectivas: si el prefab dejó el campo vacío se usa la capa canónica,
     // en vez de fallar en silencio (un wallLayer a 0 hacía el cono atravesar muros).
     int _wallMask;
     int _playerMask;
-
-    /// <summary>
-    /// <see cref="distance"/> mide el cono en espacio LOCAL: el vertice sin obstaculo
-    /// se coloca en <c>localDir * distance</c> y la malla lo dibuja ya escalado. La
-    /// fisica, en cambio, trabaja en mundo, asi que hay que convertir antes de
-    /// preguntarle. Los guardias vienen escalados a 0.7, de modo que usar
-    /// <c>distance</c> en bruto consultaba 5 unidades de mundo para un cono que solo
-    /// llega a 3.5: cualquier muro en esa franja fijaba el vertice sobre el muro y el
-    /// guardia reconocia al jugador mucho mas lejos de donde termina el cono visible.
-    /// </summary>
-    float WorldReach => distance * Mathf.Abs(transform.lossyScale.x);
 
     void Awake()
     {
@@ -53,7 +76,6 @@ public class VisionCone : MonoBehaviour
         _mesh = new Mesh { name = "VisionConeMesh" };
         _mf.mesh = _mesh;
         _mr.material = normalMaterial;
-        _polyLocal = new Vector3[256];
     }
 
     void LateUpdate()
@@ -71,11 +93,13 @@ public class VisionCone : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
             _angleBuffer.Add(-halfAngle + angleStep * i);
 
-        Vector2 origin = transform.position;
+        Vector2 origin = Origin;
         float worldReach = WorldReach;
         int wallCount = Physics2D.OverlapCircleNonAlloc(origin, worldReach, _wallBuffer, _wallMask);
-        float forwardWorldDeg = Mathf.Atan2(transform.up.x, transform.up.y) * Mathf.Rad2Deg;
+        float forwardWorldDeg = Mathf.Atan2(Forward.x, Forward.y) * Mathf.Rad2Deg;
 
+        // Rayos extra hacia cada esquina de muro visible para que el borde del
+        // recorte sea nítido en lugar de escalonado.
         for (int w = 0; w < wallCount; w++)
         {
             var b = _wallBuffer[w].bounds;
@@ -95,7 +119,6 @@ public class VisionCone : MonoBehaviour
         _angleBuffer.Sort();
 
         int n = _angleBuffer.Count;
-        if (_polyLocal.Length < n) _polyLocal = new Vector3[n];
         var vertices = new Vector3[n + 1];
         var triangles = new int[(n - 1) * 3];
         var colors = new Color[n + 1];
@@ -104,7 +127,7 @@ public class VisionCone : MonoBehaviour
 
         vertices[0] = Vector3.zero;
         colors[0] = uniform;
-        // uv.x normaliza el radio: 0 en el guardia, 1 en el perimetro del cono. El shader
+        // uv.x normaliza el radio: 0 en el guardia, 1 en el perímetro del cono. El shader
         // lo usa para el degradado y el reborde, de modo que el cono se lee hasta su
         // alcance real aunque un muro lo recorte o cambie "distance".
         uvs[0] = Vector2.zero;
@@ -113,17 +136,17 @@ public class VisionCone : MonoBehaviour
         {
             float a = _angleBuffer[i];
             float rad = a * Mathf.Deg2Rad;
+            // Dirección local del rayo: (sin, cos) porque 0° es "arriba" (+Y local).
             Vector2 localDir = new Vector2(Mathf.Sin(rad), Mathf.Cos(rad));
             Vector2 worldDir = transform.TransformDirection(localDir);
             RaycastHit2D hit = Physics2D.Raycast(origin, worldDir, worldReach, _wallMask);
+            // El vértice se guarda en coordenadas LOCALES del cono (la malla rota con él).
             Vector3 point = hit ? transform.InverseTransformPoint(hit.point)
                                 : (Vector3)(localDir * distance);
             vertices[i + 1] = point;
             colors[i + 1] = uniform;
             uvs[i + 1] = new Vector2(1f, 0f);
-            _polyLocal[i] = point;
         }
-        _polyCount = n;
 
         for (int i = 0; i < n - 1; i++)
         {
@@ -140,44 +163,69 @@ public class VisionCone : MonoBehaviour
         _mesh.RecalculateNormals();
     }
 
-    bool PointInsideCone(Vector3 localPoint)
-    {
-        // Fan polygon: origin + perimeter[0..n-1]. Inside if any triangle (origin, p[i], p[i+1]) contains the point.
-        Vector2 p = localPoint;
-        for (int i = 0; i < _polyCount - 1; i++)
-        {
-            if (PointInTriangle(p, Vector2.zero, _polyLocal[i], _polyLocal[i + 1])) return true;
-        }
-        return false;
-    }
-
-    static bool PointInTriangle(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
-    {
-        float d1 = Sign(p, a, b);
-        float d2 = Sign(p, b, c);
-        float d3 = Sign(p, c, a);
-        bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-        bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-        return !(hasNeg && hasPos);
-    }
-
-    static float Sign(Vector2 p1, Vector2 p2, Vector2 p3) =>
-        (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-
     void CheckDetection()
     {
         bool sees = false;
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, WorldReach, _playerMask);
-        if (hit != null && _polyCount >= 2)
+        DistanceToPlayer = float.PositiveInfinity;
+        AngleToPlayer = float.PositiveInfinity;
+
+        float worldReach = WorldReach;
+        Collider2D hit = Physics2D.OverlapCircle(Origin, worldReach, _playerMask);
+        if (hit != null)
         {
-            Vector3 localPlayer = transform.InverseTransformPoint(hit.transform.position);
-            sees = PointInsideCone(localPlayer);
-            if (sees) LastSeenPlayerPosition = hit.transform.position;
+            Vector2 playerPoint = hit.bounds.center;
+            Vector2 toPlayer = playerPoint - Origin;                     // vector guardia → héroe
+            DistanceToPlayer = toPlayer.magnitude;
+            AngleToPlayer = VectorMath.AngleBetween(Forward, toPlayer);
+
+            sees = CanSee(playerPoint);
+            if (sees) LastSeenPlayerPosition = playerPoint;
         }
+
         IsSeeingPlayer = sees;
         if (sees) OnPlayerDetected?.Invoke();
     }
 
+    /// <summary>
+    /// ¿Vería el guardia un punto del MUNDO? Misma regla que la detección real:
+    /// dentro del alcance en mundo, dentro de la apertura y sin muro en medio.
+    /// Público para que los tests midan hasta dónde reconoce el cono.
+    /// </summary>
+    public bool CanSee(Vector2 worldPoint) =>
+        VectorMath.IsInsideCone(Origin, Forward, worldPoint, angle * 0.5f, WorldReach)
+        && HasLineOfSight(Origin, worldPoint);
+
+    /// <summary>Un muro entre los dos puntos bloquea la visión aunque el ángulo cuadre.</summary>
+    bool HasLineOfSight(Vector2 from, Vector2 to)
+    {
+        Vector2 dir = VectorMath.Direction(from, to);
+        float len = VectorMath.Distance(from, to);
+        return !Physics2D.Raycast(from, dir, len, _wallMask);
+    }
+
     public void SetAlerted(bool alerted) =>
         _mr.material = alerted ? alertMaterial : normalMaterial;
+
+    void OnDrawGizmosSelected()
+    {
+        // Vista de escena: bordes del cono (blanco), mirada (verde) y vector al héroe
+        // (rojo si lo ve, gris si no). Se dibuja al alcance real en mundo.
+        Vector3 o = transform.position;
+        Vector2 fwd = Application.isPlaying ? Forward : (Vector2)transform.up;
+        float half = angle * 0.5f;
+        float reach = WorldReach;
+        Vector3 left = VectorMath.AngleToDirection(VectorMath.DirectionToAngle(fwd) + half) * reach;
+        Vector3 right = VectorMath.AngleToDirection(VectorMath.DirectionToAngle(fwd) - half) * reach;
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(o, o + left);
+        Gizmos.DrawLine(o, o + right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(o, o + (Vector3)fwd * reach);
+
+        if (Application.isPlaying && !float.IsInfinity(DistanceToPlayer))
+        {
+            Gizmos.color = IsSeeingPlayer ? Color.red : Color.gray;
+            Gizmos.DrawLine(o, LastSeenPlayerPosition);
+        }
+    }
 }

@@ -97,6 +97,8 @@ public class SpikeTrap : MonoBehaviour
     void PunishOverlapping()
     {
         int mask = CollisionLayers.Resolve(victimLayers, CollisionLayers.PlayerMask);
+        // Solo cuerpos sólidos: el sensor de interacción del héroe (trigger, radio 1)
+        // no debe morir un metro antes de tocar los pinchos.
         var filter = new ContactFilter2D { useTriggers = false, useLayerMask = true, layerMask = mask };
         var hits = new Collider2D[4];
         int count = _col.Overlap(filter, hits);
@@ -107,13 +109,14 @@ public class SpikeTrap : MonoBehaviour
 
     void Punish(Collider2D victim)
     {
-        if (!IsDeadly || _punishedThisCycle || victim == null || victim.isTrigger) return;
+        if (!IsDeadly || _punishedThisCycle || victim == null) return;
+        if (victim.isTrigger) return;                 // el sensor del héroe no es su cuerpo
         int mask = CollisionLayers.Resolve(victimLayers, CollisionLayers.PlayerMask);
         if (!CollisionLayers.Contains(mask, victim.gameObject.layer)) return;
         _punishedThisCycle = true;
 
         Vfx.Spark(victim.transform.position);
-        if (GameManager.Instance != null) GameManager.Instance.PlayerDetected();
+        if (GameManager.Instance != null) GameManager.Instance.PlayerHitByTrap();
     }
 
     /// <summary>

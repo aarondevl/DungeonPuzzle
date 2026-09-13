@@ -241,7 +241,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: up_0
+      name: down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -263,7 +263,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: up_1
+      name: down_1
       rect:
         serializedVersion: 2
         x: 64
@@ -285,7 +285,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: up_2
+      name: down_2
       rect:
         serializedVersion: 2
         x: 128
@@ -307,7 +307,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: up_3
+      name: down_3
       rect:
         serializedVersion: 2
         x: 192
@@ -329,7 +329,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: up_4
+      name: down_4
       rect:
         serializedVersion: 2
         x: 256
@@ -351,7 +351,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: up_5
+      name: down_5
       rect:
         serializedVersion: 2
         x: 320
@@ -637,7 +637,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_0
+      name: up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -659,7 +659,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_1
+      name: up_1
       rect:
         serializedVersion: 2
         x: 64
@@ -681,7 +681,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_2
+      name: up_2
       rect:
         serializedVersion: 2
         x: 128
@@ -703,7 +703,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_3
+      name: up_3
       rect:
         serializedVersion: 2
         x: 192
@@ -725,7 +725,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_4
+      name: up_4
       rect:
         serializedVersion: 2
         x: 256
@@ -747,7 +747,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: down_5
+      name: up_5
       rect:
         serializedVersion: 2
         x: 320

@@ -6,8 +6,14 @@ public class Stone : PickupItem
     [Tooltip("Distancia a la que aparece la piedra por delante del lanzador.")]
     [SerializeField] float spawnOffset = 0.55f;
 
-    public override void OnPickedUp(PlayerInventory inventory) =>
+    public override void OnPickedUp(PlayerInventory inventory)
+    {
         SfxLibrary.Play("SFX/stone_pickup");
+        // Se lanza ANTES de que el inventario desactive la piedra.
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr != null) PickupPop.Spawn(sr, 1.5f, 0.25f);
+        inventory.GetComponent<PlayerFeedback>()?.Punch(1.12f, 0.16f);
+    }
 
     /// <param name="thrower">Collider del lanzador; se ignora para que la piedra no lo empuje.</param>
     public void Throw(Vector2 origin, Vector2 target, Collider2D thrower = null)

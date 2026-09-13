@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 public class PlayerInteraction : MonoBehaviour
 {
     PlayerInventory _inventory;
+    PlayerMovement _movement;
     InteractionSensor _sensor;
     Collider2D _ownCollider;
     Camera _cam;
@@ -20,6 +21,7 @@ public class PlayerInteraction : MonoBehaviour
     void Awake()
     {
         _inventory = GetComponent<PlayerInventory>();
+        _movement = GetComponent<PlayerMovement>();
         // Se añade en caliente si el prefab aún no lo trae: RequireComponent solo
         // actúa al añadir el script, no sobre prefabs ya guardados.
         _sensor = GetComponent<InteractionSensor>();
@@ -72,10 +74,23 @@ public class PlayerInteraction : MonoBehaviour
     void TryThrow()
     {
         if (!_inventory.HasItem<Stone>()) return;
-        if (_cam == null) _cam = Camera.main;
-        if (_cam == null || Mouse.current == null) return;
+        Vector2 origin = transform.position;                       // punto de lanzamiento
+        Vector2 target = AimPoint(origin);
         var stone = _inventory.TakeItem() as Stone;
-        Vector2 mouseWorld = _cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        stone.Throw(transform.position, mouseWorld, _ownCollider);
+        stone.Throw(origin, target, _ownCollider);
+    }
+
+    /// <summary>
+    /// Punto del mundo al que se apunta. Con ratón: la posición del cursor pasada de
+    /// coordenadas de PANTALLA (píxeles) a coordenadas de MUNDO. Sin ratón: un punto
+    /// a una unidad por delante del héroe en su dirección de mirada.
+    /// </summary>
+    Vector2 AimPoint(Vector2 origin)
+    {
+        if (_cam == null) _cam = Camera.main;
+        if (_cam != null && Mouse.current != null)
+            return _cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 facing = _movement != null ? _movement.Facing : Vector2.up;
+        return origin + facing;
     }
 }

@@ -24,11 +24,13 @@ Una celda = una unidad del mundo; cada sala mide 26x14 y la cámara se ajusta so
 
 ## Recorrido previsto
 
-1. **La celda**: llave → puerta, cruzar el corredor entre los dos bloques esquivando al guardia de arriba y al que vigila la salida.
-2. **Los pasillos**: la patrulla da vueltas al bloque central; lanzar la piedra al lado contrario, accionar la palanca y bajar a la reja.
-3. **La armería**: la placa de la celda abre el pasillo de pinchos; la llave está en la esquina opuesta y abre la reja doble de la sala de la salida.
-4. **La guardia**: palanca en la celda, dos patrullas que se cruzan, llave abajo a la izquierda y salida en el cuarto de arriba a la derecha.
-5. **El patio**: placa en la celda, dos piedras, tres guardias y dos patrullas; la llave del portón está junto a los pinchos.
+1. **La celda**: solo sigilo. La reja de la celda está rota; una patrulla rodea el bloque de arriba y un guardia fijo vigila la salida. El corredor entre los dos bloques es la ruta segura.
+2. **La llave**: primera puerta. La llave está en la zona de partida y vuela sola hasta la reja del pasillo; una patrulla rodea el bloque central y un guardia cubre la salida.
+3. **Los pasillos**: piedra y palanca. La palanca abre la reja doble de la celda, el guardia del puesto central mira por su ventana y la patrulla de la derecha se puede atraer con la piedra. Pinchos en el tramo bajo.
+4. **La armería**: placa y dos puertas. La placa de la celda abre el pasillo de pinchos que patrulla un guardia; la llave está en la esquina opuesta y abre la reja doble de la sala de la salida. Hay que ir y volver.
+5. **El patio**: final. Placa en la celda, dos piedras, dos patrullas que se cruzan, dos guardias fijos y la llave del portón doble junto a los pinchos.
+
+Cada sala tiene su propio tinte de muros, suelo y antorchas (piedra fría, arenisca, musgo, ladrillo rojizo, noche azul) para reconocerla de un vistazo.
 
 Para cambiar un nivel: edita el mapa en el archivo, valida con **Niveles → Validar mapas**
 (comprueba anchos, que haya un `P` y un `E`, que cada puerta tenga forma de abrirse y que

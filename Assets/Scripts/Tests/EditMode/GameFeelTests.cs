@@ -55,7 +55,8 @@ public class GameFeelTests
     public void RoomHint_LaPrimeraSalaEnsenaLosControles()
     {
         Assert.That(GameManager.RoomHint(1), Does.Contain("WASD"));
-        Assert.That(GameManager.RoomHint(2), Does.Contain("PIEDRA"));
+        Assert.That(GameManager.RoomHint(2), Does.Contain("LLAVE"));
+        Assert.That(GameManager.RoomHint(3), Does.Contain("PIEDRA"));
         Assert.That(GameManager.RoomHint(5), Is.Not.Empty);
     }
 }

@@ -34,99 +34,100 @@ public static class LevelDesigner
 
     public static readonly string[][] Maps =
     {
-        // Room_01 — LA CELDA. Tutorial: llave → puerta, un guardia arriba y otro
-        // vigilando la salida; el corredor central entre los dos bloques es la ruta segura.
+        // Room_01 — LA CELDA. Solo sigilo: la reja de la celda está rota (abierta por
+        // abajo), una patrulla da vueltas al bloque de arriba y un guardia fijo vigila
+        // la salida. El corredor entre los dos bloques es la ruta segura.
         new[]
         {
             "##########################",
-            "#P....#.......G..........#",
-            "#.....#..................#",
-            "#..a..#....######........#",
-            "#.....A....#....#........#",
-            "#.....#....#....#.....*..#",
-            "#######....#....#........#",
+            "#P....#..................#",
+            "#.....#....m.......m.....#",
+            "#.....#....######........#",
+            "#.....#....######.....*..#",
+            "#....##....######........#",
             "#..........######.....E..#",
+            "#..........m.......m.....#",
             "#...T....................#",
-            "#........................#",
-            "#...*......######........#",
-            "#..........#....#...G....#",
             "#..........######........#",
+            "#...*......######...G....#",
+            "#..........######........#",
+            "#........................#",
             "##########################",
         },
 
-        // Room_02 — LOS PASILLOS. Una patrulla recorre el anillo alrededor del bloque
-        // central; la piedra sirve para atraerla al lado contrario. La palanca abre la
-        // reja de abajo, que da al pasillo de la salida.
+        // Room_02 — LA LLAVE. Primera puerta: la llave está en la zona de partida y
+        // abre la reja del pasillo izquierdo. Una patrulla rodea el bloque central y un
+        // guardia fijo cubre la salida.
         new[]
         {
             "##########################",
-            "#P.......#...m.......m...#",
-            "#........#...............#",
-            "#..S.....#.....######....#",
-            "#........#.....#....#....#",
-            "#....#####.....#....#....#",
-            "#....#.........#....#....#",
-            "#....#.........######....#",
+            "#P.......#...............#",
+            "#........#..m.......m....#",
+            "#..a.....#...............#",
+            "#........#.....####......#",
+            "#....#####.....####......#",
+            "#....#.........####......#",
+            "#....#.........####......#",
+            "#....A...................#",
+            "#....#......m.......m....#",
             "#....#...................#",
-            "#..1.#.......m.......m...#",
-            "#....#...................#",
-            "#....#####AA######.......#",
-            "#..*.............#...E...#",
+            "#....#####...G...........#",
+            "#..*.#...............E...#",
             "##########################",
         },
 
-        // Room_03 — LA ARMERÍA. Dos puertas: la placa (5) de la celda abre la A y da al
-        // pasillo de pinchos; la llave b está en la esquina opuesta, vigilada, y abre la
-        // reja doble B de la sala superior donde está la salida. Hay que ir y volver.
+        // Room_03 — LOS PASILLOS. Piedra y palanca: la palanca abre la reja doble de la
+        // celda; el guardia del puesto central mira por su ventana y la patrulla de la
+        // derecha se puede atraer con la piedra. Pinchos en el tramo bajo.
+        new[]
+        {
+            "##########################",
+            "#P....#..........m.....m.#",
+            "#..S..#..................#",
+            "#.....#....#######.......#",
+            "#.....#....#.....#.......#",
+            "#.....#....#..G..#.......#",
+            "#..1..#....#.....#.......#",
+            "#.....#....###.###.......#",
+            "#....AA..........m.....m.#",
+            "#######..................#",
+            "#.....T..........T.......#",
+            "#........#####...........#",
+            "#..*.....#####.......E...#",
+            "##########################",
+        },
+
+        // Room_04 — LA ARMERÍA. Placa y dos puertas: la placa de la celda abre la A y
+        // da al pasillo de pinchos que patrulla un guardia; la llave b está en la esquina
+        // opuesta y abre la reja doble B de la sala de la salida. Hay que ir y volver.
         new[]
         {
             "##########################",
             "#P...#.......#.......*...#",
-            "#....#...G...#......E....#",
+            "#....#...q...#......E....#",
             "#....#.......#...........#",
             "#....A.......######BB#####",
-            "#....#...T...#...........#",
+            "#....#..T....#...........#",
+            "#....#...q...#....n......#",
+            "#.5..#....T..#...........#",
             "#....#.......#...........#",
-            "#.5..#...T...#.....G.....#",
-            "#....#.......#...........#",
-            "######.....###...........#",
+            "######.....###....n......#",
             "#........................#",
             "#..*....G.............b..#",
             "#........................#",
             "##########################",
         },
 
-        // Room_04 — LA GUARDIA. Dos patrullas se cruzan en el pasillo en cruz; la llave
-        // está en el cuarto de arriba a la derecha y la palanca abre la reja de salida
-        // desde el otro extremo, así que hay que cruzar dos veces.
-        new[]
-        {
-            "##########################",
-            "#P.......#..m......m.#...#",
-            "#........#...........#.E.#",
-            "#..S...1.#...........#...#",
-            "#........#....###....#...#",
-            "######A###....#.#....##B##",
-            "#.............#.#........#",
-            "#...q.....T...#.#...T....#",
-            "#.............#.#........#",
-            "#.............###........#",
-            "#...q.......m......m.....#",
-            "#..........####..........#",
-            "#..b.......#..#....*.....#",
-            "##########################",
-        },
-
-        // Room_05 — EL PATIO. Final: tres guardias, dos piedras, placa y llave en
-        // lados opuestos, y la puerta doble del portón antes de la salida definitiva.
+        // Room_05 — EL PATIO. Final: placa en la celda, dos piedras, dos patrullas que
+        // se cruzan, dos guardias fijos, y la llave del portón doble junto a los pinchos.
         new[]
         {
             "##########################",
             "#P....#.....m.......m....#",
             "#..S..#..................#",
             "#..S..#......####........#",
-            "#.....A......#..#.....G..#",
-            "#..5..#......#..#........#",
+            "#.....A......####.....G..#",
+            "#..5..#......####........#",
             "######.......####....#####",
             "#.......n........n....b..#",
             "#.......................T#",
@@ -138,7 +139,19 @@ public static class LevelDesigner
         },
     };
 
-    static readonly string[] Titles = { "La celda", "Los pasillos", "La armería", "La guardia", "El patio" };
+    static readonly string[] Titles = { "La celda", "La llave", "Los pasillos", "La armería", "El patio" };
+
+    /// <summary>Aspecto por sala: tinte de muros, de suelo y color de antorchas, para que cada una se reconozca.</summary>
+    struct Theme { public Color Wall, Floor, Torch; }
+    static readonly Theme[] Themes =
+    {
+        // Muros claros y suelo oscuro: el contraste es lo que hace legible por dónde se pasa.
+        new Theme { Wall = new Color(0.85f, 0.85f, 0.92f), Floor = new Color(0.34f, 0.36f, 0.44f), Torch = new Color(1f, 0.85f, 0.6f) },   // celda: piedra fría
+        new Theme { Wall = new Color(0.95f, 0.82f, 0.62f), Floor = new Color(0.40f, 0.33f, 0.24f), Torch = new Color(1f, 0.8f, 0.5f) },    // llave: arenisca cálida
+        new Theme { Wall = new Color(0.70f, 0.92f, 0.70f), Floor = new Color(0.26f, 0.36f, 0.26f), Torch = new Color(0.8f, 1f, 0.7f) },    // pasillos: musgo
+        new Theme { Wall = new Color(0.98f, 0.72f, 0.62f), Floor = new Color(0.40f, 0.27f, 0.24f), Torch = new Color(1f, 0.6f, 0.4f) },    // armería: ladrillo rojizo
+        new Theme { Wall = new Color(0.72f, 0.76f, 1.00f), Floor = new Color(0.22f, 0.26f, 0.42f), Torch = new Color(0.7f, 0.8f, 1f) },    // patio: noche azul
+    };
 
     // ---------------------------------------------------------------- entrada
 
@@ -253,12 +266,19 @@ public static class LevelDesigner
         Vector2 World(int r, int c) => new Vector2(c - w / 2f + 0.5f, h / 2f - r - 0.5f);
 
         // Suelo y cámara ajustados al tamaño del mapa.
+        Theme theme = Themes[index];
         var floor = Revive(t.Floor, "FloorTiled");
         if (floor != null)
         {
             floor.transform.position = Vector3.zero;
             var fsr = floor.GetComponent<SpriteRenderer>();
-            if (fsr != null) { fsr.drawMode = SpriteDrawMode.Tiled; fsr.size = new Vector2(w, h); }
+            if (fsr != null)
+            {
+                fsr.sprite = Sprite("floor_stone") ?? fsr.sprite;
+                fsr.color = theme.Floor;
+                fsr.drawMode = SpriteDrawMode.Tiled;
+                fsr.size = new Vector2(w, h);
+            }
         }
         var cam = Camera.main;
         if (cam != null)
@@ -267,7 +287,7 @@ public static class LevelDesigner
             cam.orthographicSize = Mathf.Max(h / 2f, w / 2f / (16f / 9f)) + 0.25f;
         }
 
-        BuildWalls(map, t.Wall, World);
+        BuildWalls(map, t.Wall, World, theme.Wall);
 
         // Entidades.
         var doors = new Dictionary<char, Door>();
@@ -289,8 +309,11 @@ public static class LevelDesigner
                     case 'E': exit = pos; break;
                     case 'G': statics.Add((r, c)); break;
                     case 'T': spikes.Add(pos); break;
-                    case 'S': Place(P("Assets/Prefabs/Stone.prefab"), $"Stone_{r}_{c}", pos); break;
-                    case '*': Torch($"PointLight_{r}_{c}", pos); break;
+                    case 'S':
+                        // La piedra mide media unidad: se agranda para que se vea desde lejos.
+                        Place(P("Assets/Prefabs/Stone.prefab"), $"Stone_{r}_{c}", pos).transform.localScale = Vector3.one * 1.6f;
+                        break;
+                    case '*': Torch($"PointLight_{r}_{c}", pos, theme.Torch); break;
                     case >= 'A' and <= 'D':
                         if (!doorCells.ContainsKey(ch)) doorCells[ch] = new List<(int, int)>();
                         doorCells[ch].Add((r, c));
@@ -390,7 +413,7 @@ public static class LevelDesigner
     }
 
     /// <summary>Muros: tramos horizontales de '#' y, para los de una celda, tramos verticales.</summary>
-    static void BuildWalls(string[] map, GameObject wallTemplate, System.Func<int, int, Vector2> world)
+    static void BuildWalls(string[] map, GameObject wallTemplate, System.Func<int, int, Vector2> world, Color tint)
     {
         int h = map.Length, w = map[0].Length;
         var used = new bool[h, w];
@@ -408,7 +431,7 @@ public static class LevelDesigner
                 if (len == 1) continue;                      // se resuelve en la pasada vertical
                 for (int k = start; k < c; k++) used[r, k] = true;
                 Vector2 center = (world(r, start) + world(r, c - 1)) * 0.5f;
-                MakeWall(wallTemplate, $"Wall_{++n}", center, new Vector2(len, 1f));
+                MakeWall(wallTemplate, $"Wall_{++n}", center, new Vector2(len, 1f), tint);
             }
         }
         for (int c = 0; c < w; c++)
@@ -422,12 +445,14 @@ public static class LevelDesigner
                 int len = r - start;
                 for (int k = start; k < r; k++) used[k, c] = true;
                 Vector2 center = (world(start, c) + world(r - 1, c)) * 0.5f;
-                MakeWall(wallTemplate, $"Wall_{++n}", center, new Vector2(1f, len));
+                MakeWall(wallTemplate, $"Wall_{++n}", center, new Vector2(1f, len), tint);
             }
         }
     }
 
-    static GameObject MakeWall(GameObject template, string name, Vector2 pos, Vector2 size)
+    static Sprite Sprite(string name) => AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Sprites/Game/{name}.png");
+
+    static GameObject MakeWall(GameObject template, string name, Vector2 pos, Vector2 size, Color tint)
     {
         GameObject go;
         if (template != null) { go = Object.Instantiate(template); go.SetActive(true); go.hideFlags = HideFlags.None; }
@@ -437,23 +462,56 @@ public static class LevelDesigner
         go.transform.position = new Vector3(pos.x, pos.y, 0f);
         go.transform.localScale = Vector3.one;
         var sr = go.GetComponent<SpriteRenderer>();
-        if (sr != null) { sr.drawMode = SpriteDrawMode.Tiled; sr.size = size; }
+        if (sr == null) sr = go.AddComponent<SpriteRenderer>();
+        // Ladrillo de 64 px a 64 px/unidad: un ladrillo por celda, sin oscurecer, para
+        // que muro y suelo se distingan a simple vista.
+        sr.sprite = Sprite("wall") ?? sr.sprite;
+        sr.color = tint;
+        sr.drawMode = SpriteDrawMode.Tiled;
+        sr.size = size;
         var box = go.GetComponent<BoxCollider2D>();
-        if (box != null) { box.size = size; box.offset = Vector2.zero; }
+        if (box == null) box = go.AddComponent<BoxCollider2D>();
+        box.size = size; box.offset = Vector2.zero;
         return go;
     }
 
-    /// <summary>Puerta escalada para cubrir exactamente sus celdas.</summary>
+    /// <summary>
+    /// Puerta ajustada a sus celdas. El sprite de la puerta mide 1x3 unidades y el
+    /// collider del prefab es diminuto, así que la escala se calcula desde el sprite y
+    /// el collider se fija después para cubrir exactamente el hueco. En un muro
+    /// horizontal (varias celdas en fila) la puerta se tumba 90°.
+    /// </summary>
     static Door MakeDoor(string name, Vector2 center, Vector2 cells)
     {
         var go = Place(P("Assets/Prefabs/Door.prefab"), name, center);
-        go.transform.localScale = Vector3.one;
-        Physics2D.SyncTransforms();
-        var col = go.GetComponent<Collider2D>();
-        Vector2 unit = col != null ? (Vector2)col.bounds.size : Vector2.one;
-        if (unit.x < 0.01f) unit.x = 1f;
-        if (unit.y < 0.01f) unit.y = 1f;
-        go.transform.localScale = new Vector3(cells.x / unit.x, cells.y / unit.y, 1f);
+        var sr = go.GetComponent<SpriteRenderer>();
+        Vector2 sprite = sr != null && sr.sprite != null ? (Vector2)sr.sprite.bounds.size : new Vector2(1f, 3f);
+        if (sprite.x < 0.01f) sprite.x = 1f;
+        if (sprite.y < 0.01f) sprite.y = 3f;
+
+        bool horizontal = cells.x > cells.y;
+        Vector2 scale;
+        if (horizontal)
+        {
+            go.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            scale = new Vector2(cells.y / sprite.x, cells.x / sprite.y);
+        }
+        else
+        {
+            go.transform.rotation = Quaternion.identity;
+            // Un poco más alta que el hueco para que parezca encajada en el muro.
+            scale = new Vector2(cells.x / sprite.x, (cells.y + 0.8f) / sprite.y);
+        }
+        go.transform.localScale = new Vector3(scale.x, scale.y, 1f);
+
+        var box = go.GetComponent<BoxCollider2D>();
+        if (box != null)
+        {
+            // Tamaño local = celdas del hueco divididas por la escala (tras la rotación).
+            box.size = horizontal ? new Vector2(cells.y / scale.x, cells.x / scale.y)
+                                  : new Vector2(cells.x / scale.x, cells.y / scale.y);
+            box.offset = Vector2.zero;
+        }
         return go.GetComponent<Door>();
     }
 
@@ -481,13 +539,13 @@ public static class LevelDesigner
         return points.OrderBy(p => Mathf.Atan2(p.y - centroid.y, p.x - centroid.x)).ToList();
     }
 
-    static void Torch(string name, Vector2 pos)
+    static void Torch(string name, Vector2 pos, Color color)
     {
         var go = new GameObject(name);
         go.transform.position = new Vector3(pos.x, pos.y, 0f);
         var l = go.AddComponent<Light2D>();
         l.lightType = Light2D.LightType.Point;
-        l.color = new Color(1f, 0.8f, 0.5f, 1f);
+        l.color = color;
         l.intensity = 1.3f;
         l.pointLightOuterRadius = 4.5f;
         l.pointLightInnerRadius = 0.4f;

@@ -271,8 +271,11 @@ public class GameManager : MonoBehaviour
     /// <summary>Pista que acompaña al cartel de entrada de cada sala.</summary>
     public static string RoomHint(int level) => level switch
     {
-        1 => "WASD MOVER · E RECOGER · EVITA EL CONO DEL GUARDIA",
-        2 => "F LANZA LA PIEDRA · EL RUIDO ATRAE A LOS GUARDIAS",
+        1 => "LA CELDA · WASD MOVER · E RECOGE LA LLAVE · EVITA LOS CONOS",
+        2 => "LOS PASILLOS · F LANZA LA PIEDRA · LA PALANCA ABRE LA REJA",
+        3 => "LA ARMERÍA · PISA LA PLACA · LA LLAVE ESTÁ AL OTRO LADO",
+        4 => "LA GUARDIA · DOS PATRULLAS · LA LLAVE ABRE LA SALA DE ARRIBA",
+        5 => "EL PATIO · ÚLTIMA SALA · EL PORTÓN NECESITA SU LLAVE",
         _ => "ENCUENTRA LA SALIDA SIN QUE TE VEAN",
     };
 

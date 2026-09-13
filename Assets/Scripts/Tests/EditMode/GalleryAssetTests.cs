@@ -12,6 +12,13 @@ public class GalleryAssetTests
         "Gallery_EnergyBarrier", "Gallery_IceCrystal", "Gallery_PoisonCloud"
     };
 
+    static readonly string[] EnvironmentTextures =
+    {
+        "Assets/Sprites/Environment/ThirdParty/KnowledgeTemple/Tileset.png",
+        "Assets/Sprites/Environment/ThirdParty/DeadSwamp/dead-swamp-v4.png",
+        "Assets/Sprites/Environment/ThirdParty/SwampACTG/SwampACTG.png"
+    };
+
     [Test]
     public void AnimatedGalleryPrefabs_HaveRendererAndFlipbook()
     {
@@ -67,5 +74,77 @@ public class GalleryAssetTests
             if (openedForTest)
                 EditorSceneManager.CloseScene(gallery, true);
         }
+    }
+
+    [Test]
+    public void BiomeGallery_UsesPixelArtFromEveryEnvironmentPack()
+    {
+        const string scenePath = "Assets/Scenes/Prototypes/BiomeGallery_Demo.unity";
+        string[] dependencies = AssetDatabase.GetDependencies(scenePath, true);
+
+        foreach (string texturePath in EnvironmentTextures)
+        {
+            Assert.That(dependencies, Does.Contain(texturePath), texturePath);
+
+            var importer = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+            Assert.That(importer, Is.Not.Null, texturePath);
+            Assert.That(importer.filterMode, Is.EqualTo(FilterMode.Point), texturePath);
+            Assert.That(importer.textureCompression, Is.EqualTo(TextureImporterCompression.Uncompressed), texturePath);
+            Assert.That(importer.mipmapEnabled, Is.False, texturePath);
+        }
+
+        Assert.That(AssetDatabase.LoadAssetAtPath<TextAsset>(
+            "Assets/Sprites/Environment/ThirdParty/THIRD-PARTY-NOTICES.txt"), Is.Not.Null);
+
+        Scene gallery = SceneManager.GetSceneByPath(scenePath);
+        bool openedForTest = !gallery.IsValid() || !gallery.isLoaded;
+        if (openedForTest)
+            gallery = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+
+        try
+        {
+            GameObject[] roots = gallery.GetRootGameObjects();
+            AssertBiomeUsesPack(roots, "Biome_Forest", "/SwampACTG/");
+            AssertBiomeUsesPack(roots, "Biome_ArcaneRuins", "/KnowledgeTemple/");
+            AssertBiomeUsesPack(roots, "Biome_AlchemyMarsh", "/DeadSwamp/");
+
+            var usedEnvironmentTextures = new System.Collections.Generic.HashSet<string>();
+            foreach (GameObject root in roots)
+            foreach (SpriteRenderer renderer in root.GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                string path = AssetDatabase.GetAssetPath(renderer.sprite);
+                if (path.StartsWith("Assets/Sprites/Environment/ThirdParty/"))
+                    usedEnvironmentTextures.Add(path);
+            }
+
+            Assert.That(usedEnvironmentTextures.Count, Is.GreaterThan(EnvironmentTextures.Length));
+            foreach (string texturePath in usedEnvironmentTextures)
+                AssertPixelArtImporter(texturePath);
+        }
+        finally
+        {
+            if (openedForTest)
+                EditorSceneManager.CloseScene(gallery, true);
+        }
+    }
+
+    static void AssertBiomeUsesPack(GameObject[] roots, string biomeName, string packFolder)
+    {
+        GameObject biome = System.Array.Find(roots, root => root.name == biomeName);
+        Assert.That(biome, Is.Not.Null, biomeName);
+
+        bool usesPack = System.Array.Exists(
+            biome.GetComponentsInChildren<SpriteRenderer>(true),
+            renderer => AssetDatabase.GetAssetPath(renderer.sprite).Contains(packFolder));
+        Assert.That(usesPack, Is.True, $"{biomeName} must use sprites from {packFolder}");
+    }
+
+    static void AssertPixelArtImporter(string texturePath)
+    {
+        var importer = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+        Assert.That(importer, Is.Not.Null, texturePath);
+        Assert.That(importer.filterMode, Is.EqualTo(FilterMode.Point), texturePath);
+        Assert.That(importer.textureCompression, Is.EqualTo(TextureImporterCompression.Uncompressed), texturePath);
+        Assert.That(importer.mipmapEnabled, Is.False, texturePath);
     }
 }

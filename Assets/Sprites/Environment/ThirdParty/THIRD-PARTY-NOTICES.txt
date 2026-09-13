@@ -1,0 +1,21 @@
+Third-party environment art used by BiomeGallery_Demo
+
+Knowledge Temple
+Author: PinguPollas
+Source: https://pingupollas.itch.io/knowledge-temple
+Terms published by the author: use in personal and commercial projects and
+modification are allowed; credit is required; redistribution as a standalone
+asset pack is not allowed.
+
+Dead Swamp Tileset
+Author credit: Sevarihk / Aurora
+Source: https://sevarihk.itch.io/dead-swamp-tileset
+License: Creative Commons Attribution 4.0 (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+The author's original README is preserved in DeadSwamp/ORIGINAL-README.txt.
+
+Swamp
+Author: ACTG
+Source: https://actg.itch.io/swamp
+License: CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/

@@ -50,6 +50,7 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.isTrigger) return;              // el sensor del héroe no pesa: solo su cuerpo
         int mask = CollisionLayers.Resolve(acceptedLayers, CollisionLayers.PlayerMask | CollisionLayers.GuardMask);
         if (!CollisionLayers.Contains(mask, other.gameObject.layer)) return;
         if (_occupants.Contains(other)) return;

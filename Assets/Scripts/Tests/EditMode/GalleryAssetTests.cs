@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GalleryAssetTests
 {
@@ -31,5 +33,39 @@ public class GalleryAssetTests
         Assert.That(prefab, Is.Not.Null);
         Assert.That(prefab.GetComponentInChildren<SpriteRenderer>(), Is.Not.Null);
         Assert.That(prefab.GetComponentInChildren<Rigidbody2D>(), Is.Null);
+    }
+
+    [Test]
+    public void BiomeGallery_HasPlayerBiomesAndThreeReturnPortals()
+    {
+        const string scenePath = "Assets/Scenes/Prototypes/BiomeGallery_Demo.unity";
+        Scene gallery = SceneManager.GetSceneByPath(scenePath);
+        bool openedForTest = !gallery.IsValid() || !gallery.isLoaded;
+        if (openedForTest)
+            gallery = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+
+        try
+        {
+            GameObject[] roots = gallery.GetRootGameObjects();
+            Assert.That(System.Array.Exists(roots, root => root.name == "CentralPlaza"), Is.True);
+            Assert.That(System.Array.Exists(roots, root => root.name == "Biome_Forest"), Is.True);
+            Assert.That(System.Array.Exists(roots, root => root.name == "Biome_ArcaneRuins"), Is.True);
+            Assert.That(System.Array.Exists(roots, root => root.name == "Biome_AlchemyMarsh"), Is.True);
+
+            GameObject systems = System.Array.Find(roots, root => root.name == "Systems");
+            Assert.That(systems, Is.Not.Null);
+            Assert.That(systems.transform.Find("Player"), Is.Not.Null);
+            Assert.That(systems.GetComponentInChildren<SpawnPoint>(true), Is.Not.Null);
+
+            int portalCount = 0;
+            foreach (GameObject root in roots)
+                portalCount += root.GetComponentsInChildren<GalleryReturnPortal>(true).Length;
+            Assert.That(portalCount, Is.EqualTo(3));
+        }
+        finally
+        {
+            if (openedForTest)
+                EditorSceneManager.CloseScene(gallery, true);
+        }
     }
 }

@@ -178,14 +178,22 @@ public class VisionCone : MonoBehaviour
             DistanceToPlayer = toPlayer.magnitude;
             AngleToPlayer = VectorMath.AngleBetween(Forward, toPlayer);
 
-            sees = VectorMath.IsInsideCone(Origin, Forward, playerPoint, angle * 0.5f, worldReach)
-                && HasLineOfSight(Origin, playerPoint);
+            sees = CanSee(playerPoint);
             if (sees) LastSeenPlayerPosition = playerPoint;
         }
 
         IsSeeingPlayer = sees;
         if (sees) OnPlayerDetected?.Invoke();
     }
+
+    /// <summary>
+    /// ¿Vería el guardia un punto del MUNDO? Misma regla que la detección real:
+    /// dentro del alcance en mundo, dentro de la apertura y sin muro en medio.
+    /// Público para que los tests midan hasta dónde reconoce el cono.
+    /// </summary>
+    public bool CanSee(Vector2 worldPoint) =>
+        VectorMath.IsInsideCone(Origin, Forward, worldPoint, angle * 0.5f, WorldReach)
+        && HasLineOfSight(Origin, worldPoint);
 
     /// <summary>Un muro entre los dos puntos bloquea la visión aunque el ángulo cuadre.</summary>
     bool HasLineOfSight(Vector2 from, Vector2 to)

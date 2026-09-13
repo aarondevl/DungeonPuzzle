@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel(int level)
     {
+        CancelSequences();
         Lives = 3;
         IsWin = false;
         ResumeTime();
@@ -166,6 +167,22 @@ public class GameManager : MonoBehaviour
 
     /// <summary>El héroe ha pisado una trampa armada.</summary>
     public void PlayerHitByTrap() => Caught("¡TRAMPA!", "SFX/stone_land");
+
+    /// <summary>
+    /// La navegación explícita (nueva partida, reintentar, menú) manda sobre cualquier
+    /// captura, salida o viaje que esté a medias: se cortan sus corrutinas y se
+    /// restablecen tiempo y bloqueo. Sin esto, una captura iniciada justo antes de
+    /// cambiar de sala dejaba el juego "en transición" para siempre y recargaba la
+    /// sala equivocada al terminar.
+    /// </summary>
+    void CancelSequences()
+    {
+        StopAllCoroutines();
+        _isTransitioning = false;
+        _pendingSpawnId = null;
+        ScreenTransition.HideBanner();
+        Time.timeScale = 1f;
+    }
 
     void Caught(string title, string sfx)
     {
@@ -285,6 +302,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        CancelSequences();
         ResumeTime();
         _trackTimer = false;
         SceneManager.LoadScene("MainMenu");
@@ -292,6 +310,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartCurrentRoom()
     {
+        CancelSequences();
         ResumeTime();
         Lives = 3;
         RoomTime = 0f;

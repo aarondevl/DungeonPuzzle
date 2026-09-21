@@ -1,6 +1,7 @@
 ﻿<Solution>
-  <Project Path="DungeonPuzzle.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="DungeonPuzzle.Runtime.csproj" />
   <Project Path="DungeonPuzzle.Tests.csproj" />
+  <Project Path="DungeonPuzzle.PlayModeTests.csproj" />
+  <Project Path="DungeonPuzzle.Editor.csproj" />
 </Solution>

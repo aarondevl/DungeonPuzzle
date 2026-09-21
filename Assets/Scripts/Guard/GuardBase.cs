@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class GuardBase : MonoBehaviour
 {
-    protected enum GuardState { Normal, Alerted }
+    protected enum GuardState { Normal, Investigating, Alerted }
     protected GuardState State = GuardState.Normal;
 
     [SerializeField] protected float alertDuration = 3f;
@@ -16,6 +16,7 @@ public abstract class GuardBase : MonoBehaviour
     float _spotTimer;
     bool _spotConfirmed;
     Coroutine _returnRoutine;
+    protected Vector3 lastNoisePosition;
 
     /// <summary>Estado legible desde fuera (HUD de demostración, herramientas).</summary>
     public bool IsAlerted => State == GuardState.Alerted;
@@ -117,6 +118,26 @@ public abstract class GuardBase : MonoBehaviour
         VisionCone.SetAlerted(false);
         OnReturnToNormal();
     }
+
+    public virtual void HearNoise(Vector3 impactPosition)
+{
+    // Si ya está persiguiendo al jugador, ignora la piedra
+    if (State != GuardState.Alerted)
+    {
+        lastNoisePosition = impactPosition;
+        State = GuardState.Investigating;
+    }
+}
+
+public void TriggerNoise(Vector2 noisePos)
+{
+    // Solo investiga si está en estado normal (si ya está alertado/persiguiendo, ignora la piedra)
+    if (State == GuardState.Normal)
+    {
+        State = GuardState.Alerted;
+        OnNoiseAlerted(noisePos);
+    }
+}
 
     protected virtual void OnAlerted() => GameManager.Instance.PlayerDetected();
     protected virtual void OnVisionAlerted(Vector2 position) { }

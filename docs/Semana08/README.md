@@ -133,6 +133,9 @@ pantalla y el movimiento parece continuo.
 - `FactorFromDepth`: 0 en el suelo, tiende a 1 en el infinito, negativo en primer plano.
 - Tras 1000 unidades de recorrido una capa envuelta sigue a menos de medio mosaico de su origen.
 
+Resultado en Unity `6000.5.0b10`: suite EditMode completa **139/139** en verde, incluidos
+los 13 casos de `ParallaxLayerTests`. El informe de `Construir todo` da **16/16 OK**.
+
 ---
 
 ## 3. Vectores aplicados

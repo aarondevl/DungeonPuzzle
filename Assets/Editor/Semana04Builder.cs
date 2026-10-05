@@ -417,7 +417,24 @@ public static class Semana04Builder
         go.name = name;
         go.layer = CollisionLayers.Walls;
         go.transform.position = new Vector3(pos.x, pos.y, 0f);
-        go.transform.localScale = new Vector3(size.x, size.y, 1f);
+
+        // La plantilla de las salas ya es un sprite en mosaico (DrawMode.Tiled) con su
+        // collider dimensionado en unidades de mundo. Escalar el transform MULTIPLICA
+        // ese tamaño (16×3 · 16×0.5 = 256×1.5) y el muro tapa y bloquea la sala entera.
+        // Por eso el tamaño se aplica al sprite y al collider, con escala 1.
+        var sr = go.GetComponent<SpriteRenderer>();
+        var box = go.GetComponent<BoxCollider2D>();
+        bool tiled = sr != null && sr.drawMode != SpriteDrawMode.Simple;
+        if (tiled)
+        {
+            go.transform.localScale = Vector3.one;
+            sr.size = size;
+            if (box != null) { box.size = size; box.offset = Vector2.zero; }
+        }
+        else
+        {
+            go.transform.localScale = new Vector3(size.x, size.y, 1f);
+        }
         return go;
     }
 

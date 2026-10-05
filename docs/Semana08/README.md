@@ -104,13 +104,18 @@ naranja dibuja el vector desde el origen de la capa hasta su posición actual.
 
 | Capa | Sorting layer | Factor | Deriva | Mosaico | Textura |
 |---|---|---|---|---|---|
-| `Parallax_Depth` | FloorFX (+5) | `0.12` | ninguna | 2 u | `parallax_cracks.png`, 128 px, grietas con caminatas aleatorias que envuelven en los bordes |
-| `Parallax_Fog` | FX (−5) | `−0.25` | `(0.12, 0.04)` u/s | 4 u | `parallax_fog.png`, 256 px, ruido de valor en tres octavas, periódico |
+| `Parallax_Depth` | FloorFX (+5) | `0.12` | ninguna | 2 u | `parallax_cracks.png`, 128 px a 64 px/u, grietas con caminatas aleatorias que envuelven en los bordes. Opacidad 45 %. |
+| `Parallax_Fog` | FX (−5) | `−0.25` | `(0.12, 0.04)` u/s | 8 u | `parallax_fog.png`, 256 px a 32 px/u, ruido de valor en tres octavas, periódico. Opacidad 9 %. |
 
 Las dos texturas se generan por código en `Semana08Builder` para que el mosaico
 no tenga costuras: las grietas avanzan con aritmética modular y la niebla usa una
 retícula que envuelve. Se importan como sprite con `FullRect`, imprescindible para
 el `DrawMode.Tiled`, y `Wrap = Repeat`.
+
+Las dos capas usan el material **`Sprite-Unlit-Default`** de URP. Con el material
+iluminado, las luces 2D de cada sala realzaban la niebla hasta volverla casi opaca;
+sin iluminación, su opacidad es exactamente la del color de la capa. La niebla usa
+32 píxeles por unidad para que el mosaico mida 8 unidades y la repetición no se note.
 
 Cada sprite se dimensiona un mosaico más grande que la zona que debe cubrir en cada
 lado. Así, cuando `Wrap` devuelve la capa a su origen, el borde nunca entra en
@@ -164,6 +169,33 @@ traslación** dependiente de otra traslación.
 Los pasos 1 y 2 del menú también existen por separado para regenerar solo las
 texturas o solo las salas.
 
+### 4.1 Grabar el gameplay sin intervención
+
+Menú **`DungeonPuzzle ▸ Semana 08 ▸ Demo automática (para grabar)`**:
+
+1. ejecuta `Construir todo`, abre `Room_Demo` y entra en Play;
+2. `DemoAutopilot` recorre la sala solo: recoge la piedra (E), la lanza al rincón
+   lejano (F) para que el guardia de patrulla investigue, camina de un lado a otro
+   para mostrar el parallax, pasa por la espalda del guardia fijo, acciona la
+   palanca y sale por la puerta hasta la pantalla de victoria;
+3. Unity graba la vista Game fotograma a fotograma con `Time.captureFramerate = 24`,
+   así el video sale fluido aunque el editor vaya lento, y nunca captura nada fuera
+   del juego. Los fotogramas quedan en `Vídeos/DungeonPuzzle/frames_FECHA/`.
+
+Luego **`DungeonPuzzle ▸ Semana 08 ▸ Codificar última grabación a MP4`** genera el
+video H.264 1920×1080 con el codificador integrado del editor (`MediaEncoder`), sin
+instalar nada. El piloto no modifica el gameplay: fija la velocidad del Rigidbody2D
+después de `PlayerMovement` y usa las mismas acciones que las teclas E y F.
+
+### 4.2 Corrección en `Room_Demo`
+
+Al grabar apareció un fallo heredado del builder de la Semana 04: los muros de
+`Room_Demo` se copiaban de una plantilla que ya es un sprite en mosaico con su
+collider en unidades de mundo, y además se les aplicaba escala. El tamaño se
+multiplicaba (16×3 por 16×0,5 = 256×1,5 unidades): los muros tapaban la sala y
+bloqueaban al héroe. `Semana04Builder.Wall` ahora aplica el tamaño al sprite y al
+collider con escala 1, y la escena está corregida.
+
 ---
 
 ## 5. Guion de demostración (3–4 min)
@@ -185,5 +217,8 @@ texturas o solo las salas.
 | `Assets/Scripts/FX/ParallaxLayer.cs` | Componente de capa de parallax con matemática estática. |
 | `Assets/Scripts/Tests/EditMode/ParallaxLayerTests.cs` | 13 pruebas EditMode de `Evaluate`, `Wrap` y `FactorFromDepth`. |
 | `Assets/Editor/Semana08Builder.cs` | Generación de texturas, colocación en salas y validación, desde el menú del editor. |
+| `Assets/Scripts/Demo/DemoAutopilot.cs` | Recorrido automático de `Room_Demo` y grabación de la vista Game. |
+| `Assets/Editor/Semana08Demo.cs` | Menú de la demo automática: construye, abre la sala, entra en Play y sale al terminar. |
+| `Assets/Editor/Semana08VideoEncoder.cs` | Convierte los fotogramas en MP4 H.264 con el codificador del editor. |
 | `docs/Semana08/README.md` | Este documento. |
-| `Assets/Sprites/Game/Parallax/*.png` | Generados por el builder; no se versionan a mano. |
+| `Assets/Sprites/Game/Parallax/*.png` | Texturas generadas por el builder, versionadas para que las salas abran con el parallax listo. |

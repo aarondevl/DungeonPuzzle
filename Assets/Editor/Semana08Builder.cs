@@ -34,6 +34,13 @@ public static class Semana08Builder
     const string DepthName = "Parallax_Depth";
     const string FogName = "Parallax_Fog";
     const float PixelsPerUnit = 64f;
+    // La niebla usa menos píxeles por unidad: un mosaico de 8 u hace que la repetición
+    // no se note y que las manchas se lean como bancos de niebla, no como píxeles.
+    const float FogPixelsPerUnit = 32f;
+    // Material sin iluminación de URP: las luces 2D de las salas no deben realzar la
+    // niebla; su opacidad tiene que ser exactamente la del color de la capa.
+    const string UnlitMaterialPath =
+        "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Unlit-Default.mat";
 
     static readonly string[] TargetRooms =
         { "Room_01", "Room_02", "Room_03", "Room_04", "Room_05", "Room_Demo" };
@@ -55,8 +62,8 @@ public static class Semana08Builder
         WriteTexture(CracksPath, BuildCracks(128, seed: 8041));
         WriteTexture(FogPath, BuildFog(256, seed: 8042));
         AssetDatabase.Refresh();
-        ConfigureImporter(CracksPath, FilterMode.Point);
-        ConfigureImporter(FogPath, FilterMode.Bilinear);
+        ConfigureImporter(CracksPath, FilterMode.Point, PixelsPerUnit);
+        ConfigureImporter(FogPath, FilterMode.Bilinear, FogPixelsPerUnit);
         AssetDatabase.SaveAssets();
         Debug.Log("[Semana08] Texturas de parallax generadas.");
     }
@@ -154,13 +161,13 @@ public static class Semana08Builder
     }
 
     /// <summary>Sprite en modo mosaico: FullRect es obligatorio para que DrawMode.Tiled funcione.</summary>
-    static void ConfigureImporter(string path, FilterMode filter)
+    static void ConfigureImporter(string path, FilterMode filter, float pixelsPerUnit)
     {
         var importer = (TextureImporter)AssetImporter.GetAtPath(path);
         if (importer == null) { Debug.LogError($"[Semana08] No se pudo importar {path}"); return; }
         importer.textureType = TextureImporterType.Sprite;
         importer.spriteImportMode = SpriteImportMode.Single;
-        importer.spritePixelsPerUnit = PixelsPerUnit;
+        importer.spritePixelsPerUnit = pixelsPerUnit;
         importer.wrapMode = TextureWrapMode.Repeat;
         importer.filterMode = filter;
         importer.mipmapEnabled = false;
@@ -207,19 +214,19 @@ public static class Semana08Builder
 
             // Capa de profundidad: cubre el suelo con un mosaico de margen para que el
             // envolvimiento (wrap) nunca deje ver un borde.
-            float cracksTile = cracks.rect.width / PixelsPerUnit;
+            float cracksTile = cracks.rect.width / cracks.pixelsPerUnit;
             var depth = MakeLayer(root.transform, DepthName, cracks, center,
                 floorSize + Vector2.one * cracksTile * 2f,
-                "FloorFX", 5, new Color(1f, 1f, 1f, 0.55f));
+                "FloorFX", 5, new Color(1f, 1f, 1f, 0.45f));
             depth.Configure(ParallaxLayer.ReferenceMode.Player,
                 new Vector2(0.12f, 0.12f), Vector2.zero, Vector2.one * cracksTile);
 
             // Niebla en primer plano: cubre la vista completa de la cámara más un mosaico.
-            float fogTile = fog.rect.width / PixelsPerUnit;
+            float fogTile = fog.rect.width / fog.pixelsPerUnit;
             Vector2 viewSize = ViewSize(s);
             var fogLayer = MakeLayer(root.transform, FogName, fog, center,
                 Vector2.Max(viewSize, floorSize) + Vector2.one * fogTile * 2f,
-                "FX", -5, new Color(1f, 1f, 1f, 0.16f));
+                "FX", -5, new Color(1f, 1f, 1f, 0.09f));
             fogLayer.Configure(ParallaxLayer.ReferenceMode.Player,
                 new Vector2(-0.25f, -0.25f), new Vector2(0.12f, 0.04f), Vector2.one * fogTile);
 
@@ -243,6 +250,9 @@ public static class Semana08Builder
         sr.sortingLayerName = sortingLayer;
         sr.sortingOrder = order;
         sr.color = tint;
+        var unlit = AssetDatabase.LoadAssetAtPath<Material>(UnlitMaterialPath);
+        if (unlit != null) sr.sharedMaterial = unlit;
+        else Debug.LogWarning("[Semana08] No se encontró Sprite-Unlit-Default; la capa usará el material iluminado.");
         return go.AddComponent<ParallaxLayer>();
     }
 

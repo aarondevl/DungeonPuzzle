@@ -73,7 +73,8 @@ public class ParallaxLayerTests
         // Mosaico de 4 unidades: 2.5 y -1.5 son el mismo punto visual.
         Assert.That(ParallaxLayer.Wrap(2.5f, 4f), Is.EqualTo(-1.5f).Within(Eps));
         Assert.That(ParallaxLayer.Wrap(9f, 4f), Is.EqualTo(1f).Within(Eps));
-        Assert.That(ParallaxLayer.Wrap(-6f, 4f), Is.EqualTo(2f).Within(Eps));
+        // -6 + 2 = -4 → Repeat(-4, 4) = 0 → 0 - 2 = -2: el límite inferior pertenece al intervalo, el superior no.
+        Assert.That(ParallaxLayer.Wrap(-6f, 4f), Is.EqualTo(-2f).Within(Eps));
     }
 
     [Test]

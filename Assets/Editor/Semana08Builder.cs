@@ -315,24 +315,35 @@ public static class Semana08Builder
             string scenePath = $"Assets/Scenes/{room}.unity";
             if (!File.Exists(scenePath)) continue;
             Scene s = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
-            var layers = Object.FindObjectsByType<ParallaxLayer>(FindObjectsSortMode.None);
+            // Se recorre la escena recién abierta por sus raíces (igual que PopulateRooms):
+            // FindObjectsByType no es fiable justo después de OpenScene en batch mode.
             ParallaxLayer depth = null, fog = null;
-            foreach (var l in layers)
+            foreach (var root in s.GetRootGameObjects())
             {
-                if (l.name == DepthName) depth = l;
-                if (l.name == FogName) fog = l;
+                foreach (var l in root.GetComponentsInChildren<ParallaxLayer>(true))
+                {
+                    if (l.name == DepthName) depth = l;
+                    if (l.name == FogName) fog = l;
+                }
             }
             bool depthOk = depth != null && depth.Factor.x > 0f && depth.Factor.x < 1f
                            && depth.Mode == ParallaxLayer.ReferenceMode.Player && depth.WrapSize.x > 0f;
             bool fogOk = fog != null && fog.Factor.x < 0f && fog.Drift != Vector2.zero
                          && fog.Mode == ParallaxLayer.ReferenceMode.Player && fog.WrapSize.x > 0f;
-            sb.AppendLine($"  {(depthOk ? "OK   " : "FALLA")} {room}: capa de profundidad (0 < factor < 1, referencia héroe, mosaico)");
-            sb.AppendLine($"  {(fogOk ? "OK   " : "FALLA")} {room}: capa de niebla (factor < 0, deriva, referencia héroe, mosaico)");
+            sb.AppendLine($"  {(depthOk ? "OK   " : "FALLA")} {room}: capa de profundidad (0 < factor < 1, referencia héroe, mosaico){Describe(depth, depthOk)}");
+            sb.AppendLine($"  {(fogOk ? "OK   " : "FALLA")} {room}: capa de niebla (factor < 0, deriva, referencia héroe, mosaico){Describe(fog, fogOk)}");
         }
         if (!string.IsNullOrEmpty(current) && File.Exists(current))
             EditorSceneManager.OpenScene(current, OpenSceneMode.Single);
 
         return sb.ToString();
+    }
+
+    static string Describe(ParallaxLayer l, bool ok)
+    {
+        if (ok) return string.Empty;
+        if (l == null) return " → no se encontró la capa";
+        return $" → factor={l.Factor} deriva={l.Drift} mosaico={l.WrapSize} ref={l.Mode}";
     }
 }
 #endif
